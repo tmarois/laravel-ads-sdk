@@ -36,6 +36,20 @@ Update `google-ads.php` with your API credentials.
 
 ### Getting Started
 
+```php
+// LaravelAds namespace
+use LaravelAds;
+
+// Get the GoogleAds API including the Client Accounts
+$googleAds = LaravelAds::service('GoogleAds')->with(['CLIENT_ID']);
+
+// Reports (Account, Campaign and Ad Group Level)
+$accountReport  = $googleAds->reports([$dateFrom, $dateTo])->getAccountReport();
+$campaignReport = $googleAds->reports([$dateFrom, $dateTo])->getCampaignReport();
+$adgroupReprot  = $googleAds->reports([$dateFrom, $dateTo])->getAdGroupReport();
+
+```
+
 * Reporting
 * Account Management
 
