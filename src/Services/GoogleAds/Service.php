@@ -1,12 +1,13 @@
-<?php namespace LaravelAds\GoogleAds;
+<?php namespace LaravelAds\Services\GoogleAds;
 
-use LaravelAds\GoogleAds\Reports;
+use LaravelAds\Services\GoogleAds\Reports;
 
+use Google\AdsApi\AdWords\AdWordsServices;
 use Google\AdsApi\Common\Configuration;
 use Google\AdsApi\Common\OAuth2TokenBuilder;
 use Google\AdsApi\AdWords\AdWordsSessionBuilder;
 
-class GoogleAdsService
+class Service
 {
     /**
      * $clientIds
@@ -46,6 +47,17 @@ class GoogleAdsService
         return $this->clientId;
     }
 
+
+    /**
+     * fetch()
+     *
+     *
+     */
+    public function fetch()
+    {
+        return (new Fetch($this));
+    }
+
     /**
      * reports()
      *
@@ -53,7 +65,17 @@ class GoogleAdsService
      */
     public function reports($dateFrom, $dateTo)
     {
-        return (new Reports($this)->setDateRange($dateFrom, $dateTo));
+        return (new Reports($this))->setDateRange($dateFrom, $dateTo);
+    }
+
+    /**
+     * service()
+     *
+     *
+     */
+    public function service($service)
+    {
+        return (new AdWordsServices())->get($this->session(), $service);
     }
 
     /**
@@ -63,14 +85,14 @@ class GoogleAdsService
      *
      * @return object $this->session
      */
-    protected function session()
+    public function session()
     {
         if (!$this->session)
         {
             $this->session = (new AdWordsSessionBuilder())
                 ->from($this->configuration())
                 ->withOAuth2Credential($this->oAuth2credentials())
-                ->withClientId($this->getClientId())
+                ->withClientCustomerId($this->getClientId())
                 ->build();
         }
 
