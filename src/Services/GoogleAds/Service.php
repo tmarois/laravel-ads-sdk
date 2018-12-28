@@ -1,10 +1,11 @@
 <?php namespace LaravelAds\Services\GoogleAds;
 
 use LaravelAds\Services\GoogleAds\Reports;
+use LaravelAds\Services\GoogleAds\Fetch;
 
-use Google\AdsApi\AdWords\AdWordsServices;
 use Google\AdsApi\Common\Configuration;
 use Google\AdsApi\Common\OAuth2TokenBuilder;
+use Google\AdsApi\AdWords\AdWordsServices;
 use Google\AdsApi\AdWords\AdWordsSessionBuilder;
 
 class Service

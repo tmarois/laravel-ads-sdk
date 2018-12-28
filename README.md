@@ -98,17 +98,23 @@ $adgroups  = $googleAds->fetch()->getAdGroups();
 
 ### Reporting Data
 
-Here are **pre-built methods** for retrieving reports
+Here are the **pre-built methods** for retrieving reports
 
 ```php
 // Get account level reports
-$accountReport  = $googleAds->reports($dateFrom, $dateTo)->getAccountReport();
+$accountReport  = $googleAds->reports($dateFrom, $dateTo)
+                            ->getAccountReport()
+                            ->toArray();
 
 // get campaign level reports
-$campaignReport = $googleAds->reports($dateFrom, $dateTo)->getCampaignReport();
+$campaignReport = $googleAds->reports($dateFrom, $dateTo)
+                            ->getCampaignReport()
+                            ->toArray();
 
 // get adgroup level reports
-$adgroupReprot  = $googleAds->reports($dateFrom, $dateTo)->getAdGroupReport();
+$adgroupReport  = $googleAds->reports($dateFrom, $dateTo)
+                            ->getAdGroupReport()
+                            ->toArray();
 
 ```
 
@@ -225,6 +231,82 @@ BING_REFRESH_TOKEN=""
 ```php
 $bingAds = LaravelAds::service('BingAds')->with('CLIENT_ID');
 ```
+
+### Reporting Data
+
+*NOTE: Bing Report API is not designed with a fluent stream, it may be wonky, submit an issue if one arises.*
+
+Here are the **pre-built methods** for retrieving reports. Learn more about [Bing Reports](https://docs.microsoft.com/en-us/bingads/reporting-service/reporting-service-reference?view=bingads-12).
+
+```php
+// Get account level reports
+$accountReport  = $bingAds->reports($dateFrom, $dateTo)
+                        ->getAccountReport()
+                        ->toArray();
+
+// Get campaign level reports
+$campaignReport  = $bingAds->reports($dateFrom, $dateTo)
+                        ->getCampaignReport()
+                        ->toArray();
+
+// Get ad group level reports
+$adgroupReport  = $bingAds->reports($dateFrom, $dateTo)
+                        ->getAdGroupReport()
+                        ->toArray();
+
+```
+
+*Results: `getAccountReport()`*
+
+```
+[0] => Array
+(
+   [AccountId] => 00000000
+   [Clicks] => 64262
+   [Impressions] => 1421876
+   [Spend] => 19433.56
+   [Conversions] => 3505
+   [Revenue] => 17161.25
+)
+```
+
+*Results: `getCampaignReport()`*
+
+```
+[0] => Array
+(
+    [TimePeriod] => 2018-12-26
+    [AccountId] => 0000000
+    [CampaignName] => Campaign Name
+    [CampaignId] => 000000000
+    [CampaignStatus] => Active
+    [Clicks] => 2
+    [Impressions] => 267
+    [Spend] => 0.53
+    [Conversions] => 0
+    [Revenue] => 0.00
+)
+```
+
+*Results: `getAdGroupReport()`*
+
+```
+[0] => Array
+(
+    [TimePeriod] => 2018-12-26
+    [AccountId] => 000000
+    [CampaignId] => 00000000
+    [AdGroupId] => 000000000000
+    [AdGroupName] => Ad Group Name
+    [Clicks] => 684
+    [Impressions] => 6008
+    [Spend] => 290.13
+    [Conversions] => 82
+    [Revenue] => 446.15
+)
+```
+
+
 
 # Facebook Ads
 
