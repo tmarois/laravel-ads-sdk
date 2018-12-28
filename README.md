@@ -16,16 +16,14 @@ Run `php artisan vendor:publish`
 
 This will generate the config files located in your `/config` for `google-ads.php` and `bing-ads.php`.
 
-## (3) Namespace
-`use LaravelAds;`
+## (3) Usage
 
-Whenever you want to use this package, add this namespace at the top.
-
-## (4) Services
-
-Accessing `GoogleAds` or `BingAds` use the following: (be sure to include the client customer id)
+Accessing `GoogleAds` or `BingAds` services use the following:
 
 ```php
+// The namespace to the Facade
+use LaravelAds;
+
 // calling the Google Ads Service and including the Customer Client Id
 $googleAds = LaravelAds::service('GoogleAds')->with('CLIENT_ID');
 
@@ -33,7 +31,7 @@ $googleAds = LaravelAds::service('GoogleAds')->with('CLIENT_ID');
 $bingAds = LaravelAds::service('BingAds')->with('CLIENT_ID');
 ```
 
-# Google Ads API
+# Google Ads
 
 This uses the [googleads-php-lib](https://github.com/googleads/googleads-php-lib) SDK for the [Google Ads API](https://developers.google.com/adwords/api/docs/guides/start)
 
