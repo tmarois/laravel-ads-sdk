@@ -261,6 +261,7 @@ $adgroupReport  = $bingAds->reports($dateFrom, $dateTo)
 ```
 [0] => Array
 (
+   [TimePeriod] => 2018-12-26
    [AccountId] => 00000000
    [Clicks] => 64262
    [Impressions] => 1421876
