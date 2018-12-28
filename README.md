@@ -114,12 +114,12 @@ $adgroupReprot  = $googleAds->reports($dateFrom, $dateTo)->getAdGroupReport();
 
 ```
 
-**Learn more about reports and dimensions:**
+**Learn more about performance reports:**
 * [Account Performance](https://developers.google.com/adwords/api/docs/appendix/reports/account-performance-report)
 * [Campaign Performance](https://developers.google.com/adwords/api/docs/appendix/reports/campaign-performance-report)
 * [Ad Group Performance](https://developers.google.com/adwords/api/docs/appendix/reports/adgroup-performance-report)
 
-The fields are already set by default, however, if you want to set **your own fields**, you can do this:
+The fields are already set by default, however, if you want to set **your own fields** too.
 
 ```php
 // Setting fields will only output those fields in the response
@@ -207,9 +207,26 @@ If you've written a new feature that isn't included in this package, send a pull
 
 # Bing Ads
 
-Uses [BingAds-PHP-SDK](https://github.com/BingAds/BingAds-PHP-SDK) for [Bing Ads API](https://docs.microsoft.com/en-us/bingads/guides/get-started-php?view=bingads-12)
+This uses the [BingAds-PHP-SDK](https://github.com/BingAds/BingAds-PHP-SDK) for the [Bing Ads API](https://docs.microsoft.com/en-us/bingads/guides/get-started-php?view=bingads-12)
 
-Coming Soon.
+### Configuration
+
+Copy this to the `.env` and update it with your credentials.
+
+```
+BING_DEVELOPER_TOKEN=""
+BING_CLIENT_ID=""
+BING_CLIENT_SECRET=""
+BING_REFRESH_TOKEN=""
+```
+
+### Getting Started
+
+**First**, you need to use the service access for `BingAds` and add the Client Customer Id
+
+```php
+$bingAds = LaravelAds::service('BingAds')->with('CLIENT_ID');
+```
 
 # Facebook Ads
 
