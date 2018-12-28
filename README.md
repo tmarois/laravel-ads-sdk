@@ -4,19 +4,19 @@ For **Google Ads**, **Bing Ads** and **Facebook Ads** APIs.
 This is a wrapper for connecting each ad source into your Laravel application using a single package. This SDK provides a simpler method API than the traditional SDKs, making it a lot easier to implement in your project.
 
 
-## (1) Installation
+### (1) Installation
 
 Use [Composer](http://getcomposer.org/) to install package.
 
 Run `composer require tmarois/laravel-ads-sdk:^1.0`
 
-## (2) Laravel Config
+### (2) Laravel Config
 
 Run `php artisan vendor:publish`
 
 This will generate the config files located in your `/config` for `google-ads.php` and `bing-ads.php`.
 
-## (3) Usage
+### (3) Usage
 
 Accessing `GoogleAds` or `BingAds` services use the following:
 

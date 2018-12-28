@@ -23,6 +23,6 @@ class LaravelAdsProvider extends ServiceProvider
      */
     public function register()
     {
-        
+
     }
 }
