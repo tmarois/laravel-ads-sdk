@@ -2,6 +2,7 @@
 
 use LaravelAds\Services\GoogleAds\Reports;
 use LaravelAds\Services\GoogleAds\Fetch;
+use LaravelAds\Services\GoogleAds\Operation;
 
 use Google\AdsApi\Common\Configuration;
 use Google\AdsApi\Common\OAuth2TokenBuilder;
@@ -48,6 +49,15 @@ class Service
         return $this->clientId;
     }
 
+    /**
+     * operation()
+     *
+     *
+     */
+    public function operation()
+    {
+        return (new Operation($this));
+    }
 
     /**
      * fetch()

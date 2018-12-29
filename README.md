@@ -35,6 +35,12 @@ $bingAds = LaravelAds::service('BingAds')->with('CLIENT_ID');
 
 This uses the [googleads-php-lib](https://github.com/googleads/googleads-php-lib) SDK for the [Google Ads API](https://developers.google.com/adwords/api/docs/guides/start)
 
+### Features
+
+* [Get Campaign/AdGroup Details](#fetching-information)
+* [Reports: Account/Campaign/AdGroup](#reporting-data)
+* [Operation: Change AdGroup Bids](#operation-change-adgroup-bids)
+
 ### Configuration
 
 Copy this to the `.env` and update it with your credentials.
@@ -68,7 +74,7 @@ $adgroups  = $googleAds->fetch()->getAdGroups();
 
 ```
 
-*Results: `getCampaigns()`*
+*Results: `getCampaigns()` (returns a [Laravel Collection](https://laravel.com/docs/5.7/collections) object, use `all()` for array)*
 
 ```
 [0] => Array
@@ -81,7 +87,7 @@ $adgroups  = $googleAds->fetch()->getAdGroups();
 )
 ```
 
-*Results: `getAdGroups()`*
+*Results: `getAdGroups()` (returns a [Laravel Collection](https://laravel.com/docs/5.7/collections) object, use `all()` for array)*
 
 ```
 [0] => Array
@@ -188,6 +194,19 @@ $googleAds->reports($dateFrom, $dateTo)
 )
 ```
 
+### Operation: Change AdGroup Bids
+
+You can change bids for `CPC`, `CPM` and `CPA`. When ready, use the `save()` method to post your changes.
+
+```php
+// This will change the cpa bid to 0.80
+$googleAds->operation()->adGroup('ADGROUPID')
+                       ->setBid(0.80,'cpa')
+                       ->save();
+
+```
+
+
 ### Need More? Advanced Options
 
 If the pre-built methods don't have what you're looking for, you may need to write your own methods to communicate with the AdWords Services directly. **You will need to understand how the [Google Ads API](https://developers.google.com/adwords/api/docs/reference/release-notes/v201809) and [Google Ads SDK](https://github.com/googleads/googleads-php-lib) work.**
@@ -213,6 +232,8 @@ If you've written a new feature that isn't included in this package, send a pull
 
 This uses the [BingAds-PHP-SDK](https://github.com/BingAds/BingAds-PHP-SDK) for the [Bing Ads API](https://docs.microsoft.com/en-us/bingads/guides/get-started-php?view=bingads-12)
 
+> **NOTICE** – You will need to [Request Bing Ads API Access](https://advertise.bingads.microsoft.com/en-us/resources/bing-partner-program/request-bing-ads-api-access).
+
 ### Configuration
 
 Copy this to the `.env` and update it with your credentials.
@@ -232,9 +253,22 @@ BING_REFRESH_TOKEN=""
 $bingAds = LaravelAds::service('BingAds')->with('CLIENT_ID');
 ```
 
+### Fetching Information
+
+> **NOTICE** – You will need campaign management and edit access to use these.
+
+```php
+// get campaign information (returns as a Collection object)
+$campaigns = $bingAds->fetch()->getCampaigns();
+
+// get adgroup information (returns as a Collection object)
+$adgroups  = $bingAds->fetch()->getAdGroups();
+
+```
+
 ### Reporting Data
 
-*NOTE: Bing Report API is not designed with a fluent stream, it may be wonky, submit an issue if one arises.*
+*Bing Report API is not designed with a fluent stream, it may be wonky, submit an issue if one arises.*
 
 Here are the **pre-built methods** for retrieving reports. Learn more about [Bing Reports](https://docs.microsoft.com/en-us/bingads/reporting-service/reporting-service-reference?view=bingads-12).
 
