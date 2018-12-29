@@ -29,12 +29,6 @@ class AdGroupOperation
      * $operations
      *
      */
-    protected $operations = [];
-
-    /**
-     * $operations
-     *
-     */
     protected $adGroup = [];
 
     /**
@@ -42,16 +36,18 @@ class AdGroupOperation
      *
      *
      */
-    public function __construct($service, $adGroupId)
+    public function __construct($service, $adGroupId = null)
     {
         $this->service = $service;
 
         $this->adGroupId = $adGroupId;
 
-        $this->operations = [];
-
         $this->adGroup = new AdGroup();
-        $this->adGroup->setId($this->adGroupId);
+
+        if ($adGroupId) {
+            $this->adGroup->setId($this->adGroupId);
+            $this->adGroup = $this->get();
+        }
     }
 
     /**
@@ -63,13 +59,19 @@ class AdGroupOperation
      * @param float $amount
      *
      */
-    public function setBid($amount, $type = 'cpc')
+    public function setBid($amount)
     {
-        switch($type)
+        switch($this->getBidType())
         {
-            case 'cpc' : $bid = new CpcBid(); break;
-            case 'cpa' : $bid = new CpaBid(); break;
-            case 'cpm' : $bid = new CpmBid(); break;
+            case 'MANUAL_CPC' :
+                $bid = new CpcBid();
+            break;
+            case 'TARGET_CPA' :
+                $bid = new CpaBid();
+            break;
+            case 'MANUAL_CPM' :
+                $bid = new CpmBid();
+            break;
             default : return false;
         }
 
@@ -81,11 +83,22 @@ class AdGroupOperation
         $biddingStrategyConfiguration = new BiddingStrategyConfiguration();
         $biddingStrategyConfiguration->setBids([$bid]);
 
+        // can not set this on ad group level, this is set on campaign level...
+        // $biddingStrategyConfiguration->setBiddingStrategyType($bidType);
+
         $this->adGroup->setBiddingStrategyConfiguration($biddingStrategyConfiguration);
 
         return $this;
     }
 
+    /**
+     * getBidType()
+     *
+     */
+    public function getBidType()
+    {
+        return $this->adGroup->getBiddingStrategyConfiguration()->getBiddingStrategyType();
+    }
 
     /**
      * setName()
@@ -182,6 +195,21 @@ class AdGroupOperation
     }
 
     /**
+     * get()
+     *
+     */
+    public function get()
+    {
+        $operation = new ApiAdGroupOperation();
+        $operation->setOperand($this->adGroup);
+        $operation->setOperator(Operator::SET);
+
+        $adgroup = ($this->service->service(AdGroupService::class))->mutate([$operation]);
+
+        return $adgroup->getValue()[0] ?? null;
+    }
+
+    /**
      * save()
      *
      * Post your changes to Google Ads Server
@@ -190,13 +218,7 @@ class AdGroupOperation
      */
     public function save()
     {
-        $operation = new ApiAdGroupOperation();
-        $operation->setOperand($this->adGroup);
-        $operation->setOperator(Operator::SET);
-
-        $this->operations[] = $operation;
-
-        return ($this->service->service(AdGroupService::class))->mutate($this->operations);
+        return $this->get();
     }
 
 

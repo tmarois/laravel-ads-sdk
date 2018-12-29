@@ -37,7 +37,7 @@ This uses the [googleads-php-lib](https://github.com/googleads/googleads-php-lib
 
 ### Features
 
-* [Fetch Many Campaigns/AdGroups](#fetching-information)
+* [Fetch Campaigns/AdGroups](#fetching-information)
 * [Reports: Account/Campaign/AdGroup](#reporting-data)
 * [AdGroups](#adgroups)
 * [AdGroup Operation: Change Bids](#operation-change-adgroup-bids)
@@ -198,17 +198,19 @@ $googleAds->reports($dateFrom, $dateTo)
 
 |Method				|Description    |
 |---				|---		    |
-|`getId()`|GET Ad Group Id|
-|`getName()`|GET Ad Group Name|
-|`getStatus()`|GET Ad Group Status|
-|`getAdGroupType()`|GET Ad Group Type|
-|`getCampaignId()`|GET Ad Group Campaign id|
-|`setName()`|SET the Ad Group name|
-|`setBid()`|SET Ad Group Bid (name,type)|
-|`setStatus()`|SET Ad Group status|
+|`getId()`|GET AdGroup Id|
+|`getName()`|GET AdGroup Name|
+|`getStatus()`|GET AdGroup Status|
+|`getAdGroupType()`|GET AdGroup Type|
+|`getCampaignId()`|GET AdGroup Campaign id|
+|`getBidType()`|GET AdGroup Bid Strategy Type|
+|`get()`|GET AdGroup details from the server|
+|`setName()`|SET the AdGroup name|
+|`setBid()`|SET AdGroup Bid (name,type)|
+|`setStatus()`|SET AdGroup status|
 |`save()`|Posts changes to the server|
 
-These AdGroup methods are available using:
+Grab the AdGroup details from the server and populate the object.
 
 ```php
 $googleAds->adGroup('ADGROUPID');
@@ -216,12 +218,12 @@ $googleAds->adGroup('ADGROUPID');
 
 ### Operation: Change AdGroup Bids
 
-You can change bids for `CPC`, `CPM` and `CPA`. When ready, use the `save()` method to post your changes.
+Set the AdGroup bid; it will automatically set the bid based on the bid strategy type.
 
 ```php
 // This will change the cpa bid to 0.80
 $googleAds->adGroup('ADGROUPID')
-            ->setBid(0.80,'cpa')
+            ->setBid(0.80)
             ->save();
 
 ```
