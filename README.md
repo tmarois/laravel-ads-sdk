@@ -6,10 +6,7 @@ For **Google Ads**, **Bing Ads** and **Facebook Ads** APIs.
 
 This is a wrapper for connecting each ad source into your Laravel application. This SDK provides simpler and consistent methods across many ad source integrations than the traditional SDKs; ultimately making it a lot easier to implement in your projects. You shouldn't have to learn how to communicate and understand the responses to every API.
 
-The goal of this package is to make one SDK to read them all.
-
-> We are actively looking for new contributors, if you want to help, join the slack channel and/or submit pull requests.
-
+**The goal of this package is to provide you with one SDK to read them all.**
 
 ### (1) Installation
 
@@ -64,7 +61,7 @@ ADWORDS_OAUTH2_REFRESH_TOKEN=""
 
 ### Getting Started
 
-**First**, you need to use the service access for `Google Ads` and add the Client Customer Id
+First, you need to use the service access for `Google Ads` and add the Client Customer Id
 
 ```php
 $googleAds = LaravelAds::googleAds()->with('CLIENT_ID');
@@ -94,6 +91,7 @@ $adgroups  = $googleAds->fetch()->getAdGroups();
     [channel] => SEARCH
     [budget] => 5
 )
+...
 ```
 
 *Results: `getAdGroups()` (returns a [Laravel Collection](https://laravel.com/docs/5.7/collections) object, use `all()` for array)*
@@ -109,6 +107,7 @@ $adgroups  = $googleAds->fetch()->getAdGroups();
     [bid_type] => MANUAL_CPC
     [bid] => 0.43
 )
+...
 ```
 
 ### Reporting Data
@@ -159,6 +158,7 @@ $googleAds->reports($dateFrom, $dateTo)
     [All conv.] => 290.00
     [All conv. value] => 1367.25
 )
+...
 ```
 
 *Results: `getCampaignReport()`*
@@ -179,6 +179,7 @@ $googleAds->reports($dateFrom, $dateTo)
     [All conv.] => 0.00
     [All conv. value] => 0.00
 )
+...
 ```
 
 *Results: `getAdGroupReport()`*
@@ -198,6 +199,7 @@ $googleAds->reports($dateFrom, $dateTo)
     [All conv.] => 0.00
     [All conv. value] => 0.00
 )
+...
 ```
 
 
@@ -225,10 +227,10 @@ $googleAds->adGroup('ADGROUPID');
 
 ### Operation: Change AdGroup Bids
 
-Set the AdGroup bid; it will automatically set the bid based on the bid strategy type.
+Set the AdGroup bid; it will automatically set the bid based on the campaign bid strategy type.
 
 ```php
-// This will change the cpa bid to 0.80
+// This will change the cpc, cpm or cpa bid to 0.80
 $googleAds->adGroup('ADGROUPID')
             ->setBid(0.80)
             ->save();
@@ -335,6 +337,7 @@ $adgroupReport  = $bingAds->reports($dateFrom, $dateTo)
    [Conversions] => 3505
    [Revenue] => 17161.25
 )
+...
 ```
 
 *Results: `getCampaignReport()`*
@@ -353,6 +356,7 @@ $adgroupReport  = $bingAds->reports($dateFrom, $dateTo)
     [Conversions] => 0
     [Revenue] => 0.00
 )
+...
 ```
 
 *Results: `getAdGroupReport()`*
@@ -371,6 +375,7 @@ $adgroupReport  = $bingAds->reports($dateFrom, $dateTo)
     [Conversions] => 82
     [Revenue] => 446.15
 )
+...
 ```
 
 
@@ -378,3 +383,13 @@ $adgroupReport  = $bingAds->reports($dateFrom, $dateTo)
 # Facebook Ads
 
 Coming Soon. Looking for contributors.
+
+# Contributions
+
+We are actively looking for new contributors.
+
+If you want to help, join the slack channel and/or submit pull requests.
+
+# License
+
+**Laravel Ads SDK** (This Package) is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
