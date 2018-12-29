@@ -12,7 +12,7 @@ This is a wrapper for connecting each ad source into your Laravel application. T
 
 Use [Composer](http://getcomposer.org/) to install package.
 
-Run `composer require Grayscale/laravel-ads-sdk:^1.0`
+Run `composer require grayscale/laravel-ads-sdk:^1.0`
 
 ### (2) Laravel Config
 
