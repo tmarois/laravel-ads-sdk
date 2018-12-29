@@ -16,11 +16,27 @@ Run `composer require grayscale/laravel-ads-sdk:^1.0`
 
 ### (2) Laravel Config
 
-Run `php artisan vendor:publish`
+Run `php artisan vendor:publish`, then copy these to your `.env` and update with your credentials.
 
-This will generate the config files located in your `/config` for `google-ads.php` and `bing-ads.php`.
+```
+ADWORDS_DEVELOPER_TOKEN=""
+ADWORDS_OAUTH2_CLIENT_ID=""
+ADWORDS_OAUTH2_CLIENT_SECRET=""
+ADWORDS_OAUTH2_REFRESH_TOKEN=""
 
-### (3) Usage
+BING_DEVELOPER_TOKEN=""
+BING_CLIENT_ID=""
+BING_CLIENT_SECRET=""
+BING_REFRESH_TOKEN=""
+```
+
+### (3) For GoogleAds
+
+*Follow the steps in the command line.*
+
+`php artisan laravelads:token:generate --service=GoogleAds`
+
+### (4) Usage
 
 Accessing `GoogleAds` or `BingAds` services use the following:
 
@@ -46,18 +62,6 @@ This uses the [googleads-php-lib](https://github.com/googleads/googleads-php-lib
 * [AdGroups](#adgroups)
 * [AdGroup Operation: Change Bids](#operation-change-adgroup-bids)
 * [AdGroup Operation: Update AdGroups](#operation-update-adgroup)
-
-### Configuration
-
-Copy this to the `.env` and update it with your credentials.
-
-```
-ADWORDS_DEVELOPER_TOKEN=""
-ADWORDS_OAUTH2_CLIENT_ID=""
-ADWORDS_OAUTH2_CLIENT_SECRET=""
-ADWORDS_OAUTH2_REFRESH_TOKEN=""
-```
-
 
 ### Getting Started
 
@@ -280,17 +284,6 @@ If you've written a new feature that isn't included in this package, send a pull
 This uses the [BingAds-PHP-SDK](https://github.com/BingAds/BingAds-PHP-SDK) for the [Bing Ads API](https://docs.microsoft.com/en-us/bingads/guides/get-started-php?view=bingads-12)
 
 > **NOTICE** – You will need to [Request Bing Ads API Access](https://advertise.bingads.microsoft.com/en-us/resources/bing-partner-program/request-bing-ads-api-access).
-
-### Configuration
-
-Copy this to the `.env` and update it with your credentials.
-
-```
-BING_DEVELOPER_TOKEN=""
-BING_CLIENT_ID=""
-BING_CLIENT_SECRET=""
-BING_REFRESH_TOKEN=""
-```
 
 ### Getting Started
 

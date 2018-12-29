@@ -1,6 +1,12 @@
 Change Log
 ==========
 
+### 12/29/2018 - 1.0.5
+
+#### Added
+* Console `RefreshTokenCommand`, you can now generate a refresh token and follow authentication steps for GoogleAds
+* Command: `php artisan laravelads:token:generate --service=GoogleAds`
+
 ### 12/29/2018 - 1.0.4
 
 #### Changed

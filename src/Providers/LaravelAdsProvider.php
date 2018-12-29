@@ -1,6 +1,7 @@
 <?php namespace LaravelAds\Providers;
 
 use Illuminate\Support\ServiceProvider;
+use LaravelAds\Console\RefreshTokenCommand;
 
 class LaravelAdsProvider extends ServiceProvider
 {
@@ -23,6 +24,8 @@ class LaravelAdsProvider extends ServiceProvider
      */
     public function register()
     {
-
+        $this->commands([
+            RefreshTokenCommand::class,
+        ]);
     }
 }
