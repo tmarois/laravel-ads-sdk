@@ -1,5 +1,12 @@
 Change Log
 ==========
+### 12/28/2018 - 1.0.3
+
+#### Added
+* GoogleAds: `AdGroupOperation` new method `getBidType()`.
+
+#### Fixed
+* GoogleAds: `AdGroupOperation` updated pull from the server when loaded.
 
 ### 12/28/2018 - 1.0.2
 
