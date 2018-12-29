@@ -1,7 +1,14 @@
 # Laravel Ads SDK
+
+[![Slack](http://timothymarois.com/a/slack-02.svg)](https://join.slack.com/t/basephp/shared_invite/enQtNDI0MzQyMDE0MDAwLWU3Nzg0Yjk4MjM0OWVmZDZjMjEyYWE2YjA1ODFhNjI2MzI3MjAyOTIyOTRkMmVlNWNhZWYzMTIwZDJlOWQ2ZTA)
+
 For **Google Ads**, **Bing Ads** and **Facebook Ads** APIs.
 
-This is a wrapper for connecting each ad source into your Laravel application using a single package. This SDK provides simpler and consistent methods across many ad source integrations than the traditional SDKs, making it a lot easier to implement in your project. You shouldn't have to learn every API, just use one package.
+This is a wrapper for connecting each ad source into your Laravel application. This SDK provides simpler and consistent methods across many ad source integrations than the traditional SDKs; ultimately making it a lot easier to implement in your projects. You shouldn't have to learn how to communicate and understand the responses to every API.
+
+**The goal of this package is to make one SDK to read them all.**
+
+> We are actively looking for new contributors, if you want to help, join the slack channel and/or submit pull requests.
 
 
 ### (1) Installation
