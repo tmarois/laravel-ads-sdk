@@ -37,11 +37,11 @@ This uses the [googleads-php-lib](https://github.com/googleads/googleads-php-lib
 
 ### Features
 
-* [Get Campaign/AdGroup Details](#fetching-information)
+* [Fetch Many Campaigns/AdGroups](#fetching-information)
 * [Reports: Account/Campaign/AdGroup](#reporting-data)
-* [Ad Groups](#adgroups)
-* [Operation: Change AdGroup Bids](#operation-change-adgroup-bids)
-* [Operation: Update AdGroups](#operation-update-adgroup)
+* [AdGroups](#adgroups)
+* [AdGroup Operation: Change Bids](#operation-change-adgroup-bids)
+* [AdGroup Operation: Update AdGroups](#operation-update-adgroup)
 
 ### Configuration
 
