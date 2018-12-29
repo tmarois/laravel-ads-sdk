@@ -1,5 +1,11 @@
 Change Log
 ==========
+
+### 12/29/2018 - 1.0.4
+
+#### Changed
+* Services: `googleAds()`, `bingAds()` and `facebookAds()` methods.
+
 ### 12/28/2018 - 1.0.3
 
 #### Added

@@ -6,7 +6,7 @@ For **Google Ads**, **Bing Ads** and **Facebook Ads** APIs.
 
 This is a wrapper for connecting each ad source into your Laravel application. This SDK provides simpler and consistent methods across many ad source integrations than the traditional SDKs; ultimately making it a lot easier to implement in your projects. You shouldn't have to learn how to communicate and understand the responses to every API.
 
-**The goal of this package is to make one SDK to read them all.**
+The goal of this package is to make one SDK to read them all.
 
 > We are actively looking for new contributors, if you want to help, join the slack channel and/or submit pull requests.
 
@@ -32,10 +32,10 @@ Accessing `GoogleAds` or `BingAds` services use the following:
 use LaravelAds;
 
 // calling the Google Ads Service and including the Customer Client Id
-$googleAds = LaravelAds::service('GoogleAds')->with('CLIENT_ID');
+$googleAds = LaravelAds::googleAds()->with('CLIENT_ID');
 
 // calling the Bing Ads Service and including the Customer Client Id
-$bingAds = LaravelAds::service('BingAds')->with('CLIENT_ID');
+$bingAds = LaravelAds::bingAds()->with('CLIENT_ID');
 ```
 
 # Google Ads
@@ -64,10 +64,10 @@ ADWORDS_OAUTH2_REFRESH_TOKEN=""
 
 ### Getting Started
 
-**First**, you need to use the service access for `GoogleAds` and add the Client Customer Id
+**First**, you need to use the service access for `Google Ads` and add the Client Customer Id
 
 ```php
-$googleAds = LaravelAds::service('GoogleAds')->with('CLIENT_ID');
+$googleAds = LaravelAds::googleAds()->with('CLIENT_ID');
 ```
 
 ### Fetching Information
@@ -260,7 +260,7 @@ If the pre-built methods don't have what you're looking for, you may need to wri
 use Google\AdsApi\AdWords\v201809\cm\CampaignService;
 
 // Start the initial step authenticating to a service
-$googleAds = LaravelAds::service('GoogleAds')->with('CLIENT_ID');
+$googleAds = LaravelAds::googleAds()->with('CLIENT_ID');
 
 // this communicates with the GoogleAds PHP LIB (returns AdWordsServices)
 // return the service class so that you can manage the next step
@@ -292,23 +292,10 @@ BING_REFRESH_TOKEN=""
 
 ### Getting Started
 
-**First**, you need to use the service access for `BingAds` and add the Client Customer Id
+**First**, you need to use the service access for `Bing Ads` and add the Client Customer Id
 
 ```php
-$bingAds = LaravelAds::service('BingAds')->with('CLIENT_ID');
-```
-
-### Fetching Information
-
-> **NOTICE** – You will need campaign management and edit access to use these.
-
-```php
-// get campaign information (returns as a Collection object)
-$campaigns = $bingAds->fetch()->getCampaigns();
-
-// get adgroup information (returns as a Collection object)
-$adgroups  = $bingAds->fetch()->getAdGroups();
-
+$bingAds = LaravelAds::bingAds()->with('CLIENT_ID');
 ```
 
 ### Reporting Data
