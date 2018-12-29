@@ -88,6 +88,100 @@ class AdGroupOperation
 
 
     /**
+     * setName()
+     *
+     * @reference
+     * https://github.com/googleads/googleads-php-lib/blob/master/src/Google/AdsApi/AdWords/v201809/cm/AdGroup.php
+     *
+     * @param string $name
+     *
+     */
+    public function setName($name)
+    {
+        $this->adGroup->setName($name);
+
+        return $this;
+    }
+
+    /**
+     * setStatus()
+     *
+     * @reference
+     * https://github.com/googleads/googleads-php-lib/blob/master/src/Google/AdsApi/AdWords/v201809/cm/AdGroup.php
+     *
+     * @param string $status
+     *
+     */
+    public function setStatus($status)
+    {
+        if (in_array($status, ['ENABLED','PAUSED'])) {
+            $this->adGroup->setStatus($status);
+        }
+
+        return $this;
+    }
+
+    /**
+     * getName()
+     *
+     * @reference
+     * https://github.com/googleads/googleads-php-lib/blob/master/src/Google/AdsApi/AdWords/v201809/cm/AdGroup.php
+     *
+     * @return string
+     *
+     */
+    public function getName()
+    {
+        return $this->adGroup->getName();
+    }
+
+    /**
+     * getStatus()
+     *
+     * @reference
+     * https://github.com/googleads/googleads-php-lib/blob/master/src/Google/AdsApi/AdWords/v201809/cm/AdGroup.php
+     *
+     * @return string
+     *
+     */
+    public function getStatus()
+    {
+        return $this->adGroup->getStatus();
+    }
+
+    /**
+     * getAdGroupType()
+     *
+     * @reference
+     * https://github.com/googleads/googleads-php-lib/blob/master/src/Google/AdsApi/AdWords/v201809/cm/AdGroup.php
+     *
+     * @return string
+     *
+     */
+    public function getAdGroupType()
+    {
+        return $this->adGroup->getAdGroupType();
+    }
+
+    /**
+     * getId()
+     *
+     */
+    public function getId()
+    {
+        return $this->adGroup->getId();
+    }
+
+    /**
+     * getCampaignId()
+     *
+     */
+    public function getCampaignId()
+    {
+        return $this->adGroup->getCampaignId();
+    }
+
+    /**
      * save()
      *
      * Post your changes to Google Ads Server

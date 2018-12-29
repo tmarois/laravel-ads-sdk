@@ -39,7 +39,9 @@ This uses the [googleads-php-lib](https://github.com/googleads/googleads-php-lib
 
 * [Get Campaign/AdGroup Details](#fetching-information)
 * [Reports: Account/Campaign/AdGroup](#reporting-data)
+* [Ad Groups](#adgroups)
 * [Operation: Change AdGroup Bids](#operation-change-adgroup-bids)
+* [Operation: Update AdGroups](#operation-update-adgroup)
 
 ### Configuration
 
@@ -124,18 +126,15 @@ $adgroupReport  = $googleAds->reports($dateFrom, $dateTo)
 
 ```
 
-**Learn more about performance reports:**
-* [Account Performance](https://developers.google.com/adwords/api/docs/appendix/reports/account-performance-report)
-* [Campaign Performance](https://developers.google.com/adwords/api/docs/appendix/reports/campaign-performance-report)
-* [Ad Group Performance](https://developers.google.com/adwords/api/docs/appendix/reports/adgroup-performance-report)
+Learn more about [Account Performance](https://developers.google.com/adwords/api/docs/appendix/reports/account-performance-report), [Campaign Performance](https://developers.google.com/adwords/api/docs/appendix/reports/campaign-performance-report), and [AdGroup Performance](https://developers.google.com/adwords/api/docs/appendix/reports/adgroup-performance-report) Reports.
 
-The fields are already set by default, however, if you want to set **your own fields** too.
+The fields are already set by default, however, you can set **your own fields** too.
 
 ```php
 // Setting fields will only output those fields in the response
 $googleAds->reports($dateFrom, $dateTo)
-    ->setFields(['AdGroupId','Conversions'])
-    ->getCampaignReport();
+          ->setFields(['AdGroupId','Conversions'])
+          ->getCampaignReport();
 ```
 
 
@@ -194,17 +193,53 @@ $googleAds->reports($dateFrom, $dateTo)
 )
 ```
 
+
+### AdGroups
+
+|Method				|Description    |
+|---				|---		    |
+|`getId()`|GET Ad Group Id|
+|`getName()`|GET Ad Group Name|
+|`getStatus()`|GET Ad Group Status|
+|`getAdGroupType()`|GET Ad Group Type|
+|`getCampaignId()`|GET Ad Group Campaign id|
+|`setName()`|SET the Ad Group name|
+|`setBid()`|SET Ad Group Bid (name,type)|
+|`setStatus()`|SET Ad Group status|
+|`save()`|Posts changes to the server|
+
+These AdGroup methods are available using:
+
+```php
+$googleAds->adGroup('ADGROUPID');
+```
+
 ### Operation: Change AdGroup Bids
 
 You can change bids for `CPC`, `CPM` and `CPA`. When ready, use the `save()` method to post your changes.
 
 ```php
 // This will change the cpa bid to 0.80
-$googleAds->operation()->adGroup('ADGROUPID')
-                       ->setBid(0.80,'cpa')
-                       ->save();
+$googleAds->adGroup('ADGROUPID')
+            ->setBid(0.80,'cpa')
+            ->save();
 
 ```
+
+### Operation: Update AdGroup
+
+You can chain AdGroup changes like below (even the bid changes), use `save()` when ready to post changes.
+
+```php
+// You can change the adgroup name and status
+$googleAds->adGroup('ADGROUPID')
+            ->setName('My New AdGroup Name')
+            ->setStatus('PAUSED')
+            ->save();
+
+```
+
+*Google AdGroup status must be equal to `ENABLED` or `PAUSED`.*
 
 
 ### Need More? Advanced Options
@@ -220,6 +255,7 @@ $googleAds = LaravelAds::service('GoogleAds')->with('CLIENT_ID');
 
 // this communicates with the GoogleAds PHP LIB (returns AdWordsServices)
 // return the service class so that you can manage the next step
+// replace the "CampaignService::class" with the API service you want to use
 $campaignService = $googleAds->service(CampaignService::class);
 
 // ... write your logic here to understand the API response

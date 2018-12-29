@@ -2,7 +2,7 @@
 
 use LaravelAds\Services\GoogleAds\Reports;
 use LaravelAds\Services\GoogleAds\Fetch;
-use LaravelAds\Services\GoogleAds\Operation;
+use LaravelAds\Services\GoogleAds\Operations\AdGroupOperation;
 
 use Google\AdsApi\Common\Configuration;
 use Google\AdsApi\Common\OAuth2TokenBuilder;
@@ -50,16 +50,6 @@ class Service
     }
 
     /**
-     * operation()
-     *
-     *
-     */
-    public function operation()
-    {
-        return (new Operation($this));
-    }
-
-    /**
      * fetch()
      *
      *
@@ -87,6 +77,19 @@ class Service
     public function service($service)
     {
         return (new AdWordsServices())->get($this->session(), $service);
+    }
+
+    /**
+     * adGroup()
+     *
+     * @reference
+     * https://github.com/googleads/googleads-php-lib/blob/master/examples/AdWords/v201809/BasicOperations/UpdateAdGroup.php
+     *
+     * @return AdGroupOperation
+     */
+    public function adGroup($id)
+    {
+        return (new AdGroupOperation($this, $id));
     }
 
     /**
