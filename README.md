@@ -6,7 +6,7 @@ For **Google Ads**, **Bing Ads** and **Facebook Ads** APIs.
 
 This is a wrapper for connecting each ad source into your Laravel application. This SDK provides simpler and consistent methods across many ad source integrations than the traditional SDKs; ultimately making it a lot easier to implement in your projects. You shouldn't have to learn how to communicate and understand the responses to every API.
 
-**The goal of this package is to provide you with one SDK to read them all.**
+**The goal of this package is to provide you with one SDK to manage them all.**
 
 ### (1) Installation
 
