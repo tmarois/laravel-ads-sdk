@@ -42,6 +42,8 @@ Run `php artisan laravelads:token:generate --service=GoogleAds`
 
 Run `php artisan laravelads:token:generate --service=BingAds`
 
+Having Trouble? [Learn More](BingAds.md)
+
 ### (5) Usage
 
 Accessing `GoogleAds` or `BingAds` services use the following:
