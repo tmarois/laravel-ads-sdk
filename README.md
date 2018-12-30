@@ -420,6 +420,8 @@ $adgroupReport  = $bingAds->reports($dateFrom, $dateTo)
 
 # Facebook Ads
 
+This uses the [facebook-php-business-sdk](https://github.com/facebook/facebook-php-business-sdk) for [Facebook Marketing API](https://developers.facebook.com/docs/marketing-apis)
+
 Coming Soon. Looking for contributors.
 
 # Contributions

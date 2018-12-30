@@ -8,10 +8,9 @@ Change Log
 * Command: `php artisan laravelads:token:generate --service=BingAds`
 * BingAds: Added new fetch methods `getCampaigns()` and `getAdGroups()`
 * GoogleAds: Added `bid_type` on `getCampaigns()`
-* Simplified the GoogleAds/BingAds Reports and made the responses consistent with both.
 
 #### Changed
-* Removed `campaign_name` from `getAdGroups()` on GoogleAds.
+* Simplified the GoogleAds/BingAds Reports and made the responses consistent with both.
 
 ### 12/29/2018 - 1.0.5
 
