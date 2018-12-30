@@ -6,6 +6,10 @@ use Illuminate\Console\Command;
 use Google\Auth\OAuth2;
 use Google\Auth\CredentialsLoader;
 
+use Microsoft\BingAds\Auth\AuthorizationData;
+use Microsoft\BingAds\Auth\OAuthTokenRequestException;
+use Microsoft\BingAds\Auth\OAuthWebAuthCodeGrant;
+
 class RefreshTokenCommand extends Command {
 
     /**
@@ -51,6 +55,9 @@ class RefreshTokenCommand extends Command {
     {
         $config = config('google-ads')['OAUTH2'] ?? [];
 
+        // check if the config is right
+        if (!$config) return $this->error('Your Google Ads config is not setup properly. Aborting.');
+
         $clientId = $config['clientId'];
         $clientSecret = $config['clientSecret'];
 
@@ -69,7 +76,7 @@ class RefreshTokenCommand extends Command {
 
         // print first message
         $this->line(sprintf(
-            "Please sign in to your AdWords account, and open following url:\n%s",
+            "Please sign in to your Google Ads account, and open following url:\n%s",
             $oauth2->buildFullAuthorizationUri([
                 'access_type' => 'offline'
             ])
@@ -107,7 +114,46 @@ class RefreshTokenCommand extends Command {
      */
     protected function bingAdsRefresh()
     {
-        $this->line('Coming Soon.');
+        $config = config('bing-ads') ?? [];
+
+        // check if the config is right
+        if (!$config) return $this->error('Your Bing Ads config is not setup properly. Aborting.');
+
+        $clientId = $config['clientId'];
+        $clientSecret = $config['clientSecret'];
+        $developerToken = $config['developerToken'];
+
+        $authentication = (new OAuthWebAuthCodeGrant())
+            ->withClientId($clientId)
+            ->withClientSecret($clientSecret)
+            // ->withRedirectUri('urn:ietf:wg:oauth:2.0:oob')
+            ->withState(rand(0,999999999));
+
+        $AuthorizationData = (new AuthorizationData())
+            ->withAuthentication($authentication)
+            ->withDeveloperToken($developerToken);
+
+        $this->comment("Please sign in to your Bing Ads account, and open following url:");
+        $this->line($AuthorizationData->Authentication->GetAuthorizationEndpoint());
+
+        $accessToken = $this->ask('Insert the full URL that you were redirected to (after you approve the access):');
+
+        try
+        {
+            $AuthorizationData->Authentication->RequestOAuthTokensByResponseUri($accessToken);
+        }
+        catch (Exception $exception) {
+            return $this->error($exception->getMessage());
+        }
+
+        $this->comment('Copy the refresh token and paste the value on BING_REFRESH_TOKEN in your .env');
+
+        // Print refresh token
+        $this->line(sprintf(
+            'Refresh token: "%s"',
+            $AuthorizationData->Authentication->OAuthTokens->RefreshToken
+        ));
+
     }
 
 }

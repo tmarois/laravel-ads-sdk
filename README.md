@@ -32,11 +32,17 @@ BING_REFRESH_TOKEN=""
 
 ### (3) For GoogleAds
 
-*Follow the steps in the command line.*
+*Follow the steps in the command line to generate a refresh token.*
 
-`php artisan laravelads:token:generate --service=GoogleAds`
+Run `php artisan laravelads:token:generate --service=GoogleAds`
 
-### (4) Usage
+### (4) For BingAds
+
+*Follow the steps in the command line to generate a refresh token.*
+
+Run `php artisan laravelads:token:generate --service=BingAds`
+
+### (5) Usage
 
 Accessing `GoogleAds` or `BingAds` services use the following:
 
