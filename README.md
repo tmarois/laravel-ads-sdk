@@ -344,18 +344,15 @@ Here are the **pre-built methods** for retrieving reports. Learn more about [Bin
 ```php
 // Get account level reports
 $accountReport  = $bingAds->reports($dateFrom, $dateTo)
-                        ->getAccountReport()
-                        ->toArray();
+                        ->getAccountReport();
 
 // Get campaign level reports
 $campaignReport  = $bingAds->reports($dateFrom, $dateTo)
-                        ->getCampaignReport()
-                        ->toArray();
+                        ->getCampaignReport();
 
 // Get ad group level reports
 $adgroupReport  = $bingAds->reports($dateFrom, $dateTo)
-                        ->getAdGroupReport()
-                        ->toArray();
+                        ->getAdGroupReport();
 
 ```
 
