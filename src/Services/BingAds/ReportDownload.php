@@ -171,6 +171,27 @@ class ReportDownload
         $csv    = array_map('str_getcsv',$this->results);
         $header = $csv[10];
 
+        $header = [];
+        foreach($csv[10] as $label)
+        {
+            $label = strtolower($label);
+
+            switch($label) {
+                case 'timeperiod' : $label = 'date'; break;
+                case 'accountid' : $label = 'account_id'; break;
+                case 'campaignid' : $label = 'campaign_id'; break;
+                case 'campaignname' : $label = 'campaign_name'; break;
+                case 'campaignstatus' : $label = 'campaign_status'; break;
+                case 'adgroupid' : $label = 'ad_group_id'; break;
+                case 'adgroupname' : $label = 'ad_group_name'; break;
+                case 'spend' : $label = 'cost'; break;
+                case 'revenue' : $label = 'conversion_value'; break;
+                default :
+            }
+
+            $header[] = str_replace(' ','_',$label);
+        }
+
         // wtf is this bing??
         unset($csv[0]);
         unset($csv[1]);

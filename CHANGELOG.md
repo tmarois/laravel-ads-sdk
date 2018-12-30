@@ -6,6 +6,12 @@ Change Log
 #### Added
 * Console `RefreshTokenCommand`, you can now generate a refresh token and follow authentication steps for BingAds
 * Command: `php artisan laravelads:token:generate --service=BingAds`
+* BingAds: Added new fetch methods `getCampaigns()` and `getAdGroups()`
+* GoogleAds: Added `bid_type` on `getCampaigns()`
+* Simplified the GoogleAds/BingAds Reports and made the responses consistent with both.
+
+#### Changed
+* Removed `campaign_name` from `getAdGroups()` on GoogleAds.
 
 ### 12/29/2018 - 1.0.5
 

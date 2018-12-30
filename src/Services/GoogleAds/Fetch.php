@@ -42,6 +42,7 @@ class Fetch
             'Name',
             'Amount',
             'CampaignStatus',
+            'BiddingStrategyType',
             'AdvertisingChannelType'
         ]);
 
@@ -51,6 +52,7 @@ class Fetch
         $r = [];
         foreach ($items as $item)
         {
+            $bidType = $item->getBiddingStrategyConfiguration()->getBiddingStrategyType() ?? '';
             $budget = $item->getBudget()->getAmount()->getMicroAmount() ?? 0;
 
             $r[] = [
@@ -58,7 +60,8 @@ class Fetch
                 'name' => $item->getName(),
                 'status' => $item->getStatus(),
                 'channel' => $item->getAdvertisingChannelType(),
-                'budget' => ($budget) ? round( intval($budget) / 1000000,2) : 0
+                'budget' => ($budget) ? round( intval($budget) / 1000000,2) : 0,
+                'bid_type' => $bidType
             ];
         }
 
@@ -82,7 +85,6 @@ class Fetch
         $selector->setFields([
             'Id',
             'Name',
-            'CampaignName',
             'CampaignId',
             'Status',
             'BiddingStrategyType',
@@ -128,7 +130,6 @@ class Fetch
                 'name' => $item->getName(),
                 'status' => $item->getStatus(),
                 'campaign_id' => $item->getCampaignId(),
-                'campaign_name' => $item->getCampaignName(),
                 'bid_type' => $bidType,
                 'bid' => ($realBid) ? round( intval($realBid) / 1000000,2) : 0
             ];

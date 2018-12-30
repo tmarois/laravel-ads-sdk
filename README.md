@@ -102,6 +102,7 @@ $adgroups  = $googleAds->fetch()->getAdGroups();
     [status] => PAUSED
     [channel] => SEARCH
     [budget] => 5
+    [bid_type] => TARGET_CPA
 )
 ...
 ```
@@ -115,7 +116,6 @@ $adgroups  = $googleAds->fetch()->getAdGroups();
     [name] => Ad Group Name
     [status] => ENABLED
     [campaign_id] => 0000000
-    [campaign_name] => Campaign Name
     [bid_type] => MANUAL_CPC
     [bid] => 0.43
 )
@@ -161,14 +161,12 @@ $googleAds->reports($dateFrom, $dateTo)
 ```
 [0] => Array
 (
-    [Day] => 2018-12-13
-    [Impressions] => 93013
-    [Clicks] => 3282
-    [Cost] => 1240.73
-    [Conversions] => 290.00
-    [Total conv. value] => 1367.25
-    [All conv.] => 290.00
-    [All conv. value] => 1367.25
+    [date] => 2018-12-16
+    [impressions] => 3286
+    [clicks] => 294
+    [cost] => 724
+    [conversions] => 9.00
+    [conversion_value] => 15.75
 )
 ...
 ```
@@ -178,18 +176,16 @@ $googleAds->reports($dateFrom, $dateTo)
 ```
 [0] => Array
 (
-    [Day] => 2018-12-20
-    [Advertising Channel] => Search
-    [Campaign state] => paused
-    [Campaign] => Campaign Name
-    [Campaign ID] => 000000000
-    [Impressions] => 90
-    [Clicks] => 12
-    [Cost] => 5.63
-    [Conversions] => 0.00
-    [Total conv. value] => 0.00
-    [All conv.] => 0.00
-    [All conv. value] => 0.00
+    [date] => 2018-12-15
+    [channel] => Search
+    [campaign_status] => paused
+    [campaign_name] => Campaign Name
+    [campaign_id] => 000000
+    [impressions] => 2
+    [clicks] => 0
+    [cost] => 0
+    [conversions] => 0.00
+    [conversion_value] => 0.00
 )
 ...
 ```
@@ -199,17 +195,15 @@ $googleAds->reports($dateFrom, $dateTo)
 ```
 [0] => Array
 (
-    [Day] => 2018-12-09
-    [Ad group ID] => 0000000
-    [Ad group] => Ad Group Name
-    [Campaign ID] => 00000000
-    [Impressions] => 160
-    [Clicks] => 4
-    [Cost] => 0.93
-    [Conversions] => 0.00
-    [Total conv. value] => 0.00
-    [All conv.] => 0.00
-    [All conv. value] => 0.00
+    [date] => 2018-12-18
+    [ad_group_id] => 000000
+    [ad_group_name] => Ad Group Name
+    [campaign_id] => 0000000
+    [impressions] => 2
+    [clicks] => 0
+    [cost] => 0
+    [conversions] => 0.00
+    [conversion_value] => 0.00
 )
 ...
 ```
@@ -295,10 +289,53 @@ This uses the [BingAds-PHP-SDK](https://github.com/BingAds/BingAds-PHP-SDK) for 
 
 ### Getting Started
 
-**First**, you need to use the service access for `Bing Ads` and add the Client Customer Id
+First, you need to use the service access for `Bing Ads` and add the Client Customer Id
 
 ```php
 $bingAds = LaravelAds::bingAds()->with('CLIENT_ID');
+```
+
+### Fetching Information
+
+If you don't want to learn how to handle the Bing Ads API request, here are **pre-built methods** to quickly get you going.
+
+```php
+// get campaign information (returns as a Collection object)
+$campaigns = $bingAds->fetch()->getCampaigns();
+
+// get adgroup information (returns as a Collection object)
+$adgroups  = $bingAds->fetch()->getAdGroups();
+
+```
+
+*Results: `getCampaigns()` (returns a [Laravel Collection](https://laravel.com/docs/5.7/collections) object, use `all()` for array)*
+
+```
+[0] => Array
+(
+    [id] => 000000000
+    [name] => Campaign Name
+    [status] => Active
+    [channel] => Search
+    [budget] => 15
+    [bid_type] => TargetCpa
+)
+...
+```
+
+*Results: `getAdGroups()` (returns a [Laravel Collection](https://laravel.com/docs/5.7/collections) object, use `all()` for array)*
+
+```
+[0] => Array
+(
+   [id] => 000000000
+   [campaign_id] => 000000
+   [name] => Ad Group Name
+   [status] => Active
+   [bid] => 0.28
+   [bid_type] => TargetCpa
+)
+...
 ```
 
 ### Reporting Data
@@ -330,13 +367,13 @@ $adgroupReport  = $bingAds->reports($dateFrom, $dateTo)
 ```
 [0] => Array
 (
-   [TimePeriod] => 2018-12-26
-   [AccountId] => 00000000
-   [Clicks] => 64262
-   [Impressions] => 1421876
-   [Spend] => 19433.56
-   [Conversions] => 3505
-   [Revenue] => 17161.25
+    [date] => 2018-12-26
+    [account_id] => 000000
+    [clicks] => 3131
+    [impressions] => 73844
+    [cost] => 1003.90
+    [conversions] => 200
+    [conversion_value] => 1017.45
 )
 ...
 ```
@@ -346,16 +383,16 @@ $adgroupReport  = $bingAds->reports($dateFrom, $dateTo)
 ```
 [0] => Array
 (
-    [TimePeriod] => 2018-12-26
-    [AccountId] => 0000000
-    [CampaignName] => Campaign Name
-    [CampaignId] => 000000000
-    [CampaignStatus] => Active
-    [Clicks] => 2
-    [Impressions] => 267
-    [Spend] => 0.53
-    [Conversions] => 0
-    [Revenue] => 0.00
+   [date] => 2018-12-26
+   [account_id] => 000000
+   [campaign_name] => Campaign Name
+   [campaign_id] => 00000
+   [campaign_status] => Active
+   [clicks] => 2
+   [impressions] => 267
+   [cost] => 0.53
+   [conversions] => 0
+   [conversion_value] => 0.00
 )
 ...
 ```
@@ -365,16 +402,16 @@ $adgroupReport  = $bingAds->reports($dateFrom, $dateTo)
 ```
 [0] => Array
 (
-    [TimePeriod] => 2018-12-26
-    [AccountId] => 000000
-    [CampaignId] => 00000000
-    [AdGroupId] => 000000000000
-    [AdGroupName] => Ad Group Name
-    [Clicks] => 684
-    [Impressions] => 6008
-    [Spend] => 290.13
-    [Conversions] => 82
-    [Revenue] => 446.15
+    [date] => 2018-12-26
+    [account_id] => 00000000
+    [campaign_id] => 0000000
+    [ad_group_id] => 0000000
+    [ad_group_name] => Ad Group Name
+    [clicks] => 684
+    [impressions] => 6008
+    [cost] => 290.13
+    [conversions] => 83
+    [conversion_value] => 451.05
 )
 ...
 ```

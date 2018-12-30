@@ -11,11 +11,13 @@ You need access before you can use the API
 
 ## (2) Register Your Application
 
-Bing Requires you to register your app. This is where you get your client id, client secret and develop token.
+Bing Requires you to register your app. This is where you get your client id, client secret and developer token.
 
-[Application Portal](https://apps.dev.microsoft.com)
+[Register Your Application](https://apps.dev.microsoft.com)
 
-Use `https://login.microsoftonline.com/common/oauth2/nativeclient` inside the Redirect URLS input field.
+Use `https://login.microsoftonline.com/common/oauth2/nativeclient` for the Redirect URLS input field.
+
+*Note: Try using the platform "Native App" if you're having trouble.*
 
 ## (3) Generate Refresh Token
 

@@ -1,5 +1,8 @@
 <?php namespace LaravelAds\Services\BingAds;
 
+use LaravelAds\Services\BingAds\Reports;
+use LaravelAds\Services\BingAds\Fetch;
+
 use Microsoft\BingAds\Auth\OAuthDesktopMobileAuthCodeGrant;
 use Microsoft\BingAds\Auth\OAuthWebAuthCodeGrant;
 use Microsoft\BingAds\Auth\AuthorizationData;
@@ -49,6 +52,16 @@ class Service
     }
 
     /**
+     * fetch()
+     *
+     *
+     */
+    public function fetch()
+    {
+        return (new Fetch($this));
+    }
+
+    /**
      * serviceProxy()
      *
      *
@@ -80,6 +93,7 @@ class Service
             $config = config('bing-ads');
 
             $AuthorizationData = (new AuthorizationData())
+                ->withAccountId($this->getClientId())
                 ->withAuthentication($this->oAuthcredentials($config))
                 ->withDeveloperToken($config['developerToken']);
 
