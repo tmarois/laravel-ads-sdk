@@ -230,4 +230,16 @@ class ReportDownload
         return $report;
     }
 
+
+    /**
+     * toCollection()
+     *
+     *
+     * @return Collection results
+     */
+    public function toCollection()
+    {
+        return collect($this->toArray());
+    }
+
 }

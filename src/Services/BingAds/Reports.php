@@ -283,7 +283,7 @@ class Reports
      */
     public function getAccountReport()
     {
-        return $this->buildAccountReport();
+        return $this->buildAccountReport()->toCollection();
     }
 
 
@@ -294,7 +294,7 @@ class Reports
      */
     public function getCampaignReport()
     {
-        return $this->buildCampaignReport();
+        return $this->buildCampaignReport()->toCollection();
     }
 
 
@@ -305,7 +305,7 @@ class Reports
      */
     public function getAdGroupReport()
     {
-        return $this->buildAdGroupReport();
+        return $this->buildAdGroupReport()->toCollection();
     }
 
 }

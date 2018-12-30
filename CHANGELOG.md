@@ -1,6 +1,14 @@
 Change Log
 ==========
 
+### 12/30/2018 - 1.0.7
+
+#### Added
+* Added `toCollection()` on `ReportDownload`, instead of sending back raw array, we will send back as a Collection. You can use `all()` if you want the basic array response.
+
+#### Changed
+* The default `ReportDownload` response to `toCollection()` instead of `toArray()`
+
 ### 12/29/2018 - 1.0.6
 
 #### Added

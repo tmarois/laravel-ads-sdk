@@ -124,23 +124,20 @@ $adgroups  = $googleAds->fetch()->getAdGroups();
 
 ### Reporting Data
 
-Here are the **pre-built methods** for retrieving reports
+Here are the **pre-built methods** for retrieving reports.
 
 ```php
 // Get account level reports
 $accountReport  = $googleAds->reports($dateFrom, $dateTo)
-                            ->getAccountReport()
-                            ->toArray();
+                            ->getAccountReport();
 
 // get campaign level reports
 $campaignReport = $googleAds->reports($dateFrom, $dateTo)
-                            ->getCampaignReport()
-                            ->toArray();
+                            ->getCampaignReport();
 
 // get adgroup level reports
 $adgroupReport  = $googleAds->reports($dateFrom, $dateTo)
                             ->getAdGroupReport()
-                            ->toArray();
 
 ```
 
@@ -156,7 +153,7 @@ $googleAds->reports($dateFrom, $dateTo)
 ```
 
 
-*Results: `getAccountReport()`*
+*Results: `getAccountReport()` (returns a [Laravel Collection](https://laravel.com/docs/5.7/collections) object, use `all()` for array)*
 
 ```
 [0] => Array
@@ -171,7 +168,7 @@ $googleAds->reports($dateFrom, $dateTo)
 ...
 ```
 
-*Results: `getCampaignReport()`*
+*Results: `getCampaignReport()` (returns a [Laravel Collection](https://laravel.com/docs/5.7/collections) object, use `all()` for array)*
 
 ```
 [0] => Array
@@ -190,7 +187,7 @@ $googleAds->reports($dateFrom, $dateTo)
 ...
 ```
 
-*Results: `getAdGroupReport()`*
+*Results: `getAdGroupReport()` (returns a [Laravel Collection](https://laravel.com/docs/5.7/collections) object, use `all()` for array)*
 
 ```
 [0] => Array
@@ -362,7 +359,7 @@ $adgroupReport  = $bingAds->reports($dateFrom, $dateTo)
 
 ```
 
-*Results: `getAccountReport()`*
+*Results: `getAccountReport()` (returns a [Laravel Collection](https://laravel.com/docs/5.7/collections) object, use `all()` for array)*
 
 ```
 [0] => Array
@@ -378,7 +375,7 @@ $adgroupReport  = $bingAds->reports($dateFrom, $dateTo)
 ...
 ```
 
-*Results: `getCampaignReport()`*
+*Results: `getCampaignReport()` (returns a [Laravel Collection](https://laravel.com/docs/5.7/collections) object, use `all()` for array)*
 
 ```
 [0] => Array
@@ -397,7 +394,7 @@ $adgroupReport  = $bingAds->reports($dateFrom, $dateTo)
 ...
 ```
 
-*Results: `getAdGroupReport()`*
+*Results: `getAdGroupReport()` (returns a [Laravel Collection](https://laravel.com/docs/5.7/collections) object, use `all()` for array)*
 
 ```
 [0] => Array

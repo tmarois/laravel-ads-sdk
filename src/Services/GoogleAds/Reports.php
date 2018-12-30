@@ -144,7 +144,7 @@ class Reports
 
         $reportDefinition = $this->reportDefinition(ReportDefinitionReportType::ACCOUNT_PERFORMANCE_REPORT);
 
-        return $this->reportDownload($reportDefinition);
+        return $this->reportDownload($reportDefinition)->toCollection();
     }
 
 
@@ -173,7 +173,7 @@ class Reports
 
         $reportDefinition = $this->reportDefinition(ReportDefinitionReportType::CAMPAIGN_PERFORMANCE_REPORT);
 
-        return $this->reportDownload($reportDefinition);
+        return $this->reportDownload($reportDefinition)->toCollection();
     }
 
 
@@ -201,7 +201,7 @@ class Reports
 
         $reportDefinition = $this->reportDefinition(ReportDefinitionReportType::ADGROUP_PERFORMANCE_REPORT);
 
-        return $this->reportDownload($reportDefinition);
+        return $this->reportDownload($reportDefinition)->toCollection();
     }
 
 }
