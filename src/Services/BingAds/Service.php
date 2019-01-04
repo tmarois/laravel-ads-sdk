@@ -2,6 +2,7 @@
 
 use LaravelAds\Services\BingAds\Reports;
 use LaravelAds\Services\BingAds\Fetch;
+use LaravelAds\Services\BingAds\Operations\AdGroupOperation;
 
 use Microsoft\BingAds\Auth\OAuthDesktopMobileAuthCodeGrant;
 use Microsoft\BingAds\Auth\OAuthWebAuthCodeGrant;
@@ -79,6 +80,17 @@ class Service
     public function reports($dateFrom, $dateTo)
     {
         return (new Reports($this))->setDateRange($dateFrom, $dateTo);
+    }
+
+    /**
+     * adGroup()
+     *
+     *
+     * @return AdGroupOperation
+     */
+    public function adGroup($id, $campaignId)
+    {
+        return (new AdGroupOperation($this, $id, $campaignId));
     }
 
     /**

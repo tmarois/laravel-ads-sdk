@@ -208,6 +208,14 @@ $googleAds->reports($dateFrom, $dateTo)
 
 ### AdGroups
 
+Grab the AdGroup details from the server and populate the object.
+
+```php
+$adGroup = $googleAds->adGroup('ADGROUP_ID');
+```
+
+These methods are available.
+
 |Method				|Description    |
 |---				|---		    |
 |`getId()`|GET AdGroup Id|
@@ -222,11 +230,6 @@ $googleAds->reports($dateFrom, $dateTo)
 |`setStatus()`|SET AdGroup status|
 |`save()`|Posts changes to the server|
 
-Grab the AdGroup details from the server and populate the object.
-
-```php
-$googleAds->adGroup('ADGROUPID');
-```
 
 ### Operation: Change AdGroup Bids
 
@@ -410,6 +413,25 @@ $adgroupReport  = $bingAds->reports($dateFrom, $dateTo)
 ...
 ```
 
+### AdGroups
+
+Grab the AdGroup details from the server and populate the object.
+
+```php
+// Bing requires Campaign Id
+$adGroup = $bingAds->adGroup('ADGROUP_ID', "CAMPAIGN_ID");
+```
+
+These methods are available.
+
+|Method				|Description    |
+|---				|---		    |
+|`getId()`|GET AdGroup Id|
+|`getName()`|GET AdGroup Name|
+|`getStatus()`|GET AdGroup Status|
+|`getBidType()`|GET AdGroup Bid Strategy Type|
+|`get()`|GET AdGroup details from the server|
+|`save()`|Posts changes to the server|
 
 
 # Facebook Ads
