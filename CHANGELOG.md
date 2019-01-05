@@ -1,7 +1,7 @@
 Change Log
 ==========
 
-### 12/30/2018 - 1.1.0
+### 01/05/2018 - 1.1.0
 
 #### Changed
 * Response of `adGroup` for both Google/Bing
