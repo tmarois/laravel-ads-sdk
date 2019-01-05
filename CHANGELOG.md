@@ -1,6 +1,16 @@
 Change Log
 ==========
 
+### 12/30/2018 - 1.1.0
+
+#### Changed
+* Response of `adGroup` for both Google/Bing
+* Request to the servers will use `AdGroupRequest`
+* Response from the servers will use `AdGroupResponse`
+* Bing now has edit ability (and uses the same methods as Google)
+* Added new Set/Get Methods to Google/Bing
+
+
 ### 12/30/2018 - 1.0.7
 
 #### Added

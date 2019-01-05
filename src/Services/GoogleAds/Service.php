@@ -1,5 +1,8 @@
 <?php namespace LaravelAds\Services\GoogleAds;
 
+
+use LaravelAds\Services\GoogleAds\Operations\AdGroupRequest;
+
 use LaravelAds\Services\GoogleAds\Reports;
 use LaravelAds\Services\GoogleAds\Fetch;
 use LaravelAds\Services\GoogleAds\Operations\AdGroupOperation;
@@ -87,9 +90,9 @@ class Service
      *
      * @return AdGroupOperation
      */
-    public function adGroup($id)
+    public function adGroup()
     {
-        return (new AdGroupOperation($this, $id));
+        return (new AdGroupRequest($this));
     }
 
     /**

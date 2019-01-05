@@ -208,55 +208,49 @@ $googleAds->reports($dateFrom, $dateTo)
 
 ### AdGroups
 
-Grab the AdGroup details from the server and populate the object.
+Use `get()` to grab AdGroup details from the server and populate the object. Returns `AdGroupResponse` object.
 
 ```php
-$adGroup = $googleAds->adGroup('ADGROUP_ID');
+// Ad Group ID is required
+$adgroup = $googleAds->adGroup()
+                     ->setId('ADGROUP_ID')
+                     ->get();
 ```
 
-These methods are available.
+These methods are available from `AdGroupResponse`
 
 |Method				|Description    |
 |---				|---		    |
 |`getId()`|GET AdGroup Id|
 |`getName()`|GET AdGroup Name|
 |`getStatus()`|GET AdGroup Status|
-|`getAdGroupType()`|GET AdGroup Type|
-|`getCampaignId()`|GET AdGroup Campaign id|
 |`getBidType()`|GET AdGroup Bid Strategy Type|
+|`getCampaignId()`|GET Campaign Id|
 |`get()`|GET AdGroup details from the server|
+
+To create or edit AdGroups, load a blank `AdGroup` from `AdGroupRequest` object, use `save()` to push changes.
+
+```php
+// setting the campaign name and bid
+// include the Id and Campaign Id when changing existing ad groups
+$adgroup = $googleAds->adGroup()
+                     ->setId('ADGROUP_ID')
+                     ->setBid(0.5)
+                     ->setName('My AdGroup Name')
+                     ->save();
+
+```
+
+These methods are available from `AdGroupRequest`
+
+|Method				|Description    |
+|---				|---		    |
+|`setId()`|SET the AdGroup id|
+|`setCampaignId()`|SET the Campaign id|
 |`setName()`|SET the AdGroup name|
-|`setBid()`|SET AdGroup Bid (name,type)|
+|`setBid()`|SET AdGroup Bid|
 |`setStatus()`|SET AdGroup status|
 |`save()`|Posts changes to the server|
-
-
-### Operation: Change AdGroup Bids
-
-Set the AdGroup bid; it will automatically set the bid based on the campaign bid strategy type.
-
-```php
-// This will change the cpc, cpm or cpa bid to 0.80
-$googleAds->adGroup('ADGROUPID')
-            ->setBid(0.80)
-            ->save();
-
-```
-
-### Operation: Update AdGroup
-
-You can chain AdGroup changes like below (even the bid changes), use `save()` when ready to post changes.
-
-```php
-// You can change the adgroup name and status
-$googleAds->adGroup('ADGROUPID')
-            ->setName('My New AdGroup Name')
-            ->setStatus('PAUSED')
-            ->save();
-
-```
-
-*Google AdGroup status must be equal to `ENABLED` or `PAUSED`.*
 
 
 ### Need More? Advanced Options
@@ -415,14 +409,17 @@ $adgroupReport  = $bingAds->reports($dateFrom, $dateTo)
 
 ### AdGroups
 
-Grab the AdGroup details from the server and populate the object.
+Use `get()` to grab AdGroup details from the server and populate the object. Returns `AdGroupResponse` object.
 
 ```php
-// Bing requires Campaign Id
-$adGroup = $bingAds->adGroup('ADGROUP_ID', "CAMPAIGN_ID");
+// Ad Group ID and Campaign ID is required
+$adgroup = $bingAds->adGroup()
+                   ->setId('ADGROUP_ID')
+                   ->setCampaignId('CAMPAIGN_ID')
+                   ->get();
 ```
 
-These methods are available.
+These methods are available from `AdGroupResponse`
 
 |Method				|Description    |
 |---				|---		    |
@@ -430,7 +427,32 @@ These methods are available.
 |`getName()`|GET AdGroup Name|
 |`getStatus()`|GET AdGroup Status|
 |`getBidType()`|GET AdGroup Bid Strategy Type|
+|`getCampaignId()`|GET Campaign Id|
 |`get()`|GET AdGroup details from the server|
+
+To create or edit AdGroups load a blank `AdGroup` from `AdGroupRequest` object, use `save()` to push changes.
+
+```php
+// setting the campaign name and bid
+// include the Id and Campaign Id when changing existing ad groups
+$adgroup = $bingAds->adGroup()
+                   ->setId('ADGROUP_ID')
+                   ->setCampaignId('CAMPAIGN_ID')
+                   ->setBid(0.5)
+                   ->setName('My AdGroup Name')
+                   ->save();
+
+```
+
+These methods are available from `AdGroupRequest`
+
+|Method				|Description    |
+|---				|---		    |
+|`setId()`|SET the AdGroup id|
+|`setCampaignId()`|SET the Campaign id|
+|`setName()`|SET the AdGroup name|
+|`setBid()`|SET AdGroup Bid|
+|`setStatus()`|SET AdGroup status|
 |`save()`|Posts changes to the server|
 
 

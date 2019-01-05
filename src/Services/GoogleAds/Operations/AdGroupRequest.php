@@ -1,6 +1,8 @@
 <?php namespace LaravelAds\Services\GoogleAds\Operations;
 
 
+use LaravelAds\Services\GoogleAds\Operations\AdGroupResponse;
+
 use Google\AdsApi\AdWords\v201809\cm\AdGroup;
 use Google\AdsApi\AdWords\v201809\cm\AdGroupOperation as ApiAdGroupOperation;
 use Google\AdsApi\AdWords\v201809\cm\AdGroupService;
@@ -11,7 +13,7 @@ use Google\AdsApi\AdWords\v201809\cm\CpmBid;
 use Google\AdsApi\AdWords\v201809\cm\Money;
 use Google\AdsApi\AdWords\v201809\cm\Operator;
 
-class AdGroupOperation
+class AdGroupRequest
 {
     /**
      * $service
@@ -20,34 +22,46 @@ class AdGroupOperation
     protected $service = null;
 
     /**
-     * $adGroupId
-     *
-     */
-    protected $adGroupId = null;
-
-    /**
      * $operations
      *
      */
-    protected $adGroup = [];
+    protected $adGroup = null;
 
     /**
      * __construct()
      *
-     *
      */
-    public function __construct($service, $adGroupId = null)
+    public function __construct($service)
     {
         $this->service = $service;
 
-        $this->adGroupId = $adGroupId;
-
         $this->adGroup = new AdGroup();
+    }
 
-        if ($adGroupId) {
-            $this->adGroup->setId($this->adGroupId);
-            $this->adGroup = $this->get();
-        }
+    /**
+     * setId()
+     *
+     * @param int $id
+     *
+     */
+    public function setId($id)
+    {
+        $this->adGroup->setId($id);
+
+        return $this;
+    }
+
+    /**
+     * setCampaignId()
+     *
+     * @param int $id
+     *
+     */
+    public function setCampaignId($id)
+    {
+        $this->adGroup->setCampaignId($id);
+
+        return $this;
     }
 
     /**
@@ -61,7 +75,7 @@ class AdGroupOperation
      */
     public function setBid($amount)
     {
-        switch($this->getBidType())
+        /*switch($this->getBidType())
         {
             case 'MANUAL_CPC' :
                 $bid = new CpcBid();
@@ -73,7 +87,9 @@ class AdGroupOperation
                 $bid = new CpmBid();
             break;
             default : return false;
-        }
+        }*/
+
+        $bid   = new CpcBid();
 
         $money = new Money();
 
@@ -89,15 +105,6 @@ class AdGroupOperation
         $this->adGroup->setBiddingStrategyConfiguration($biddingStrategyConfiguration);
 
         return $this;
-    }
-
-    /**
-     * getBidType()
-     *
-     */
-    public function getBidType()
-    {
-        return $this->adGroup->getBiddingStrategyConfiguration()->getBiddingStrategyType();
     }
 
     /**
@@ -134,65 +141,6 @@ class AdGroupOperation
         return $this;
     }
 
-    /**
-     * getName()
-     *
-     * @reference
-     * https://github.com/googleads/googleads-php-lib/blob/master/src/Google/AdsApi/AdWords/v201809/cm/AdGroup.php
-     *
-     * @return string
-     *
-     */
-    public function getName()
-    {
-        return $this->adGroup->getName();
-    }
-
-    /**
-     * getStatus()
-     *
-     * @reference
-     * https://github.com/googleads/googleads-php-lib/blob/master/src/Google/AdsApi/AdWords/v201809/cm/AdGroup.php
-     *
-     * @return string
-     *
-     */
-    public function getStatus()
-    {
-        return $this->adGroup->getStatus();
-    }
-
-    /**
-     * getAdGroupType()
-     *
-     * @reference
-     * https://github.com/googleads/googleads-php-lib/blob/master/src/Google/AdsApi/AdWords/v201809/cm/AdGroup.php
-     *
-     * @return string
-     *
-     */
-    public function getAdGroupType()
-    {
-        return $this->adGroup->getAdGroupType();
-    }
-
-    /**
-     * getId()
-     *
-     */
-    public function getId()
-    {
-        return $this->adGroup->getId();
-    }
-
-    /**
-     * getCampaignId()
-     *
-     */
-    public function getCampaignId()
-    {
-        return $this->adGroup->getCampaignId();
-    }
 
     /**
      * get()
@@ -206,7 +154,7 @@ class AdGroupOperation
 
         $adgroup = ($this->service->service(AdGroupService::class))->mutate([$operation]);
 
-        return $adgroup->getValue()[0] ?? null;
+        return (new AdGroupResponse($adgroup->getValue()[0] ?? null));
     }
 
     /**

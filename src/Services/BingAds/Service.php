@@ -2,7 +2,7 @@
 
 use LaravelAds\Services\BingAds\Reports;
 use LaravelAds\Services\BingAds\Fetch;
-use LaravelAds\Services\BingAds\Operations\AdGroupOperation;
+use LaravelAds\Services\BingAds\Operations\AdGroupRequest;
 
 use Microsoft\BingAds\Auth\OAuthDesktopMobileAuthCodeGrant;
 use Microsoft\BingAds\Auth\OAuthWebAuthCodeGrant;
@@ -88,9 +88,9 @@ class Service
      *
      * @return AdGroupOperation
      */
-    public function adGroup($id, $campaignId)
+    public function adGroup()
     {
-        return (new AdGroupOperation($this, $id, $campaignId));
+        return (new AdGroupRequest($this));
     }
 
     /**
