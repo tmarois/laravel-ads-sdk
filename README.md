@@ -225,6 +225,7 @@ These methods are available from `AdGroupResponse`
 |`getName()`|GET AdGroup Name|
 |`getStatus()`|GET AdGroup Status|
 |`getBidType()`|GET AdGroup Bid Strategy Type|
+|`getBid()`|GET AdGroup bid amount|
 |`getCampaignId()`|GET Campaign Id|
 |`get()`|GET AdGroup details from the server|
 
@@ -427,6 +428,7 @@ These methods are available from `AdGroupResponse`
 |`getName()`|GET AdGroup Name|
 |`getStatus()`|GET AdGroup Status|
 |`getBidType()`|GET AdGroup Bid Strategy Type|
+|`getBid()`|GET AdGroup bid amount|
 |`getCampaignId()`|GET Campaign Id|
 |`get()`|GET AdGroup details from the server|
 

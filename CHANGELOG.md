@@ -1,6 +1,12 @@
 Change Log
 ==========
 
+### 01/05/2018 - 1.1.1
+
+#### Added
+* For Google/Bing get the active bid with `getBid()` on adgroups.
+
+
 ### 01/05/2018 - 1.1.0
 
 #### Changed
