@@ -200,6 +200,8 @@ class Fetch
 
             foreach($items->AdGroups->AdGroup as $item)
             {
+                $item->CampaignId = $campaign['id'];
+                
                 $adgroup = (new AdGroupResponse($item));
 
                 $r[] = [
