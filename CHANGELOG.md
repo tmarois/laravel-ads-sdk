@@ -1,5 +1,9 @@
 Change Log
 ==========
+### 01/14/2018 - 1.1.5
+
+#### Fixed
+* Added `Campaign Id` into Bing Ad Group response.
 
 
 ### 01/14/2018 - 1.1.4
