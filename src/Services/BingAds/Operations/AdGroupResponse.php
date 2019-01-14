@@ -77,7 +77,21 @@ class AdGroupResponse
      */
     public function getBidType()
     {
-        return $this->adGroup->BiddingScheme->InheritedBidStrategyType ?? null;
+        $type = $this->adGroup->BiddingScheme->InheritedBidStrategyType ?? null;
+
+        if ($type = 'EnhancedCpc') {
+            return 'ECPC';
+        }
+
+        if ($type = 'ManualCpc') {
+            return 'CPC';
+        }
+
+        if ($type = 'TargetCpa') {
+            return 'CPA';
+        }
+
+        return $type;
     }
 
 }

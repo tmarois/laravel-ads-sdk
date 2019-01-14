@@ -102,7 +102,7 @@ $adgroups  = $googleAds->fetch()->getAdGroups();
     [status] => PAUSED
     [channel] => SEARCH
     [budget] => 5
-    [bid_type] => TARGET_CPA
+    [bid_type] => CPA
 )
 ...
 ```
@@ -116,7 +116,8 @@ $adgroups  = $googleAds->fetch()->getAdGroups();
     [name] => Ad Group Name
     [status] => ENABLED
     [campaign_id] => 0000000
-    [bid_type] => MANUAL_CPC
+    [type] => SEARCH_STANDARD
+    [bid_type] => CPC
     [bid] => 0.43
 )
 ...
@@ -224,10 +225,12 @@ These methods are available from `AdGroupResponse`
 |`getId()`|GET AdGroup Id|
 |`getName()`|GET AdGroup Name|
 |`getStatus()`|GET AdGroup Status|
-|`getBidType()`|GET AdGroup Bid Strategy Type|
+|`getBidType()`|GET AdGroup Bid Strategy Type (`CPC`,`ECPC`,`CPA`)|
 |`getBid()`|GET AdGroup bid amount|
 |`getCampaignId()`|GET Campaign Id|
 |`get()`|GET AdGroup details from the server|
+|`isEnhancedCpc()`|Boolean if adgorup is set to Enhanced
+|`getAdGroupType()`|GET [AdGroup Type](https://developers.google.com/adwords/api/docs/reference/v201809/AdGroupService.AdGroup)
 
 To create or edit AdGroups, load a blank `AdGroup` from `AdGroupRequest` object, use `save()` to push changes.
 
@@ -313,7 +316,7 @@ $adgroups  = $bingAds->fetch()->getAdGroups();
     [status] => Active
     [channel] => Search
     [budget] => 15
-    [bid_type] => TargetCpa
+    [bid_type] => CPA
 )
 ...
 ```
@@ -328,7 +331,7 @@ $adgroups  = $bingAds->fetch()->getAdGroups();
    [name] => Ad Group Name
    [status] => Active
    [bid] => 0.28
-   [bid_type] => TargetCpa
+   [bid_type] => CPA
 )
 ...
 ```
@@ -427,7 +430,7 @@ These methods are available from `AdGroupResponse`
 |`getId()`|GET AdGroup Id|
 |`getName()`|GET AdGroup Name|
 |`getStatus()`|GET AdGroup Status|
-|`getBidType()`|GET AdGroup Bid Strategy Type|
+|`getBidType()`|GET AdGroup Bid Strategy Type (`CPC`,`ECPC`,`CPA`)|
 |`getBid()`|GET AdGroup bid amount|
 |`getCampaignId()`|GET Campaign Id|
 |`get()`|GET AdGroup details from the server|

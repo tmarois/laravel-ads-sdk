@@ -24,7 +24,25 @@ class AdGroupResponse
      */
     public function getBidType()
     {
-        return $this->adGroup->getBiddingStrategyConfiguration()->getBiddingStrategyType();
+        $type = $this->adGroup->getBiddingStrategyConfiguration()->getBiddingStrategyType();
+
+        if ($type = 'MANUAL_CPC' && $this->isEnhancedCpc()) {
+            return 'ECPC';
+        }
+
+        if ($type = 'MANUAL_CPC') {
+            return 'CPC';
+        }
+
+        if ($type = 'TARGET_CPA') {
+            return 'CPA';
+        }
+
+        if ($type = 'MANUAL_CPM') {
+            return 'CPM';
+        }
+
+        return $type;
     }
 
     /**
@@ -33,7 +51,12 @@ class AdGroupResponse
      */
     public function isEnhancedCpc()
     {
-         return $this->adGroup->getBiddingStrategyConfiguration()->getBiddingScheme()->getEnhancedCpcEnabled();
+        $scheme = $this->adGroup->getBiddingStrategyConfiguration()->getBiddingScheme() ?? null;
+        if ($scheme) {
+            return $this->adGroup->getBiddingStrategyConfiguration()->getBiddingScheme()->getEnhancedCpcEnabled() ?? false;
+        }
+
+        return false;
     }
 
     /**
@@ -50,19 +73,19 @@ class AdGroupResponse
 
         foreach($bids as $bid)
         {
-            if ($bid->getBidsType() == 'CpcBid' && $this->getBidType() == "MANUAL_CPC")
+            if ($bid->getBidsType() == 'CpcBid' && ($this->getBidType() == "CPC" || $this->getBidType() == "ECPC"))
             {
                 $bidAmount = $bid->getbid()->getMicroAmount();
                 break;
             }
 
-            if ($bid->getBidsType() == 'CpmBid' && $this->getBidType() == "MANUAL_CPM")
+            if ($bid->getBidsType() == 'CpmBid' && $this->getBidType() == "CPM")
             {
                 $bidAmount = $bid->getbid()->getMicroAmount();
                 break;
             }
 
-            if ($bid->getBidsType() == 'CpaBid' && $this->getBidType() == "TARGET_CPA")
+            if ($bid->getBidsType() == 'CpaBid' && $this->getBidType() == "CPA")
             {
                 $bidAmount = $bid->getbid()->getMicroAmount();
                 break;

@@ -1,6 +1,13 @@
 Change Log
 ==========
 
+### 01/14/2018 - 1.1.3
+
+#### Added
+* Google: Added `type` for `AdGroupType` in `getAdGroups()`
+* Changed the Bid Type to always return a uniform set (`CPC`,`ECPC`,`CPA`,`CPM`)
+
+
 ### 01/14/2018 - 1.1.2
 
 #### Added

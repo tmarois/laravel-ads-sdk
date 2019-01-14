@@ -1,5 +1,7 @@
 <?php namespace LaravelAds\Services\GoogleAds;
 
+use LaravelAds\Services\GoogleAds\Operations\AdGroupResponse;
+
 use Google\AdsApi\AdWords\v201809\cm\CampaignService;
 use Google\AdsApi\AdWords\v201809\cm\AdGroupService;
 use Google\AdsApi\AdWords\v201809\cm\OrderBy;
@@ -89,61 +91,28 @@ class Fetch
             'Status',
             'BiddingStrategyType',
             'EnhancedCpcEnabled',
+            'AdGroupType',
             'CpcBid',
             'CpmBid',
             'TargetCpaBid'
         ]);
 
         $page  = $this->service->service(AdGroupService::class)->get($selector);
-        $items = $page->getEntries(); 
+        $items = $page->getEntries();
 
         $r = [];
-        foreach ($items as $item)
+        foreach($items as $item)
         {
-            $bidType    = $item->getBiddingStrategyConfiguration()->getBiddingStrategyType() ?? '';
-
-            $isEnhanced = false;
-
-            if ($bidType=='MANUAL_CPC') {
-                $isEnhanced = $item->getBiddingStrategyConfiguration()->getBiddingScheme()->getEnhancedCpcEnabled() ?? false;
-
-                if ($isEnhanced==true) {
-                    $bidType = 'ENHANCED_CPC';
-                }
-            }
-
-            $bids = $item->getBiddingStrategyConfiguration()->getBids() ?? '';
-
-            $realBid = 0;
-
-            foreach($bids as $bid)
-            {
-                if ($bid->getBidsType() == 'CpcBid' && ($bidType == "MANUAL_CPC" || $bidType == "ENHANCED_CPC"))
-                {
-                    $realBid = $bid->getbid()->getMicroAmount();
-                    break;
-                }
-
-                if ($bid->getBidsType() == 'CpmBid' && $bidType == "MANUAL_CPM")
-                {
-                    $realBid = $bid->getbid()->getMicroAmount();
-                    break;
-                }
-
-                if ($bid->getBidsType() == 'CpaBid' && $bidType == "TARGET_CPA")
-                {
-                    $realBid = $bid->getbid()->getMicroAmount();
-                    break;
-                }
-            }
+            $adgroup = (new AdGroupResponse($item));
 
             $r[] = [
-                'id' => $item->getId(),
-                'name' => $item->getName(),
-                'status' => $item->getStatus(),
-                'campaign_id' => $item->getCampaignId(),
-                'bid_type' => $bidType,
-                'bid' => ($realBid) ? round( intval($realBid) / 1000000,2) : 0
+                'id' => $adgroup->getId(),
+                'name' => $adgroup->getName(),
+                'status' => $adgroup->getStatus(),
+                'campaign_id' => $adgroup->getCampaignId(),
+                'type' => $adgroup->getAdGroupType(),
+                'bid_type' => $adgroup->getBidType(),
+                'bid' => $adgroup->getBid()
             ];
         }
 
