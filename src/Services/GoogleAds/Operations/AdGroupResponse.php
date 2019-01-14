@@ -28,6 +28,15 @@ class AdGroupResponse
     }
 
     /**
+     * isEnhancedCpc()
+     *
+     */
+    public function isEnhancedCpc()
+    {
+         return $this->adGroup->getBiddingStrategyConfiguration()->getBiddingScheme()->getEnhancedCpcEnabled();
+    }
+
+    /**
      * getBid()
      *
      * This will get the bid that is currently active on the bid type

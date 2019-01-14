@@ -1,6 +1,13 @@
 Change Log
 ==========
 
+### 01/14/2018 - 1.1.2
+
+#### Added
+* Google: Ability to check if an ad group is Enhanced CPC using `isEnhancedCpc()`
+* Google: Added `ENHANCED_CPC` for bid strategy response in fetch ad groups
+
+
 ### 01/05/2018 - 1.1.1
 
 #### Added

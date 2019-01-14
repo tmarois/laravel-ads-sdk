@@ -88,25 +88,37 @@ class Fetch
             'CampaignId',
             'Status',
             'BiddingStrategyType',
+            'EnhancedCpcEnabled',
             'CpcBid',
             'CpmBid',
             'TargetCpaBid'
         ]);
 
         $page  = $this->service->service(AdGroupService::class)->get($selector);
-        $items = $page->getEntries();
+        $items = $page->getEntries(); 
 
         $r = [];
         foreach ($items as $item)
         {
-            $bidType = $item->getBiddingStrategyConfiguration()->getBiddingStrategyType() ?? '';
+            $bidType    = $item->getBiddingStrategyConfiguration()->getBiddingStrategyType() ?? '';
+
+            $isEnhanced = false;
+
+            if ($bidType=='MANUAL_CPC') {
+                $isEnhanced = $item->getBiddingStrategyConfiguration()->getBiddingScheme()->getEnhancedCpcEnabled() ?? false;
+
+                if ($isEnhanced==true) {
+                    $bidType = 'ENHANCED_CPC';
+                }
+            }
+
             $bids = $item->getBiddingStrategyConfiguration()->getBids() ?? '';
 
             $realBid = 0;
 
             foreach($bids as $bid)
             {
-                if ($bid->getBidsType() == 'CpcBid' && $bidType == "MANUAL_CPC")
+                if ($bid->getBidsType() == 'CpcBid' && ($bidType == "MANUAL_CPC" || $bidType == "ENHANCED_CPC"))
                 {
                     $realBid = $bid->getbid()->getMicroAmount();
                     break;
