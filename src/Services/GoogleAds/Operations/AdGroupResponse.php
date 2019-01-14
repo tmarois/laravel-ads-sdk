@@ -26,19 +26,19 @@ class AdGroupResponse
     {
         $type = $this->adGroup->getBiddingStrategyConfiguration()->getBiddingStrategyType();
 
-        if ($type = 'MANUAL_CPC' && $this->isEnhancedCpc()) {
+        if ($type == 'MANUAL_CPC' && $this->isEnhancedCpc()) {
             return 'ECPC';
         }
 
-        if ($type = 'MANUAL_CPC') {
+        if ($type == 'MANUAL_CPC') {
             return 'CPC';
         }
 
-        if ($type = 'TARGET_CPA') {
+        if ($type == 'TARGET_CPA') {
             return 'CPA';
         }
 
-        if ($type = 'MANUAL_CPM') {
+        if ($type == 'MANUAL_CPM') {
             return 'CPM';
         }
 

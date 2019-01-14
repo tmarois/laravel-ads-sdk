@@ -89,15 +89,15 @@ class AdGroupResponse
     {
         $type = $this->adGroup->BiddingScheme->InheritedBidStrategyType ?? null;
 
-        if ($type = 'EnhancedCpc') {
+        if ($type == 'EnhancedCpc') {
             return 'ECPC';
         }
 
-        if ($type = 'ManualCpc') {
+        if ($type == 'ManualCpc') {
             return 'CPC';
         }
 
-        if ($type = 'TargetCpa') {
+        if ($type == 'TargetCpa') {
             return 'CPA';
         }
 

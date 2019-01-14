@@ -1,5 +1,13 @@
 Change Log
 ==========
+
+### 01/14/2018 - 1.1.6
+
+#### Fixed
+* Fixed new bid type method returns the correct types now.
+
+
+
 ### 01/14/2018 - 1.1.5
 
 #### Fixed
