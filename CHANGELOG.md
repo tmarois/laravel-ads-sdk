@@ -1,10 +1,20 @@
 Change Log
 ==========
 
+
+### 01/14/2018 - 1.1.4
+
+#### Changed
+* Changed Bing Ad Group status from `Active` to `ENABLED` (matching GoogleAds)
+* Fetching AdGroups now use the AdGroup Response object.
+
+
 ### 01/14/2018 - 1.1.3
 
 #### Added
 * Google: Added `type` for `AdGroupType` in `getAdGroups()`
+
+#### Changed
 * Changed the Bid Type to always return a uniform set (`CPC`,`ECPC`,`CPA`,`CPM`)
 
 

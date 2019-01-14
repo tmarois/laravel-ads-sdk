@@ -4,6 +4,8 @@ use SoapVar;
 use SoapFault;
 use Exception;
 
+use LaravelAds\Services\BingAds\Operations\AdGroupResponse;
+
 use Microsoft\BingAds\V12\CampaignManagement\AddAdExtensionsRequest;
 use Microsoft\BingAds\V12\CampaignManagement\AddAdGroupCriterionsRequest;
 use Microsoft\BingAds\V12\CampaignManagement\AddAdGroupsRequest;
@@ -198,13 +200,15 @@ class Fetch
 
             foreach($items->AdGroups->AdGroup as $item)
             {
+                $adgroup = (new AdGroupResponse($item));
+
                 $r[] = [
-                    'id' => $item->Id,
-                    'campaign_id' => $campaign['id'],
-                    'name' => $item->Name,
-                    'status' => $item->Status,
-                    'bid' => $item->CpcBid->Amount,
-                    'bid_type' => $item->BiddingScheme->InheritedBidStrategyType ?? 'Unknown'
+                    'id' => $adgroup->getId(),
+                    'campaign_id' => $adgroup->getCampaignId(),
+                    'name' => $adgroup->getName(),
+                    'status' => $adgroup->getStatus(),
+                    'bid' => $adgroup->getBid(),
+                    'bid_type' => $adgroup->getBidType()
                 ];
             }
         }

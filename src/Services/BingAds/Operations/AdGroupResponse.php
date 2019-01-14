@@ -35,7 +35,17 @@ class AdGroupResponse
      */
     public function getStatus()
     {
-        return $this->adGroup->Status ?? null;
+        $status = strtoupper($this->adGroup->Status ?? null);
+
+        switch($status)
+        {
+            case 'ACTIVE'  : return 'ENABLED'; break;
+            case 'PAUSED'  : return 'PAUSED'; break;
+            case 'DELETED' : return 'DELETED'; break;
+            default :
+        }
+
+        return $status;
     }
 
     /**
