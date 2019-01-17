@@ -110,7 +110,7 @@ class AdGroup extends AdGroupOperations
     public function setStatus($status)
     {
         $status = strtoupper($status);
-        
+
         if (in_array($status, ['ENABLED','PAUSED'])) {
             $this->request()->setStatus($status);
         }
@@ -129,7 +129,7 @@ class AdGroup extends AdGroupOperations
      */
     public function getType()
     {
-        return $this->response()->getAdGroupType();
+        return strtoupper($this->response()->getAdGroupType());
     }
 
     /**

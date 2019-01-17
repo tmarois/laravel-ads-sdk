@@ -113,7 +113,7 @@ class Campaign extends CampaignOperations
      */
     public function getBudgetDelivery()
     {
-        return $this->response()->getBudget()->getDeliveryMethod() ?? 'UNKNOWN';
+        return strtoupper($this->response()->getBudget()->getDeliveryMethod() ?? 'UNKNOWN');
     }
 
     /**
@@ -124,7 +124,7 @@ class Campaign extends CampaignOperations
      */
     public function getChannelType()
     {
-        return $this->response()->getAdvertisingChannelType() ?? 'UNKNOWN';
+        return strtoupper($this->response()->getAdvertisingChannelType() ?? 'UNKNOWN');
     }
 
     /**

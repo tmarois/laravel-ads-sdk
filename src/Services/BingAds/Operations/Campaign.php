@@ -48,6 +48,8 @@ class Campaign extends CampaignOperations
      */
     public function setName($name)
     {
+        $this->request()->Name = $name;
+
         return $this;
     }
 
@@ -81,6 +83,13 @@ class Campaign extends CampaignOperations
      */
     public function setStatus($status)
     {
+        $status = ucfirst(strtolower($status));
+        if ($status == 'Enabled') $status = 'Active';
+
+        if (in_array($status, ['Active','Paused'])) {
+            $this->request()->Status = $status;
+        }
+
         return $this;
     }
 
@@ -133,13 +142,13 @@ class Campaign extends CampaignOperations
      */
     public function getBidStrategy()
     {
-        $type = $this->response()->BiddingScheme->Type ?? 'UNKNOWN';
+        $type = strtoupper($this->response()->BiddingScheme->Type ?? 'UNKNOWN');
 
         switch($type)
         {
-            case 'EnhancedCpc' : return 'ECPC'; break;
-            case 'ManualCpc'   : return 'CPC'; break;
-            case 'TargetCpa'   : return 'CPA'; break;
+            case 'ENHANCEDCPC' : return 'ECPC'; break;
+            case 'MANUALCPC'   : return 'CPC'; break;
+            case 'TARGETCPA'   : return 'CPA'; break;
             default :
         }
 
@@ -165,11 +174,13 @@ class Campaign extends CampaignOperations
     /**
      * setBudget()
      *
-     * @param int $budget
+     * @param int $amount
      *
      */
     public function setBudget($amount = 0)
     {
+        $this->request()->DailyBudget = $amount;
+
         return $this;
     }
 

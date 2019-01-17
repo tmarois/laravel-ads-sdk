@@ -67,7 +67,8 @@ class Fetch
                         'status' => $campaign->getStatus(),
                         'channel' => $campaign->getChannelType(),
                         'budget' => $campaign->getBudget(),
-                        'bid_strategy' => $campaign->getBidStrategy()
+                        'bid_strategy' => $campaign->getBidStrategy(),
+                        'target_cpa' => $campaign->getTargetCpa()
                     ];
                 }
                 else

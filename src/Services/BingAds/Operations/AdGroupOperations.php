@@ -79,7 +79,7 @@ class AdGroupOperations
      */
     public function get()
     {
-        $this->set($this->sendRequest(false));
+        $this->set($this->sendRequest());
 
         return $this;
     }
@@ -115,7 +115,7 @@ class AdGroupOperations
      * save()
      *
      */
-    public function save()
+    public function save($updateObject = true)
     {
         $serviceCall = $this->service->call(ServiceClientType::CampaignManagementVersion12);
 
@@ -130,7 +130,10 @@ class AdGroupOperations
             // $request->UpdateAudienceAdsBidAdjustment = true;
             // $request->ReturnInheritedBidStrategyTypes = true;
 
-            return $serviceCall->GetService()->UpdateAdGroups($request);
+            $serverResponse = $serviceCall->GetService()->UpdateAdGroups($request);
+
+            // lets update the current object
+            if ($updateObject) $this->get();
         }
         catch(\Exception $e) {
             print $serviceCall->GetService()->__getLastRequest()."\n";

@@ -137,9 +137,7 @@ class Reports
             'Clicks',
             'Cost',
             'Conversions',
-            'ConversionValue',
-            // 'AllConversions',
-            // 'AllConversionValue'
+            'ConversionValue'
         ],true);
 
         $reportDefinition = $this->reportDefinition(ReportDefinitionReportType::ACCOUNT_PERFORMANCE_REPORT);
@@ -166,9 +164,7 @@ class Reports
             'Clicks',
             'Cost',
             'Conversions',
-            'ConversionValue',
-            // 'AllConversions',
-            // 'AllConversionValue'
+            'ConversionValue'
         ],true);
 
         $reportDefinition = $this->reportDefinition(ReportDefinitionReportType::CAMPAIGN_PERFORMANCE_REPORT);
@@ -194,9 +190,7 @@ class Reports
             'Clicks',
             'Cost',
             'Conversions',
-            'ConversionValue',
-            // 'AllConversions',
-            // 'AllConversionValue'
+            'ConversionValue'
         ],true);
 
         $reportDefinition = $this->reportDefinition(ReportDefinitionReportType::ADGROUP_PERFORMANCE_REPORT);

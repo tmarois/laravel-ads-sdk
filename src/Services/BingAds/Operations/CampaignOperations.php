@@ -8,6 +8,7 @@ use Microsoft\BingAds\V12\CampaignManagement\Campaign as CampaignProxy;
 use Microsoft\BingAds\V12\CampaignManagement\CampaignStatus;
 
 use Microsoft\BingAds\V12\CampaignManagement\GetCampaignsByIdsRequest;
+use Microsoft\BingAds\V12\CampaignManagement\UpdateCampaignsRequest;
 
 use Microsoft\BingAds\Auth\ServiceClient;
 use Microsoft\BingAds\Auth\ServiceClientType;
@@ -92,8 +93,31 @@ class CampaignOperations
      * Post your changes to Google Ads Server
      *
      */
-    public function save()
+    public function save($updateObject = true)
     {
+        $serviceCall = $this->service->call(ServiceClientType::CampaignManagementVersion12);
+
+        try
+        {
+            $campaign = $this->request();
+
+            $request = new UpdateCampaignsRequest();
+            $request->AccountId  = $this->service->getClientId();
+            $request->CampaignId = $campaign->Id;
+            $request->Campaigns = [$campaign];
+            // $request->UpdateAudienceAdsBidAdjustment = true;
+            // $request->ReturnInheritedBidStrategyTypes = true;
+
+            $serverResponse = $serviceCall->GetService()->UpdateCampaigns($request);
+
+            // lets update the current object
+            if ($updateObject) $this->get();
+        }
+        catch(\Exception $e) {
+            print $serviceCall->GetService()->__getLastRequest()."\n";
+            print $serviceCall->GetService()->__getLastResponse()."\n";
+        }
+
         return $this;
     }
 

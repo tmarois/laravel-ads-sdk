@@ -33,6 +33,7 @@ class Fetch
      * @reference
      * https://github.com/googleads/googleads-php-lib/blob/master/src/Google/AdsApi/AdWords/v201809/cm/Campaign.php
      * https://developers.google.com/adwords/api/docs/reference/v201809/CampaignService.Campaign
+     * https://developers.google.com/adwords/api/docs/appendix/selectorfields
      *
      * @return object Collection
      */
@@ -45,7 +46,8 @@ class Fetch
             'Amount',
             'CampaignStatus',
             'BiddingStrategyType',
-            'AdvertisingChannelType'
+            'AdvertisingChannelType',
+            'TargetCpa'
         ]);
 
         $page = $this->service->call(CampaignService::class)->get($selector);
@@ -64,7 +66,8 @@ class Fetch
                     'status' => $campaign->getStatus(),
                     'channel' => $campaign->getChannelType(),
                     'budget' => $campaign->getBudget(),
-                    'bid_strategy' => $campaign->getBidStrategy()
+                    'bid_strategy' => $campaign->getBidStrategy(),
+                    'target_cpa' => $campaign->getTargetCpa()
                 ];
             }
             else

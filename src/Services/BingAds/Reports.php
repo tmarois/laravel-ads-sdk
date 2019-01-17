@@ -200,7 +200,6 @@ class Reports
             CampaignPerformanceReportColumn::AccountId,
             CampaignPerformanceReportColumn::CampaignName,
             CampaignPerformanceReportColumn::CampaignId,
-            // CampaignPerformanceReportColumn::CampaignStatus,
             CampaignPerformanceReportColumn::Clicks,
             CampaignPerformanceReportColumn::Impressions,
             CampaignPerformanceReportColumn::Spend,
