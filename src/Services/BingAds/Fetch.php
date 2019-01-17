@@ -53,27 +53,29 @@ class Fetch
             return [];
         }
 
-        foreach ($items->Campaigns->Campaign as $item)
+        if ($items && isset($items->Campaigns, $items->Campaigns->Campaign))
         {
-            $campaign = $this->service->campaign($item);
+            foreach ($items->Campaigns->Campaign as $item)
+            {
+                $campaign = $this->service->campaign($item);
 
-            if ($returnArray)
-            {
-                $r[] = [
-                    'id' => $campaign->getId(),
-                    'name' => $campaign->getName(),
-                    'status' => $campaign->getStatus(),
-                    'channel' => $campaign->getChannelType(),
-                    'budget' => $campaign->getBudget(),
-                    'bid_strategy' => $campaign->getBidStrategy()
-                ];
-            }
-            else
-            {
-                $r[] = $campaign;
+                if ($returnArray)
+                {
+                    $r[] = [
+                        'id' => $campaign->getId(),
+                        'name' => $campaign->getName(),
+                        'status' => $campaign->getStatus(),
+                        'channel' => $campaign->getChannelType(),
+                        'budget' => $campaign->getBudget(),
+                        'bid_strategy' => $campaign->getBidStrategy()
+                    ];
+                }
+                else
+                {
+                    $r[] = $campaign;
+                }
             }
         }
-
 
         return collect($r);
 
