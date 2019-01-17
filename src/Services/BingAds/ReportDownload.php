@@ -180,6 +180,8 @@ class ReportDownload
      */
     public function toArray()
     {
+        if (empty($this->results)) return [];
+        
         $csv    = array_map('str_getcsv',$this->results);
         $header = $csv[10];
 

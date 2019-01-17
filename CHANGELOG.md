@@ -1,6 +1,12 @@
 Change Log
 ==========
 
+### 01/17/2018 - 1.2.2
+
+#### Changed
+
+* Fixed bing report response once again!
+
 ### 01/17/2018 - 1.2.1
 
 #### Changed
