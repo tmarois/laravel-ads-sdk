@@ -2,7 +2,12 @@
 
 use LaravelAds\Services\BingAds\Reports;
 use LaravelAds\Services\BingAds\Fetch;
+
 use LaravelAds\Services\BingAds\Operations\AdGroupRequest;
+use LaravelAds\Services\BingAds\Operations\Campaign;
+use LaravelAds\Services\BingAds\Operations\AdGroup;
+use Microsoft\BingAds\V12\CampaignManagement\Campaign as CampaignProxy;
+use Microsoft\BingAds\V12\CampaignManagement\AdGroup as AdGroupProxy;
 
 use Microsoft\BingAds\Auth\OAuthDesktopMobileAuthCodeGrant;
 use Microsoft\BingAds\Auth\OAuthWebAuthCodeGrant;
@@ -63,13 +68,16 @@ class Service
     }
 
     /**
-     * serviceProxy()
+     * call()
      *
      *
      */
-    public function serviceProxy($service)
+    public function call($service)
     {
-        return (new ServiceClient($service, $this->session(), 'Production'));
+        $serviceClient = (new ServiceClient($service, $this->session(), 'Production'));
+        $serviceClient->SetAuthorizationData($this->session());
+
+        return $serviceClient;
     }
 
     /**
@@ -88,9 +96,29 @@ class Service
      *
      * @return AdGroupOperation
      */
-    public function adGroup()
+     public function adGroup($adGroup, $campaignId = null)
+     {
+         if ($adGroup instanceof \stdClass) {
+             return (new AdGroup($this))->set($adGroup);
+         }
+         else {
+             return (new AdGroup($this))->setId($adGroup)->setCampaignId($campaignId)->get();
+         }
+     }
+
+    /**
+     * campaign()
+     *
+     * @return Campaign
+     */
+    public function campaign($campaign)
     {
-        return (new AdGroupRequest($this));
+        if ($campaign instanceof \stdClass) {
+            return (new Campaign($this))->set($campaign);
+        }
+        else {
+            return (new Campaign($this))->setId($campaign)->get();
+        }
     }
 
     /**

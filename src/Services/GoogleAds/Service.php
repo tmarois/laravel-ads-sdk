@@ -1,11 +1,14 @@
 <?php namespace LaravelAds\Services\GoogleAds;
 
 
-use LaravelAds\Services\GoogleAds\Operations\AdGroupRequest;
+use LaravelAds\Services\GoogleAds\Operations\Campaign;
+use LaravelAds\Services\GoogleAds\Operations\AdGroup;
 
 use LaravelAds\Services\GoogleAds\Reports;
 use LaravelAds\Services\GoogleAds\Fetch;
-use LaravelAds\Services\GoogleAds\Operations\AdGroupOperation;
+
+use Google\AdsApi\AdWords\v201809\cm\Campaign as CampaignProxy;
+use Google\AdsApi\AdWords\v201809\cm\AdGroup as AdGroupProxy;
 
 use Google\AdsApi\Common\Configuration;
 use Google\AdsApi\Common\OAuth2TokenBuilder;
@@ -73,11 +76,11 @@ class Service
     }
 
     /**
-     * service()
+     * call()
      *
      *
      */
-    public function service($service)
+    public function call($service)
     {
         return (new AdWordsServices())->get($this->session(), $service);
     }
@@ -88,11 +91,31 @@ class Service
      * @reference
      * https://github.com/googleads/googleads-php-lib/blob/master/examples/AdWords/v201809/BasicOperations/UpdateAdGroup.php
      *
-     * @return AdGroupOperation
+     * @return AdGroup
      */
-    public function adGroup()
+    public function adGroup($adGroup)
     {
-        return (new AdGroupRequest($this));
+        if ($adGroup instanceof AdGroupProxy) {
+            return (new AdGroup($this))->set($adGroup);
+        }
+        else {
+            return (new AdGroup($this))->setId($adGroup)->get();
+        }
+    }
+
+    /**
+     * campaign()
+     *
+     * @return Campaign
+     */
+    public function campaign($campaign)
+    {
+        if ($campaign instanceof CampaignProxy) {
+            return (new Campaign($this))->set($campaign);
+        }
+        else {
+            return (new Campaign($this))->setId($campaign)->get();
+        }
     }
 
     /**

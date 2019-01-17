@@ -1,11 +1,17 @@
 Change Log
 ==========
 
+### 01/17/2018 - 1.2.0
+
+* Overhaul of Google and Bing APIs
+* Includes Google/Bing Campaign and AdGroup Management Features.
+* Updated Readme with all Documentation for both Google/Bing
+* Improved consistency between both Google/Bing
+
 ### 01/14/2018 - 1.1.6
 
 #### Fixed
 * Fixed new bid type method returns the correct types now.
-
 
 
 ### 01/14/2018 - 1.1.5

@@ -21,4 +21,4 @@ Use `https://login.microsoftonline.com/common/oauth2/nativeclient` for the Redir
 
 ## (3) Generate Refresh Token
 
-[Back to Readme](README.md#-4-for-bingads)
+[Back to Readme](README.md)

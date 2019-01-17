@@ -36,7 +36,7 @@ class Fetch
      *
      * @return object Collection
      */
-    public function getCampaigns()
+    public function getCampaigns($returnArray = true)
     {
         $selector = new Selector();
         $selector->setFields([
@@ -48,23 +48,29 @@ class Fetch
             'AdvertisingChannelType'
         ]);
 
-        $page = $this->service->service(CampaignService::class)->get($selector);
+        $page = $this->service->call(CampaignService::class)->get($selector);
         $items = $page->getEntries();
 
         $r = [];
         foreach ($items as $item)
         {
-            $bidType = $item->getBiddingStrategyConfiguration()->getBiddingStrategyType() ?? '';
-            $budget = $item->getBudget()->getAmount()->getMicroAmount() ?? 0;
+            $campaign = $this->service->campaign($item);
 
-            $r[] = [
-                'id' => $item->getId(),
-                'name' => $item->getName(),
-                'status' => $item->getStatus(),
-                'channel' => $item->getAdvertisingChannelType(),
-                'budget' => ($budget) ? round( intval($budget) / 1000000,2) : 0,
-                'bid_type' => $bidType
-            ];
+            if ($returnArray)
+            {
+                $r[] = [
+                    'id' => $campaign->getId(),
+                    'name' => $campaign->getName(),
+                    'status' => $campaign->getStatus(),
+                    'channel' => $campaign->getChannelType(),
+                    'budget' => $campaign->getBudget(),
+                    'bid_strategy' => $campaign->getBidStrategy()
+                ];
+            }
+            else
+            {
+                $r[] = $campaign;
+            }
         }
 
         return collect($r);
@@ -81,7 +87,7 @@ class Fetch
      *
      * @return object Collection
      */
-    public function getAdGroups()
+    public function getAdGroups($returnArray = true)
     {
         $selector = new Selector();
         $selector->setFields([
@@ -97,23 +103,30 @@ class Fetch
             'TargetCpaBid'
         ]);
 
-        $page  = $this->service->service(AdGroupService::class)->get($selector);
+        $page  = $this->service->call(AdGroupService::class)->get($selector);
         $items = $page->getEntries();
 
         $r = [];
         foreach($items as $item)
         {
-            $adgroup = (new AdGroupResponse($item));
+            $adgroup = $this->service->adGroup($item);
 
-            $r[] = [
-                'id' => $adgroup->getId(),
-                'name' => $adgroup->getName(),
-                'status' => $adgroup->getStatus(),
-                'campaign_id' => $adgroup->getCampaignId(),
-                'type' => $adgroup->getAdGroupType(),
-                'bid_type' => $adgroup->getBidType(),
-                'bid' => $adgroup->getBid()
-            ];
+            if ($returnArray)
+            {
+                $r[] = [
+                    'id' => $adgroup->getId(),
+                    'name' => $adgroup->getName(),
+                    'status' => $adgroup->getStatus(),
+                    'campaign_id' => $adgroup->getCampaignId(),
+                    'type' => $adgroup->getType(),
+                    'bid_strategy' => $adgroup->getBidStrategy(),
+                    'bid' => $adgroup->getBid()
+                ];
+            }
+            else
+            {
+                $r[] = $adgroup;
+            }
         }
 
         return collect($r);

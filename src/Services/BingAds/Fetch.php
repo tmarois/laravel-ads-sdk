@@ -4,111 +4,14 @@ use SoapVar;
 use SoapFault;
 use Exception;
 
-use LaravelAds\Services\BingAds\Operations\AdGroupResponse;
+use LaravelAds\Services\BingAds\Operations\Campaign;
+use LaravelAds\Services\BingAds\Operations\AdGroup;
 
-use Microsoft\BingAds\V12\CampaignManagement\AddAdExtensionsRequest;
-use Microsoft\BingAds\V12\CampaignManagement\AddAdGroupCriterionsRequest;
-use Microsoft\BingAds\V12\CampaignManagement\AddAdGroupsRequest;
-use Microsoft\BingAds\V12\CampaignManagement\AddAdsRequest;
-use Microsoft\BingAds\V12\CampaignManagement\AddAudiencesRequest;
-use Microsoft\BingAds\V12\CampaignManagement\AddBudgetsRequest;
-use Microsoft\BingAds\V12\CampaignManagement\AddCampaignCriterionsRequest;
-use Microsoft\BingAds\V12\CampaignManagement\AddCampaignsRequest;
-use Microsoft\BingAds\V12\CampaignManagement\AddConversionGoalsRequest;
-use Microsoft\BingAds\V12\CampaignManagement\AddExperimentsRequest;
-use Microsoft\BingAds\V12\CampaignManagement\AddKeywordsRequest;
-use Microsoft\BingAds\V12\CampaignManagement\AddLabelsRequest;
-use Microsoft\BingAds\V12\CampaignManagement\AddListItemsToSharedListRequest;
-use Microsoft\BingAds\V12\CampaignManagement\AddMediaRequest;
-use Microsoft\BingAds\V12\CampaignManagement\AddNegativeKeywordsToEntitiesRequest;
-use Microsoft\BingAds\V12\CampaignManagement\AddSharedEntityRequest;
-use Microsoft\BingAds\V12\CampaignManagement\AddUetTagsRequest;
-use Microsoft\BingAds\V12\CampaignManagement\AppealEditorialRejectionsRequest;
-use Microsoft\BingAds\V12\CampaignManagement\ApplyOfflineConversionsRequest;
-use Microsoft\BingAds\V12\CampaignManagement\ApplyProductPartitionActionsRequest;
-use Microsoft\BingAds\V12\CampaignManagement\DeleteAdExtensionsRequest;
-use Microsoft\BingAds\V12\CampaignManagement\DeleteAdExtensionsAssociationsRequest;
-use Microsoft\BingAds\V12\CampaignManagement\DeleteAdGroupCriterionsRequest;
-use Microsoft\BingAds\V12\CampaignManagement\DeleteAdGroupsRequest;
-use Microsoft\BingAds\V12\CampaignManagement\DeleteAdsRequest;
-use Microsoft\BingAds\V12\CampaignManagement\DeleteAudiencesRequest;
-use Microsoft\BingAds\V12\CampaignManagement\DeleteBudgetsRequest;
-use Microsoft\BingAds\V12\CampaignManagement\DeleteCampaignCriterionsRequest;
-use Microsoft\BingAds\V12\CampaignManagement\DeleteCampaignsRequest;
-use Microsoft\BingAds\V12\CampaignManagement\DeleteExperimentsRequest;
-use Microsoft\BingAds\V12\CampaignManagement\DeleteKeywordsRequest;
-use Microsoft\BingAds\V12\CampaignManagement\DeleteLabelAssociationsRequest;
-use Microsoft\BingAds\V12\CampaignManagement\DeleteLabelsRequest;
-use Microsoft\BingAds\V12\CampaignManagement\DeleteListItemsFromSharedListRequest;
-use Microsoft\BingAds\V12\CampaignManagement\DeleteMediaRequest;
-use Microsoft\BingAds\V12\CampaignManagement\DeleteNegativeKeywordsFromEntitiesRequest;
-use Microsoft\BingAds\V12\CampaignManagement\DeleteSharedEntitiesRequest;
-use Microsoft\BingAds\V12\CampaignManagement\DeleteSharedEntityAssociationsRequest;
-use Microsoft\BingAds\V12\CampaignManagement\GetAccountMigrationStatusesRequest;
-use Microsoft\BingAds\V12\CampaignManagement\GetAccountPropertiesRequest;
-use Microsoft\BingAds\V12\CampaignManagement\GetAdExtensionIdsByAccountIdRequest;
-use Microsoft\BingAds\V12\CampaignManagement\GetAdExtensionsAssociationsRequest;
-use Microsoft\BingAds\V12\CampaignManagement\GetAdExtensionsByIdsRequest;
-use Microsoft\BingAds\V12\CampaignManagement\GetAdExtensionsEditorialReasonsRequest;
-use Microsoft\BingAds\V12\CampaignManagement\GetAdGroupCriterionsByIdsRequest;
-use Microsoft\BingAds\V12\CampaignManagement\GetAdGroupsByCampaignIdRequest;
-use Microsoft\BingAds\V12\CampaignManagement\GetAdGroupsByIdsRequest;
-use Microsoft\BingAds\V12\CampaignManagement\GetAdsByAdGroupIdRequest;
-use Microsoft\BingAds\V12\CampaignManagement\GetAdsByEditorialStatusRequest;
-use Microsoft\BingAds\V12\CampaignManagement\GetAdsByIdsRequest;
-use Microsoft\BingAds\V12\CampaignManagement\GetAudiencesByIdsRequest;
-use Microsoft\BingAds\V12\CampaignManagement\GetBMCStoresByCustomerIdRequest;
-use Microsoft\BingAds\V12\CampaignManagement\GetBSCCountriesRequest;
-use Microsoft\BingAds\V12\CampaignManagement\GetBudgetsByIdsRequest;
-use Microsoft\BingAds\V12\CampaignManagement\GetCampaignCriterionsByIdsRequest;
-use Microsoft\BingAds\V12\CampaignManagement\GetCampaignIdsByBudgetIdsRequest;
 use Microsoft\BingAds\V12\CampaignManagement\GetCampaignsByAccountIdRequest;
-use Microsoft\BingAds\V12\CampaignManagement\GetCampaignsByIdsRequest;
-use Microsoft\BingAds\V12\CampaignManagement\GetConversionGoalsByIdsRequest;
-use Microsoft\BingAds\V12\CampaignManagement\GetConversionGoalsByTagIdsRequest;
-use Microsoft\BingAds\V12\CampaignManagement\GetEditorialReasonsByIdsRequest;
-use Microsoft\BingAds\V12\CampaignManagement\GetExperimentsByIdsRequest;
-use Microsoft\BingAds\V12\CampaignManagement\GetGeoLocationsFileUrlRequest;
-use Microsoft\BingAds\V12\CampaignManagement\GetKeywordsByAdGroupIdRequest;
-use Microsoft\BingAds\V12\CampaignManagement\GetKeywordsByEditorialStatusRequest;
-use Microsoft\BingAds\V12\CampaignManagement\GetKeywordsByIdsRequest;
-use Microsoft\BingAds\V12\CampaignManagement\GetLabelAssociationsByEntityIdsRequest;
-use Microsoft\BingAds\V12\CampaignManagement\GetLabelAssociationsByLabelIdsRequest;
-use Microsoft\BingAds\V12\CampaignManagement\GetLabelsByIdsRequest;
-use Microsoft\BingAds\V12\CampaignManagement\GetListItemsBySharedListRequest;
-use Microsoft\BingAds\V12\CampaignManagement\GetMediaAssociationsRequest;
-use Microsoft\BingAds\V12\CampaignManagement\GetMediaMetaDataByAccountIdRequest;
-use Microsoft\BingAds\V12\CampaignManagement\GetMediaMetaDataByIdsRequest;
-use Microsoft\BingAds\V12\CampaignManagement\GetNegativeKeywordsByEntityIdsRequest;
-use Microsoft\BingAds\V12\CampaignManagement\GetNegativeSitesByAdGroupIdsRequest;
-use Microsoft\BingAds\V12\CampaignManagement\GetNegativeSitesByCampaignIdsRequest;
-use Microsoft\BingAds\V12\CampaignManagement\GetProfileDataFileUrlRequest;
-use Microsoft\BingAds\V12\CampaignManagement\GetSharedEntitiesByAccountIdRequest;
-use Microsoft\BingAds\V12\CampaignManagement\GetSharedEntityAssociationsByEntityIdsRequest;
-use Microsoft\BingAds\V12\CampaignManagement\GetSharedEntityAssociationsBySharedEntityIdsRequest;
-use Microsoft\BingAds\V12\CampaignManagement\GetUetTagsByIdsRequest;
-use Microsoft\BingAds\V12\CampaignManagement\SetAccountPropertiesRequest;
-use Microsoft\BingAds\V12\CampaignManagement\SetAdExtensionsAssociationsRequest;
-use Microsoft\BingAds\V12\CampaignManagement\SetLabelAssociationsRequest;
-use Microsoft\BingAds\V12\CampaignManagement\SetNegativeSitesToAdGroupsRequest;
-use Microsoft\BingAds\V12\CampaignManagement\SetNegativeSitesToCampaignsRequest;
-use Microsoft\BingAds\V12\CampaignManagement\SetSharedEntityAssociationsRequest;
-use Microsoft\BingAds\V12\CampaignManagement\UpdateAdExtensionsRequest;
-use Microsoft\BingAds\V12\CampaignManagement\UpdateAdGroupCriterionsRequest;
-use Microsoft\BingAds\V12\CampaignManagement\UpdateAdGroupsRequest;
-use Microsoft\BingAds\V12\CampaignManagement\UpdateAdsRequest;
-use Microsoft\BingAds\V12\CampaignManagement\UpdateAudiencesRequest;
-use Microsoft\BingAds\V12\CampaignManagement\UpdateBudgetsRequest;
-use Microsoft\BingAds\V12\CampaignManagement\UpdateCampaignCriterionsRequest;
-use Microsoft\BingAds\V12\CampaignManagement\UpdateCampaignsRequest;
-use Microsoft\BingAds\V12\CampaignManagement\UpdateConversionGoalsRequest;
-use Microsoft\BingAds\V12\CampaignManagement\UpdateExperimentsRequest;
-use Microsoft\BingAds\V12\CampaignManagement\UpdateKeywordsRequest;
-use Microsoft\BingAds\V12\CampaignManagement\UpdateLabelsRequest;
-use Microsoft\BingAds\V12\CampaignManagement\UpdateSharedEntitiesRequest;
-use Microsoft\BingAds\V12\CampaignManagement\UpdateUetTagsRequest;
+use Microsoft\BingAds\V12\CampaignManagement\GetAdGroupsByCampaignIdRequest;
 
 use Microsoft\BingAds\Auth\ServiceClientType;
+
 
 class Fetch
 {
@@ -134,19 +37,17 @@ class Fetch
      *
      * @return object Collection
      */
-    public function getCampaigns()
+    public function getCampaigns($returnArray = true)
     {
-        $proxy = $this->service->serviceProxy(ServiceClientType::CampaignManagementVersion12);
-        $proxy->SetAuthorizationData($this->service->session());
+        $serviceCall = $this->service->call(ServiceClientType::CampaignManagementVersion12);
 
         $request = new GetCampaignsByAccountIdRequest();
         $request->AccountId = $this->service->getClientId();
 
         $r = [];
 
-        try
-        {
-            $items = $proxy->GetService()->GetCampaignsByAccountId($request);
+        try {
+            $items = $serviceCall->GetService()->GetCampaignsByAccountId($request);
         }
         catch(\Exception $e) {
             return [];
@@ -154,14 +55,23 @@ class Fetch
 
         foreach ($items->Campaigns->Campaign as $item)
         {
-            $r[] = [
-                'id' => $item->Id,
-                'name' => $item->Name,
-                'status' => $item->Status,
-                'channel' => $item->CampaignType,
-                'budget' => $item->DailyBudget,
-                'bid_type' => $item->BiddingScheme->Type ?? 'Unknown'
-            ];
+            $campaign = $this->service->campaign($item);
+
+            if ($returnArray)
+            {
+                $r[] = [
+                    'id' => $campaign->getId(),
+                    'name' => $campaign->getName(),
+                    'status' => $campaign->getStatus(),
+                    'channel' => $campaign->getChannelType(),
+                    'budget' => $campaign->getBudget(),
+                    'bid_strategy' => $campaign->getBidStrategy()
+                ];
+            }
+            else
+            {
+                $r[] = $campaign;
+            }
         }
 
 
@@ -177,22 +87,21 @@ class Fetch
      *
      * @return object Collection
      */
-    public function getAdGroups()
+    public function getAdGroups($returnArray = true)
     {
+        $serviceCall = $this->service->call(ServiceClientType::CampaignManagementVersion12);
+
         $campaigns = $this->getCampaigns();
 
         $r = [];
         foreach($campaigns->all() as $campaign)
         {
-            $proxy = $this->service->serviceProxy(ServiceClientType::CampaignManagementVersion12);
-            $proxy->SetAuthorizationData($this->service->session());
-
             $request = new GetAdGroupsByCampaignIdRequest();
             $request->CampaignId = $campaign['id'];
 
             try
             {
-                $items = $proxy->GetService()->GetAdGroupsByCampaignId($request);
+                $items = $serviceCall->GetService()->GetAdGroupsByCampaignId($request);
             }
             catch(\Exception $e) {
                 return [];
@@ -200,18 +109,24 @@ class Fetch
 
             foreach($items->AdGroups->AdGroup as $item)
             {
-                $item->CampaignId = $campaign['id'];
-                
-                $adgroup = (new AdGroupResponse($item));
+                $adgroup = $this->service->adGroup($item);
 
-                $r[] = [
-                    'id' => $adgroup->getId(),
-                    'campaign_id' => $adgroup->getCampaignId(),
-                    'name' => $adgroup->getName(),
-                    'status' => $adgroup->getStatus(),
-                    'bid' => $adgroup->getBid(),
-                    'bid_type' => $adgroup->getBidType()
-                ];
+                if ($returnArray)
+                {
+                    $r[] = [
+                        'id' => $adgroup->getId(),
+                        'name' => $adgroup->getName(),
+                        'status' => $adgroup->getStatus(),
+                        'campaign_id' => $request->CampaignId,
+                        'type' => 'SEARCH',
+                        'bid_strategy' => $adgroup->getBidStrategy(),
+                        'bid' => $adgroup->getBid()
+                    ];
+                }
+                else
+                {
+                    $r[] = $adgroup;
+                }
             }
         }
 

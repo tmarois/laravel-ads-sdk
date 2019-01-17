@@ -73,7 +73,7 @@ class Reports
     {
         $this->service = $service;
 
-        $this->serviceProxy = $this->service->serviceProxy(ServiceClientType::ReportingVersion12);
+        $this->serviceProxy = $this->service->call(ServiceClientType::ReportingVersion12);
     }
 
     /**
@@ -161,8 +161,6 @@ class Reports
         $encodedReport   = new SoapVar($report, SOAP_ENC_OBJECT, 'AccountPerformanceReportRequest', $this->serviceProxy->GetNamespace());
         $reportRequestId = $this->submitGenerateReport($encodedReport)->ReportRequestId;
 
-        $waitTime = 15 * 1;
-        $reportRequestStatus = null;
         $reportName   = time();
         $DownloadPath = storage_path("app/".$reportName.'.zip');
 
@@ -202,7 +200,7 @@ class Reports
             CampaignPerformanceReportColumn::AccountId,
             CampaignPerformanceReportColumn::CampaignName,
             CampaignPerformanceReportColumn::CampaignId,
-            CampaignPerformanceReportColumn::CampaignStatus,
+            // CampaignPerformanceReportColumn::CampaignStatus,
             CampaignPerformanceReportColumn::Clicks,
             CampaignPerformanceReportColumn::Impressions,
             CampaignPerformanceReportColumn::Spend,
@@ -213,8 +211,6 @@ class Reports
         $encodedReport   = new SoapVar($report, SOAP_ENC_OBJECT, 'CampaignPerformanceReportRequest', $this->serviceProxy->GetNamespace());
         $reportRequestId = $this->submitGenerateReport($encodedReport)->ReportRequestId;
 
-        $waitTime = 15 * 1;
-        $reportRequestStatus = null;
         $reportName   = time();
         $DownloadPath = storage_path("app/".$reportName.'.zip');
 
@@ -265,8 +261,6 @@ class Reports
         $encodedReport   = new SoapVar($report, SOAP_ENC_OBJECT, 'AdGroupPerformanceReportRequest', $this->serviceProxy->GetNamespace());
         $reportRequestId = $this->submitGenerateReport($encodedReport)->ReportRequestId;
 
-        $waitTime = 15 * 1;
-        $reportRequestStatus = null;
         $reportName   = time();
         $DownloadPath = storage_path("app/".$reportName.'.zip');
 
