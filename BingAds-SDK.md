@@ -209,7 +209,8 @@ $campaignStatus = $bingAds->campaign('CAMPAIGN_ID')->getStatus();
 You can easily manage/view Ad Group settings by loading up the AdGroup service.
 
 ```php
-$adGroup = $bingAds->adGroup('ADGROUP_ID');
+// Campaign Id Is Required for Bing Ad Groups.
+$adGroup = $bingAds->adGroup('ADGROUP_ID', 'CAMPAIGN_ID');
 ```
 
 **Available methods** from the `AdGroup` object. (the `SET` methods are chainable, see example)
@@ -232,7 +233,7 @@ $adGroup = $bingAds->adGroup('ADGROUP_ID');
 
 ```php
 // Rename the Ad Group, enable it, and then set the CPC bid to 0.22
-$bingAds->adGroup('ADGROUP_ID')
+$bingAds->adGroup('ADGROUP_ID', 'CAMPAIGN_ID')
           ->setName('My New Ad Group Name')
           ->setStatus('ENABLED')
           ->setBid(0.22)
