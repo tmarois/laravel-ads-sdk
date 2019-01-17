@@ -161,9 +161,6 @@ class Reports
         $encodedReport   = new SoapVar($report, SOAP_ENC_OBJECT, 'AccountPerformanceReportRequest', $this->serviceProxy->GetNamespace());
         $reportRequestId = $this->submitGenerateReport($encodedReport)->ReportRequestId;
 
-        $reportName   = time();
-        $DownloadPath = storage_path("app/".$reportName.'.zip');
-
         return (new ReportDownload($this->serviceProxy, $reportRequestId));
     }
 
@@ -209,9 +206,6 @@ class Reports
 
         $encodedReport   = new SoapVar($report, SOAP_ENC_OBJECT, 'CampaignPerformanceReportRequest', $this->serviceProxy->GetNamespace());
         $reportRequestId = $this->submitGenerateReport($encodedReport)->ReportRequestId;
-
-        $reportName   = time();
-        $DownloadPath = storage_path("app/".$reportName.'.zip');
 
         return (new ReportDownload($this->serviceProxy, $reportRequestId));
     }
@@ -259,9 +253,6 @@ class Reports
 
         $encodedReport   = new SoapVar($report, SOAP_ENC_OBJECT, 'AdGroupPerformanceReportRequest', $this->serviceProxy->GetNamespace());
         $reportRequestId = $this->submitGenerateReport($encodedReport)->ReportRequestId;
-
-        $reportName   = time();
-        $DownloadPath = storage_path("app/".$reportName.'.zip');
 
         return (new ReportDownload($this->serviceProxy, $reportRequestId));
     }

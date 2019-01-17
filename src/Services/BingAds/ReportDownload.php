@@ -63,6 +63,10 @@ class ReportDownload
                 if($reportDownloadUrl == null)
                 {
                     print "No report data for the submitted request\n";
+
+                    $this->results = '';
+
+                    return;
                 }
                 else
                 {
@@ -74,12 +78,20 @@ class ReportDownload
         	{
         		printf("The request failed. Try requesting the report " .
         				"later.\nIf the request continues to fail, contact support.\n");
+
+                $this->results = '';
+
+                return;
         	}
         	else
         	{
         		printf("The request is taking longer than expected.\n " .
         				"Save the report ID (%s) and try again later.\n",
         				$reportId);
+
+                $this->results = '';
+
+                return;
         	}
         }
 

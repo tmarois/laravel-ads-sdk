@@ -1,6 +1,13 @@
 Change Log
 ==========
 
+### 01/17/2018 - 1.2.1
+
+#### Changed
+
+* Fixed Bing Report Download when download fails due to "no data in report" (now returns a empty response)
+
+
 ### 01/17/2018 - 1.2.0
 
 * Overhaul of Google and Bing APIs
