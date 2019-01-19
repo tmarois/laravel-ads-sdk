@@ -183,6 +183,7 @@ $campaign = $bingAds->campaign('CAMPAIGN_ID');
 |`setName()`|SET the Campaign name|
 |`setStatus($status)`|SET Campaign status (`ENABLED`,`PAUSED`)|
 |`setBudget($amount)`|SET Campaign Budget (`FLOAT $amount`)|
+|`setTargetCpa($amount)`|SET Campaign Target CPA (`FLOAT $amount`)|
 |`save()`|Post your changes to the server|
 
 

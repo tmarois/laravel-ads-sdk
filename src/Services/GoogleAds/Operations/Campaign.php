@@ -181,6 +181,29 @@ class Campaign extends CampaignOperations
         return 0;
     }
 
+
+    /**
+     * setTargetCpa()
+     *
+     *
+     */
+    public function setTargetCpa($amount = 0)
+    {
+        if ($this->getBidStrategy() == 'CPA')
+        {
+            $money = new Money();
+            $money->setMicroAmount($amount*1000000);
+
+            $biddingConfig = $this->response()->getBiddingStrategyConfiguration();
+            $biddingScheme = $biddingConfig->getBiddingScheme()->setTargetCpa($money);
+
+            $this->request()->setBiddingStrategyConfiguration($biddingConfig);
+        }
+
+        return $this;
+    }
+
+
     /**
      * setBudget()
      *
@@ -189,10 +212,8 @@ class Campaign extends CampaignOperations
      */
     public function setBudget($amount = 0)
     {
-        $microAmount = ($amount*1000000);
-
         $money = new Money();
-        $money->setMicroAmount($microAmount);
+        $money->setMicroAmount($amount*1000000);
 
         $budget = new Budget();
         $budget->setBudgetId($this->response()->getBudget()->getBudgetId());

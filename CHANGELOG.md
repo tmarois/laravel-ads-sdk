@@ -1,6 +1,14 @@
 Change Log
 ==========
 
+
+### 01/18/2018 - 1.2.3
+
+#### Added
+
+* `setTargetCpa()` on Bing/Google campaigns. 
+
+
 ### 01/17/2018 - 1.2.2
 
 #### Changed

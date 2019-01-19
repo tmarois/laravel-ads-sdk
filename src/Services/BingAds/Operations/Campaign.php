@@ -2,8 +2,12 @@
 
 use LaravelAds\Services\BingAds\Operations\CampaignOperations;
 
+use SoapVar;
+
 use Microsoft\BingAds\Auth\ServiceClient;
 use Microsoft\BingAds\Auth\ServiceClientType;
+
+use Microsoft\BingAds\V12\CampaignManagement\TargetCpaBiddingScheme;
 
 class Campaign extends CampaignOperations
 {
@@ -169,6 +173,33 @@ class Campaign extends CampaignOperations
         }
 
         return 0;
+    }
+
+
+    /**
+     * setTargetCpa()
+     *
+     *
+     */
+    public function setTargetCpa($amount = 0)
+    {
+        if ($this->getBidStrategy() == 'CPA')
+        {
+            $biddingScheme = (new TargetCpaBiddingScheme());
+            $biddingScheme->Type = 'TargetCpa';
+            $biddingScheme->TargetCpa = $amount;
+
+            // why? this is horrible. I hope Bing learns eventually...
+            $this->request()->BiddingScheme = new SoapVar(
+                $biddingScheme,
+                SOAP_ENC_OBJECT,
+                'TargetCpaBiddingScheme',
+                'https://bingads.microsoft.com/CampaignManagement/v12'
+            );
+
+        }
+
+        return $this;
     }
 
     /**
