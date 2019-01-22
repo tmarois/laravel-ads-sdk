@@ -1,24 +1,28 @@
 Change Log
 ==========
 
+### 01/22/2018 - 1.2.4
+
+#### Added
+* GoogleAds: `AveragePosition` which equals `avg_position` within AdGroup Report `getAdGroupReport`.
+* BingAds: `AveragePosition` which equals `avg_position` within AdGroup Report `getAdGroupReport()`.
+
 
 ### 01/18/2018 - 1.2.3
 
 #### Added
-
-* `setTargetCpa()` on Bing/Google campaigns. 
+* `setTargetCpa()` on Bing/Google campaigns.
 
 
 ### 01/17/2018 - 1.2.2
 
 #### Changed
-
 * Fixed bing report response once again!
+
 
 ### 01/17/2018 - 1.2.1
 
 #### Changed
-
 * Fixed Bing Report Download when download fails due to "no data in report" (now returns a empty response)
 
 

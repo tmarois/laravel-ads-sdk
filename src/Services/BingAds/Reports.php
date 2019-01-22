@@ -248,7 +248,8 @@ class Reports
             AdGroupPerformanceReportColumn::Impressions,
             AdGroupPerformanceReportColumn::Spend,
             AdGroupPerformanceReportColumn::Conversions,
-            AdGroupPerformanceReportColumn::Revenue
+            AdGroupPerformanceReportColumn::Revenue,
+            AdGroupPerformanceReportColumn::AveragePosition
         );
 
         $encodedReport   = new SoapVar($report, SOAP_ENC_OBJECT, 'AdGroupPerformanceReportRequest', $this->serviceProxy->GetNamespace());

@@ -181,7 +181,7 @@ class ReportDownload
     public function toArray()
     {
         if (empty($this->results)) return [];
-        
+
         $csv    = array_map('str_getcsv',$this->results);
         $header = $csv[10];
 
@@ -200,6 +200,7 @@ class ReportDownload
                 case 'adgroupname' : $label = 'ad_group_name'; break;
                 case 'spend' : $label = 'cost'; break;
                 case 'revenue' : $label = 'conversion_value'; break;
+                case 'averageposition' : $label = 'avg_position'; break;
                 default :
             }
 

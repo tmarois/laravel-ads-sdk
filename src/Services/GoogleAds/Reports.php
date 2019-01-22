@@ -12,6 +12,8 @@ use Google\AdsApi\AdWords\v201802\cm\PredicateOperator;
 use Google\AdsApi\AdWords\v201802\cm\ReportDefinitionReportType;
 use Google\AdsApi\AdWords\v201802\cm\Selector;
 
+//https://developers.google.com/adwords/api/docs/appendix/reports
+
 class Reports
 {
     /**
@@ -190,7 +192,8 @@ class Reports
             'Clicks',
             'Cost',
             'Conversions',
-            'ConversionValue'
+            'ConversionValue',
+            'AveragePosition'
         ],true);
 
         $reportDefinition = $this->reportDefinition(ReportDefinitionReportType::ADGROUP_PERFORMANCE_REPORT);

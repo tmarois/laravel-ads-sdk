@@ -78,6 +78,7 @@ class ReportDownload
                 case 'advertising channel' : $label = 'channel'; break;
                 case 'ad group id' : $label = 'ad_group_id'; break;
                 case 'total conv. value' : $label = 'conversion_value'; break;
+                case 'avg. position' : $label = 'avg_position'; break;
                 default :
             }
 
