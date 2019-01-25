@@ -35,6 +35,12 @@ class Reports
     protected $fields = [];
 
     /**
+     * $filters
+     *
+     */
+    protected $filters = [];
+
+    /**
      * __construct()
      *
      *
@@ -80,11 +86,24 @@ class Reports
     }
 
     /**
+     * setFilters()
+     *
+     *
+     * @return self
+     */
+    public function setFilters($filters)
+    {
+        $this->filters = $filters;
+
+        return $this;
+    }
+
+    /**
      * selectors()
      *
      *
      */
-    protected function getSelector($dateRange, $fields = [])
+    protected function getSelector($dateRange, $fields = [], $filters = [])
     {
         $selector = new Selector();
         $selector->setFields($fields);
@@ -92,6 +111,17 @@ class Reports
             'min' => str_replace('-','',$dateRange[0]),
             'max' => str_replace('-','',$dateRange[1])
         ]);
+
+        if ($filters)
+        {
+            $predicates = [];
+
+            foreach($filters as $filter) {
+                $predicates[] = new Predicate($filter['field'], PredicateOperator::IN, $filter['values']);
+            }
+
+            $selector->setPredicates($predicates);
+        }
 
         return $selector;
     }
@@ -104,7 +134,7 @@ class Reports
     protected function reportDefinition($reportType)
     {
         $reportDefinition = new ReportDefinition();
-        $reportDefinition->setSelector($this->getSelector($this->dateRange, $this->fields));
+        $reportDefinition->setSelector($this->getSelector($this->dateRange, $this->fields, $this->filters));
         $reportDefinition->setReportName('Performance report #' . uniqid());
         $reportDefinition->setDateRangeType(ReportDefinitionDateRangeType::CUSTOM_DATE);
         $reportDefinition->setReportType($reportType);
@@ -119,8 +149,10 @@ class Reports
      *
      *
      */
-    protected function reportDownload($reportDefinition)
+    public function reportDownload($reportType)
     {
+        $reportDefinition = $this->reportDefinition($reportType);
+
         return (new ReportDownload($this->service, $reportDefinition));
     }
 
@@ -142,9 +174,7 @@ class Reports
             'ConversionValue'
         ],true);
 
-        $reportDefinition = $this->reportDefinition(ReportDefinitionReportType::ACCOUNT_PERFORMANCE_REPORT);
-
-        return $this->reportDownload($reportDefinition)->toCollection();
+        return $this->reportDownload(ReportDefinitionReportType::ACCOUNT_PERFORMANCE_REPORT)->toCollection();
     }
 
 
@@ -169,9 +199,7 @@ class Reports
             'ConversionValue'
         ],true);
 
-        $reportDefinition = $this->reportDefinition(ReportDefinitionReportType::CAMPAIGN_PERFORMANCE_REPORT);
-
-        return $this->reportDownload($reportDefinition)->toCollection();
+        return $this->reportDownload(ReportDefinitionReportType::CAMPAIGN_PERFORMANCE_REPORT)->toCollection();
     }
 
 
@@ -196,9 +224,72 @@ class Reports
             'AveragePosition'
         ],true);
 
-        $reportDefinition = $this->reportDefinition(ReportDefinitionReportType::ADGROUP_PERFORMANCE_REPORT);
+        return $this->reportDownload(ReportDefinitionReportType::ADGROUP_PERFORMANCE_REPORT)->toCollection();
+    }
 
-        return $this->reportDownload($reportDefinition)->toCollection();
+    /**
+     * getAgeRangeReport()
+     * https://developers.google.com/adwords/api/docs/appendix/reports/age-range-performance-report
+     *
+     *
+     */
+    public function getAgeRangeReport()
+    {
+        return $this->getCriteriaReport(ReportDefinitionReportType::AGE_RANGE_PERFORMANCE_REPORT,'age_range','Criteria');
+    }
+
+    /**
+     * getGenderReport()
+     *
+     */
+    public function getGenderReport()
+    {
+        return $this->getCriteriaReport(ReportDefinitionReportType::GENDER_PERFORMANCE_REPORT,'gender','Criteria');
+    }
+
+    /**
+     * getPlacementReport()
+     *
+     */
+    public function getPlacementReport()
+    {
+        return $this->getCriteriaReport(ReportDefinitionReportType::PLACEMENT_PERFORMANCE_REPORT,'placement','Criteria');
+    }
+
+    /**
+     * getUrlReport()
+     *
+     */
+    public function getUrlReport()
+    {
+        return $this->getCriteriaReport(ReportDefinitionReportType::URL_PERFORMANCE_REPORT,'url','Url');
+    }
+
+    /**
+     * getSearchTermReport()
+     *
+     */
+    public function getSearchTermReport()
+    {
+        return $this->getCriteriaReport(ReportDefinitionReportType::SEARCH_QUERY_PERFORMANCE_REPORT,'search_term','Query');
+    }
+
+    /**
+     * getCriteriaReport()
+     *
+     */
+    public function getCriteriaReport($report, $field, $setField)
+    {
+        $this->setFields([
+            $setField,
+            'Impressions',
+            'Clicks',
+            'Cost',
+            'Conversions',
+            'ConversionValue'
+        ],true);
+
+        return $this->reportDownload($report)->aggregate($field);
     }
 
 }

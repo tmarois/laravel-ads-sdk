@@ -1,6 +1,12 @@
 Change Log
 ==========
 
+### 01/25/2018 - 1.2.5
+
+#### Changed
+* GoogleAds Reports now allow for advanced customization, making `reportDownload()` a public method.
+* GoogleAds Reports now allow `aggregate()` to be used with multiple calls.
+
 ### 01/22/2018 - 1.2.4
 
 #### Added

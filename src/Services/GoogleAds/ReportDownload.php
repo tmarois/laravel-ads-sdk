@@ -42,14 +42,56 @@ class ReportDownload
     }
 
     /**
-     * toString()
+     * getResults()
      *
      *
      * @return string results
      */
-    public function toString()
+    public function getResults()
     {
-        return $this->results ?? '';
+        return $this->results ?? false;
+    }
+
+    /**
+     * aggregate()
+     *
+     *
+     * @return collection results
+     */
+    public function aggregate($field)
+    {
+        $results = $this->toArray();
+
+        $only = [
+            'impressions','clicks','cost','conversions','conversion_value'
+        ];
+
+        $r = [];
+        foreach($results as $key=>$value)
+        {
+            if (isset($r[$value[$field]]))
+            {
+                $x = $r[$value[$field]];
+
+                foreach($value as $k=>$v) {
+                    if (!in_array($k,$only)) continue;
+
+                    $n = $x[$k];
+                    if (!is_numeric($n)) continue 2;
+                    if (!is_numeric($v)) continue 2;
+
+                    $value[$k] = $v+$n;
+                }
+
+                $r[$value[$field]] = $value;
+            }
+            else
+            {
+                $r[$value[$field]] = $value;
+            }
+        }
+
+        return collect($r);
     }
 
     /**
@@ -60,6 +102,8 @@ class ReportDownload
      */
     public function toArray()
     {
+        if (is_array($this->results)) return $this->results;
+
         $csv    = explode("\n",$this->results);
         $header = explode(',',$csv[0]);
         $csv    = array_filter($csv);
@@ -79,10 +123,14 @@ class ReportDownload
                 case 'ad group id' : $label = 'ad_group_id'; break;
                 case 'total conv. value' : $label = 'conversion_value'; break;
                 case 'avg. position' : $label = 'avg_position'; break;
+                // criteria
+                case 'age range' : $label = 'age_range'; break;
+                case 'searchterm' : $label = 'search_term'; break;
+                case 'most specific location' : $label = 'location'; break;
                 default :
             }
 
-            $header[] = str_replace(' ','_',$label);
+            $header[] = str_replace([' ','/'],'_',$label);
         }
 
         unset($csv[0]);
