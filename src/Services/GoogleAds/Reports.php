@@ -3,14 +3,14 @@
 
 use LaravelAds\Services\GoogleAds\ReportDownload;
 
-use Google\AdsApi\AdWords\Reporting\v201802\DownloadFormat;
-use Google\AdsApi\AdWords\Reporting\v201802\ReportDefinition;
-use Google\AdsApi\AdWords\Reporting\v201802\ReportDefinitionDateRangeType;
-use Google\AdsApi\AdWords\Reporting\v201802\ReportDownloader;
-use Google\AdsApi\AdWords\v201802\cm\Predicate;
-use Google\AdsApi\AdWords\v201802\cm\PredicateOperator;
-use Google\AdsApi\AdWords\v201802\cm\ReportDefinitionReportType;
-use Google\AdsApi\AdWords\v201802\cm\Selector;
+use Google\AdsApi\AdWords\Reporting\v201809\DownloadFormat;
+use Google\AdsApi\AdWords\Reporting\v201809\ReportDefinition;
+use Google\AdsApi\AdWords\Reporting\v201809\ReportDefinitionDateRangeType;
+use Google\AdsApi\AdWords\Reporting\v201809\ReportDownloader;
+use Google\AdsApi\AdWords\v201809\cm\Predicate;
+use Google\AdsApi\AdWords\v201809\cm\PredicateOperator;
+use Google\AdsApi\AdWords\v201809\cm\ReportDefinitionReportType;
+use Google\AdsApi\AdWords\v201809\cm\Selector;
 
 //https://developers.google.com/adwords/api/docs/appendix/reports
 

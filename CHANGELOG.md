@@ -1,6 +1,12 @@
 Change Log
 ==========
 
+### 02/01/2018 - 1.2.6
+
+#### Changed
+* Updated GoogleAds API from `v201802` to  `v201809`
+
+
 ### 01/25/2018 - 1.2.5
 
 #### Changed
