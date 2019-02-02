@@ -1,6 +1,13 @@
 Change Log
 ==========
 
+### 02/02/2018 - 1.2.7
+
+#### Changed
+* Added `getCampaigns()` and `getAdGroups()` to now work with paging. Google allows only 10,000 results per page. Pre-defined 5,000 per page in this SDK for safety. It will be handled automatically and give you the entire total in the response.
+* Added `$filters` array within the `getCampaigns()` and `getAdGroups()`, using the `Predicate` and `setPredicates` Google Ads functionality. (Note: this currently will only use the `PredicateOperator::IN` operator.)
+
+
 ### 02/01/2018 - 1.2.6
 
 #### Changed
