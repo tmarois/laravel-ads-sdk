@@ -241,13 +241,13 @@ $bingAds->adGroup('ADGROUP_ID', 'CAMPAIGN_ID')
           ->save();
 
 // if you only want to grab the ad group name...
-$adgroupName = $bingAds->adGroup('ADGROUP_ID')->getName();
+$adgroupName = $bingAds->adGroup('ADGROUP_ID', 'CAMPAIGN_ID')->getName();
 
 // Get only the ad group status
-$adgroupStatus = $bingAds->adGroup('ADGROUP_ID')->getStatus();
+$adgroupStatus = $bingAds->adGroup('ADGROUP_ID', 'CAMPAIGN_ID')->getStatus();
 
 // Get only the ad group bid
-$adGroupBid = $bingAds->adGroup('ADGROUP_ID')->getBid();
+$adGroupBid = $bingAds->adGroup('ADGROUP_ID', 'CAMPAIGN_ID')->getBid();
 
 ```
 
