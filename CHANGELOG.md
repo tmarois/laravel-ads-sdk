@@ -1,77 +1,82 @@
 Change Log
 ==========
 
-### 02/02/2018 - 1.2.7
+### 02/22/2018 - 1.2.8
+
+#### Changed
+* Fixed fetching `getAdGroups()` on Bing causing undefined error when AdGroups not returned.
+
+### 02/02/2019 - 1.2.7
 
 #### Changed
 * Added `getCampaigns()` and `getAdGroups()` to now work with paging. Google allows only 10,000 results per page. Pre-defined 5,000 per page in this SDK for safety. It will be handled automatically and give you the entire total in the response.
 * Added `$filters` array within the `getCampaigns()` and `getAdGroups()`, using the `Predicate` and `setPredicates` Google Ads functionality. (Note: this currently will only use the `PredicateOperator::IN` operator.)
 
 
-### 02/01/2018 - 1.2.6
+### 02/01/2019 - 1.2.6
 
 #### Changed
 * Updated GoogleAds API from `v201802` to  `v201809`
 
 
-### 01/25/2018 - 1.2.5
+### 01/25/2019 - 1.2.5
 
 #### Changed
 * GoogleAds Reports now allow for advanced customization, making `reportDownload()` a public method.
 * GoogleAds Reports now allow `aggregate()` to be used with multiple calls.
 
-### 01/22/2018 - 1.2.4
+### 01/22/2019 - 1.2.4
 
 #### Added
 * GoogleAds: `AveragePosition` which equals `avg_position` within AdGroup Report `getAdGroupReport`.
 * BingAds: `AveragePosition` which equals `avg_position` within AdGroup Report `getAdGroupReport()`.
 
 
-### 01/18/2018 - 1.2.3
+### 01/18/2019 - 1.2.3
 
 #### Added
 * `setTargetCpa()` on Bing/Google campaigns.
 
 
-### 01/17/2018 - 1.2.2
+### 01/17/2019 - 1.2.2
 
 #### Changed
 * Fixed bing report response once again!
 
 
-### 01/17/2018 - 1.2.1
+### 01/17/2019 - 1.2.1
 
 #### Changed
 * Fixed Bing Report Download when download fails due to "no data in report" (now returns a empty response)
 
 
-### 01/17/2018 - 1.2.0
+### 01/17/2019 - 1.2.0
 
 * Overhaul of Google and Bing APIs
 * Includes Google/Bing Campaign and AdGroup Management Features.
 * Updated Readme with all Documentation for both Google/Bing
 * Improved consistency between both Google/Bing
 
-### 01/14/2018 - 1.1.6
+### 01/14/2019 - 1.1.6
 
 #### Fixed
 * Fixed new bid type method returns the correct types now.
 
 
-### 01/14/2018 - 1.1.5
+### 01/14/2019 - 1.1.5
 
 #### Fixed
 * Added `Campaign Id` into Bing Ad Group response.
 
 
-### 01/14/2018 - 1.1.4
+### 01/14/2019 - 1.1.4
 
 #### Changed
 * Changed Bing Ad Group status from `Active` to `ENABLED` (matching GoogleAds)
 * Fetching AdGroups now use the AdGroup Response object.
 
 
-### 01/14/2018 - 1.1.3
+### 01/14/2019 - 1.1.3
 
 #### Added
 * Google: Added `type` for `AdGroupType` in `getAdGroups()`
@@ -80,20 +85,20 @@ Change Log
 * Changed the Bid Type to always return a uniform set (`CPC`,`ECPC`,`CPA`,`CPM`)
 
 
-### 01/14/2018 - 1.1.2
+### 01/14/2019 - 1.1.2
 
 #### Added
 * Google: Ability to check if an ad group is Enhanced CPC using `isEnhancedCpc()`
 * Google: Added `ENHANCED_CPC` for bid strategy response in fetch ad groups
 
 
-### 01/05/2018 - 1.1.1
+### 01/05/2019 - 1.1.1
 
 #### Added
 * For Google/Bing get the active bid with `getBid()` on adgroups.
 
 
-### 01/05/2018 - 1.1.0
+### 01/05/2019 - 1.1.0
 
 #### Changed
 * Response of `adGroup` for both Google/Bing
