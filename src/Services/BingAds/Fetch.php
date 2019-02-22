@@ -105,32 +105,33 @@ class Fetch
             try
             {
                 $items = $serviceCall->GetService()->GetAdGroupsByCampaignId($request);
+
+                foreach($items->AdGroups->AdGroup as $item)
+                {
+                    $adgroup = $this->service->adGroup($item);
+
+                    if ($returnArray)
+                    {
+                        $r[] = [
+                            'id' => $adgroup->getId(),
+                            'name' => $adgroup->getName(),
+                            'status' => $adgroup->getStatus(),
+                            'campaign_id' => $request->CampaignId,
+                            'type' => 'SEARCH',
+                            'bid_strategy' => $adgroup->getBidStrategy(),
+                            'bid' => $adgroup->getBid()
+                        ];
+                    }
+                    else
+                    {
+                        $r[] = $adgroup;
+                    }
+                }
             }
             catch(\Exception $e) {
-                return [];
+                continue;
             }
 
-            foreach($items->AdGroups->AdGroup as $item)
-            {
-                $adgroup = $this->service->adGroup($item);
-
-                if ($returnArray)
-                {
-                    $r[] = [
-                        'id' => $adgroup->getId(),
-                        'name' => $adgroup->getName(),
-                        'status' => $adgroup->getStatus(),
-                        'campaign_id' => $request->CampaignId,
-                        'type' => 'SEARCH',
-                        'bid_strategy' => $adgroup->getBidStrategy(),
-                        'bid' => $adgroup->getBid()
-                    ];
-                }
-                else
-                {
-                    $r[] = $adgroup;
-                }
-            }
         }
 
         return collect($r);
