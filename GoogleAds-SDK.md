@@ -12,17 +12,23 @@ First, you need to use the service access for `Google Ads` and add the Client Cu
 $googleAds = LaravelAds::googleAds()->with('CLIENT_ID');
 ```
 
-### Jump To:
-
-* **Getting Started**
+#### Management
 * [Fetching - All Campaigns](#fetch-all-campaigns)
 * [Fetching - All Ad Groups](#fetch-all-ad-groups)
-* [Reports - Account](#account-reports)
-* [Reports - Campaign](#campaign-reports)
-* [Reports - Ad Group](#ad-group-reports)
 * [Management - Campaigns](#campaigns)
 * [Management - Ad Groups](#ad-groups)
 * [Advanced Options](#need-more-advanced-options)
+
+#### Reports
+* [Account Performance](#account-reports)
+* [Campaign Performance](#campaign-reports)
+* [Ad Group Performance](#ad-group-reports)
+* [Final URL Performance](#final-url-performance-report)
+* [Placement Domain Performance](#placement-domain-performance-report)
+* [Placement URL Performance](#placement-url-performance-report)
+* [Search Term Performance](#search-term-performance-report)
+* [Age Range Performance](#age-range-performance-report)
+* [Gender Performance](#gender-performance-report)
 
 ## Fetching
 
@@ -151,11 +157,177 @@ $adgroupReport  = $googleAds->reports($dateFrom, $dateTo)
     [ad_group_id] => 000000
     [ad_group_name] => Ad Group Name
     [campaign_id] => 0000000
+    [campaign_name] => Campaign Name
     [impressions] => 2
     [clicks] => 0
     [cost] => 0
     [conversions] => 0.00
     [conversion_value] => 0.00
+)
+...
+```
+
+### Final URL Performance Report
+
+This report is **campaign-level** and uses [Final URL Performance](https://developers.google.com/adwords/api/docs/appendix/reports/final-url-report).
+
+```php
+$report  = $googleAds->reports($dateFrom, $dateTo)
+                     ->getFinalUrlReport();
+```
+
+*Results: `getFinalUrlReport()` (returns a [Laravel Collection](https://laravel.com/docs/5.7/collections) object, use `all()` for array)*
+
+```
+[0] => Array
+(
+    [date] => 2019-01-23
+    [campaign_id] => 00000000
+    [campaign_name] => Campaign Name
+    [impressions] => 3
+    [clicks] => 0
+    [cost] => 0
+    [conversions] => 0.00
+    [conversion_value] => 0.00
+    [final_url] => https://your-final-url.com/landing-page
+)
+...
+```
+
+### Placement Domain Performance Report
+
+This report is aggregated to **account-level** and uses [Placement Performance](https://developers.google.com/adwords/api/docs/appendix/reports/placement-performance-report).
+
+```php
+$report  = $googleAds->reports($dateFrom, $dateTo)
+                     ->getPlacementReport();
+```
+
+*Results: `getPlacementReport()` (returns a [Laravel Collection](https://laravel.com/docs/5.7/collections) object, use `all()` for array)*
+
+```
+// the key of the array is also the placement domain
+// this ensures a unique placement aggregation
+
+[example.com] => Array
+(
+    [placement] => example.com
+    [impressions] => 9
+    [clicks] => 0
+    [cost] => 0
+    [conversions] => 0.00
+    [conversion_value] => 0.00
+)
+...
+```
+
+### Placement URL Performance Report
+
+This report is aggregated to **account-level** and uses [URL Performance](https://developers.google.com/adwords/api/docs/appendix/reports/url-performance-report).
+
+```php
+$report  = $googleAds->reports($dateFrom, $dateTo)
+                     ->getPlacementUrlReport();
+```
+
+*Results: `getPlacementUrlReport()` (returns a [Laravel Collection](https://laravel.com/docs/5.7/collections) object, use `all()` for array)*
+
+```
+// the key of the array is also the placement URL
+// this ensures a unique placement URL aggregation
+
+[example.com/page/path.html] => Array
+(
+    [placement] => example.com/page/path.html
+    [impressions] => 9
+    [clicks] => 0
+    [cost] => 0
+    [conversions] => 0.00
+    [conversion_value] => 0.00
+)
+...
+```
+
+
+### Search Term Performance Report
+
+This report is aggregated to **account-level** and uses [Search Query Performance](https://developers.google.com/adwords/api/docs/appendix/reports/search-query-performance-report).
+
+```php
+$report  = $googleAds->reports($dateFrom, $dateTo)
+                     ->getSearchTermReport();
+```
+
+*Results: `getSearchTermReport()` (returns a [Laravel Collection](https://laravel.com/docs/5.7/collections) object, use `all()` for array)*
+
+```
+// the key of the array is also the search term
+// this ensures a unique search term for aggregation
+
+[food in boston ma] => Array
+(
+    [search_term] => food in boston ma
+    [impressions] => 1
+    [clicks] => 1
+    [cost] => 0.47
+    [conversions] => 0.00
+    [conversion_value] => 0.00
+)
+...
+```
+
+### Age Range Performance Report
+
+This report is aggregated to **account-level** and uses [Age Range Performance](https://developers.google.com/adwords/api/docs/appendix/reports/age-range-performance-report).
+
+```php
+$report  = $googleAds->reports($dateFrom, $dateTo)
+                     ->getAgeRangeReport();
+```
+
+*Results: `getGenderReport()` (returns a [Laravel Collection](https://laravel.com/docs/5.7/collections) object, use `all()` for array)*
+
+```
+// the key of the array is also the age range
+// this ensures a unique age range for aggregation
+// Age (Valid age ranges are 18-24, 25-34, 35-44, 45-54, 55-64, 65 or more, and Unknown.)
+
+[18-24] => Array
+(
+   [age_range] => 18-24
+   [impressions] => 12517
+   [clicks] => 203
+   [cost] => 58.65
+   [conversions] => 11
+   [conversion_value] => 51.25
+)
+...
+```
+
+### Gender Performance Report
+
+This report is aggregated to **account-level** and uses [Gender Performance](https://developers.google.com/adwords/api/docs/appendix/reports/gender-performance-report).
+
+```php
+$report  = $googleAds->reports($dateFrom, $dateTo)
+                     ->getGenderReport();
+```
+
+*Results: `getGenderReport()` (returns a [Laravel Collection](https://laravel.com/docs/5.7/collections) object, use `all()` for array)*
+
+```
+// the key of the array is also the gender
+// this ensures a unique gender for aggregation
+// Genders (Male, Female)
+
+[Female] => Array
+(
+    [gender] => Female
+    [impressions] => 16045
+    [clicks] => 411
+    [cost] => 162.28
+    [conversions] => 18
+    [conversion_value] => 88
 )
 ...
 ```

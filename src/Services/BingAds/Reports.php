@@ -15,6 +15,9 @@ use Microsoft\BingAds\V12\Reporting\AudiencePerformanceReportRequest;
 use Microsoft\BingAds\V12\Reporting\KeywordPerformanceReportRequest;
 use Microsoft\BingAds\V12\Reporting\CampaignPerformanceReportRequest;
 use Microsoft\BingAds\V12\Reporting\AdGroupPerformanceReportRequest;
+use Microsoft\BingAds\V12\Reporting\SearchQueryPerformanceReportRequest;
+use Microsoft\BingAds\V12\Reporting\AgeGenderAudienceReportRequest;
+use Microsoft\BingAds\V12\Reporting\GeographicPerformanceReportRequest;
 use Microsoft\BingAds\V12\Reporting\DestinationUrlPerformanceReportRequest;
 use Microsoft\BingAds\V12\Reporting\ReportFormat;
 use Microsoft\BingAds\V12\Reporting\ReportAggregation;
@@ -36,6 +39,9 @@ use Microsoft\BingAds\V12\Reporting\AudiencePerformanceReportColumn;
 use Microsoft\BingAds\V12\Reporting\CampaignPerformanceReportColumn;
 use Microsoft\BingAds\V12\Reporting\AdGroupPerformanceReportColumn;
 use Microsoft\BingAds\V12\Reporting\KeywordPerformanceReportColumn;
+use Microsoft\BingAds\V12\Reporting\SearchQueryPerformanceReportColumn;
+use Microsoft\BingAds\V12\Reporting\AgeGenderAudienceReportColumn;
+use Microsoft\BingAds\V12\Reporting\GeographicPerformanceReportColumn;
 use Microsoft\BingAds\V12\Reporting\ReportRequestStatusType;
 use Microsoft\BingAds\V12\Reporting\KeywordPerformanceReportSort;
 use Microsoft\BingAds\V12\Reporting\SortOrder;
@@ -324,6 +330,185 @@ class Reports
     }
 
 
+    /**
+     * buildFinalUrlReport()
+     *
+     *
+     */
+    public function buildSearchTermReport()
+    {
+        try
+        {
+            $report                         = new SearchQueryPerformanceReportRequest();
+            $report->ReportName             = 'Search Query Performance Report';
+            $report->Format                 = ReportFormat::Csv;
+            $report->ReturnOnlyCompleteData = false;
+            $report->Aggregation            = ReportAggregation::Daily;
+
+            $report->Scope                  = new AccountThroughAdGroupReportScope();
+            $report->Scope->AccountIds      = [$this->service->getClientId()];
+
+            $report->Time                               = new ReportTime();
+            $report->Time->CustomDateRangeStart         = new Date();
+            $report->Time->CustomDateRangeStart->Day    = date('d',strtotime($this->dateRange[0]));
+            $report->Time->CustomDateRangeStart->Month  = date('m',strtotime($this->dateRange[0]));
+            $report->Time->CustomDateRangeStart->Year   = date('Y',strtotime($this->dateRange[0]));
+
+            $report->Time->CustomDateRangeEnd           = new Date();
+            $report->Time->CustomDateRangeEnd->Day      = date('d',strtotime($this->dateRange[1]));
+            $report->Time->CustomDateRangeEnd->Month    = date('m',strtotime($this->dateRange[1]));
+            $report->Time->CustomDateRangeEnd->Year     = date('Y',strtotime($this->dateRange[1]));
+
+            $report->Columns = array (
+                SearchQueryPerformanceReportColumn::TimePeriod,
+                SearchQueryPerformanceReportColumn::Clicks,
+                SearchQueryPerformanceReportColumn::Impressions,
+                SearchQueryPerformanceReportColumn::Spend,
+                SearchQueryPerformanceReportColumn::Conversions,
+                SearchQueryPerformanceReportColumn::Revenue,
+                SearchQueryPerformanceReportColumn::SearchQuery
+            );
+
+            $encodedReport   = new SoapVar($report, SOAP_ENC_OBJECT, 'SearchQueryPerformanceReportRequest', $this->serviceProxy->GetNamespace());
+            $reportRequestId = $this->submitGenerateReport($encodedReport)->ReportRequestId;
+        }
+        catch (SoapFault $e)
+        {
+        	printf("-----\r\nFault Code: %s\r\nFault String: %s\r\nFault Detail: \r\n", $e->faultcode, $e->faultstring);
+            var_dump($e->detail);
+        	print "-----\r\nLast SOAP request/response:\r\n";
+            print $this->serviceProxy->GetWsdl() . "\r\n";
+        	print $this->serviceProxy->__getLastRequest()."\r\n";
+            print $this->serviceProxy->__getLastResponse()."\r\n";
+        }
+
+        return (new ReportDownload($this->serviceProxy, $reportRequestId));
+    }
+
+
+    /**
+     * buildAgeRangeReport()
+     *
+     *
+     */
+    public function buildAgeGenderReport()
+    {
+        try
+        {
+            $report                         = new AgeGenderAudienceReportRequest();
+            $report->ReportName             = 'Age Gender Performance Report';
+            $report->Format                 = ReportFormat::Csv;
+            $report->ReturnOnlyCompleteData = false;
+            $report->Aggregation            = ReportAggregation::Daily;
+
+            $report->Scope                  = new AccountThroughAdGroupReportScope();
+            $report->Scope->AccountIds      = [$this->service->getClientId()];
+
+            $report->Time                               = new ReportTime();
+            $report->Time->CustomDateRangeStart         = new Date();
+            $report->Time->CustomDateRangeStart->Day    = date('d',strtotime($this->dateRange[0]));
+            $report->Time->CustomDateRangeStart->Month  = date('m',strtotime($this->dateRange[0]));
+            $report->Time->CustomDateRangeStart->Year   = date('Y',strtotime($this->dateRange[0]));
+
+            $report->Time->CustomDateRangeEnd           = new Date();
+            $report->Time->CustomDateRangeEnd->Day      = date('d',strtotime($this->dateRange[1]));
+            $report->Time->CustomDateRangeEnd->Month    = date('m',strtotime($this->dateRange[1]));
+            $report->Time->CustomDateRangeEnd->Year     = date('Y',strtotime($this->dateRange[1]));
+
+            $report->Columns = array (
+                AgeGenderAudienceReportColumn::TimePeriod,
+                AgeGenderAudienceReportColumn::AccountName,
+                AgeGenderAudienceReportColumn::AdGroupName,
+                AgeGenderAudienceReportColumn::AgeGroup,
+                AgeGenderAudienceReportColumn::Gender,
+                AgeGenderAudienceReportColumn::Clicks,
+                AgeGenderAudienceReportColumn::Impressions,
+                AgeGenderAudienceReportColumn::Spend,
+                AgeGenderAudienceReportColumn::Conversions,
+                AgeGenderAudienceReportColumn::Revenue
+            );
+
+            $encodedReport   = new SoapVar($report, SOAP_ENC_OBJECT, 'AgeGenderAudienceReportRequest', $this->serviceProxy->GetNamespace());
+            $reportRequestId = $this->submitGenerateReport($encodedReport)->ReportRequestId;
+        }
+        catch (SoapFault $e)
+        {
+        	printf("-----\r\nFault Code: %s\r\nFault String: %s\r\nFault Detail: \r\n", $e->faultcode, $e->faultstring);
+            var_dump($e->detail);
+        	print "-----\r\nLast SOAP request/response:\r\n";
+            print $this->serviceProxy->GetWsdl() . "\r\n";
+        	print $this->serviceProxy->__getLastRequest()."\r\n";
+            print $this->serviceProxy->__getLastResponse()."\r\n";
+        }
+
+        return (new ReportDownload($this->serviceProxy, $reportRequestId));
+    }
+
+
+    /**
+     * buildGeoReport()
+     *
+     *
+     */
+    public function buildMostSpecificLocationReport()
+    {
+        try
+        {
+            $report                         = new GeographicPerformanceReportRequest();
+            $report->ReportName             = 'Age Gender Performance Report';
+            $report->Format                 = ReportFormat::Csv;
+            $report->ReturnOnlyCompleteData = false;
+            $report->Aggregation            = ReportAggregation::Summary;
+
+            $report->Scope                  = new AccountThroughAdGroupReportScope();
+            $report->Scope->AccountIds      = [$this->service->getClientId()];
+
+            $report->Time                               = new ReportTime();
+            $report->Time->CustomDateRangeStart         = new Date();
+            $report->Time->CustomDateRangeStart->Day    = date('d',strtotime($this->dateRange[0]));
+            $report->Time->CustomDateRangeStart->Month  = date('m',strtotime($this->dateRange[0]));
+            $report->Time->CustomDateRangeStart->Year   = date('Y',strtotime($this->dateRange[0]));
+
+            $report->Time->CustomDateRangeEnd           = new Date();
+            $report->Time->CustomDateRangeEnd->Day      = date('d',strtotime($this->dateRange[1]));
+            $report->Time->CustomDateRangeEnd->Month    = date('m',strtotime($this->dateRange[1]));
+            $report->Time->CustomDateRangeEnd->Year     = date('Y',strtotime($this->dateRange[1]));
+
+            $report->Columns = array (
+                GeographicPerformanceReportColumn::AccountName,
+                GeographicPerformanceReportColumn::LocationType,
+                GeographicPerformanceReportColumn::MostSpecificLocation,
+                GeographicPerformanceReportColumn::Country,
+                GeographicPerformanceReportColumn::State,
+                GeographicPerformanceReportColumn::MetroArea,
+                GeographicPerformanceReportColumn::City,
+                GeographicPerformanceReportColumn::County,
+                GeographicPerformanceReportColumn::PostalCode,
+                GeographicPerformanceReportColumn::LocationId,
+                GeographicPerformanceReportColumn::Clicks,
+                GeographicPerformanceReportColumn::Impressions,
+                GeographicPerformanceReportColumn::Spend,
+                GeographicPerformanceReportColumn::Conversions,
+                GeographicPerformanceReportColumn::Revenue
+            );
+
+            $encodedReport   = new SoapVar($report, SOAP_ENC_OBJECT, 'GeographicPerformanceReportRequest', $this->serviceProxy->GetNamespace());
+            $reportRequestId = $this->submitGenerateReport($encodedReport)->ReportRequestId;
+        }
+        catch (SoapFault $e)
+        {
+        	printf("-----\r\nFault Code: %s\r\nFault String: %s\r\nFault Detail: \r\n", $e->faultcode, $e->faultstring);
+            var_dump($e->detail);
+        	print "-----\r\nLast SOAP request/response:\r\n";
+            print $this->serviceProxy->GetWsdl() . "\r\n";
+        	print $this->serviceProxy->__getLastRequest()."\r\n";
+            print $this->serviceProxy->__getLastResponse()."\r\n";
+        }
+
+        return (new ReportDownload($this->serviceProxy, $reportRequestId));
+    }
+
+
 
 
     /**
@@ -367,6 +552,50 @@ class Reports
     public function getFinalUrlReport()
     {
         return $this->buildFinalUrlReport()->toCollection();
+    }
+
+
+    /**
+     * getDestinationUrlReport()
+     *
+     *
+     */
+    public function getSearchTermReport()
+    {
+        return $this->buildSearchTermReport()->aggregate('search_term');
+    }
+
+
+    /**
+     * getAgeRangeReport()
+     *
+     *
+     */
+    public function getAgeRangeReport()
+    {
+        return $this->buildAgeGenderReport()->aggregate('age_range');
+    }
+
+
+    /**
+     * getGenderReport()
+     *
+     *
+     */
+    public function getGenderReport()
+    {
+        return $this->buildAgeGenderReport()->aggregate('gender');
+    }
+
+
+    /**
+     * getMostSpecificLocationReport()
+     *
+     *
+     */
+    public function getMostSpecificLocationReport()
+    {
+        return $this->buildMostSpecificLocationReport()->toCollection();
     }
 
 }

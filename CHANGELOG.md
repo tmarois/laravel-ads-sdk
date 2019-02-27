@@ -1,6 +1,17 @@
 Change Log
 ==========
 
+### 02/26/2018 - 1.2.9
+
+#### Added
+* Added `campaign_name` to the resposne of `getAdGroupReport()`.
+* Added Reports: `getFinalUrlReport()` on both Google/Bing (it returns per campaign)
+* Added Reports: `getPlacementReport()` on Google only
+* Added Reports: `getPlacementUrlReport()` on Google only
+* Added Reports: `getSearchTermReport()` on Google/Bing
+* Added Reports: `getAgeRangeReport()` on Google/Bing
+* Added Reports: `getGenderReport()` on Google/Bing
+
 ### 02/22/2018 - 1.2.8
 
 #### Changed

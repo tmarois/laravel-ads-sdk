@@ -65,17 +65,23 @@ This uses the [googleads-php-lib](https://github.com/googleads/googleads-php-lib
 
 > **NOTICE** – You will need to [Request Google Ads API Access](https://services.google.com/fb/forms/newtoken/).
 
-### Jump to:
-
-* **[Getting Started](GoogleAds-SDK.md)**
+#### Management
 * [Fetching - All Campaigns](GoogleAds-SDK.md#fetch-all-campaigns)
 * [Fetching - All Ad Groups](GoogleAds-SDK.md#fetch-all-ad-groups)
-* [Reports - Account](GoogleAds-SDK.md#account-reports)
-* [Reports - Campaign](GoogleAds-SDK.md#campaign-reports)
-* [Reports - Ad Group](GoogleAds-SDK.md#ad-group-reports)
 * [Management - Campaigns](GoogleAds-SDK.md#campaigns)
 * [Management - Ad Groups](GoogleAds-SDK.md#ad-groups)
 * [Advanced Options](GoogleAds-SDK.md#need-more-advanced-options)
+
+#### Reports
+* [Account Performance](GoogleAds-SDK.md#account-reports)
+* [Campaign Performance](GoogleAds-SDK.md#campaign-reports)
+* [Ad Group Performance](GoogleAds-SDK.md#ad-group-reports)
+* [Final URL Performance](GoogleAds-SDK.md#final-url-performance-report)
+* [Placement Domain Performance](GoogleAds-SDK.md#placement-domain-performance-report)
+* [Placement URL Performance](GoogleAds-SDK.md#placement-url-performance-report)
+* [Search Term Performance](GoogleAds-SDK.md#search-term-performance-report)
+* [Age Range Performance](GoogleAds-SDK.md#age-range-performance-report)
+* [Gender Performance](GoogleAds-SDK.md#gender-performance-report)
 
 # Bing Ads
 
@@ -83,16 +89,20 @@ This uses the [BingAds-PHP-SDK](https://github.com/BingAds/BingAds-PHP-SDK) for 
 
 > **NOTICE** – You will need to [Request Bing Ads API Access](https://advertise.bingads.microsoft.com/en-us/resources/bing-partner-program/request-bing-ads-api-access).
 
-### Jump to:
-
-* **[Getting Started](BingAds-SDK.md)**
+#### Management
 * [Fetching - All Campaigns](BingAds-SDK.md#fetch-all-campaigns)
 * [Fetching - All Ad Groups](BingAds-SDK.md#fetch-all-ad-groups)
-* [Reports - Account](BingAds-SDK.md#account-reports)
-* [Reports - Campaign](BingAds-SDK.md#campaign-reports)
-* [Reports - Ad Group](BingAds-SDK.md#ad-group-reports)
 * [Management - Campaigns](BingAds-SDK.md#campaigns)
 * [Management - Ad Groups](BingAds-SDK.md#ad-groups)
+
+#### Reports
+* [Account Performance](BingAds-SDK.md#account-reports)
+* [Campaign Performance](BingAds-SDK.md#campaign-reports)
+* [Ad Group Performance](BingAds-SDK.md#ad-group-reports)
+* [Final URL Performance](BingAds-SDK.md#final-url-performance-report)
+* [Search Term Performance](BingAds-SDK.md#search-term-performance-report)
+* [Age Range Performance](BingAds-SDK.md#age-range-performance-report)
+* [Gender Performance](BingAds-SDK.md#gender-performance-report)
 
 
 # Facebook Ads

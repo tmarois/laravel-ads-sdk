@@ -12,16 +12,20 @@ First, you need to use the service access for `Bing Ads` and add the Client Cust
 $bingAds = LaravelAds::bingAds()->with('CLIENT_ID');
 ```
 
-### Jump To:
-
-* **Getting Started**
+#### Management
 * [Fetching - All Campaigns](#fetch-all-campaigns)
 * [Fetching - All Ad Groups](#fetch-all-ad-groups)
-* [Reports - Account](#account-reports)
-* [Reports - Campaign](#campaign-reports)
-* [Reports - Ad Group](#ad-group-reports)
 * [Management - Campaigns](#campaigns)
 * [Management - Ad Groups](#ad-groups)
+
+#### Reports
+* [Account Performance](#account-reports)
+* [Campaign Performance](#campaign-reports)
+* [Ad Group Performance](#ad-group-reports)
+* [Final URL Performance](#final-url-performance-report)
+* [Search Term Performance](#search-term-performance-report)
+* [Age Range Performance](#age-range-performance-report)
+* [Gender Performance](#gender-performance-report)
 
 ## Fetching
 
@@ -148,6 +152,7 @@ $adgroupReport  = $bingAds->reports($dateFrom, $dateTo)
     [date] => 2018-12-26
     [account_id] => 000000
     [campaign_id] => 000000
+    [campaign_name] => Campaign Name
     [ad_group_id] => 000000
     [ad_group_name] => Ad Group Name
     [clicks] => 684
@@ -155,6 +160,119 @@ $adgroupReport  = $bingAds->reports($dateFrom, $dateTo)
     [cost] => 290.13
     [conversions] => 87
     [conversion_value] => 466.05
+)
+...
+```
+
+### Final URL Performance Report
+
+This report is **campaign-level** and uses [Destination URL Performance](https://docs.microsoft.com/en-us/bingads/reporting-service/destinationurlperformancereportrequest?view=bingads-12).
+
+```php
+$report  = $bingads->reports($dateFrom, $dateTo)
+                     ->getFinalUrlReport();
+```
+
+*Results: `getFinalUrlReport()` (returns a [Laravel Collection](https://laravel.com/docs/5.7/collections) object, use `all()` for array)*
+
+```
+[0] => Array
+(
+    [date] => 2018-12-26
+    [account_name] => Account Name
+    [account_id] => 00000000
+    [campaign_id] => 00000000
+    [campaign_name] => Campaign Name
+    [clicks] => 684
+    [impressions] => 6008
+    [cost] => 290.13
+    [conversions] => 88
+    [conversion_value] => 470.80
+    [destination_url] => (no longer used, look at final url)
+    [final_url] => https://your-final-url.com/landing-page
+)
+...
+```
+
+### Search Term Performance Report
+
+This report is aggregated to **account-level** and uses [Search Query Performance](https://docs.microsoft.com/en-us/bingads/reporting-service/searchqueryperformancereportrequest?view=bingads-12).
+
+```php
+$report  = $bingads->reports($dateFrom, $dateTo)
+                   ->getSearchTermReport();
+```
+
+*Results: `getSearchTermReport()` (returns a [Laravel Collection](https://laravel.com/docs/5.7/collections) object, use `all()` for array)*
+
+```
+// the key of the array is also the search term
+// this ensures a unique search term for aggregation
+
+[food in boston ma] => Array
+(
+    [search_term] => food in boston ma
+    [impressions] => 1
+    [clicks] => 1
+    [cost] => 0.47
+    [conversions] => 0.00
+    [conversion_value] => 0.00
+)
+...
+```
+
+### Age Range Performance Report
+
+This report is aggregated to **account-level** and uses [Age Gender Performance](https://docs.microsoft.com/en-us/bingads/reporting-service/agegenderaudiencereportcolumn?view=bingads-12).
+
+```php
+$report  = $bingads->reports($dateFrom, $dateTo)
+                   ->getAgeRangeReport();
+```
+
+*Results: `getGenderReport()` (returns a [Laravel Collection](https://laravel.com/docs/5.7/collections) object, use `all()` for array)*
+
+```
+// the key of the array is also the age range
+// this ensures a unique age range for aggregation
+// Age (Valid age ranges are 18-24, 25-34, 35-44, 45-54, 55-64, 65 or more, and Unknown.)
+
+[18-24] => Array
+(
+   [age_range] => 18-24
+   [impressions] => 12517
+   [clicks] => 203
+   [cost] => 58.65
+   [conversions] => 11
+   [conversion_value] => 51.25
+)
+...
+```
+
+### Gender Performance Report
+
+This report is aggregated to **account-level** and uses [Age Gender Performance](https://docs.microsoft.com/en-us/bingads/reporting-service/agegenderaudiencereportcolumn?view=bingads-12).
+
+```php
+$report  = $bingads->reports($dateFrom, $dateTo)
+                   ->getGenderReport();
+```
+
+*Results: `getGenderReport()` (returns a [Laravel Collection](https://laravel.com/docs/5.7/collections) object, use `all()` for array)*
+
+```
+// the key of the array is also the gender
+// this ensures a unique gender for aggregation
+// Genders (Male, Female)
+
+[Female] => Array
+(
+    [gender] => Female
+    [impressions] => 16045
+    [clicks] => 411
+    [cost] => 162.28
+    [conversions] => 18
+    [conversion_value] => 88
 )
 ...
 ```

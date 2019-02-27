@@ -173,6 +173,51 @@ class ReportDownload
     }
 
     /**
+     * aggregate()
+     *
+     *
+     * @return collection results
+     */
+    public function aggregate($field)
+    {
+        $results = $this->toArray();
+
+        $only = [
+            'impressions','clicks','cost','conversions','conversion_value'
+        ];
+
+        $r = [];
+        foreach($results as $key=>$value)
+        {
+            unset($value['date']);
+
+            if (isset($r[$value[$field]]))
+            {
+                $x = $r[$value[$field]];
+
+                foreach($value as $k=>$v)
+                {
+                    if (!in_array($k,$only)) continue;
+
+                    $n = $x[$k];
+                    if (!is_numeric($n)) continue 2;
+                    if (!is_numeric($v)) continue 2;
+
+                    $value[$k] = $v+$n;
+                }
+
+                $r[$value[$field]] = $value;
+            }
+            else
+            {
+                $r[$value[$field]] = $value;
+            }
+        }
+
+        return collect($r);
+    }
+
+    /**
      * toArray()
      *
      *
@@ -180,13 +225,12 @@ class ReportDownload
      */
     public function toArray()
     {
-        if (empty($this->results)) return [];
-
         $csv    = array_map('str_getcsv',$this->results);
-        $header = $csv[10];
+
+        $h = $csv[10] ?? [];
 
         $header = [];
-        foreach($csv[10] as $label)
+        foreach($h as $label)
         {
             $label = strtolower($label);
 
@@ -204,6 +248,14 @@ class ReportDownload
                 case 'averageposition' : $label = 'avg_position'; break;
                 case 'destinationurl' : $label = 'destination_url'; break;
                 case 'finalurl' : $label = 'final_url'; break;
+                case 'gender' : $label = 'gender'; break;
+                case 'agegroup' : $label = 'age_range'; break;
+                case 'searchquery' : $label = 'search_term'; break;
+                case 'locationtype' : $label = 'location_type'; break;
+                case 'mostspecificlocation' : $label = 'location'; break;
+                case 'metroarea' : $label = 'metro_area'; break;
+                case 'postalcode' : $label = 'postal_code'; break;
+                case 'locationid' : $label = 'location_id'; break;
                 default :
             }
 
