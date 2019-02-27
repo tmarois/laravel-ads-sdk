@@ -15,9 +15,11 @@ use Microsoft\BingAds\V12\Reporting\AudiencePerformanceReportRequest;
 use Microsoft\BingAds\V12\Reporting\KeywordPerformanceReportRequest;
 use Microsoft\BingAds\V12\Reporting\CampaignPerformanceReportRequest;
 use Microsoft\BingAds\V12\Reporting\AdGroupPerformanceReportRequest;
+use Microsoft\BingAds\V12\Reporting\DestinationUrlPerformanceReportRequest;
 use Microsoft\BingAds\V12\Reporting\ReportFormat;
 use Microsoft\BingAds\V12\Reporting\ReportAggregation;
 use Microsoft\BingAds\V12\Reporting\AccountThroughAdGroupReportScope;
+use Microsoft\BingAds\V12\Reporting\DestinationUrlPerformanceReportColumn;
 use Microsoft\BingAds\V12\Reporting\CampaignReportScope;
 use Microsoft\BingAds\V12\Reporting\AdGroupReportScope;
 use Microsoft\BingAds\V12\Reporting\AccountReportScope;
@@ -37,6 +39,7 @@ use Microsoft\BingAds\V12\Reporting\KeywordPerformanceReportColumn;
 use Microsoft\BingAds\V12\Reporting\ReportRequestStatusType;
 use Microsoft\BingAds\V12\Reporting\KeywordPerformanceReportSort;
 use Microsoft\BingAds\V12\Reporting\SortOrder;
+
 
 class Reports
 {
@@ -242,6 +245,7 @@ class Reports
             AdGroupPerformanceReportColumn::TimePeriod,
             AdGroupPerformanceReportColumn::AccountId,
             AdGroupPerformanceReportColumn::CampaignId,
+            AdGroupPerformanceReportColumn::CampaignName,
             AdGroupPerformanceReportColumn::AdGroupId,
             AdGroupPerformanceReportColumn::AdGroupName,
             AdGroupPerformanceReportColumn::Clicks,
@@ -254,6 +258,67 @@ class Reports
 
         $encodedReport   = new SoapVar($report, SOAP_ENC_OBJECT, 'AdGroupPerformanceReportRequest', $this->serviceProxy->GetNamespace());
         $reportRequestId = $this->submitGenerateReport($encodedReport)->ReportRequestId;
+
+        return (new ReportDownload($this->serviceProxy, $reportRequestId));
+    }
+
+
+    /**
+     * buildFinalUrlReport()
+     *
+     *
+     */
+    public function buildFinalUrlReport()
+    {
+        try
+        {
+            $report                         = new DestinationUrlPerformanceReportRequest();
+            $report->ReportName             = 'Destination Url Performance Report';
+            $report->Format                 = ReportFormat::Csv;
+            $report->ReturnOnlyCompleteData = false;
+            $report->Aggregation            = ReportAggregation::Daily;
+
+            $report->Scope                  = new AccountThroughAdGroupReportScope();
+            $report->Scope->AccountIds      = [$this->service->getClientId()];
+
+            $report->Time                               = new ReportTime();
+            $report->Time->CustomDateRangeStart         = new Date();
+            $report->Time->CustomDateRangeStart->Day    = date('d',strtotime($this->dateRange[0]));
+            $report->Time->CustomDateRangeStart->Month  = date('m',strtotime($this->dateRange[0]));
+            $report->Time->CustomDateRangeStart->Year   = date('Y',strtotime($this->dateRange[0]));
+
+            $report->Time->CustomDateRangeEnd           = new Date();
+            $report->Time->CustomDateRangeEnd->Day      = date('d',strtotime($this->dateRange[1]));
+            $report->Time->CustomDateRangeEnd->Month    = date('m',strtotime($this->dateRange[1]));
+            $report->Time->CustomDateRangeEnd->Year     = date('Y',strtotime($this->dateRange[1]));
+
+            $report->Columns = array (
+                DestinationUrlPerformanceReportColumn::TimePeriod,
+                DestinationUrlPerformanceReportColumn::AccountName,
+                DestinationUrlPerformanceReportColumn::AccountId,
+                DestinationUrlPerformanceReportColumn::CampaignId,
+                DestinationUrlPerformanceReportColumn::CampaignName,
+                DestinationUrlPerformanceReportColumn::Clicks,
+                DestinationUrlPerformanceReportColumn::Impressions,
+                DestinationUrlPerformanceReportColumn::Spend,
+                DestinationUrlPerformanceReportColumn::Conversions,
+                DestinationUrlPerformanceReportColumn::Revenue,
+                DestinationUrlPerformanceReportColumn::DestinationUrl,
+                DestinationUrlPerformanceReportColumn::FinalUrl
+            );
+
+            $encodedReport   = new SoapVar($report, SOAP_ENC_OBJECT, 'DestinationUrlPerformanceReportRequest', $this->serviceProxy->GetNamespace());
+            $reportRequestId = $this->submitGenerateReport($encodedReport)->ReportRequestId;
+        }
+        catch (SoapFault $e)
+        {
+        	printf("-----\r\nFault Code: %s\r\nFault String: %s\r\nFault Detail: \r\n", $e->faultcode, $e->faultstring);
+            var_dump($e->detail);
+        	print "-----\r\nLast SOAP request/response:\r\n";
+            print $this->serviceProxy->GetWsdl() . "\r\n";
+        	print $this->serviceProxy->__getLastRequest()."\r\n";
+            print $this->serviceProxy->__getLastResponse()."\r\n";
+        }
 
         return (new ReportDownload($this->serviceProxy, $reportRequestId));
     }
@@ -291,6 +356,17 @@ class Reports
     public function getAdGroupReport()
     {
         return $this->buildAdGroupReport()->toCollection();
+    }
+
+
+    /**
+     * getDestinationUrlReport()
+     *
+     *
+     */
+    public function getFinalUrlReport()
+    {
+        return $this->buildFinalUrlReport()->toCollection();
     }
 
 }

@@ -216,6 +216,7 @@ class Reports
             'AdGroupId',
             'AdGroupName',
             'CampaignId',
+            'CampaignName',
             'Impressions',
             'Clicks',
             'Cost',
@@ -226,6 +227,28 @@ class Reports
 
         return $this->reportDownload(ReportDefinitionReportType::ADGROUP_PERFORMANCE_REPORT)->toCollection();
     }
+
+    /**
+     * getFinalUrlReport()
+     *
+     */
+    public function getFinalUrlReport()
+    {
+        $this->setFields([
+            'Date',
+            'CampaignId',
+            'CampaignName',
+            'Impressions',
+            'Clicks',
+            'Cost',
+            'Conversions',
+            'ConversionValue',
+            'EffectiveFinalUrl'
+        ],true);
+
+        return $this->reportDownload(ReportDefinitionReportType::FINAL_URL_REPORT)->toCollection();
+    }
+
 
     /**
      * getAgeRangeReport()
@@ -257,10 +280,10 @@ class Reports
     }
 
     /**
-     * getUrlReport()
+     * getPlacementUrlReport()
      *
      */
-    public function getUrlReport()
+    public function getPlacementUrlReport()
     {
         return $this->getCriteriaReport(ReportDefinitionReportType::URL_PERFORMANCE_REPORT,'url','Url');
     }
@@ -273,6 +296,7 @@ class Reports
     {
         return $this->getCriteriaReport(ReportDefinitionReportType::SEARCH_QUERY_PERFORMANCE_REPORT,'search_term','Query');
     }
+
 
     /**
      * getCriteriaReport()
