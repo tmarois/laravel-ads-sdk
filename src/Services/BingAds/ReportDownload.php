@@ -193,6 +193,7 @@ class ReportDownload
             switch($label) {
                 case 'timeperiod' : $label = 'date'; break;
                 case 'accountid' : $label = 'account_id'; break;
+                case 'accountname' : $label = 'account_name'; break;
                 case 'campaignid' : $label = 'campaign_id'; break;
                 case 'campaignname' : $label = 'campaign_name'; break;
                 case 'campaignstatus' : $label = 'campaign_status'; break;
@@ -201,6 +202,8 @@ class ReportDownload
                 case 'spend' : $label = 'cost'; break;
                 case 'revenue' : $label = 'conversion_value'; break;
                 case 'averageposition' : $label = 'avg_position'; break;
+                case 'destinationurl' : $label = 'destination_url'; break;
+                case 'finalurl' : $label = 'final_url'; break;
                 default :
             }
 
