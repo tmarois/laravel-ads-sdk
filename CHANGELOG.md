@@ -1,7 +1,13 @@
 Change Log
 ==========
 
-### 02/26/2018 - 1.2.9
+### 03/04/2019 - 1.2.10
+
+#### Added
+* Fixed GoogleAds Reports by bad parsing of csv data. Due to comma issues. Now using `str_getcsv`
+
+
+### 02/26/2019 - 1.2.9
 
 #### Added
 * Added `campaign_name` to the resposne of `getAdGroupReport()`.
@@ -12,7 +18,7 @@ Change Log
 * Added Reports: `getAgeRangeReport()` on Google/Bing
 * Added Reports: `getGenderReport()` on Google/Bing
 
-### 02/22/2018 - 1.2.8
+### 02/22/2019 - 1.2.8
 
 #### Changed
 * Fixed fetching `getAdGroups()` on Bing causing undefined error when AdGroups not returned.
