@@ -3,8 +3,9 @@ Change Log
 
 ### 03/04/2019 - 1.2.10
 
-#### Added
+#### Changed
 * Fixed GoogleAds Reports by bad parsing of csv data. Due to comma issues. Now using `str_getcsv`
+* GoogleAds Report: Added default columns to rows (based on headers) if the column was missing
 
 
 ### 02/26/2019 - 1.2.9
