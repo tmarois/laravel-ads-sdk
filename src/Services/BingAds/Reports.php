@@ -343,7 +343,7 @@ class Reports
             $report->ReportName             = 'Search Query Performance Report';
             $report->Format                 = ReportFormat::Csv;
             $report->ReturnOnlyCompleteData = false;
-            $report->Aggregation            = ReportAggregation::Daily;
+            $report->Aggregation            = ReportAggregation::Summary;
 
             $report->Scope                  = new AccountThroughAdGroupReportScope();
             $report->Scope->AccountIds      = [$this->service->getClientId()];
@@ -360,7 +360,6 @@ class Reports
             $report->Time->CustomDateRangeEnd->Year     = date('Y',strtotime($this->dateRange[1]));
 
             $report->Columns = array (
-                SearchQueryPerformanceReportColumn::TimePeriod,
                 SearchQueryPerformanceReportColumn::Clicks,
                 SearchQueryPerformanceReportColumn::Impressions,
                 SearchQueryPerformanceReportColumn::Spend,
@@ -399,7 +398,7 @@ class Reports
             $report->ReportName             = 'Age Gender Performance Report';
             $report->Format                 = ReportFormat::Csv;
             $report->ReturnOnlyCompleteData = false;
-            $report->Aggregation            = ReportAggregation::Daily;
+            $report->Aggregation            = ReportAggregation::Summary;
 
             $report->Scope                  = new AccountThroughAdGroupReportScope();
             $report->Scope->AccountIds      = [$this->service->getClientId()];
@@ -416,7 +415,6 @@ class Reports
             $report->Time->CustomDateRangeEnd->Year     = date('Y',strtotime($this->dateRange[1]));
 
             $report->Columns = array (
-                AgeGenderAudienceReportColumn::TimePeriod,
                 AgeGenderAudienceReportColumn::AccountName,
                 AgeGenderAudienceReportColumn::AdGroupName,
                 AgeGenderAudienceReportColumn::AgeGroup,
