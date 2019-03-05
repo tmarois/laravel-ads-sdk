@@ -1,6 +1,12 @@
 Change Log
 ==========
 
+
+### TBD - 1.2.11
+
+#### Changed
+* Fixed BingAds from running too many rows for Search Terms (using Summary instead of Daily feed)
+
 ### 03/04/2019 - 1.2.10
 
 #### Changed
