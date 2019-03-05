@@ -104,12 +104,15 @@ class ReportDownload
     {
         if (is_array($this->results)) return $this->results;
 
-        $csv    = explode("\n",$this->results);
-        $header = explode(',',$csv[0]);
-        $csv    = array_filter($csv);
+        // get all rows
+        $rows = array_map('str_getcsv', explode("\n",$this->results));
+        // get the header row
+        $headers = $rows[0];
+        // remove first row (headers)
+        array_shift($rows);
 
         $header = [];
-        foreach(explode(',',$csv[0]) as $label)
+        foreach($headers as $label)
         {
             $label = strtolower($label);
 
@@ -133,13 +136,9 @@ class ReportDownload
             $header[] = str_replace([' ','/'],'_',$label);
         }
 
-        unset($csv[0]);
-
         $report = [];
-        foreach($csv as $index=>$row)
+        foreach($rows as $index=>$columns)
         {
-            $columns = explode(',',$row);
-
             $r = [];
             foreach($columns as $index2=>$cs)
             {
@@ -150,6 +149,14 @@ class ReportDownload
                 if ($n == 'cost') $cs = round( intval($cs) / 1000000,2);
 
                 $r[$n] = $cs;
+            }
+
+            // add in columns (headers) that are missing from the response
+            foreach($header as $h)
+            {
+                if (!isset($r[$h])) {
+                    $r[$h] = 0;
+                }
             }
 
             $report[] = $r;
