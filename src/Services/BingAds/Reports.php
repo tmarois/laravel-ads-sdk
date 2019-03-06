@@ -135,13 +135,13 @@ class Reports
      *
      *
      */
-    public function buildAccountReport()
+    public function buildAccountReport($aggregation = 'Daily')
     {
         $report                         = new AccountPerformanceReportRequest();
         $report->ReportName             = 'Account Performance Report';
         $report->Format                 = ReportFormat::Csv;
         $report->ReturnOnlyCompleteData = false;
-        $report->Aggregation            = ReportAggregation::Daily;
+        $report->Aggregation            = $aggregation;
 
         $report->Scope                  = new AccountReportScope();
         $report->Scope->AccountIds      = [$this->service->getClientId()];
@@ -514,9 +514,9 @@ class Reports
      *
      *
      */
-    public function getAccountReport()
+    public function getAccountReport($aggregation = 'Daily')
     {
-        return $this->buildAccountReport()->toCollection();
+        return $this->buildAccountReport($aggregation)->toCollection();
     }
 
 

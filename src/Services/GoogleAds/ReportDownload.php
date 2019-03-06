@@ -126,6 +126,10 @@ class ReportDownload
                 case 'ad group id' : $label = 'ad_group_id'; break;
                 case 'total conv. value' : $label = 'conversion_value'; break;
                 case 'avg. position' : $label = 'avg_position'; break;
+
+                case 'hour of day' : $label = 'hour'; break;
+                case 'day of week' : $label = 'day'; break;
+
                 // criteria
                 case 'age range' : $label = 'age_range'; break;
                 case 'searchterm' : $label = 'search_term'; break;

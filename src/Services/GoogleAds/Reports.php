@@ -163,10 +163,10 @@ class Reports
      *
      *
      */
-    public function getAccountReport()
+    public function getAccountReport($aggregation = 'Date')
     {
         $this->setFields([
-            'Date',
+            $aggregation,
             'Impressions',
             'Clicks',
             'Cost',
