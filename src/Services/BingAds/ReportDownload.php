@@ -31,7 +31,7 @@ class ReportDownload
     {
         $this->serviceProxy = $serviceProxy;
 
-        $waitTime = 20 * 1;
+        $waitTime = 10 * 1;
         $reportRequestStatus = null;
         $reportName   = time();
         $DownloadPath = storage_path("app/".$reportName.'.zip');
@@ -41,7 +41,7 @@ class ReportDownload
         // If the call succeeds, stop polling. If the call or
         // download fails, the call throws a fault.
 
-        for ($i = 0; $i < 30; $i++)
+        for ($i = 0; $i < 60; $i++)
         {
         	sleep($waitTime);
 
