@@ -41,7 +41,7 @@ class ReportDownload
         // If the call succeeds, stop polling. If the call or
         // download fails, the call throws a fault.
 
-        for ($i = 0; $i < 15; $i++)
+        for ($i = 0; $i < 20; $i++)
         {
         	sleep($waitTime);
 
