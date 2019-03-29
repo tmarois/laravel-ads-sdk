@@ -1,11 +1,13 @@
 Change Log
 ==========
 
-
-### TBD - 1.2.11
+### 03/29/2019 - 1.2.11
 
 #### Changed
 * Fixed BingAds from running too many rows for Search Terms (using Summary instead of Daily feed)
+* Updated BingAds to increase time checking for API reports
+* Updated BingAds Report Names and Aggregation to choose, daily, hourly, summary on account level.
+* Updated GoogleAds API to version 40
 
 ### 03/04/2019 - 1.2.10
 
