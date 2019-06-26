@@ -1,10 +1,9 @@
 {
 	"description": "A Laravel Ads SDK for Google Ads, Bing Ads and Facebook Ads",
 	"keywords": ["ads", "google-ads","bing-ads", "api", "facebook-ads"],
-	"name": "grayscale/laravel-ads-sdk",
-	"homepage": "https://github.com/grayscale/laravel-ads-sdk",
+	"name": "tmarois/laravel-ads-sdk",
+	"homepage": "https://github.com/tmarois/laravel-ads-sdk",
 	"type": "package",
-	"licence": "MIT",
 
 	"authors": [
         {
