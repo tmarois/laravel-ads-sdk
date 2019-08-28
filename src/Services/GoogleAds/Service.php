@@ -3,6 +3,7 @@
 
 use LaravelAds\Services\GoogleAds\Operations\Campaign;
 use LaravelAds\Services\GoogleAds\Operations\AdGroup;
+use LaravelAds\Services\GoogleAds\Operations\OfflineConversions;
 
 use LaravelAds\Services\GoogleAds\Reports;
 use LaravelAds\Services\GoogleAds\Fetch;
@@ -83,6 +84,16 @@ class Service
     public function call($service)
     {
         return (new AdWordsServices())->get($this->session(), $service);
+    }
+
+    /**
+     * offlineConversionImport()
+     *
+     *
+     */
+    public function offlineConversionImport(array $conversions = [])
+    {
+        return (new OfflineConversions($this))->addBulk($conversions);
     }
 
     /**

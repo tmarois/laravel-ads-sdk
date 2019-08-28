@@ -2,6 +2,7 @@
 
 use LaravelAds\Services\BingAds\Reports;
 use LaravelAds\Services\BingAds\Fetch;
+use LaravelAds\Services\BingAds\Operations\OfflineConversions;
 
 use LaravelAds\Services\BingAds\Operations\AdGroupRequest;
 use LaravelAds\Services\BingAds\Operations\Campaign;
@@ -27,6 +28,13 @@ class Service
     protected $clientId = null;
 
     /**
+     * $customerId
+     *
+     * @var array
+     */
+    protected $customerId = null;
+
+    /**
      * $session
      *
      *
@@ -48,6 +56,20 @@ class Service
     }
 
     /**
+     * withCustomerId()
+     *
+     * Sets the customer id
+     *
+     * @return self
+     */
+    public function withCustomerId($customerId)
+    {
+        $this->customerId = $customerId;
+
+        return $this;
+    }
+
+    /**
      * getClientId()
      *
      * @return string
@@ -55,6 +77,16 @@ class Service
     public function getClientId()
     {
         return $this->clientId;
+    }
+
+    /**
+     * getCustomerId()
+     *
+     * @return string
+     */
+    public function getCustomerId()
+    {
+        return $this->customerId;
     }
 
     /**
@@ -88,6 +120,16 @@ class Service
     public function reports($dateFrom, $dateTo)
     {
         return (new Reports($this))->setDateRange($dateFrom, $dateTo);
+    }
+
+    /**
+     * offlineConversionImport()
+     *
+     *
+     */
+    public function offlineConversionImport(array $conversions = [])
+    {
+        return (new OfflineConversions($this))->addBulk($conversions);
     }
 
     /**
@@ -136,6 +178,11 @@ class Service
                 ->withAccountId($this->getClientId())
                 ->withAuthentication($this->oAuthcredentials($config))
                 ->withDeveloperToken($config['developerToken']);
+        
+            // Add Customer Id (OPTIONAL)
+            if ($this->getCustomerId()) {
+                $AuthorizationData->withCustomerId($this->getCustomerId());
+            }
 
             try
             {

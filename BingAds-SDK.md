@@ -6,17 +6,24 @@ This uses the [BingAds-PHP-SDK](https://github.com/BingAds/BingAds-PHP-SDK) for 
 
 ### Getting Started
 
-First, you need to use the service access for `Bing Ads` and add the Client Customer Id
+First, you need to use the service access for `Bing Ads` and add the Account Id
 
 ```php
-$bingAds = LaravelAds::bingAds()->with('CLIENT_ID');
+$bingAds = LaravelAds::bingAds()->with('ACCOUNT_ID');
 ```
+
+|Method|Description|
+|---|---|
+|`with(ACCOUNT_ID)`|**(Required)** – This is your "Account Id" (not account number)
+|`withCustomerId(CUSTOMER_ID)`|**(Optional)** – Some requests might require your customer id
+
 
 #### Management
 * [Fetching - All Campaigns](#fetch-all-campaigns)
 * [Fetching - All Ad Groups](#fetch-all-ad-groups)
 * [Management - Campaigns](#campaigns)
 * [Management - Ad Groups](#ad-groups)
+* [Offline Conversion Import](#offline-conversion-import)
 
 #### Reports
 * [Account Performance](#account-reports)
@@ -368,6 +375,67 @@ $adgroupStatus = $bingAds->adGroup('ADGROUP_ID', 'CAMPAIGN_ID')->getStatus();
 $adGroupBid = $bingAds->adGroup('ADGROUP_ID', 'CAMPAIGN_ID')->getBid();
 
 ```
+
+
+## Offline Conversion Import
+
+You can import offline conversions using this simple method. Uses [OfflineConversion](https://docs.microsoft.com/en-us/advertising/bulk-service/offline-conversion?view=bingads-13)
+
+```php
+// Can chain and add() as many as you wish
+$conversionImport = $bingAds->offlineConversionImport()
+    ->add([
+        'click_id' => '5de65ff20a9a1957c67c0294d1e9b',
+        'value' => 0,
+        'name' => 'CONVERSION NAME',
+        'time' => 'DATETIME TIMEZONE'
+    ])
+    ->add([
+        'click_id' => 'CjwKCAjwzJjrBRBvEiwA867',
+        'value' => 0,
+        'name' => 'CONVERSION NAME',
+        'time' => 'DATETIME TIMEZONE'
+    ]);
+
+// when read, begin the upload
+$response = $conversionImport->upload();
+```
+
+*Note: `time` must include the timezone. "20190828 200112 America/New_York" (format "Ymd His timezone")*
+
+**Methods:**
+
+|Method|Description|
+|---|---|
+|`add( single array )`|Adding a single conversion
+|`addBulk( multi-array )`|Adding an array of single conversions
+|`upload()`|Imports the conversions to Bing
+
+**Response:**
+
+The array response is both `success` and `errors`, errors will include [Bing Error Codes](https://docs.microsoft.com/en-us/advertising/guides/operation-error-codes?view=bingads-13#5500)
+
+*Note: Click Ids that are success will not appear in the errors array and vise-versa.*
+
+```
+Array
+(
+    [errors] => Array
+    (
+        [0] => Array
+        (
+            [click_id] => CjwKCAjwzJjrBRBvEiwA867
+            [error] => OfflineConversionMicrosoftClickIdInvalid
+        )
+    )
+    [success] => Array
+    (
+        [1] => 5de65ff20a9a1957c67c0294d1e9b
+    )
+)
+...
+```
+
 
 ## Jump To:
 * [Home](README.md)

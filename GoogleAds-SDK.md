@@ -17,6 +17,7 @@ $googleAds = LaravelAds::googleAds()->with('CLIENT_ID');
 * [Fetching - All Ad Groups](#fetch-all-ad-groups)
 * [Management - Campaigns](#campaigns)
 * [Management - Ad Groups](#ad-groups)
+* [Offline Conversion Import](#offline-conversion-import)
 * [Advanced Options](#need-more-advanced-options)
 
 #### Reports
@@ -424,6 +425,67 @@ $adgroupStatus = $googleAds->adGroup('ADGROUP_ID')->getStatus();
 $adGroupBid = $googleAds->adGroup('ADGROUP_ID')->getBid();
 
 ```
+
+## Offline Conversion Import
+
+You can import offline conversions using this simple method. Uses [OfflineConversionFeedService](https://developers.google.com/adwords/api/docs/reference/v201809/OfflineConversionFeedService)
+
+```php
+// Can chain and add() as many as you wish
+$conversionImport = $googleAds->offlineConversionImport()
+    ->add([
+        'click_id' => 'CjwKCAjwzJjrBRBvEiwA867byorDPQ2K0zO_8bXuJ7SeEs',
+        'value' => 0,
+        'name' => 'CONVERSION NAME',
+        'time' => 'DATETIME TIMEZONE'
+    ])
+    ->add([
+        'click_id' => 'CjwKCAjwzJjrBRBvEiwA867',
+        'value' => 0,
+        'name' => 'CONVERSION NAME',
+        'time' => 'DATETIME TIMEZONE'
+    ]);
+
+// when read, begin the upload
+$response = $conversionImport->upload();
+```
+
+*Note: `time` must include the timezone. "20190828 200112 America/New_York" (format "Ymd His timezone")*
+
+**Methods:**
+
+|Method|Description|
+|---|---|
+|`add( single array )`|Adding a single conversion
+|`addBulk( multi-array )`|Adding an array of single conversions
+|`upload()`|Imports the conversions to Google
+
+**Response:**
+
+The array response is both `success` and `errors`, errors will include [Google Error Codes](https://developers.google.com/adwords/api/docs/reference/v201809/OfflineConversionFeedService.OfflineConversionError.Reason)
+
+*Note: Click Ids that are success will not appear in the errors array and vise-versa.*
+
+```
+Array
+(
+    [errors] => Array
+    (
+        [0] => Array
+        (
+            [click_id] => CjwKCAjwzJjrBRBvEiwA867
+            [error] => TOO_RECENT_CLICK
+        )
+    )
+    [success] => Array
+    (
+        [1] => CjwKCAjwzJjrBRBvEiwA867byorDPQ2K0zO_8bXuJ7SeEs
+    )
+)
+...
+```
+
+
 
 ## Need More? Advanced Options
 

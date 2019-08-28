@@ -1,6 +1,13 @@
 Change Log
 ==========
 
+### 03/29/2019 - 1.2.12
+
+#### Added
+* Added Offline Conversion Import services for both `BingAds` and `GoogleAds`.
+* Added `withCustomerId()` to the `BingAds` service as some requests require it.
+
+
 ### 03/29/2019 - 1.2.11
 
 #### Changed
