@@ -401,7 +401,7 @@ $conversionImport = $bingAds->offlineConversionImport()
 $response = $conversionImport->upload();
 ```
 
-*Note: `time` must include the timezone. "20190828 200112 America/New_York" (format "Ymd His timezone")*
+*Note: `time` must be in UTC format "2019-08-28T23:11:39.000000Z"*
 
 **Methods:**
 
