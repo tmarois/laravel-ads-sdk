@@ -3,9 +3,9 @@
 use LaravelAds\Services\BingAds\Operations\AdGroup;
 use LaravelAds\Services\BingAds\Service;
 
-use Microsoft\BingAds\V12\CampaignManagement\GetAdGroupsByIdsRequest;
-use Microsoft\BingAds\V12\CampaignManagement\UpdateAdGroupsRequest;
-use Microsoft\BingAds\V12\CampaignManagement\AdGroup as AdGroupProxy;
+use Microsoft\BingAds\V13\CampaignManagement\GetAdGroupsByIdsRequest;
+use Microsoft\BingAds\V13\CampaignManagement\UpdateAdGroupsRequest;
+use Microsoft\BingAds\V13\CampaignManagement\AdGroup as AdGroupProxy;
 
 use Microsoft\BingAds\Auth\ServiceClient;
 use Microsoft\BingAds\Auth\ServiceClientType;
@@ -90,7 +90,7 @@ class AdGroupOperations
      */
     protected function sendRequest()
     {
-        $serviceCall = $this->service->call(ServiceClientType::CampaignManagementVersion12);
+        $serviceCall = $this->service->call(ServiceClientType::CampaignManagementVersion13);
 
         try
         {
@@ -117,7 +117,7 @@ class AdGroupOperations
      */
     public function save($updateObject = true)
     {
-        $serviceCall = $this->service->call(ServiceClientType::CampaignManagementVersion12);
+        $serviceCall = $this->service->call(ServiceClientType::CampaignManagementVersion13);
 
         try
         {

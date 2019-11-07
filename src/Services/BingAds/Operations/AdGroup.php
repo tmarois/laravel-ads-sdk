@@ -2,11 +2,11 @@
 
 use LaravelAds\Services\BingAds\Operations\AdGroupOperations;
 
-use Microsoft\BingAds\V12\CampaignManagement\Bid;
-use Microsoft\BingAds\V12\CampaignManagement\BiddingScheme;
-use Microsoft\BingAds\V12\CampaignManagement\EnhancedCpcBiddingScheme;
-use Microsoft\BingAds\V12\CampaignManagement\InheritFromParentBiddingScheme;
-use Microsoft\BingAds\V12\CampaignManagement\ManualCpcBiddingScheme;
+use Microsoft\BingAds\V13\CampaignManagement\Bid;
+use Microsoft\BingAds\V13\CampaignManagement\BiddingScheme;
+use Microsoft\BingAds\V13\CampaignManagement\EnhancedCpcBiddingScheme;
+use Microsoft\BingAds\V13\CampaignManagement\InheritFromParentBiddingScheme;
+use Microsoft\BingAds\V13\CampaignManagement\ManualCpcBiddingScheme;
 
 class AdGroup extends AdGroupOperations
 {

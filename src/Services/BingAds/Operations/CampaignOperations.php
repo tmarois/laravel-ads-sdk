@@ -4,11 +4,11 @@ use LaravelAds\Services\BingAds\Operations\Campaign;
 use LaravelAds\Services\BingAds\Service;
 
 
-use Microsoft\BingAds\V12\CampaignManagement\Campaign as CampaignProxy;
-use Microsoft\BingAds\V12\CampaignManagement\CampaignStatus;
+use Microsoft\BingAds\V13\CampaignManagement\Campaign as CampaignProxy;
+use Microsoft\BingAds\V13\CampaignManagement\CampaignStatus;
 
-use Microsoft\BingAds\V12\CampaignManagement\GetCampaignsByIdsRequest;
-use Microsoft\BingAds\V12\CampaignManagement\UpdateCampaignsRequest;
+use Microsoft\BingAds\V13\CampaignManagement\GetCampaignsByIdsRequest;
+use Microsoft\BingAds\V13\CampaignManagement\UpdateCampaignsRequest;
 
 use Microsoft\BingAds\Auth\ServiceClient;
 use Microsoft\BingAds\Auth\ServiceClientType;
@@ -95,7 +95,7 @@ class CampaignOperations
      */
     public function save($updateObject = true)
     {
-        $serviceCall = $this->service->call(ServiceClientType::CampaignManagementVersion12);
+        $serviceCall = $this->service->call(ServiceClientType::CampaignManagementVersion13);
 
         try
         {
@@ -127,7 +127,7 @@ class CampaignOperations
      */
     protected function sendRequest()
     {
-        $serviceCall = $this->service->call(ServiceClientType::CampaignManagementVersion12);
+        $serviceCall = $this->service->call(ServiceClientType::CampaignManagementVersion13);
 
         try
         {

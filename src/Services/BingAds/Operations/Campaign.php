@@ -7,7 +7,7 @@ use SoapVar;
 use Microsoft\BingAds\Auth\ServiceClient;
 use Microsoft\BingAds\Auth\ServiceClientType;
 
-use Microsoft\BingAds\V12\CampaignManagement\TargetCpaBiddingScheme;
+use Microsoft\BingAds\V13\CampaignManagement\TargetCpaBiddingScheme;
 
 class Campaign extends CampaignOperations
 {
@@ -194,7 +194,7 @@ class Campaign extends CampaignOperations
                 $biddingScheme,
                 SOAP_ENC_OBJECT,
                 'TargetCpaBiddingScheme',
-                'https://bingads.microsoft.com/CampaignManagement/v12'
+                'https://bingads.microsoft.com/CampaignManagement/v13'
             );
 
         }

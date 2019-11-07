@@ -8,43 +8,43 @@ use ZipArchive;
 use Microsoft\BingAds\Auth\ServiceClient;
 use Microsoft\BingAds\Auth\ServiceClientType;
 
-use Microsoft\BingAds\V12\Reporting\SubmitGenerateReportRequest;
-use Microsoft\BingAds\V12\Reporting\PollGenerateReportRequest;
-use Microsoft\BingAds\V12\Reporting\AccountPerformanceReportRequest;
-use Microsoft\BingAds\V12\Reporting\AudiencePerformanceReportRequest;
-use Microsoft\BingAds\V12\Reporting\KeywordPerformanceReportRequest;
-use Microsoft\BingAds\V12\Reporting\CampaignPerformanceReportRequest;
-use Microsoft\BingAds\V12\Reporting\AdGroupPerformanceReportRequest;
-use Microsoft\BingAds\V12\Reporting\SearchQueryPerformanceReportRequest;
-use Microsoft\BingAds\V12\Reporting\AgeGenderAudienceReportRequest;
-use Microsoft\BingAds\V12\Reporting\GeographicPerformanceReportRequest;
-use Microsoft\BingAds\V12\Reporting\DestinationUrlPerformanceReportRequest;
-use Microsoft\BingAds\V12\Reporting\ReportFormat;
-use Microsoft\BingAds\V12\Reporting\ReportAggregation;
-use Microsoft\BingAds\V12\Reporting\AccountThroughAdGroupReportScope;
-use Microsoft\BingAds\V12\Reporting\DestinationUrlPerformanceReportColumn;
-use Microsoft\BingAds\V12\Reporting\CampaignReportScope;
-use Microsoft\BingAds\V12\Reporting\AdGroupReportScope;
-use Microsoft\BingAds\V12\Reporting\AccountReportScope;
-use Microsoft\BingAds\V12\Reporting\ReportTime;
-use Microsoft\BingAds\V12\Reporting\ReportTimePeriod;
-use Microsoft\BingAds\V12\Reporting\Date;
-use Microsoft\BingAds\V12\Reporting\AccountPerformanceReportFilter;
-use Microsoft\BingAds\V12\Reporting\KeywordPerformanceReportFilter;
-use Microsoft\BingAds\V12\Reporting\CampaignPerformanceReportFilter;
-use Microsoft\BingAds\V12\Reporting\AdGroupPerformanceReportFilter;
-use Microsoft\BingAds\V12\Reporting\DeviceTypeReportFilter;
-use Microsoft\BingAds\V12\Reporting\AccountPerformanceReportColumn;
-use Microsoft\BingAds\V12\Reporting\AudiencePerformanceReportColumn;
-use Microsoft\BingAds\V12\Reporting\CampaignPerformanceReportColumn;
-use Microsoft\BingAds\V12\Reporting\AdGroupPerformanceReportColumn;
-use Microsoft\BingAds\V12\Reporting\KeywordPerformanceReportColumn;
-use Microsoft\BingAds\V12\Reporting\SearchQueryPerformanceReportColumn;
-use Microsoft\BingAds\V12\Reporting\AgeGenderAudienceReportColumn;
-use Microsoft\BingAds\V12\Reporting\GeographicPerformanceReportColumn;
-use Microsoft\BingAds\V12\Reporting\ReportRequestStatusType;
-use Microsoft\BingAds\V12\Reporting\KeywordPerformanceReportSort;
-use Microsoft\BingAds\V12\Reporting\SortOrder;
+use Microsoft\BingAds\V13\Reporting\SubmitGenerateReportRequest;
+use Microsoft\BingAds\V13\Reporting\PollGenerateReportRequest;
+use Microsoft\BingAds\V13\Reporting\AccountPerformanceReportRequest;
+use Microsoft\BingAds\V13\Reporting\AudiencePerformanceReportRequest;
+use Microsoft\BingAds\V13\Reporting\KeywordPerformanceReportRequest;
+use Microsoft\BingAds\V13\Reporting\CampaignPerformanceReportRequest;
+use Microsoft\BingAds\V13\Reporting\AdGroupPerformanceReportRequest;
+use Microsoft\BingAds\V13\Reporting\SearchQueryPerformanceReportRequest;
+use Microsoft\BingAds\V13\Reporting\AgeGenderAudienceReportRequest;
+use Microsoft\BingAds\V13\Reporting\GeographicPerformanceReportRequest;
+use Microsoft\BingAds\V13\Reporting\DestinationUrlPerformanceReportRequest;
+use Microsoft\BingAds\V13\Reporting\ReportFormat;
+use Microsoft\BingAds\V13\Reporting\ReportAggregation;
+use Microsoft\BingAds\V13\Reporting\AccountThroughAdGroupReportScope;
+use Microsoft\BingAds\V13\Reporting\DestinationUrlPerformanceReportColumn;
+use Microsoft\BingAds\V13\Reporting\CampaignReportScope;
+use Microsoft\BingAds\V13\Reporting\AdGroupReportScope;
+use Microsoft\BingAds\V13\Reporting\AccountReportScope;
+use Microsoft\BingAds\V13\Reporting\ReportTime;
+use Microsoft\BingAds\V13\Reporting\ReportTimePeriod;
+use Microsoft\BingAds\V13\Reporting\Date;
+use Microsoft\BingAds\V13\Reporting\AccountPerformanceReportFilter;
+use Microsoft\BingAds\V13\Reporting\KeywordPerformanceReportFilter;
+use Microsoft\BingAds\V13\Reporting\CampaignPerformanceReportFilter;
+use Microsoft\BingAds\V13\Reporting\AdGroupPerformanceReportFilter;
+use Microsoft\BingAds\V13\Reporting\DeviceTypeReportFilter;
+use Microsoft\BingAds\V13\Reporting\AccountPerformanceReportColumn;
+use Microsoft\BingAds\V13\Reporting\AudiencePerformanceReportColumn;
+use Microsoft\BingAds\V13\Reporting\CampaignPerformanceReportColumn;
+use Microsoft\BingAds\V13\Reporting\AdGroupPerformanceReportColumn;
+use Microsoft\BingAds\V13\Reporting\KeywordPerformanceReportColumn;
+use Microsoft\BingAds\V13\Reporting\SearchQueryPerformanceReportColumn;
+use Microsoft\BingAds\V13\Reporting\AgeGenderAudienceReportColumn;
+use Microsoft\BingAds\V13\Reporting\GeographicPerformanceReportColumn;
+use Microsoft\BingAds\V13\Reporting\ReportRequestStatusType;
+use Microsoft\BingAds\V13\Reporting\KeywordPerformanceReportSort;
+use Microsoft\BingAds\V13\Reporting\SortOrder;
 
 
 class Reports
@@ -82,7 +82,7 @@ class Reports
     {
         $this->service = $service;
 
-        $this->serviceProxy = $this->service->call(ServiceClientType::ReportingVersion12);
+        $this->serviceProxy = $this->service->call(ServiceClientType::ReportingVersion13);
     }
 
     /**

@@ -7,8 +7,8 @@ use LaravelAds\Services\BingAds\Operations\OfflineConversions;
 use LaravelAds\Services\BingAds\Operations\AdGroupRequest;
 use LaravelAds\Services\BingAds\Operations\Campaign;
 use LaravelAds\Services\BingAds\Operations\AdGroup;
-use Microsoft\BingAds\V12\CampaignManagement\Campaign as CampaignProxy;
-use Microsoft\BingAds\V12\CampaignManagement\AdGroup as AdGroupProxy;
+use Microsoft\BingAds\V13\CampaignManagement\Campaign as CampaignProxy;
+use Microsoft\BingAds\V13\CampaignManagement\AdGroup as AdGroupProxy;
 
 use Microsoft\BingAds\Auth\OAuthDesktopMobileAuthCodeGrant;
 use Microsoft\BingAds\Auth\OAuthWebAuthCodeGrant;

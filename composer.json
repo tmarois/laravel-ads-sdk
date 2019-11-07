@@ -15,7 +15,7 @@
 	"require": {
 		"php": ">=7",
 		"googleads/googleads-php-lib": "^40.0",
-		"microsoft/bingads": "v0.11.12.2"
+		"microsoft/bingads": "^0.12"
 	},
 
 	"require-dev": {

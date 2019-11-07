@@ -9,8 +9,8 @@ use LaravelAds\Services\BingAds\Service;
 use Microsoft\BingAds\Auth\ServiceClient;
 use Microsoft\BingAds\Auth\ServiceClientType;
 
-use Microsoft\BingAds\V12\CampaignManagement\OfflineConversion;
-use Microsoft\BingAds\V12\CampaignManagement\ApplyOfflineConversionsRequest;
+use Microsoft\BingAds\V13\CampaignManagement\OfflineConversion;
+use Microsoft\BingAds\V13\CampaignManagement\ApplyOfflineConversionsRequest;
 
 class OfflineConversions
 {
@@ -99,7 +99,7 @@ class OfflineConversions
 
             try 
             {
-                $serviceCall = $this->service->call(ServiceClientType::CampaignManagementVersion12);
+                $serviceCall = $this->service->call(ServiceClientType::CampaignManagementVersion13);
 
                 $request = new ApplyOfflineConversionsRequest();
                 $request->OfflineConversions = [$mutate];
@@ -121,13 +121,23 @@ class OfflineConversions
             catch (SoapFault $e)
             {
                 // printf("-----\r\nFault Code: %s\r\nFault String: %s\r\nFault Detail: \r\n", $e->faultcode, $e->faultstring);
-                // print_r($e->detail);
+                // var_dump($e->detail);
 
-                // print_r($e->detail->ApiFaultDetail->TrackingId);
+                // display generic error code
+                $errorCode = $e->faultcode;
+
+                // display auth error
+                if (isset($e->detail->AdApiFaultDetail->Errors->AdApiError->ErrorCode)) {
+                    $errorCode = $e->detail->AdApiFaultDetail->Errors->AdApiError->ErrorCode;
+                }
+
+                if (isset($e->detail->ApiFaultDetail->OperationErrors->OperationError->ErrorCode)) {
+                    $errorCode = $e->detail->ApiFaultDetail->OperationErrors->OperationError->ErrorCode;
+                }
 
                 $errorResponse[$i] = [
                     'click_id' => $click['click_id'],
-                    'error' => $e->faultcode
+                    'error' => $errorCode
                 ];
 
                 // print "-----\r\nLast SOAP request/response:\r\n";

@@ -1,12 +1,22 @@
 Change Log
 ==========
 
+### 11/07/2019 - 1.2.13
+
+#### Added
+* Added `InvalidCredentials` Error code with Offline Conversion Import on `BingAds`
+* Added `ApiVersionNoLongerSupported` Error code with Offline Conversion Import on `BingAds`
+* Added `withRedirectUri()` by default for `BingAds` Auth
+
+#### Changed
+* Fixed `BingAds` now using `^0.12` instead of deprecated `v0.11` as of 11/6 (version of SDK)
+* Changed `BingAds` Services to use `V13` namespace instead of `V12` (version of API)
+
 ### 03/29/2019 - 1.2.12
 
 #### Added
 * Added Offline Conversion Import services for both `BingAds` and `GoogleAds`.
 * Added `withCustomerId()` to the `BingAds` service as some requests require it.
-
 
 ### 03/29/2019 - 1.2.11
 

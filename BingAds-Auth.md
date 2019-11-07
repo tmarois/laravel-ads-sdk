@@ -8,6 +8,7 @@ You need access before you can use the API
 
 [Request Bing Ads API Access](https://advertise.bingads.microsoft.com/en-us/resources/bing-partner-program/request-bing-ads-api-access)
 
+[Create Developer Token](https://developers.ads.microsoft.com/Account)
 
 ## (2) Register Your Application
 

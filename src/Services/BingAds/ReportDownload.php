@@ -5,8 +5,8 @@ use SoapFault;
 use Exception;
 use ZipArchive;
 
-use Microsoft\BingAds\V12\Reporting\ReportRequestStatusType;
-use Microsoft\BingAds\V12\Reporting\PollGenerateReportRequest;
+use Microsoft\BingAds\V13\Reporting\ReportRequestStatusType;
+use Microsoft\BingAds\V13\Reporting\PollGenerateReportRequest;
 
 class ReportDownload
 {

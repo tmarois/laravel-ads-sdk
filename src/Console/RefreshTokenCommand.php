@@ -126,6 +126,7 @@ class RefreshTokenCommand extends Command {
         $authentication = (new OAuthWebAuthCodeGrant())
             ->withClientId($clientId)
             ->withClientSecret($clientSecret)
+            ->withRedirectUri('https://login.microsoftonline.com/common/oauth2/nativeclient')
             // ->withRedirectUri('urn:ietf:wg:oauth:2.0:oob')
             ->withState(rand(0,999999999));
 
@@ -137,6 +138,8 @@ class RefreshTokenCommand extends Command {
         $this->line($AuthorizationData->Authentication->GetAuthorizationEndpoint());
 
         $accessToken = $this->ask('Insert the full URL that you were redirected to (after you approve the access):');
+
+        print_r($accessToken);
 
         try
         {

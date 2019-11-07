@@ -7,8 +7,8 @@ use Exception;
 use LaravelAds\Services\BingAds\Operations\Campaign;
 use LaravelAds\Services\BingAds\Operations\AdGroup;
 
-use Microsoft\BingAds\V12\CampaignManagement\GetCampaignsByAccountIdRequest;
-use Microsoft\BingAds\V12\CampaignManagement\GetAdGroupsByCampaignIdRequest;
+use Microsoft\BingAds\V13\CampaignManagement\GetCampaignsByAccountIdRequest;
+use Microsoft\BingAds\V13\CampaignManagement\GetAdGroupsByCampaignIdRequest;
 
 use Microsoft\BingAds\Auth\ServiceClientType;
 
@@ -39,7 +39,7 @@ class Fetch
      */
     public function getCampaigns($returnArray = true)
     {
-        $serviceCall = $this->service->call(ServiceClientType::CampaignManagementVersion12);
+        $serviceCall = $this->service->call(ServiceClientType::CampaignManagementVersion13);
 
         $request = new GetCampaignsByAccountIdRequest();
         $request->AccountId = $this->service->getClientId();
@@ -92,7 +92,7 @@ class Fetch
      */
     public function getAdGroups($returnArray = true)
     {
-        $serviceCall = $this->service->call(ServiceClientType::CampaignManagementVersion12);
+        $serviceCall = $this->service->call(ServiceClientType::CampaignManagementVersion13);
 
         $campaigns = $this->getCampaigns();
 
