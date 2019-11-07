@@ -7,6 +7,7 @@ Change Log
 * Added `InvalidCredentials` Error code with Offline Conversion Import on `BingAds`
 * Added `ApiVersionNoLongerSupported` Error code with Offline Conversion Import on `BingAds`
 * Added `withRedirectUri()` by default for `BingAds` Auth
+* Added config variable `redirect_uri` by default it will use `https://login.microsoftonline.com/common/oauth2/nativeclient`
 
 #### Changed
 * Fixed `BingAds` now using `^0.12` instead of deprecated `v0.11` as of 11/6 (version of SDK)

@@ -8,5 +8,7 @@ return [
 
     'clientSecret' => env('BING_CLIENT_SECRET', ''),
 
-    'refreshToken' => env('BING_REFRESH_TOKEN', '')
+    'refreshToken' => env('BING_REFRESH_TOKEN', ''),
+
+    'redirect_uri' => 'https://login.microsoftonline.com/common/oauth2/nativeclient'
 ];

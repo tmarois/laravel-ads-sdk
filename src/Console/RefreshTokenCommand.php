@@ -119,14 +119,15 @@ class RefreshTokenCommand extends Command {
         // check if the config is right
         if (!$config) return $this->error('Your Bing Ads config is not setup properly. Aborting.');
 
-        $clientId = $config['clientId'];
-        $clientSecret = $config['clientSecret'];
+        $clientId       = $config['clientId'];
+        $clientSecret   = $config['clientSecret'];
         $developerToken = $config['developerToken'];
+        $redirectUri    = $config['redirect_uri'] ?? 'https://login.microsoftonline.com/common/oauth2/nativeclient';
 
         $authentication = (new OAuthWebAuthCodeGrant())
             ->withClientId($clientId)
             ->withClientSecret($clientSecret)
-            ->withRedirectUri('https://login.microsoftonline.com/common/oauth2/nativeclient')
+            ->withRedirectUri($redirectUri)
             // ->withRedirectUri('urn:ietf:wg:oauth:2.0:oob')
             ->withState(rand(0,999999999));
 
