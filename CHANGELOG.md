@@ -1,6 +1,11 @@
 Change Log
 ==========
 
+### 12/12/2019 - 1.2.14
+
+#### Changed
+* Cleaned up `BingAds` for Soap errors due to request of `__getLastRequest()` undefined errors.  
+
 ### 11/07/2019 - 1.2.13
 
 #### Added

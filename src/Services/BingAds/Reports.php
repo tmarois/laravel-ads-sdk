@@ -318,12 +318,16 @@ class Reports
         }
         catch (SoapFault $e)
         {
-        	printf("-----\r\nFault Code: %s\r\nFault String: %s\r\nFault Detail: \r\n", $e->faultcode, $e->faultstring);
-            var_dump($e->detail);
-        	print "-----\r\nLast SOAP request/response:\r\n";
-            print $this->serviceProxy->GetWsdl() . "\r\n";
-        	print $this->serviceProxy->__getLastRequest()."\r\n";
-            print $this->serviceProxy->__getLastResponse()."\r\n";
+            printf("-----\r\nFault Code: %s\r\nFault String: %s\r\nFault Detail: \r\n", $e->faultcode, $e->faultstring);
+        
+            if (isset($e->detail)) {
+                var_dump($e->detail);
+            }
+
+        	// print "-----\r\nLast SOAP request/response:\r\n";
+            // print $this->serviceProxy->GetWsdl() . "\r\n";
+        	// print $this->serviceProxy->__getLastRequest()."\r\n";
+            // print $this->serviceProxy->__getLastResponse()."\r\n";
         }
 
         return (new ReportDownload($this->serviceProxy, $reportRequestId));
@@ -373,12 +377,16 @@ class Reports
         }
         catch (SoapFault $e)
         {
-        	printf("-----\r\nFault Code: %s\r\nFault String: %s\r\nFault Detail: \r\n", $e->faultcode, $e->faultstring);
-            var_dump($e->detail);
-        	print "-----\r\nLast SOAP request/response:\r\n";
-            print $this->serviceProxy->GetWsdl() . "\r\n";
-        	print $this->serviceProxy->__getLastRequest()."\r\n";
-            print $this->serviceProxy->__getLastResponse()."\r\n";
+            printf("-----\r\nFault Code: %s\r\nFault String: %s\r\nFault Detail: \r\n", $e->faultcode, $e->faultstring);
+            
+            if (isset($e->detail)) {
+                var_dump($e->detail);
+            }
+
+        	// print "-----\r\nLast SOAP request/response:\r\n";
+            // print $this->serviceProxy->GetWsdl() . "\r\n";
+        	// print $this->serviceProxy->__getLastRequest()."\r\n";
+            // print $this->serviceProxy->__getLastResponse()."\r\n";
         }
 
         return (new ReportDownload($this->serviceProxy, $reportRequestId));
@@ -431,12 +439,16 @@ class Reports
         }
         catch (SoapFault $e)
         {
-        	printf("-----\r\nFault Code: %s\r\nFault String: %s\r\nFault Detail: \r\n", $e->faultcode, $e->faultstring);
-            var_dump($e->detail);
-        	print "-----\r\nLast SOAP request/response:\r\n";
-            print $this->serviceProxy->GetWsdl() . "\r\n";
-        	print $this->serviceProxy->__getLastRequest()."\r\n";
-            print $this->serviceProxy->__getLastResponse()."\r\n";
+            printf("-----\r\nFault Code: %s\r\nFault String: %s\r\nFault Detail: \r\n", $e->faultcode, $e->faultstring);
+            
+            if (isset($e->detail)) {
+                var_dump($e->detail);
+            }
+
+        	// print "-----\r\nLast SOAP request/response:\r\n";
+            // print $this->serviceProxy->GetWsdl() . "\r\n";
+        	// print $this->serviceProxy->__getLastRequest()."\r\n";
+            // print $this->serviceProxy->__getLastResponse()."\r\n";
         }
 
         return (new ReportDownload($this->serviceProxy, $reportRequestId));
@@ -495,12 +507,16 @@ class Reports
         }
         catch (SoapFault $e)
         {
-        	printf("-----\r\nFault Code: %s\r\nFault String: %s\r\nFault Detail: \r\n", $e->faultcode, $e->faultstring);
-            var_dump($e->detail);
-        	print "-----\r\nLast SOAP request/response:\r\n";
-            print $this->serviceProxy->GetWsdl() . "\r\n";
-        	print $this->serviceProxy->__getLastRequest()."\r\n";
-            print $this->serviceProxy->__getLastResponse()."\r\n";
+            printf("-----\r\nFault Code: %s\r\nFault String: %s\r\nFault Detail: \r\n", $e->faultcode, $e->faultstring);
+            
+            if (isset($e->detail)) {
+                var_dump($e->detail);
+            }
+
+        	// print "-----\r\nLast SOAP request/response:\r\n";
+            // print $this->serviceProxy->GetWsdl() . "\r\n";
+        	// print $this->serviceProxy->__getLastRequest()."\r\n";
+            // print $this->serviceProxy->__getLastResponse()."\r\n";
         }
 
         return (new ReportDownload($this->serviceProxy, $reportRequestId));
