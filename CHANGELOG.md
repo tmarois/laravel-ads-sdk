@@ -1,6 +1,11 @@
 Change Log
 ==========
 
+### 12/13/2019 - 1.2.15
+
+#### Changed
+* Cleaning up more `BingAds` for Soap errors due to undefined variables. (raw output of errors). 
+
 ### 12/12/2019 - 1.2.14
 
 #### Changed

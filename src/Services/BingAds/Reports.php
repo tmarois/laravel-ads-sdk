@@ -276,6 +276,8 @@ class Reports
      */
     public function buildFinalUrlReport()
     {
+        $reportRequestId = null;
+
         try
         {
             $report                         = new DestinationUrlPerformanceReportRequest();
@@ -314,7 +316,11 @@ class Reports
             );
 
             $encodedReport   = new SoapVar($report, SOAP_ENC_OBJECT, 'DestinationUrlPerformanceReportRequest', $this->serviceProxy->GetNamespace());
-            $reportRequestId = $this->submitGenerateReport($encodedReport)->ReportRequestId;
+            $reportRequest = $this->submitGenerateReport($encodedReport);
+
+            if ($reportRequest) {
+                $reportRequestId = $reportRequest->ReportRequestId;
+            }
         }
         catch (SoapFault $e)
         {
@@ -335,12 +341,14 @@ class Reports
 
 
     /**
-     * buildFinalUrlReport()
+     * buildSearchTermReport()
      *
      *
      */
     public function buildSearchTermReport()
     {
+        $reportRequestId = null;
+
         try
         {
             $report                         = new SearchQueryPerformanceReportRequest();
@@ -373,7 +381,13 @@ class Reports
             );
 
             $encodedReport   = new SoapVar($report, SOAP_ENC_OBJECT, 'SearchQueryPerformanceReportRequest', $this->serviceProxy->GetNamespace());
-            $reportRequestId = $this->submitGenerateReport($encodedReport)->ReportRequestId;
+
+            $reportRequest = $this->submitGenerateReport($encodedReport);
+
+            if ($reportRequest) {
+                $reportRequestId = $reportRequest->ReportRequestId;
+            }
+
         }
         catch (SoapFault $e)
         {
@@ -400,6 +414,8 @@ class Reports
      */
     public function buildAgeGenderReport()
     {
+        $reportRequestId = null;
+
         try
         {
             $report                         = new AgeGenderAudienceReportRequest();
@@ -435,7 +451,12 @@ class Reports
             );
 
             $encodedReport   = new SoapVar($report, SOAP_ENC_OBJECT, 'AgeGenderAudienceReportRequest', $this->serviceProxy->GetNamespace());
-            $reportRequestId = $this->submitGenerateReport($encodedReport)->ReportRequestId;
+
+            $reportRequest = $this->submitGenerateReport($encodedReport);
+
+            if ($reportRequest) {
+                $reportRequestId = $reportRequest->ReportRequestId;
+            }
         }
         catch (SoapFault $e)
         {
@@ -462,6 +483,8 @@ class Reports
      */
     public function buildMostSpecificLocationReport()
     {
+        $reportRequestId = null;
+
         try
         {
             $report                         = new GeographicPerformanceReportRequest();
@@ -503,7 +526,13 @@ class Reports
             );
 
             $encodedReport   = new SoapVar($report, SOAP_ENC_OBJECT, 'GeographicPerformanceReportRequest', $this->serviceProxy->GetNamespace());
-            $reportRequestId = $this->submitGenerateReport($encodedReport)->ReportRequestId;
+            
+            $reportRequest = $this->submitGenerateReport($encodedReport);
+
+            if ($reportRequest) {
+                $reportRequestId = $reportRequest->ReportRequestId;
+            }
+
         }
         catch (SoapFault $e)
         {

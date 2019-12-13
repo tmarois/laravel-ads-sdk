@@ -64,7 +64,7 @@ class ReportDownload
                 {
                     print "No report data for the submitted request\n";
 
-                    $this->results = [];
+                    $this->results = null;
 
                     return;
                 }
@@ -79,7 +79,7 @@ class ReportDownload
         		printf("The request failed. Try requesting the report " .
         				"later.\nIf the request continues to fail, contact support.\n");
 
-                $this->results = [];
+                $this->results = null;
 
                 return;
         	}
@@ -89,7 +89,7 @@ class ReportDownload
         				"Save the report ID (%s) and try again later.\n",
         				$reportId);
 
-                $this->results = [];
+                $this->results = null;
 
                 return;
         	}
@@ -128,6 +128,7 @@ class ReportDownload
                  $exception = new Exception("Write operation to ZIP file failed.");
             }
         }
+
         fclose($reader);
         fflush($writer);
         fclose($writer);
@@ -225,6 +226,8 @@ class ReportDownload
      */
     public function toArray()
     {
+        if (!$this->results) return [];
+        
         $csv    = array_map('str_getcsv',$this->results);
 
         $h = $csv[10] ?? [];
