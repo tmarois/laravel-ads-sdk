@@ -53,10 +53,10 @@ Accessing `GoogleAds` or `BingAds` services use the following:
 use LaravelAds;
 
 // calling the Google Ads Service and including the Customer Client Id
-$googleAds = LaravelAds::googleAds()->with('CLIENT_ID');
+$googleAds = LaravelAds::googleAds()->with('ACCOUNT_ID');
 
 // calling the Bing Ads Service and including the Customer Client Id
-$bingAds = LaravelAds::bingAds()->with('CLIENT_ID');
+$bingAds = LaravelAds::bingAds()->with('ACCOUNT_ID');
 ```
 
 # Google Ads
