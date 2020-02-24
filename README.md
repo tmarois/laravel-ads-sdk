@@ -1,6 +1,6 @@
 # Laravel Ads SDK
 
-[![Slack](http://timothymarois.com/a/slack-02.svg)](https://join.slack.com/t/basephp/shared_invite/enQtNDI0MzQyMDE0MDAwLWU3Nzg0Yjk4MjM0OWVmZDZjMjEyYWE2YjA1ODFhNjI2MzI3MjAyOTIyOTRkMmVlNWNhZWYzMTIwZDJlOWQ2ZTA)
+[![Slack](https://timothymarois.com/a/slack-02.svg)](https://join.slack.com/t/basephp/shared_invite/enQtNDI0MzQyMDE0MDAwLThlNjNlYWM3YWMxMjdhOGFiOTY1ZDFkMzUxMmUzZjJjM2JmZjI0YTg4MDYyYzc3OTc5MGIzYTdkNjQwMTQyNWY)
 
 For **Google Ads**, **Bing Ads** and **Facebook Ads** APIs.
 

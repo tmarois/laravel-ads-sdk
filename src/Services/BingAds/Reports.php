@@ -221,7 +221,7 @@ class Reports
 
 
     /**
-     * buildCampaignReport()
+     * buildAdGroupReport()
      *
      *
      */
