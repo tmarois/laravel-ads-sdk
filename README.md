@@ -2,7 +2,7 @@
 
 [![Slack](https://timothymarois.com/a/slack-02.svg)](https://join.slack.com/t/basephp/shared_invite/enQtNDI0MzQyMDE0MDAwLThlNjNlYWM3YWMxMjdhOGFiOTY1ZDFkMzUxMmUzZjJjM2JmZjI0YTg4MDYyYzc3OTc5MGIzYTdkNjQwMTQyNWY)
 
-For **Google Ads**, **Bing Ads** and **Facebook Ads** APIs.
+For **Google Ads** and **Bing Ads** API.
 
 This is a wrapper for connecting each ad source into your Laravel application. This SDK provides simpler and consistent methods across many ad source integrations than the traditional SDKs; ultimately making it a lot easier to implement in your projects. You shouldn't have to learn how to communicate and understand the responses to every API.
 
@@ -52,10 +52,10 @@ Accessing `GoogleAds` or `BingAds` services use the following:
 // The namespace to the Facade
 use LaravelAds;
 
-// calling the Google Ads Service and including the Customer Client Id
+// calling the Google Ads Service and including the Account ID
 $googleAds = LaravelAds::googleAds()->with('ACCOUNT_ID');
 
-// calling the Bing Ads Service and including the Customer Client Id
+// calling the Bing Ads Service and including the Account ID
 $bingAds = LaravelAds::bingAds()->with('ACCOUNT_ID');
 ```
 
@@ -111,7 +111,7 @@ This uses the [BingAds-PHP-SDK](https://github.com/BingAds/BingAds-PHP-SDK) for 
 
 This uses the [facebook-php-business-sdk](https://github.com/facebook/facebook-php-business-sdk) for [Facebook Marketing API](https://developers.facebook.com/docs/marketing-apis)
 
-Coming Soon. Looking for contributors.
+Looking for and accepting contributors to help implement this. 
 
 # Contributions
 
@@ -121,4 +121,4 @@ If you want to help, join the slack channel and/or submit pull requests.
 
 # License
 
-**Laravel Ads SDK** (This Package) is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+**Laravel Ads SDK** (This Package) is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT). USE AT YOUR OWN RISK. Laravel Ads SDK is a tool to help you manage your accounts, it does not guarantee features listed here will work as described. If you do find a bug, please feel free to submit an issue. *This package is not affiliated with Laravel LLC or the Laravel Framework team.*
