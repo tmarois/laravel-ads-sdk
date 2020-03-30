@@ -36,6 +36,8 @@ BING_REFRESH_TOKEN=""
 
 Run `php artisan laravelads:token:generate --service=GoogleAds`
 
+Having Trouble? [Learn More](GoogleAds-Auth.md)
+
 ### (4) For BingAds
 
 *Follow the steps in the command line to generate a refresh token.*

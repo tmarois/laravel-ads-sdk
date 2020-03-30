@@ -1,4 +1,4 @@
-# BingAds API SDK
+# BingAds API SDK  (Authentication Help)
 
 This uses the [BingAds-PHP-SDK](https://github.com/BingAds/BingAds-PHP-SDK) for the [Bing Ads API](https://docs.microsoft.com/en-us/bingads/guides/get-started-php?view=bingads-12)
 
