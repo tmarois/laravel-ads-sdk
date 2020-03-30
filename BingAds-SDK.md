@@ -24,6 +24,7 @@ $bingAds = LaravelAds::bingAds()->with('ACCOUNT_ID');
 * [Management - Campaigns](#campaigns)
 * [Management - Ad Groups](#ad-groups)
 * [Offline Conversion Import](#offline-conversion-import)
+* [Manual Configuration](#manual-configuration)
 
 #### Reports
 * [Account Performance](#account-reports)
@@ -434,6 +435,30 @@ Array
     )
 )
 ...
+
+```
+
+
+## Manual Configuration 
+
+By default, the configuration will always look at the `/config/bing-ads.php`, however, you can override that by injecting your own config into the bing ads service object.
+
+**You only need to use this if you WANT to override the config, otherwise the config file will work in most cases.**
+
+```php
+$bingAds = LaravelAds::bingAds();
+$bingAds->configuration([
+    'developerToken' => '',
+    'clientId' => '',
+    'clientSecret' => '',
+    'refreshToken' => ''
+]);
+
+$bingAds = $bingAds->with('ACCOUNT_ID'); 
+
+// after the config is set above, now you can use the SDK as you normally do...
+// $report = $bingAds->reports('2020-01-01', '2020-01-05')->getAccountReport();
+
 ```
 
 

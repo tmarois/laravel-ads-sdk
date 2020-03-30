@@ -1,6 +1,11 @@
 Change Log
 ==========
 
+### 03/30/2020 - 1.2.16
+
+#### Added
+* Ability to set the configuration manaually (overriding the laravel config settings) by using `configuration(array)`
+
 ### 12/13/2019 - 1.2.15
 
 #### Changed

@@ -18,6 +18,7 @@ $googleAds = LaravelAds::googleAds()->with('CLIENT_ID');
 * [Management - Campaigns](#campaigns)
 * [Management - Ad Groups](#ad-groups)
 * [Offline Conversion Import](#offline-conversion-import)
+* [Manual Configuration](#manual-configuration)
 * [Advanced Options](#need-more-advanced-options)
 
 #### Reports
@@ -485,6 +486,39 @@ Array
 ...
 ```
 
+
+## Manual Configuration 
+
+By default, the configuration will always look at the `/config/google-ads.php`, however, you can override that by injecting your own config into the google ads service object.
+
+**You only need to use this if you WANT to override the config, otherwise the config file will work in most cases.**
+
+```php
+$googleAds = LaravelAds::googleAds();
+$googleAds->configuration([
+    'ADWORDS' => [
+        'developerToken' => ''
+    ],
+    'ADWORDS_REPORTING' => [
+
+    ],
+    'OAUTH2' => [
+        'clientId' => '',
+        'clientSecret' => '',
+        'refreshToken' => '',
+    ],
+    'LOGGING' => [        
+        'soapLogLevel' => 'ERROR',
+        'reportDownloaderLogLevel' => 'ERROR'
+    ]
+]);
+
+$googleAds = $googleAds->with('ACCOUNT_ID'); 
+
+// after the config is set above, now you can use the SDK as you normally do...
+// $report = $googleAds->reports('2020-01-01', '2020-01-05')->getAccountReport();
+
+```
 
 
 ## Need More? Advanced Options

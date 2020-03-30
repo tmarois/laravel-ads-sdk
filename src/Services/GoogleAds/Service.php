@@ -33,6 +33,13 @@ class Service
     protected $session;
 
     /**
+     * $config
+     *
+     *
+     */
+    protected $config;
+
+    /**
      * with()
      *
      * Sets the client ids
@@ -167,11 +174,21 @@ class Service
     *
     * @return Configuration
     */
-    protected function configuration()
+    public function configuration($config = [])
     {
-        $config = config('google-ads');
+        if (!$config) 
+        {
+            // use laravel config
+            $config = config('google-ads');
 
-        return (new Configuration($config));
+            // check if config already exist
+            if ($this->config) {
+                return $this->config;
+            }
+        }
+
+        // create a new config
+        return ($this->config = (new Configuration($config)));
     }
 
 }

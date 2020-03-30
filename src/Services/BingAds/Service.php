@@ -42,6 +42,13 @@ class Service
     protected $session;
 
     /**
+     * $config
+     *
+     *
+     */
+    protected $config;
+
+    /**
      * with()
      *
      * Sets the client ids
@@ -164,6 +171,28 @@ class Service
     }
 
     /**
+    * Configuration
+    *
+    * @return Configuration
+    */
+    public function configuration($config = [])
+    {
+        if (!$config) 
+        {
+            // use laravel config
+            $config = config('bing-ads');
+
+            // check if config already exist
+            if ($this->config) {
+                return $this->config;
+            }
+        }
+
+        // create a new config
+        return ($this->config = (($config)));
+    }
+
+    /**
      * session()
      *
      *
@@ -172,7 +201,7 @@ class Service
     {
         if (!$this->session)
         {
-            $config = config('bing-ads');
+            $config = $this->configuration();
 
             $AuthorizationData = (new AuthorizationData())
                 ->withAccountId($this->getClientId())
@@ -200,8 +229,6 @@ class Service
 
         return $this->session;
     }
-
-
 
     /**
      * oAuth2credentials()

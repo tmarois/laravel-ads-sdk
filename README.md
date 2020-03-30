@@ -71,6 +71,7 @@ This uses the [googleads-php-lib](https://github.com/googleads/googleads-php-lib
 * [Management - Campaigns](GoogleAds-SDK.md#campaigns)
 * [Management - Ad Groups](GoogleAds-SDK.md#ad-groups)
 * [Offline Conversion Import](GoogleAds-SDK.md#offline-conversion-import)
+* [Manual Configuration](GoogleAds-SDK.md#manual-configuration)
 * [Advanced Options](GoogleAds-SDK.md#need-more-advanced-options)
 
 #### Reports
@@ -96,6 +97,7 @@ This uses the [BingAds-PHP-SDK](https://github.com/BingAds/BingAds-PHP-SDK) for 
 * [Management - Campaigns](BingAds-SDK.md#campaigns)
 * [Management - Ad Groups](BingAds-SDK.md#ad-groups)
 * [Offline Conversion Import](BingAds-SDK.md#offline-conversion-import)
+* [Manual Configuration](BingAds-SDK.md#manual-configuration)
 
 #### Reports
 * [Account Performance](BingAds-SDK.md#account-reports)
