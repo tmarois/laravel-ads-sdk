@@ -1,6 +1,12 @@
 Change Log
 ==========
 
+### 00/00/0000 - 1.2.17 (TBD)
+
+#### Changed
+* Google Ads `getTargetCpa()` suppressing any null errors when trying to get the target cpa value. 
+
+
 ### 03/30/2020 - 1.2.16
 
 #### Added

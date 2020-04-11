@@ -173,9 +173,9 @@ class Campaign extends CampaignOperations
     {
         if ($this->getBidStrategy() == 'CPA')
         {
-            $amount = $this->response()->getBiddingStrategyConfiguration()->getBiddingScheme()->getTargetCpa()->getMicroAmount();
+            $amount =@ $this->response()->getBiddingStrategyConfiguration()->getBiddingScheme()->getTargetCpa()->getMicroAmount();
 
-            return (($amount) ? round( intval($amount) / 1000000,2) : 0);
+            return (($amount) ? @round( intval($amount) / 1000000,2) : 0);
         }
 
         return 0;
