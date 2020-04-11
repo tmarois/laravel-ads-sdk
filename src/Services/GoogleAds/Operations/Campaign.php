@@ -173,10 +173,13 @@ class Campaign extends CampaignOperations
     {
         if ($this->getBidStrategy() == 'CPA')
         {
-            $tcpa =@ $this->response()->getBiddingStrategyConfiguration()->getBiddingScheme()->getTargetCpa();
+            $strategy =@ $this->response()->getBiddingStrategyConfiguration()->getBiddingScheme() ?? null;
 
-            if ($tcpa) {
-                $amount =@ ($tcpa->getMicroAmount() ?? 0);
+            if ($strategy) {
+                $tcpa =@ $strategy->getTargetCpa();
+                if ($tcpa) {
+                    $amount =@ ($tcpa->getMicroAmount() ?? 0);
+                }
             }
 
             return (($amount) ? @round( intval($amount) / 1000000,2) : 0);
