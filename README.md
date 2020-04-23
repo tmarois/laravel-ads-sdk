@@ -8,7 +8,7 @@ This is a wrapper for connecting each ad source into your Laravel application. T
 
 **The goal of this package is to provide you with one SDK to manage all the platforms.**
 
-*Note: You do not need to use the Laravel Framework, it's not required, using the **manual-configuration** allows this package to be used in any project*
+*Note: You do not need to use the Laravel Framework, it's not required, using the **manual-configuration** allows this package to be used in any project. Using Laravel helps with using commands for authentication and initial setup.*
 
 ### (1) Installation
 
@@ -20,7 +20,7 @@ Run `composer require tmarois/laravel-ads-sdk:^1.2`
 
 Run `php artisan vendor:publish`, then copy these to your `.env` and update with your credentials.
 
-*ONLY IF USING THE LARAVEL PHP FRAMEWORK, Otherwise you can use the **manual-configuration** to use in any project.*
+*Only if using the Laravel Framework, Otherwise you can use the **manual-configuration** to use in any project.*
 
 ```
 ADWORDS_DEVELOPER_TOKEN=""
