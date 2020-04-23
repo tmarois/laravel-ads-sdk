@@ -6,7 +6,9 @@ For **Google Ads** and **Bing Ads** API.
 
 This is a wrapper for connecting each ad source into your Laravel application. This SDK provides simpler and consistent methods across many ad source integrations than the traditional SDKs; ultimately making it a lot easier to implement in your projects. You shouldn't have to learn how to communicate and understand the responses to every API.
 
-**The goal of this package is to provide you with one SDK to manage them all.**
+**The goal of this package is to provide you with one SDK to manage all the platforms.**
+
+*Note: You do not need to use the Laravel Framework, it's not required, using the **manual-configuration** allows this package to be used in any project*
 
 ### (1) Installation
 
@@ -17,6 +19,8 @@ Run `composer require tmarois/laravel-ads-sdk:^1.2`
 ### (2) Laravel Config
 
 Run `php artisan vendor:publish`, then copy these to your `.env` and update with your credentials.
+
+*ONLY IF USING THE LARAVEL PHP FRAMEWORK, Otherwise you can use the **manual-configuration** to use in any project.*
 
 ```
 ADWORDS_DEVELOPER_TOKEN=""
