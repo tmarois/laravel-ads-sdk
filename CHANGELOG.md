@@ -1,6 +1,11 @@
 Change Log
 ==========
 
+### 06/02/2020 - 1.2.18
+
+#### Changed
+* Updated Google Ads API to v47 (from v40) to fix the dependency issue #10
+
 ### 04/12/2020 - 1.2.17
 
 #### Changed
