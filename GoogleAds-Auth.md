@@ -12,7 +12,7 @@ Developer tokens are located in the "API Center" within your Google Ads account.
 
 ## (2) Get API Client/Secret keys
 
-Create an application using the [Google Cloud Platform](console.cloud.google.com)
+Create an application using the [Google Cloud Platform](https://console.cloud.google.com)
 
 Set application type to "other"
 
