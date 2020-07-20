@@ -23,3 +23,7 @@ Use `https://login.microsoftonline.com/common/oauth2/nativeclient` for the Redir
 ## (3) Generate Refresh Token
 
 [Back to Readme](README.md)
+
+## Sandbox
+
+The [Bing Ads API Sandbox](https://docs.microsoft.com/en-us/advertising/guides/sandbox?view=bingads-13) can be used by changing the API environment using the `->setEnvironment()` function.
