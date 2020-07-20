@@ -47,6 +47,8 @@ class Service
      *
      */
     protected $config;
+    
+    protected $environment = ApiEnvironment::Production;
 
     /**
      * with()
@@ -95,6 +97,32 @@ class Service
     {
         return $this->customerId;
     }
+    
+    /**
+     * setEnvironment()
+     *
+     * Sets the Bing API environment
+     *
+     * @return self
+     */
+    public function setEnvironment($env)
+    {
+        $this->environment = $env;
+        
+        return $this;
+    }
+    
+    /**
+     * getEnvironment()
+     *
+     * Get the current Bing API environment
+     *
+     * @return string
+     */
+    public function getEnvironment()
+    {
+        return $this->environment;
+    }
 
     /**
      * fetch()
@@ -113,7 +141,7 @@ class Service
      */
     public function call($service)
     {
-        $serviceClient = (new ServiceClient($service, $this->session(), 'Production'));
+        $serviceClient = (new ServiceClient($service, $this->session(), $this->environment));
         $serviceClient->SetAuthorizationData($this->session());
 
         return $serviceClient;
