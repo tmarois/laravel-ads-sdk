@@ -6,9 +6,9 @@ For **Google Ads** and **Bing Ads** API.
 
 This is a wrapper for connecting each ad source into your Laravel application. This SDK provides simpler and consistent methods across many ad source integrations than the traditional SDKs; ultimately making it a lot easier to implement in your projects. You shouldn't have to learn how to communicate and understand the responses to every API.
 
-**The goal of this package is to provide you with one SDK to manage all the platforms.**
+**The goal of this package is to provide you with one SDK to manage all.**
 
-*Note: You do not need to use the Laravel Framework, it's not required, using the **manual-configuration** allows this package to be used in any project. Using Laravel helps with using commands for authentication and initial setup.*
+*Note: You do not need to use the Laravel Framework, it's not required, using the **manual-configuration** allows this package to be used in any project. Using Laravel helps with the commands for authentication and initial setup.*
 
 ### (1) Installation
 
@@ -55,7 +55,7 @@ Having Trouble? [Learn More](BingAds-Auth.md)
 Accessing `GoogleAds` or `BingAds` services use the following:
 
 ```php
-// The namespace to the Facade
+// The namespace to the Facade for laravel
 use LaravelAds;
 
 // calling the Google Ads Service and including the Account ID
@@ -125,7 +125,7 @@ Looking for and accepting contributors to help implement this.
 
 We are actively looking for new contributors.
 
-If you want to help, join the slack channel and/or submit pull requests.
+If you want to contribute, join the slack channel and/or submit pull requests.
 
 # License
 
