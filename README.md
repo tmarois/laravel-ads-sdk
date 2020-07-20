@@ -71,6 +71,8 @@ This uses the [googleads-php-lib](https://github.com/googleads/googleads-php-lib
 
 > **NOTICE** – You will need to [Request Google Ads API Access](https://services.google.com/fb/forms/newtoken/).
 
+[Need help with authentication?](GoogleAds-Auth.md)
+
 #### Management
 * [Fetching - All Campaigns](GoogleAds-SDK.md#fetch-all-campaigns)
 * [Fetching - All Ad Groups](GoogleAds-SDK.md#fetch-all-ad-groups)
@@ -96,6 +98,8 @@ This uses the [googleads-php-lib](https://github.com/googleads/googleads-php-lib
 This uses the [BingAds-PHP-SDK](https://github.com/BingAds/BingAds-PHP-SDK) for the [Bing Ads API](https://docs.microsoft.com/en-us/bingads/guides/get-started-php?view=bingads-12)
 
 > **NOTICE** – You will need to [Request Bing Ads API Access](https://advertise.bingads.microsoft.com/en-us/resources/bing-partner-program/request-bing-ads-api-access).
+
+[Need help with authentication or sandbox mode?](BingAds-Auth.md)
 
 #### Management
 * [Fetching - All Campaigns](BingAds-SDK.md#fetch-all-campaigns)
