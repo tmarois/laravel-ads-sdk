@@ -4,14 +4,12 @@
 	"name": "tmarois/laravel-ads-sdk",
 	"homepage": "https://github.com/tmarois/laravel-ads-sdk",
 	"type": "package",
-
 	"authors": [
         {
             "name": "Timothy Marois",
             "email": "timothymarois@gmail.com"
         }
     ],
-
 	"require": {
 		"php": ">=7",
 		"googleads/googleads-php-lib": "^49.0",
