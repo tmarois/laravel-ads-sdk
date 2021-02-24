@@ -1,6 +1,6 @@
 # Laravel Ads SDK
 
-[![Slack](https://timothymarois.com/a/slack-02.svg)](https://join.slack.com/t/basephp/shared_invite/enQtNDI0MzQyMDE0MDAwLThlNjNlYWM3YWMxMjdhOGFiOTY1ZDFkMzUxMmUzZjJjM2JmZjI0YTg4MDYyYzc3OTc5MGIzYTdkNjQwMTQyNWY)
+[Join Discord](https://discord.gg/jV83bFFZ) – For support, updates and collaboration.
 
 For **Google Ads** and **Bing Ads** API.
 
