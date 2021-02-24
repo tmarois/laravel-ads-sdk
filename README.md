@@ -1,6 +1,6 @@
 # Laravel Ads SDK
 
-[Join Discord](https://discord.gg/jV83bFFZ) – For support, updates and collaboration.
+[Join Discord](https://discord.gg/g3W49zdWm2) – For support, updates and collaboration.
 
 For **Google Ads** and **Bing Ads** API.
 
