@@ -10,54 +10,36 @@ class LaravelAds
      *
      * @return static method
      */
-    public static function service($service)
-    {
-        if ($service == 'GoogleAds')
-        {
-            return static::googleAds();
-        }
-
-        if ($service == 'BingAds')
-        {
-            return static::bingAds();
-        }
-
-        if ($service == 'FacebookAds')
-        {
-            return static::facebookAds();
-        }
+    public static function service($service) {
+        if ($service == 'GoogleAds') return static::googleAds();
+        if ($service == 'BingAds') return static::bingAds();
+        if ($service == 'FacebookAds') return static::facebookAds();
     }
 
     /**
-     * gAds()
-     *
+     * googleAds()
      * Google Ads
      *
      */
-    public static function googleAds()
-    {
+    public static function googleAds() {
         return (new GoogleAdsService());
     }
 
     /**
-     * bAds()
-     *
+     * bingAds()
      * Bind Ads
      *
      */
-    public static function bingAds()
-    {
+    public static function bingAds() {
         return (new BingAdsService());
     }
 
     /**
-     * fAds()
-     *
+     * facebookAds()
      * Facebook Ads
      *
      */
-    public static function facebookAds()
-    {
+    public static function facebookAds() {
         return false;
     }
 
