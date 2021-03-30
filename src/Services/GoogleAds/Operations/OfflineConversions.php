@@ -33,8 +33,7 @@ class OfflineConversions
      * __construct()
      *
      */
-    public function __construct(Service $service = null)
-    {
+    public function __construct(Service $service = null) {
         $this->service = $service;
     }
 
@@ -43,14 +42,15 @@ class OfflineConversions
      *
      * @return array
      */
-    public function getConversions()
-    {
+    public function getConversions() {
         return $this->offlineConversions;
     }
 
     /**
      * addBulk()
-     *
+     * Add multiple conversions to the offline array
+     * 
+     * @param array $conversions
      * @return OfflineConversions
      */
     public function addBulk(array $conversions = [])
@@ -64,22 +64,28 @@ class OfflineConversions
 
     /**
      * add()
-     *
+     * Add a single conversion to the offline array
+     * The conversion array should have keys of 
+     * 
+     *    name, time, click_id, value
+     * 
+     * 
+     * @param array $conversion 
      * @return OfflineConversions
      */
-    public function add(array $conversions = [])
+    public function add(array $conversion = [])
     {
         $gc = new OfflineConversionFeed();
-        $gc->setConversionName($conversions['name']);
-        $gc->setConversionTime($conversions['time']);
-        $gc->setGoogleClickId($conversions['click_id']);
-        $gc->setConversionValue($conversions['value']);
+        $gc->setConversionName($conversion['name']);
+        $gc->setConversionTime($conversion['time']);
+        $gc->setGoogleClickId($conversion['click_id']);
+        $gc->setConversionValue($conversion['value']);
 
         $offlineConversionOperation = new OfflineConversionFeedOperation();
         $offlineConversionOperation->setOperand($gc);
         $offlineConversionOperation->setOperator(Operator::ADD);
 
-        $this->offlineConversions[] = $conversions;
+        $this->offlineConversions[] = $conversion;
         $this->mutations[] = $offlineConversionOperation;
 
         return $this;
@@ -88,8 +94,13 @@ class OfflineConversions
     /**
      * upload()
      *
+     * This method will upload offline converions
+     * and return the success and errors of each id
+     * 
+     * https://github.com/googleads/googleads-php-lib/blob/cec475ce83f8cdb923cfc08d9053b48769c0e64a/src/Google/AdsApi/AdWords/v201809/cm/OfflineConversionFeed.php
+     * 
      */
-    public function upload()
+    public function upload($outputValue = false)
     {
         $errorResponse = [];
         $successResponse = [];
@@ -103,8 +114,18 @@ class OfflineConversions
                 // array of "OfflineConversionFeed"
                 $responseValues = $result->getValue();
 
-                foreach($responseValues as $feed) {
-                    $successResponse[$i] = $feed->getGoogleClickId();
+                foreach($responseValues as $feed) 
+                {
+                    if ($outputValue==true) 
+                    {
+                        $successResponse[$i] = [
+                            'click_id' => $feed->getGoogleClickId(),
+                            'value' => $feed->getConversionValue()
+                        ];
+                    }
+                    else {
+                        $successResponse[$i] = $feed->getGoogleClickId();
+                    }
                 }
             }
             catch (ApiException $e) 
@@ -118,6 +139,7 @@ class OfflineConversions
 
                     $errorResponse[$i] = [
                         'click_id' => $click['click_id'],
+                        'value' => $click['value'] ?? 0,
                         'error' => $reason
                     ];
                 }

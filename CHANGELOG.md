@@ -1,6 +1,13 @@
 Change Log
 ==========
 
+## [1.2.19] - 03-30-2021
+
+### Added
+* Added a way to output the conversion value of success/error offline conversion imports for google/bing ads
+
+-------------------------------------------------------
+
 ## [1.2.18] - 06-02-2020
 
 ### Changed

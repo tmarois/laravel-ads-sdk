@@ -88,7 +88,7 @@ class OfflineConversions
      * upload()
      *
      */
-    public function upload()
+    public function upload($outputValue = false)
     {
         $errorResponse = [];
         $successResponse = [];
@@ -110,12 +110,21 @@ class OfflineConversions
                 {
                     $errorResponse[$i] = [
                         'click_id' => $click['click_id'],
+                        'value' => $click['value'] ?? 0,
                         'error' => $result->PartialErrors->BatchError[0]->ErrorCode ?? 'unknown'
                     ];
                 }
                 else 
                 {
-                    $successResponse[$i] = $click['click_id'];
+                    if ($outputValue==true) {
+                        $successResponse[$i] = [
+                            'click' => $click['click_id'],
+                            'value' => $click['value'] ?? 0,
+                        ];
+                    }
+                    else {
+                        $successResponse[$i] = $click['click_id'];
+                    }
                 }
             }
             catch (SoapFault $e)
@@ -137,6 +146,7 @@ class OfflineConversions
 
                 $errorResponse[$i] = [
                     'click_id' => $click['click_id'],
+                    'value' => $click['value'] ?? 0,
                     'error' => $errorCode
                 ];
 
@@ -149,6 +159,7 @@ class OfflineConversions
             {
                 $errorResponse[$i] = [
                     'click_id' => $click['click_id'],
+                    'value' => $click['value'] ?? 0,
                     'error' => $e->getMessage()
                 ];
             }
