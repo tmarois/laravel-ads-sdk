@@ -1,10 +1,17 @@
 Change Log
 ==========
 
-## [1.2.19] - 03-30-2021
+## [1.2.20] - 03-30-2021
 
 ### Added
 * Added a way to output the conversion value of success/error offline conversion imports for google/bing ads
+
+-------------------------------------------------------
+
+## [1.2.19] - 12-27-2020
+
+### Changed
+* Updated composer.json Google Ads API to v49 based on #19 (no other AdWords changes were made)
 
 -------------------------------------------------------
 
