@@ -1,6 +1,16 @@
 Change Log
 ==========
 
+## [1.2.21] - 03-31-2021
+
+### Added
+* For the google/bing offline conversions import and with setting of output value, now returns name and time.
+
+### Fixed
+* Fixed offline conversions for both google/bing to return the proper click id on errors (was returning the same click id for all errors)
+
+-------------------------------------------------------
+
 ## [1.2.20] - 03-30-2021
 
 ### Added

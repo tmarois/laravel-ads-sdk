@@ -107,24 +107,30 @@ class OfflineConversions
 
         foreach($this->mutations as $i=>$mutate)
         {
+            $click = $this->offlineConversions[$i] ?? [];
+
             try 
             {
                 $result = ($this->service->call(OfflineConversionFeedService::class))->mutate([$mutate]);
-
-                // array of "OfflineConversionFeed"
                 $responseValues = $result->getValue();
-
                 foreach($responseValues as $feed) 
                 {
                     if ($outputValue==true) 
                     {
-                        $successResponse[$i] = [
-                            'click_id' => $feed->getGoogleClickId(),
-                            'value' => $feed->getConversionValue()
+                        // $successResponse[] = [
+                        //     'click_id' => $feed->getGoogleClickId(),
+                        //     'value' => $feed->getConversionValue()
+                        // ];
+
+                        $successResponse[] = [
+                            'name' => $click['name'],
+                            'time' => $click['time'],
+                            'click_id' => $click['click_id'],
+                            'value' => $click['value'] ?? 0
                         ];
                     }
                     else {
-                        $successResponse[$i] = $feed->getGoogleClickId();
+                        $successResponse[] = $feed->getGoogleClickId();
                     }
                 }
             }
@@ -133,11 +139,9 @@ class OfflineConversions
                 foreach($e->getErrors() as $err) 
                 {
                     $reason = $err->getReason();
-                    $arr    = $err->getFieldPathElements();
-                    $index  = $arr[0]->getIndex() ?? null;
-                    $click  = $this->offlineConversions[$index] ?? [];
-
-                    $errorResponse[$i] = [
+                    $errorResponse[] = [
+                        'name' => $click['name'],
+                        'time' => $click['time'],
                         'click_id' => $click['click_id'],
                         'value' => $click['value'] ?? 0,
                         'error' => $reason
@@ -147,8 +151,8 @@ class OfflineConversions
         }
 
         // prevent abuse in api requests
-        // default is 0.1 seconds per request
-        usleep(100000);
+        // default is 0.05 seconds per request
+        usleep(050000);
 
         return [
             'errors' => ($errorResponse) ? $errorResponse : false,

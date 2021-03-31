@@ -109,6 +109,8 @@ class OfflineConversions
                 if (isset($result->PartialErrors->BatchError))
                 {
                     $errorResponse[$i] = [
+                        'name' => $click['name'] ?? '',
+                        'time' => $click['time'] ?? '',
                         'click_id' => $click['click_id'],
                         'value' => $click['value'] ?? 0,
                         'error' => $result->PartialErrors->BatchError[0]->ErrorCode ?? 'unknown'
@@ -145,6 +147,8 @@ class OfflineConversions
                 }
 
                 $errorResponse[$i] = [
+                    'name' => $click['name'] ?? '',
+                    'time' => $click['time'] ?? '',
                     'click_id' => $click['click_id'],
                     'value' => $click['value'] ?? 0,
                     'error' => $errorCode
@@ -158,6 +162,8 @@ class OfflineConversions
             catch (Exception $e) 
             {
                 $errorResponse[$i] = [
+                    'name' => $click['name'] ?? '',
+                    'time' => $click['time'] ?? '',
                     'click_id' => $click['click_id'],
                     'value' => $click['value'] ?? 0,
                     'error' => $e->getMessage()
@@ -166,8 +172,8 @@ class OfflineConversions
         }
 
         // prevent abuse in api requests
-        // default is 0.1 seconds per request
-        usleep(100000);
+        // default is 0.05 seconds per request
+        usleep(050000);
 
         return [
             'errors' => ($errorResponse) ? $errorResponse : false,
