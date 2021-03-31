@@ -448,7 +448,12 @@ $conversionImport = $googleAds->offlineConversionImport()
     ]);
 
 // when read, begin the upload
+// Response will return an array of [success] and [errors]
 $response = $conversionImport->upload();
+
+// passing true will return a more detail array of [success] and [errors] for each upload
+$response = $conversionImport->upload(true);
+
 ```
 
 *Note: `time` must include the timezone. "20190828 200112 America/New_York" (format "Ymd His timezone")*
