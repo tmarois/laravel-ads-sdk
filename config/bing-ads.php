@@ -10,5 +10,5 @@ return [
 
     'refreshToken' => env('BING_REFRESH_TOKEN', ''),
 
-    'redirect_uri' => 'https://login.microsoftonline.com/common/oauth2/nativeclient'
+    'redirect_uri' => env('BING_REDIRECT_URI', 'https://login.microsoftonline.com/common/oauth2/nativeclient'),
 ];
