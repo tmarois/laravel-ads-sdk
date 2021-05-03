@@ -14,7 +14,7 @@ $bingAds = LaravelAds::bingAds()->with('ACCOUNT_ID');
 
 |Method|Description|
 |---|---|
-|`with(ACCOUNT_ID)`|**(Required)** – This is your "Account Id" (not account number)
+|`with(ACCOUNT_ID)`|**(Required)** – This is your "Account Id" (can be found in the url &aid={ YOUR ACCOUNT ID })
 |`withCustomerId(CUSTOMER_ID)`|**(Optional)** – Some requests might require your customer id
 
 
@@ -489,7 +489,7 @@ Array
 ```
 
 
-## Manual Configuration 
+## Manual Configuration
 
 By default, the configuration will always look at the `/config/bing-ads.php`, however, you can override that by injecting your own config into the bing ads service object.
 
@@ -504,7 +504,7 @@ $bingAds->configuration([
     'refreshToken' => ''
 ]);
 
-$bingAds = $bingAds->with('ACCOUNT_ID'); 
+$bingAds = $bingAds->with('ACCOUNT_ID');
 
 // after the config is set above, now you can use the SDK as you normally do...
 // $report = $bingAds->reports('2020-01-01', '2020-01-05')->getAccountReport();
