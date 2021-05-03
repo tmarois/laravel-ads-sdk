@@ -117,13 +117,14 @@ This uses the [BingAds-PHP-SDK](https://github.com/BingAds/BingAds-PHP-SDK) for 
 * [Search Term Performance](BingAds-SDK.md#search-term-performance-report)
 * [Age Range Performance](BingAds-SDK.md#age-range-performance-report)
 * [Gender Performance](BingAds-SDK.md#gender-performance-report)
+* [Custom Fields](BingAds-SDK.md#custom-fields)
 
 
 # Facebook Ads
 
 This uses the [facebook-php-business-sdk](https://github.com/facebook/facebook-php-business-sdk) for [Facebook Marketing API](https://developers.facebook.com/docs/marketing-apis)
 
-Looking for and accepting contributors to help implement this. 
+Looking for and accepting contributors to help implement this.
 
 # Contributions
 
