@@ -44,7 +44,7 @@ Fetching all campaigns within the account.
 $campaigns = $googleAds->fetch()->getCampaigns();
 ```
 
-*Results: `getCampaigns()` (returns a [Laravel Collection](https://laravel.com/docs/5.7/collections) object, use `all()` for array)*
+*Results: `getCampaigns()` (returns a [Laravel Collection](https://laravel.com/docs/collections) object, use `all()` for array)*
 
 ```
 [0] => Array
@@ -68,7 +68,7 @@ Fetching all ad groups within the account.
 $adgroups  = $googleAds->fetch()->getAdGroups();
 ```
 
-*Results: `getAdGroups()` (returns a [Laravel Collection](https://laravel.com/docs/5.7/collections) object, use `all()` for array)*
+*Results: `getAdGroups()` (returns a [Laravel Collection](https://laravel.com/docs/collections) object, use `all()` for array)*
 
 ```
 [0] => Array
@@ -97,7 +97,7 @@ $accountReport  = $googleAds->reports($dateFrom, $dateTo)
                             ->getAccountReport();
 ```
 
-*Results: `getAccountReport()` (returns a [Laravel Collection](https://laravel.com/docs/5.7/collections) object, use `all()` for array)*
+*Results: `getAccountReport()` (returns a [Laravel Collection](https://laravel.com/docs/collections) object, use `all()` for array)*
 
 ```
 [0] => Array
@@ -122,7 +122,7 @@ $campaignReport  = $googleAds->reports($dateFrom, $dateTo)
                              ->getCampaignReport();
 ```
 
-*Results: `getCampaignReport()` (returns a [Laravel Collection](https://laravel.com/docs/5.7/collections) object, use `all()` for array)*
+*Results: `getCampaignReport()` (returns a [Laravel Collection](https://laravel.com/docs/collections) object, use `all()` for array)*
 
 ```
 [0] => Array
@@ -150,7 +150,7 @@ $adgroupReport  = $googleAds->reports($dateFrom, $dateTo)
                             ->getAdGroupReport();
 ```
 
-*Results: `getAdGroupReport()` (returns a [Laravel Collection](https://laravel.com/docs/5.7/collections) object, use `all()` for array)*
+*Results: `getAdGroupReport()` (returns a [Laravel Collection](https://laravel.com/docs/collections) object, use `all()` for array)*
 
 ```
 [0] => Array
@@ -178,7 +178,7 @@ $report  = $googleAds->reports($dateFrom, $dateTo)
                      ->getFinalUrlReport();
 ```
 
-*Results: `getFinalUrlReport()` (returns a [Laravel Collection](https://laravel.com/docs/5.7/collections) object, use `all()` for array)*
+*Results: `getFinalUrlReport()` (returns a [Laravel Collection](https://laravel.com/docs/collections) object, use `all()` for array)*
 
 ```
 [0] => Array
@@ -205,7 +205,7 @@ $report  = $googleAds->reports($dateFrom, $dateTo)
                      ->getPlacementReport();
 ```
 
-*Results: `getPlacementReport()` (returns a [Laravel Collection](https://laravel.com/docs/5.7/collections) object, use `all()` for array)*
+*Results: `getPlacementReport()` (returns a [Laravel Collection](https://laravel.com/docs/collections) object, use `all()` for array)*
 
 ```
 // the key of the array is also the placement domain
@@ -232,7 +232,7 @@ $report  = $googleAds->reports($dateFrom, $dateTo)
                      ->getPlacementUrlReport();
 ```
 
-*Results: `getPlacementUrlReport()` (returns a [Laravel Collection](https://laravel.com/docs/5.7/collections) object, use `all()` for array)*
+*Results: `getPlacementUrlReport()` (returns a [Laravel Collection](https://laravel.com/docs/collections) object, use `all()` for array)*
 
 ```
 // the key of the array is also the placement URL
@@ -260,7 +260,7 @@ $report  = $googleAds->reports($dateFrom, $dateTo)
                      ->getSearchTermReport();
 ```
 
-*Results: `getSearchTermReport()` (returns a [Laravel Collection](https://laravel.com/docs/5.7/collections) object, use `all()` for array)*
+*Results: `getSearchTermReport()` (returns a [Laravel Collection](https://laravel.com/docs/collections) object, use `all()` for array)*
 
 ```
 // the key of the array is also the search term
@@ -287,7 +287,7 @@ $report  = $googleAds->reports($dateFrom, $dateTo)
                      ->getAgeRangeReport();
 ```
 
-*Results: `getGenderReport()` (returns a [Laravel Collection](https://laravel.com/docs/5.7/collections) object, use `all()` for array)*
+*Results: `getGenderReport()` (returns a [Laravel Collection](https://laravel.com/docs/collections) object, use `all()` for array)*
 
 ```
 // the key of the array is also the age range
@@ -315,7 +315,7 @@ $report  = $googleAds->reports($dateFrom, $dateTo)
                      ->getGenderReport();
 ```
 
-*Results: `getGenderReport()` (returns a [Laravel Collection](https://laravel.com/docs/5.7/collections) object, use `all()` for array)*
+*Results: `getGenderReport()` (returns a [Laravel Collection](https://laravel.com/docs/collections) object, use `all()` for array)*
 
 ```
 // the key of the array is also the gender
@@ -492,7 +492,7 @@ Array
 ```
 
 
-## Manual Configuration 
+## Manual Configuration
 
 By default, the configuration will always look at the `/config/google-ads.php`, however, you can override that by injecting your own config into the google ads service object.
 
@@ -512,13 +512,13 @@ $googleAds->configuration([
         'clientSecret' => '',
         'refreshToken' => '',
     ],
-    'LOGGING' => [        
+    'LOGGING' => [
         'soapLogLevel' => 'ERROR',
         'reportDownloaderLogLevel' => 'ERROR'
     ]
 ]);
 
-$googleAds = $googleAds->with('ACCOUNT_ID'); 
+$googleAds = $googleAds->with('ACCOUNT_ID');
 
 // after the config is set above, now you can use the SDK as you normally do...
 // $report = $googleAds->reports('2020-01-01', '2020-01-05')->getAccountReport();

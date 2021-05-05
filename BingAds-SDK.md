@@ -14,7 +14,7 @@ $bingAds = LaravelAds::bingAds()->with('ACCOUNT_ID');
 
 |Method|Description|
 |---|---|
-|`with(ACCOUNT_ID)`|**(Required)** – This is your "Account Id" (not account number)
+|`with(ACCOUNT_ID)`|**(Required)** – This is your "Account Id" (can be found in the url &aid={ YOUR ACCOUNT ID })
 |`withCustomerId(CUSTOMER_ID)`|**(Optional)** – Some requests might require your customer id
 
 
@@ -34,6 +34,7 @@ $bingAds = LaravelAds::bingAds()->with('ACCOUNT_ID');
 * [Search Term Performance](#search-term-performance-report)
 * [Age Range Performance](#age-range-performance-report)
 * [Gender Performance](#gender-performance-report)
+* [Custom Fields](#custom-fields)
 
 ## Fetching
 
@@ -47,7 +48,7 @@ Fetching all campaigns within the account.
 $campaigns = $bingAds->fetch()->getCampaigns();
 ```
 
-*Results: `getCampaigns()` (returns a [Laravel Collection](https://laravel.com/docs/5.7/collections) object, use `all()` for array)*
+*Results: `getCampaigns()` (returns a [Laravel Collection](https://laravel.com/docs/collections) object, use `all()` for array)*
 
 ```
 [0] => Array
@@ -71,7 +72,7 @@ Fetching all ad groups within the account.
 $adgroups  = $bingAds->fetch()->getAdGroups();
 ```
 
-*Results: `getAdGroups()` (returns a [Laravel Collection](https://laravel.com/docs/5.7/collections) object, use `all()` for array)*
+*Results: `getAdGroups()` (returns a [Laravel Collection](https://laravel.com/docs/collections) object, use `all()` for array)*
 
 ```
 [0] => Array
@@ -99,7 +100,7 @@ $accountReport  = $bingAds->reports($dateFrom, $dateTo)
                           ->getAccountReport();
 ```
 
-*Results: `getAccountReport()` (returns a [Laravel Collection](https://laravel.com/docs/5.7/collections) object, use `all()` for array)*
+*Results: `getAccountReport()` (returns a [Laravel Collection](https://laravel.com/docs/collections) object, use `all()` for array)*
 
 ```
 [0] => Array
@@ -125,7 +126,7 @@ $campaignReport  = $bingAds->reports($dateFrom, $dateTo)
                            ->getCampaignReport();
 ```
 
-*Results: `getCampaignReport()` (returns a [Laravel Collection](https://laravel.com/docs/5.7/collections) object, use `all()` for array)*
+*Results: `getCampaignReport()` (returns a [Laravel Collection](https://laravel.com/docs/collections) object, use `all()` for array)*
 
 ```
 [0] => Array
@@ -152,7 +153,7 @@ $adgroupReport  = $bingAds->reports($dateFrom, $dateTo)
                           ->getAdGroupReport();
 ```
 
-*Results: `getAdGroupReport()` (returns a [Laravel Collection](https://laravel.com/docs/5.7/collections) object, use `all()` for array)*
+*Results: `getAdGroupReport()` (returns a [Laravel Collection](https://laravel.com/docs/collections) object, use `all()` for array)*
 
 ```
 [0] => Array
@@ -181,7 +182,7 @@ $report  = $bingads->reports($dateFrom, $dateTo)
                      ->getFinalUrlReport();
 ```
 
-*Results: `getFinalUrlReport()` (returns a [Laravel Collection](https://laravel.com/docs/5.7/collections) object, use `all()` for array)*
+*Results: `getFinalUrlReport()` (returns a [Laravel Collection](https://laravel.com/docs/collections) object, use `all()` for array)*
 
 ```
 [0] => Array
@@ -211,7 +212,7 @@ $report  = $bingads->reports($dateFrom, $dateTo)
                    ->getSearchTermReport();
 ```
 
-*Results: `getSearchTermReport()` (returns a [Laravel Collection](https://laravel.com/docs/5.7/collections) object, use `all()` for array)*
+*Results: `getSearchTermReport()` (returns a [Laravel Collection](https://laravel.com/docs/collections) object, use `all()` for array)*
 
 ```
 // the key of the array is also the search term
@@ -238,7 +239,7 @@ $report  = $bingads->reports($dateFrom, $dateTo)
                    ->getAgeRangeReport();
 ```
 
-*Results: `getGenderReport()` (returns a [Laravel Collection](https://laravel.com/docs/5.7/collections) object, use `all()` for array)*
+*Results: `getGenderReport()` (returns a [Laravel Collection](https://laravel.com/docs/collections) object, use `all()` for array)*
 
 ```
 // the key of the array is also the age range
@@ -266,7 +267,7 @@ $report  = $bingads->reports($dateFrom, $dateTo)
                    ->getGenderReport();
 ```
 
-*Results: `getGenderReport()` (returns a [Laravel Collection](https://laravel.com/docs/5.7/collections) object, use `all()` for array)*
+*Results: `getGenderReport()` (returns a [Laravel Collection](https://laravel.com/docs/collections) object, use `all()` for array)*
 
 ```
 // the key of the array is also the gender
@@ -281,6 +282,55 @@ $report  = $bingads->reports($dateFrom, $dateTo)
     [cost] => 162.28
     [conversions] => 18
     [conversion_value] => 88
+)
+...
+```
+
+### Custom Fields
+
+You can set your own fields to pull from Bing Ads. Available fields can be
+found in `Microsoft\BingAds\V13\Reporting`
+
+```php
+use Microsoft\BingAds\V13\Reporting\AdGroupPerformanceReportColumn;
+
+$adgroupReport  = $bingAds->reports($dateFrom, $dateTo)
+    ->setFields([
+        AdGroupPerformanceReportColumn::TimePeriod,
+        AdGroupPerformanceReportColumn::AccountId,
+        AdGroupPerformanceReportColumn::CampaignId,
+        AdGroupPerformanceReportColumn::CampaignName,
+        AdGroupPerformanceReportColumn::AdGroupId,
+        AdGroupPerformanceReportColumn::AdGroupName,
+        AdGroupPerformanceReportColumn::Clicks,
+        AdGroupPerformanceReportColumn::Impressions,
+        AdGroupPerformanceReportColumn::Spend,
+        AdGroupPerformanceReportColumn::Conversions,
+        // AdGroupPerformanceReportColumn::Revenue,
+        // AdGroupPerformanceReportColumn::AveragePosition,
+
+        // new custom field
+        AdGroupPerformanceReportColumn::CostPerConversion,
+    ])
+->getAdGroupReport();
+```
+
+*Results: `getAdGroupReport()` (returns a [Laravel Collection](https://laravel.com/docs/collections) object, use `all()` for array)*
+
+```
+[0] => Array
+(
+    [date] => 2018-12-26
+    [account_id] => 000000
+    [campaign_id] => 000000
+    [campaign_name] => Campaign Name
+    [ad_group_id] => 000000
+    [ad_group_name] => Ad Group Name
+    [clicks] => 684
+    [impressions] => 6008
+    [cost] => 290.13
+    [conversions] => 87
+    [costperconversion] => 3.33
 )
 ...
 ```
@@ -439,7 +489,7 @@ Array
 ```
 
 
-## Manual Configuration 
+## Manual Configuration
 
 By default, the configuration will always look at the `/config/bing-ads.php`, however, you can override that by injecting your own config into the bing ads service object.
 
@@ -454,7 +504,7 @@ $bingAds->configuration([
     'refreshToken' => ''
 ]);
 
-$bingAds = $bingAds->with('ACCOUNT_ID'); 
+$bingAds = $bingAds->with('ACCOUNT_ID');
 
 // after the config is set above, now you can use the SDK as you normally do...
 // $report = $bingAds->reports('2020-01-01', '2020-01-05')->getAccountReport();
