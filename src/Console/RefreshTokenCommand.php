@@ -10,7 +10,8 @@ use Microsoft\BingAds\Auth\AuthorizationData;
 use Microsoft\BingAds\Auth\OAuthTokenRequestException;
 use Microsoft\BingAds\Auth\OAuthWebAuthCodeGrant;
 
-class RefreshTokenCommand extends Command {
+class RefreshTokenCommand extends Command
+{
 
     /**
      * Console command signature
@@ -34,15 +35,14 @@ class RefreshTokenCommand extends Command {
     {
         $service = strtolower($this->option('service'));
 
-        switch($service)
-        {
-            case 'googleads' :
+        switch ($service) {
+            case 'googleads':
                 $this->googleAdsRefresh();
             break;
-            case 'bingads' :
+            case 'bingads':
                 $this->bingAdsRefresh();
             break;
-            default :
+            default:
                 $this->error("Error: --service option is required. (Use GoogleAds or BingAds)");
         }
     }
@@ -56,7 +56,9 @@ class RefreshTokenCommand extends Command {
         $config = config('google-ads')['OAUTH2'] ?? [];
 
         // check if the config is right
-        if (!$config) return $this->error('Your Google Ads config is not setup properly. Aborting.');
+        if (!$config) {
+            return $this->error('Your Google Ads config is not setup properly. Aborting.');
+        }
 
         $clientId = $config['clientId'];
         $clientSecret = $config['clientSecret'];
@@ -86,12 +88,10 @@ class RefreshTokenCommand extends Command {
         $accessToken = $this->ask('Insert your access token');
 
         // Fetch auth token
-        try
-        {
+        try {
             $oauth2->setCode($accessToken);
             $authToken = $oauth2->fetchAuthToken();
-        }
-        catch (Exception $exception) {
+        } catch (Exception $exception) {
             return $this->error($exception->getMessage());
         }
 
@@ -117,7 +117,9 @@ class RefreshTokenCommand extends Command {
         $config = config('bing-ads') ?? [];
 
         // check if the config is right
-        if (!$config) return $this->error('Your Bing Ads config is not setup properly. Aborting.');
+        if (!$config) {
+            return $this->error('Your Bing Ads config is not setup properly. Aborting.');
+        }
 
         $clientId       = $config['clientId'];
         $clientSecret   = $config['clientSecret'];
@@ -129,7 +131,7 @@ class RefreshTokenCommand extends Command {
             ->withClientSecret($clientSecret)
             ->withRedirectUri($redirectUri)
             // ->withRedirectUri('urn:ietf:wg:oauth:2.0:oob')
-            ->withState(rand(0,999999999));
+            ->withState(rand(0, 999999999));
 
         $AuthorizationData = (new AuthorizationData())
             ->withAuthentication($authentication)
@@ -142,11 +144,9 @@ class RefreshTokenCommand extends Command {
 
         print_r($accessToken);
 
-        try
-        {
+        try {
             $AuthorizationData->Authentication->RequestOAuthTokensByResponseUri($accessToken);
-        }
-        catch (Exception $exception) {
+        } catch (Exception $exception) {
             return $this->error($exception->getMessage());
         }
 
@@ -157,7 +157,5 @@ class RefreshTokenCommand extends Command {
             'Refresh token: "%s"',
             $AuthorizationData->Authentication->OAuthTokens->RefreshToken
         ));
-
     }
-
 }

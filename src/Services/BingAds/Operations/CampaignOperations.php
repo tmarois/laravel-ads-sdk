@@ -1,4 +1,6 @@
-<?php namespace LaravelAds\Services\BingAds\Operations;
+<?php
+
+namespace LaravelAds\Services\BingAds\Operations;
 
 use LaravelAds\Services\BingAds\Operations\Campaign;
 use LaravelAds\Services\BingAds\Service;
@@ -16,24 +18,6 @@ use Microsoft\BingAds\Auth\ServiceClientType;
 class CampaignOperations
 {
     /**
-     * $service
-     *
-     */
-    protected $service = null;
-
-    /**
-     * $campaignRequest
-     *
-     */
-    protected $request = null;
-
-    /**
-     * $campaignResponse
-     *
-     */
-    protected $response = null;
-
-    /**
      * __construct()
      *
      */
@@ -45,46 +29,27 @@ class CampaignOperations
     }
 
     /**
-     * request()
+     * sendRequest()
      *
      */
-    public function request()
+    protected function sendRequest()
     {
-        return $this->request;
-    }
+        $serviceCall = $this->service->call(ServiceClientType::CampaignManagementVersion13);
 
-    /**
-     * response()
-     *
-     */
-    public function response()
-    {
-        return $this->response;
-    }
+        try {
+            $campaign = $this->request();
 
-    /**
-     * set()
-     *
-     */
-    public function set($campaign)
-    {
-        $this->response = $campaign;
+            $request = new GetCampaignsByIdsRequest();
+            $request->AccountId = $this->service->getClientId();
+            $request->CampaignIds = [$campaign->Id];
 
-        // set up our request if we have not done this yet
-        $this->request()->Id = $campaign->Id;
+            return $serviceCall->GetService()->GetCampaignsByIds($request)->Campaigns->Campaign[0] ?? null;
+        } catch (\Exception $e) {
+            print $serviceCall->GetService()->__getLastRequest()."\n";
+            print $serviceCall->GetService()->__getLastResponse()."\n";
+        }
 
-        return $this;
-    }
-
-    /**
-     * get()
-     *
-     */
-    public function get()
-    {
-        $this->set($this->sendRequest());
-
-        return $this;
+        return (new CampaignProxy());
     }
 
     /**
@@ -97,8 +62,7 @@ class CampaignOperations
     {
         $serviceCall = $this->service->call(ServiceClientType::CampaignManagementVersion13);
 
-        try
-        {
+        try {
             $campaign = $this->request();
 
             $request = new UpdateCampaignsRequest();
@@ -111,40 +75,14 @@ class CampaignOperations
             $serverResponse = $serviceCall->GetService()->UpdateCampaigns($request);
 
             // lets update the current object
-            if ($updateObject) $this->get();
-        }
-        catch(\Exception $e) {
+            if ($updateObject) {
+                $this->get();
+            }
+        } catch (\Exception $e) {
             print $serviceCall->GetService()->__getLastRequest()."\n";
             print $serviceCall->GetService()->__getLastResponse()."\n";
         }
 
         return $this;
     }
-
-    /**
-     * sendRequest()
-     *
-     */
-    protected function sendRequest()
-    {
-        $serviceCall = $this->service->call(ServiceClientType::CampaignManagementVersion13);
-
-        try
-        {
-            $campaign = $this->request();
-
-            $request = new GetCampaignsByIdsRequest();
-            $request->AccountId = $this->service->getClientId();
-            $request->CampaignIds = [$campaign->Id];
-
-            return $serviceCall->GetService()->GetCampaignsByIds($request)->Campaigns->Campaign[0] ?? null;
-        }
-        catch(\Exception $e) {
-            print $serviceCall->GetService()->__getLastRequest()."\n";
-            print $serviceCall->GetService()->__getLastResponse()."\n";
-        }
-
-        return (new CampaignProxy());
-    }
-
 }
