@@ -1,4 +1,6 @@
-<?php namespace LaravelAds;
+<?php
+
+namespace LaravelAds;
 
 use LaravelAds\Services\GoogleAds\Service AS GoogleAdsService;
 use LaravelAds\Services\BingAds\Service AS BingAdsService;

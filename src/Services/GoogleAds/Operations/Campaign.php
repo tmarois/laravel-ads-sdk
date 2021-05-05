@@ -1,4 +1,6 @@
-<?php namespace LaravelAds\Services\GoogleAds\Operations;
+<?php
+
+namespace LaravelAds\Services\GoogleAds\Operations;
 
 use LaravelAds\Services\GoogleAds\Operations\CampaignOperations;
 
@@ -176,7 +178,7 @@ class Campaign extends CampaignOperations
             $strategy =@ $this->response()->getBiddingStrategyConfiguration()->getBiddingScheme() ?? null;
 
             $amount = null;
-            
+
             if ($strategy) {
                 $tcpa =@ $strategy->getTargetCpa();
                 if ($tcpa) {

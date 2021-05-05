@@ -1,5 +1,6 @@
-<?php namespace LaravelAds\Services\GoogleAds;
+<?php
 
+namespace LaravelAds\Services\GoogleAds;
 
 use LaravelAds\Services\GoogleAds\Operations\Campaign;
 use LaravelAds\Services\GoogleAds\Operations\AdGroup;
@@ -169,7 +170,7 @@ class Service
     */
     public function configuration($config = [])
     {
-        if (!$config) 
+        if (!$config)
         {
             // use laravel config
             $config = config('google-ads');

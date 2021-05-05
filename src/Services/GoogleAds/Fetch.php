@@ -1,4 +1,6 @@
-<?php namespace LaravelAds\Services\GoogleAds;
+<?php
+
+namespace LaravelAds\Services\GoogleAds;
 
 use LaravelAds\Services\GoogleAds\Operations\AdGroupResponse;
 

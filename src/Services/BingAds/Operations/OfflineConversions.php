@@ -1,4 +1,6 @@
-<?php namespace LaravelAds\Services\BingAds\Operations;
+<?php
+
+namespace LaravelAds\Services\BingAds\Operations;
 
 use SoapVar;
 use SoapFault;
@@ -97,7 +99,7 @@ class OfflineConversions
         {
             $click = $this->offlineConversions[$i] ?? [];
 
-            try 
+            try
             {
                 $serviceCall = $this->service->call(ServiceClientType::CampaignManagementVersion13);
 
@@ -116,7 +118,7 @@ class OfflineConversions
                         'error' => $result->PartialErrors->BatchError[0]->ErrorCode ?? 'unknown'
                     ];
                 }
-                else 
+                else
                 {
                     if ($outputValue==true) {
                         $successResponse[$i] = [
@@ -159,7 +161,7 @@ class OfflineConversions
                 // print $serviceCall->GetService()->__getLastRequest()."\r\n";
                 // print $serviceCall->GetService()->__getLastResponse()."\r\n";
             }
-            catch (Exception $e) 
+            catch (Exception $e)
             {
                 $errorResponse[$i] = [
                     'name' => $click['name'] ?? '',

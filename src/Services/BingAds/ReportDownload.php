@@ -1,4 +1,6 @@
-<?php namespace LaravelAds\Services\BingAds;
+<?php
+
+namespace LaravelAds\Services\BingAds;
 
 use SoapVar;
 use SoapFault;
@@ -227,7 +229,7 @@ class ReportDownload
     public function toArray()
     {
         if (!$this->results) return [];
-        
+
         $csv    = array_map('str_getcsv',$this->results);
 
         $h = $csv[10] ?? [];

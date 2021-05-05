@@ -1,4 +1,6 @@
-<?php namespace LaravelAds\Services\BingAds;
+<?php
+
+namespace LaravelAds\Services\BingAds;
 
 use LaravelAds\Services\BingAds\Reports;
 use LaravelAds\Services\BingAds\Fetch;

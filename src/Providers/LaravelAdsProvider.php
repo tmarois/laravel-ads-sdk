@@ -1,4 +1,6 @@
-<?php namespace LaravelAds\Providers;
+<?php
+
+namespace LaravelAds\Providers;
 
 use Illuminate\Support\ServiceProvider;
 use LaravelAds\Console\RefreshTokenCommand;

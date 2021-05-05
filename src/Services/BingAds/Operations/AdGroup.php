@@ -1,4 +1,6 @@
-<?php namespace LaravelAds\Services\BingAds\Operations;
+<?php
+
+namespace LaravelAds\Services\BingAds\Operations;
 
 use LaravelAds\Services\BingAds\Operations\AdGroupOperations;
 

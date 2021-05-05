@@ -1,4 +1,6 @@
-<?php namespace LaravelAds\Services\GoogleAds\Operations;
+<?php
+
+namespace LaravelAds\Services\GoogleAds\Operations;
 
 use LaravelAds\Services\GoogleAds\Operations\AdGroupOperations;
 

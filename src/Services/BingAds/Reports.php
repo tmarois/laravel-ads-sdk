@@ -1,4 +1,6 @@
-<?php namespace LaravelAds\Services\BingAds;
+<?php
+
+namespace LaravelAds\Services\BingAds;
 
 use SoapVar;
 use SoapFault;
@@ -325,7 +327,7 @@ class Reports
         catch (SoapFault $e)
         {
             printf("-----\r\nFault Code: %s\r\nFault String: %s\r\nFault Detail: \r\n", $e->faultcode, $e->faultstring);
-        
+
             if (isset($e->detail)) {
                 var_dump($e->detail);
             }
@@ -392,7 +394,7 @@ class Reports
         catch (SoapFault $e)
         {
             printf("-----\r\nFault Code: %s\r\nFault String: %s\r\nFault Detail: \r\n", $e->faultcode, $e->faultstring);
-            
+
             if (isset($e->detail)) {
                 var_dump($e->detail);
             }
@@ -461,7 +463,7 @@ class Reports
         catch (SoapFault $e)
         {
             printf("-----\r\nFault Code: %s\r\nFault String: %s\r\nFault Detail: \r\n", $e->faultcode, $e->faultstring);
-            
+
             if (isset($e->detail)) {
                 var_dump($e->detail);
             }
@@ -526,7 +528,7 @@ class Reports
             );
 
             $encodedReport   = new SoapVar($report, SOAP_ENC_OBJECT, 'GeographicPerformanceReportRequest', $this->serviceProxy->GetNamespace());
-            
+
             $reportRequest = $this->submitGenerateReport($encodedReport);
 
             if ($reportRequest) {
@@ -537,7 +539,7 @@ class Reports
         catch (SoapFault $e)
         {
             printf("-----\r\nFault Code: %s\r\nFault String: %s\r\nFault Detail: \r\n", $e->faultcode, $e->faultstring);
-            
+
             if (isset($e->detail)) {
                 var_dump($e->detail);
             }

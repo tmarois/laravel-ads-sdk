@@ -1,4 +1,6 @@
-<?php namespace LaravelAds\Services\GoogleAds;
+<?php
+
+namespace LaravelAds\Services\GoogleAds;
 
 use Google\AdsApi\AdWords\Reporting\v201809\ReportDownloader;
 use Google\AdsApi\AdWords\Reporting\v201809\ReportDefinition;
