@@ -1,4 +1,6 @@
-<?php namespace LaravelAds\Services\GoogleAds\Operations;
+<?php
+
+namespace LaravelAds\Services\GoogleAds\Operations;
 
 use LaravelAds\Services\GoogleAds\Service;
 
@@ -33,7 +35,8 @@ class OfflineConversions
      * __construct()
      *
      */
-    public function __construct(Service $service = null) {
+    public function __construct(Service $service = null)
+    {
         $this->service = $service;
     }
 
@@ -42,20 +45,21 @@ class OfflineConversions
      *
      * @return array
      */
-    public function getConversions() {
+    public function getConversions()
+    {
         return $this->offlineConversions;
     }
 
     /**
      * addBulk()
      * Add multiple conversions to the offline array
-     * 
+     *
      * @param array $conversions
      * @return OfflineConversions
      */
     public function addBulk(array $conversions = [])
     {
-        foreach($conversions as $conversion) {
+        foreach ($conversions as $conversion) {
             $this->add($conversion);
         }
 
@@ -65,12 +69,12 @@ class OfflineConversions
     /**
      * add()
      * Add a single conversion to the offline array
-     * The conversion array should have keys of 
-     * 
+     * The conversion array should have keys of
+     *
      *    name, time, click_id, value
-     * 
-     * 
-     * @param array $conversion 
+     *
+     *
+     * @param array $conversion
      * @return OfflineConversions
      */
     public function add(array $conversion = [])
@@ -96,27 +100,23 @@ class OfflineConversions
      *
      * This method will upload offline converions
      * and return the success and errors of each id
-     * 
+     *
      * https://github.com/googleads/googleads-php-lib/blob/cec475ce83f8cdb923cfc08d9053b48769c0e64a/src/Google/AdsApi/AdWords/v201809/cm/OfflineConversionFeed.php
-     * 
+     *
      */
     public function upload($outputValue = false)
     {
         $errorResponse = [];
         $successResponse = [];
 
-        foreach($this->mutations as $i=>$mutate)
-        {
+        foreach ($this->mutations as $i => $mutate) {
             $click = $this->offlineConversions[$i] ?? [];
 
-            try 
-            {
+            try {
                 $result = ($this->service->call(OfflineConversionFeedService::class))->mutate([$mutate]);
                 $responseValues = $result->getValue();
-                foreach($responseValues as $feed) 
-                {
-                    if ($outputValue==true) 
-                    {
+                foreach ($responseValues as $feed) {
+                    if ($outputValue == true) {
                         // $successResponse[] = [
                         //     'click_id' => $feed->getGoogleClickId(),
                         //     'value' => $feed->getConversionValue()
@@ -128,16 +128,12 @@ class OfflineConversions
                             'click_id' => $click['click_id'],
                             'value' => $click['value'] ?? 0
                         ];
-                    }
-                    else {
+                    } else {
                         $successResponse[] = $feed->getGoogleClickId();
                     }
                 }
-            }
-            catch (ApiException $e) 
-            {
-                foreach($e->getErrors() as $err) 
-                {
+            } catch (ApiException $e) {
+                foreach ($e->getErrors() as $err) {
                     $reason = $err->getReason();
                     $errorResponse[] = [
                         'name' => $click['name'],

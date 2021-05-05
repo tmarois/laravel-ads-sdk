@@ -3,18 +3,16 @@
 namespace LaravelAds\Services\BingAds\Operations;
 
 use LaravelAds\Services\BingAds\Service;
-use Microsoft\BingAds\Auth\ServiceClient;
 
 use Microsoft\BingAds\Auth\ServiceClientType;
-use LaravelAds\Services\BingAds\Operations\AdGroup;
 use LaravelAds\Services\BingAds\Operations\Operation;
+use Microsoft\BingAds\V13\CustomerManagement\UpdateCustomerRequest;
+use Microsoft\BingAds\V13\CustomerManagement\GetCustomersInfoRequest;
+use Microsoft\BingAds\V13\CustomerManagement\Customer as CustomerProxy;
 
-use Microsoft\BingAds\V13\CampaignManagement\UpdateAdGroupsRequest;
-use Microsoft\BingAds\V13\CampaignManagement\AdGroup as AdGroupProxy;
-use Microsoft\BingAds\V13\CampaignManagement\GetAdGroupsByIdsRequest;
-
-class AdGroupOperations extends Operation
+class CustomerOperations extends Operation
 {
+
     /**
      * __construct()
      *
@@ -23,7 +21,7 @@ class AdGroupOperations extends Operation
     {
         $this->service = $service;
 
-        $this->request = new AdGroupProxy();
+        $this->request = new CustomerProxy();
     }
 
     /**
@@ -32,23 +30,22 @@ class AdGroupOperations extends Operation
      */
     protected function sendRequest()
     {
-        $serviceCall = $this->service->call(ServiceClientType::CampaignManagementVersion13);
+        $serviceCall = $this->service->call(ServiceClientType::CustomerManagementVersion13);
 
         try {
-            $adGroup = $this->request();
+            $customer = $this->request();
 
-            $request = new GetAdGroupsByIdsRequest();
-            $request->AccountId  = $this->service->getClientId();
-            $request->CampaignId = $adGroup->CampaignId;
-            $request->AdGroupIds = [$adGroup->Id];
+            $request = new GetCustomersInfoRequest();
+            $request->CustomerNameFilter = '';
+            $request->TopN = 100;
 
-            return $serviceCall->GetService()->GetAdGroupsByIds($request)->AdGroups->AdGroup[0] ?? null;
+            return $serviceCall->GetService()->GetCustomersInfo($request)->CustomersInfo->CustomerInfo[0] ?? null;
         } catch (\Exception $e) {
             print $serviceCall->GetService()->__getLastRequest()."\n";
             print $serviceCall->GetService()->__getLastResponse()."\n";
         }
 
-        return (new AdGroupProxy());
+        return (new CustomerProxy());
     }
 
     /**
@@ -57,12 +54,14 @@ class AdGroupOperations extends Operation
      */
     public function save($updateObject = true)
     {
+        /*
         $serviceCall = $this->service->call(ServiceClientType::CampaignManagementVersion13);
 
-        try {
+        try
+        {
             $adGroup = $this->request();
 
-            $request = new UpdateAdGroupsRequest();
+            $request = new UpdateCustomerRequest();
             $request->AccountId  = $this->service->getClientId();
             $request->CampaignId = $adGroup->CampaignId;
             $request->AdGroups = [$adGroup];
@@ -72,13 +71,13 @@ class AdGroupOperations extends Operation
             $serverResponse = $serviceCall->GetService()->UpdateAdGroups($request);
 
             // lets update the current object
-            if ($updateObject) {
-                $this->get();
-            }
-        } catch (\Exception $e) {
+            if ($updateObject) $this->get();
+        }
+        catch(\Exception $e) {
             print $serviceCall->GetService()->__getLastRequest()."\n";
             print $serviceCall->GetService()->__getLastResponse()."\n";
         }
+        */
 
         return $this;
     }

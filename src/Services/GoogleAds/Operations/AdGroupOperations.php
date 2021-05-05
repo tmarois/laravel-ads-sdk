@@ -1,4 +1,6 @@
-<?php namespace LaravelAds\Services\GoogleAds\Operations;
+<?php
+
+namespace LaravelAds\Services\GoogleAds\Operations;
 
 use LaravelAds\Services\GoogleAds\Operations\AdGroup;
 use LaravelAds\Services\GoogleAds\Service;
@@ -9,7 +11,6 @@ use Google\AdsApi\AdWords\v201809\cm\AdGroupService;
 use LaravelAds\Services\GoogleAds\Operations\AdGroupResponse;
 
 use Google\AdsApi\AdWords\v201809\cm\Operator;
-
 
 class AdGroupOperations
 {

@@ -1,5 +1,6 @@
-<?php namespace LaravelAds\Services\GoogleAds;
+<?php
 
+namespace LaravelAds\Services\GoogleAds;
 
 use LaravelAds\Services\GoogleAds\ReportDownload;
 
@@ -72,13 +73,11 @@ class Reports
      */
     public function setFields($fields, $auto = false)
     {
-        if ($auto == false)
-        {
+        if ($auto == false) {
             $this->fields = $fields;
         }
 
-        if ($auto == true && empty($this->fields))
-        {
+        if ($auto == true && empty($this->fields)) {
             $this->fields = $fields;
         }
 
@@ -108,15 +107,14 @@ class Reports
         $selector = new Selector();
         $selector->setFields($fields);
         $selector->setDateRange([
-            'min' => str_replace('-','',$dateRange[0]),
-            'max' => str_replace('-','',$dateRange[1])
+            'min' => str_replace('-', '', $dateRange[0]),
+            'max' => str_replace('-', '', $dateRange[1])
         ]);
 
-        if ($filters)
-        {
+        if ($filters) {
             $predicates = [];
 
-            foreach($filters as $filter) {
+            foreach ($filters as $filter) {
                 $predicates[] = new Predicate($filter['field'], PredicateOperator::IN, $filter['values']);
             }
 
@@ -172,7 +170,7 @@ class Reports
             'Cost',
             'Conversions',
             'ConversionValue'
-        ],true);
+        ], true);
 
         return $this->reportDownload(ReportDefinitionReportType::ACCOUNT_PERFORMANCE_REPORT)->toCollection();
     }
@@ -197,7 +195,7 @@ class Reports
             'Cost',
             'Conversions',
             'ConversionValue'
-        ],true);
+        ], true);
 
         return $this->reportDownload(ReportDefinitionReportType::CAMPAIGN_PERFORMANCE_REPORT)->toCollection();
     }
@@ -223,7 +221,7 @@ class Reports
             'Conversions',
             'ConversionValue',
             'AveragePosition'
-        ],true);
+        ], true);
 
         return $this->reportDownload(ReportDefinitionReportType::ADGROUP_PERFORMANCE_REPORT)->toCollection();
     }
@@ -244,7 +242,7 @@ class Reports
             'Conversions',
             'ConversionValue',
             'EffectiveFinalUrl'
-        ],true);
+        ], true);
 
         return $this->reportDownload(ReportDefinitionReportType::FINAL_URL_REPORT)->toCollection();
     }
@@ -258,7 +256,7 @@ class Reports
      */
     public function getAgeRangeReport()
     {
-        return $this->getCriteriaReport(ReportDefinitionReportType::AGE_RANGE_PERFORMANCE_REPORT,'age_range','Criteria');
+        return $this->getCriteriaReport(ReportDefinitionReportType::AGE_RANGE_PERFORMANCE_REPORT, 'age_range', 'Criteria');
     }
 
     /**
@@ -267,7 +265,7 @@ class Reports
      */
     public function getGenderReport()
     {
-        return $this->getCriteriaReport(ReportDefinitionReportType::GENDER_PERFORMANCE_REPORT,'gender','Criteria');
+        return $this->getCriteriaReport(ReportDefinitionReportType::GENDER_PERFORMANCE_REPORT, 'gender', 'Criteria');
     }
 
     /**
@@ -276,7 +274,7 @@ class Reports
      */
     public function getPlacementReport()
     {
-        return $this->getCriteriaReport(ReportDefinitionReportType::PLACEMENT_PERFORMANCE_REPORT,'placement','Criteria');
+        return $this->getCriteriaReport(ReportDefinitionReportType::PLACEMENT_PERFORMANCE_REPORT, 'placement', 'Criteria');
     }
 
     /**
@@ -285,7 +283,7 @@ class Reports
      */
     public function getPlacementUrlReport()
     {
-        return $this->getCriteriaReport(ReportDefinitionReportType::URL_PERFORMANCE_REPORT,'url','Url');
+        return $this->getCriteriaReport(ReportDefinitionReportType::URL_PERFORMANCE_REPORT, 'url', 'Url');
     }
 
     /**
@@ -294,7 +292,7 @@ class Reports
      */
     public function getSearchTermReport()
     {
-        return $this->getCriteriaReport(ReportDefinitionReportType::SEARCH_QUERY_PERFORMANCE_REPORT,'search_term','Query');
+        return $this->getCriteriaReport(ReportDefinitionReportType::SEARCH_QUERY_PERFORMANCE_REPORT, 'search_term', 'Query');
     }
 
 
@@ -311,9 +309,8 @@ class Reports
             'Cost',
             'Conversions',
             'ConversionValue'
-        ],true);
+        ], true);
 
         return $this->reportDownload($report)->aggregate($field);
     }
-
 }

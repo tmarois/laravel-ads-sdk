@@ -1,5 +1,6 @@
-<?php namespace LaravelAds\Services\GoogleAds;
+<?php
 
+namespace LaravelAds\Services\GoogleAds;
 
 use LaravelAds\Services\GoogleAds\Operations\Campaign;
 use LaravelAds\Services\GoogleAds\Operations\AdGroup;
@@ -46,7 +47,8 @@ class Service
      *
      * @return self
      */
-    public function with($clientId) {
+    public function with($clientId)
+    {
         $this->clientId = $clientId;
         return $this;
     }
@@ -56,7 +58,8 @@ class Service
      *
      * @return string
      */
-    public function getClientId() {
+    public function getClientId()
+    {
         return $this->clientId;
     }
 
@@ -65,7 +68,8 @@ class Service
      *
      *
      */
-    public function fetch() {
+    public function fetch()
+    {
         return (new Fetch($this));
     }
 
@@ -74,7 +78,8 @@ class Service
      *
      *
      */
-    public function reports($dateFrom, $dateTo) {
+    public function reports($dateFrom, $dateTo)
+    {
         return (new Reports($this))->setDateRange($dateFrom, $dateTo);
     }
 
@@ -83,7 +88,8 @@ class Service
      *
      *
      */
-    public function call($service) {
+    public function call($service)
+    {
         return (new AdWordsServices())->get($this->session(), $service);
     }
 
@@ -92,7 +98,8 @@ class Service
      *
      *
      */
-    public function offlineConversionImport(array $conversions = []) {
+    public function offlineConversionImport(array $conversions = [])
+    {
         return (new OfflineConversions($this))->addBulk($conversions);
     }
 
@@ -108,8 +115,7 @@ class Service
     {
         if ($adGroup instanceof AdGroupProxy) {
             return (new AdGroup($this))->set($adGroup);
-        }
-        else {
+        } else {
             return (new AdGroup($this))->setId($adGroup)->get();
         }
     }
@@ -123,8 +129,7 @@ class Service
     {
         if ($campaign instanceof CampaignProxy) {
             return (new Campaign($this))->set($campaign);
-        }
-        else {
+        } else {
             return (new Campaign($this))->setId($campaign)->get();
         }
     }
@@ -138,8 +143,7 @@ class Service
      */
     public function session()
     {
-        if (!$this->session)
-        {
+        if (!$this->session) {
             $this->session = (new AdWordsSessionBuilder())
                 ->from($this->configuration())
                 ->withOAuth2Credential($this->oAuth2credentials())
@@ -169,8 +173,7 @@ class Service
     */
     public function configuration($config = [])
     {
-        if (!$config) 
-        {
+        if (!$config) {
             // use laravel config
             $config = config('google-ads');
 
@@ -183,5 +186,4 @@ class Service
         // create a new config
         return ($this->config = (new Configuration($config)));
     }
-
 }

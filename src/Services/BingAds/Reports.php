@@ -1,4 +1,6 @@
-<?php namespace LaravelAds\Services\BingAds;
+<?php
+
+namespace LaravelAds\Services\BingAds;
 
 use SoapVar;
 use Exception;
@@ -15,6 +17,7 @@ use Microsoft\BingAds\V13\Reporting\AdGroupPerformanceReportColumn;
 use Microsoft\BingAds\V13\Reporting\AdGroupPerformanceReportRequest;
 use Microsoft\BingAds\V13\Reporting\AdGroupReportScope;
 use Microsoft\BingAds\V13\Reporting\AgeGenderAudienceReportColumn;
+use Microsoft\BingAds\V13\Reporting\AgeGenderAudienceReportColumn;
 use Microsoft\BingAds\V13\Reporting\AgeGenderAudienceReportRequest;
 use Microsoft\BingAds\V13\Reporting\CampaignPerformanceReportColumn;
 use Microsoft\BingAds\V13\Reporting\CampaignPerformanceReportRequest;
@@ -23,12 +26,16 @@ use Microsoft\BingAds\V13\Reporting\Date;
 use Microsoft\BingAds\V13\Reporting\DestinationUrlPerformanceReportColumn;
 use Microsoft\BingAds\V13\Reporting\DestinationUrlPerformanceReportRequest;
 use Microsoft\BingAds\V13\Reporting\GeographicPerformanceReportColumn;
+use Microsoft\BingAds\V13\Reporting\GeographicPerformanceReportColumn;
 use Microsoft\BingAds\V13\Reporting\GeographicPerformanceReportRequest;
+use Microsoft\BingAds\V13\Reporting\KeywordPerformanceReportSort;
 use Microsoft\BingAds\V13\Reporting\ReportAggregation;
 use Microsoft\BingAds\V13\Reporting\ReportFormat;
+use Microsoft\BingAds\V13\Reporting\ReportRequestStatusType;
 use Microsoft\BingAds\V13\Reporting\ReportTime;
 use Microsoft\BingAds\V13\Reporting\SearchQueryPerformanceReportColumn;
 use Microsoft\BingAds\V13\Reporting\SearchQueryPerformanceReportRequest;
+use Microsoft\BingAds\V13\Reporting\SortOrder;
 use Microsoft\BingAds\V13\Reporting\SubmitGenerateReportRequest;
 
 class Reports

@@ -1,4 +1,6 @@
-<?php namespace LaravelAds\Services\GoogleAds;
+<?php
+
+namespace LaravelAds\Services\GoogleAds;
 
 use LaravelAds\Services\GoogleAds\Operations\AdGroupResponse;
 
@@ -54,11 +56,10 @@ class Fetch
             'TargetCpa'
         ]);
 
-        if ($filters)
-        {
+        if ($filters) {
             $predicates = [];
 
-            foreach($filters as $key=>$values) {
+            foreach ($filters as $key=>$values) {
                 $predicates[] = new Predicate($key, PredicateOperator::IN, $values);
             }
 
@@ -68,21 +69,17 @@ class Fetch
         $totalNumEntries = 0;
         $entries = [];
 
-        do
-        {
+        do {
             $page = $this->service->call(CampaignService::class)->get($selector);
             $items = $page->getEntries();
 
-            if ($page->getEntries() !== null)
-            {
+            if ($page->getEntries() !== null) {
                 $totalNumEntries = $page->getTotalNumEntries();
 
-                foreach ($items as $item)
-                {
+                foreach ($items as $item) {
                     $campaign = $this->service->campaign($item);
 
-                    if ($rArray)
-                    {
+                    if ($rArray) {
                         $entries[] = [
                             'id' => $campaign->getId(),
                             'name' => $campaign->getName(),
@@ -92,9 +89,7 @@ class Fetch
                             'bid_strategy' => $campaign->getBidStrategy(),
                             'target_cpa' => $campaign->getTargetCpa()
                         ];
-                    }
-                    else
-                    {
+                    } else {
                         $entries[] = $campaign;
                     }
                 }
@@ -103,7 +98,6 @@ class Fetch
             $selector->getPaging()->setStartIndex(
                 $selector->getPaging()->getStartIndex() + 5000
             );
-
         } while ($selector->getPaging()->getStartIndex() < $totalNumEntries);
 
         return collect($entries);
@@ -138,11 +132,10 @@ class Fetch
             'TargetCpaBid'
         ]);
 
-        if ($filters)
-        {
+        if ($filters) {
             $predicates = [];
 
-            foreach($filters as $key=>$values) {
+            foreach ($filters as $key=>$values) {
                 $predicates[] = new Predicate($key, PredicateOperator::IN, $values);
             }
 
@@ -152,21 +145,17 @@ class Fetch
         $totalNumEntries = 0;
         $entries = [];
 
-        do
-        {
+        do {
             $page  = $this->service->call(AdGroupService::class)->get($selector);
             $items = $page->getEntries();
 
-            if ($page->getEntries() !== null)
-            {
+            if ($page->getEntries() !== null) {
                 $totalNumEntries = $page->getTotalNumEntries();
 
-                foreach($items as $item)
-                {
+                foreach ($items as $item) {
                     $adgroup = $this->service->adGroup($item);
 
-                    if ($rArray)
-                    {
+                    if ($rArray) {
                         $entries[] = [
                             'id' => $adgroup->getId(),
                             'name' => $adgroup->getName(),
@@ -176,9 +165,7 @@ class Fetch
                             'bid_strategy' => $adgroup->getBidStrategy(),
                             'bid' => $adgroup->getBid()
                         ];
-                    }
-                    else
-                    {
+                    } else {
                         $entries[] = $adgroup;
                     }
                 }
@@ -187,10 +174,8 @@ class Fetch
             $selector->getPaging()->setStartIndex(
                 $selector->getPaging()->getStartIndex() + 5000
             );
-
         } while ($selector->getPaging()->getStartIndex() < $totalNumEntries);
 
         return collect($entries);
     }
-
 }
