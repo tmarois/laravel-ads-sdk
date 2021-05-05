@@ -12,7 +12,6 @@ use LaravelAds\Services\GoogleAds\Operations\AdGroupResponse;
 
 use Google\AdsApi\AdWords\v201809\cm\Operator;
 
-
 class AdGroupOperations
 {
     /**

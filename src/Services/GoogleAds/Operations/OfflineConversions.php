@@ -35,7 +35,8 @@ class OfflineConversions
      * __construct()
      *
      */
-    public function __construct(Service $service = null) {
+    public function __construct(Service $service = null)
+    {
         $this->service = $service;
     }
 
@@ -44,7 +45,8 @@ class OfflineConversions
      *
      * @return array
      */
-    public function getConversions() {
+    public function getConversions()
+    {
         return $this->offlineConversions;
     }
 
@@ -57,7 +59,7 @@ class OfflineConversions
      */
     public function addBulk(array $conversions = [])
     {
-        foreach($conversions as $conversion) {
+        foreach ($conversions as $conversion) {
             $this->add($conversion);
         }
 
@@ -107,18 +109,14 @@ class OfflineConversions
         $errorResponse = [];
         $successResponse = [];
 
-        foreach($this->mutations as $i=>$mutate)
-        {
+        foreach ($this->mutations as $i => $mutate) {
             $click = $this->offlineConversions[$i] ?? [];
 
-            try
-            {
+            try {
                 $result = ($this->service->call(OfflineConversionFeedService::class))->mutate([$mutate]);
                 $responseValues = $result->getValue();
-                foreach($responseValues as $feed)
-                {
-                    if ($outputValue==true)
-                    {
+                foreach ($responseValues as $feed) {
+                    if ($outputValue == true) {
                         // $successResponse[] = [
                         //     'click_id' => $feed->getGoogleClickId(),
                         //     'value' => $feed->getConversionValue()
@@ -130,16 +128,12 @@ class OfflineConversions
                             'click_id' => $click['click_id'],
                             'value' => $click['value'] ?? 0
                         ];
-                    }
-                    else {
+                    } else {
                         $successResponse[] = $feed->getGoogleClickId();
                     }
                 }
-            }
-            catch (ApiException $e)
-            {
-                foreach($e->getErrors() as $err)
-                {
+            } catch (ApiException $e) {
+                foreach ($e->getErrors() as $err) {
                     $reason = $err->getReason();
                     $errorResponse[] = [
                         'name' => $click['name'],

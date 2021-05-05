@@ -220,8 +220,7 @@ class Service
     */
     public function configuration($config = [])
     {
-        if (!$config)
-        {
+        if (empty($config)) {
             // use laravel config
             $config = config('bing-ads');
 
@@ -242,8 +241,7 @@ class Service
      */
     public function session()
     {
-        if (!$this->session)
-        {
+        if (!$this->session) {
             $config = $this->configuration();
 
             $AuthorizationData = (new AuthorizationData())
@@ -256,10 +254,9 @@ class Service
                 $AuthorizationData->withCustomerId($this->getCustomerId());
             }
 
-            try
-            {
+            try {
                 $AuthorizationData->Authentication->RequestOAuthTokensByRefreshToken($config['refreshToken']);
-            } catch(OAuthTokenRequestException $e) {
+            } catch (OAuthTokenRequestException $e) {
                 // printf("Error: %s\n", $e->Error);
                 // printf("Description: %s\n", $e->Description);
                 // AuthHelper::RequestUserConsent();
@@ -281,5 +278,4 @@ class Service
                 ->withClientSecret($config['clientSecret'])
                 ->withClientId($config['clientId']);
     }
-
 }

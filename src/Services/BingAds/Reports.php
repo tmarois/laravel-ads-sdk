@@ -48,7 +48,6 @@ use Microsoft\BingAds\V13\Reporting\ReportRequestStatusType;
 use Microsoft\BingAds\V13\Reporting\KeywordPerformanceReportSort;
 use Microsoft\BingAds\V13\Reporting\SortOrder;
 
-
 class Reports
 {
     /**
@@ -109,13 +108,11 @@ class Reports
      */
     public function setFields($fields, $auto = false)
     {
-        if ($auto == false)
-        {
+        if ($auto == false) {
             $this->fields = $fields;
         }
 
-        if ($auto == true && empty($this->fields))
-        {
+        if ($auto == true && empty($this->fields)) {
             $this->fields = $fields;
         }
 
@@ -150,16 +147,16 @@ class Reports
 
         $report->Time                               = new ReportTime();
         $report->Time->CustomDateRangeStart         = new Date();
-        $report->Time->CustomDateRangeStart->Day    = date('d',strtotime($this->dateRange[0]));
-        $report->Time->CustomDateRangeStart->Month  = date('m',strtotime($this->dateRange[0]));
-        $report->Time->CustomDateRangeStart->Year   = date('Y',strtotime($this->dateRange[0]));
+        $report->Time->CustomDateRangeStart->Day    = date('d', strtotime($this->dateRange[0]));
+        $report->Time->CustomDateRangeStart->Month  = date('m', strtotime($this->dateRange[0]));
+        $report->Time->CustomDateRangeStart->Year   = date('Y', strtotime($this->dateRange[0]));
 
         $report->Time->CustomDateRangeEnd           = new Date();
-        $report->Time->CustomDateRangeEnd->Day      = date('d',strtotime($this->dateRange[1]));
-        $report->Time->CustomDateRangeEnd->Month    = date('m',strtotime($this->dateRange[1]));
-        $report->Time->CustomDateRangeEnd->Year     = date('Y',strtotime($this->dateRange[1]));
+        $report->Time->CustomDateRangeEnd->Day      = date('d', strtotime($this->dateRange[1]));
+        $report->Time->CustomDateRangeEnd->Month    = date('m', strtotime($this->dateRange[1]));
+        $report->Time->CustomDateRangeEnd->Year     = date('Y', strtotime($this->dateRange[1]));
 
-        $report->Columns = array (
+        $report->Columns = array(
             AccountPerformanceReportColumn::TimePeriod,
             AccountPerformanceReportColumn::AccountId,
             AccountPerformanceReportColumn::Clicks,
@@ -194,16 +191,16 @@ class Reports
 
         $report->Time                               = new ReportTime();
         $report->Time->CustomDateRangeStart         = new Date();
-        $report->Time->CustomDateRangeStart->Day    = date('d',strtotime($this->dateRange[0]));
-        $report->Time->CustomDateRangeStart->Month  = date('m',strtotime($this->dateRange[0]));
-        $report->Time->CustomDateRangeStart->Year   = date('Y',strtotime($this->dateRange[0]));
+        $report->Time->CustomDateRangeStart->Day    = date('d', strtotime($this->dateRange[0]));
+        $report->Time->CustomDateRangeStart->Month  = date('m', strtotime($this->dateRange[0]));
+        $report->Time->CustomDateRangeStart->Year   = date('Y', strtotime($this->dateRange[0]));
 
         $report->Time->CustomDateRangeEnd           = new Date();
-        $report->Time->CustomDateRangeEnd->Day      = date('d',strtotime($this->dateRange[1]));
-        $report->Time->CustomDateRangeEnd->Month    = date('m',strtotime($this->dateRange[1]));
-        $report->Time->CustomDateRangeEnd->Year     = date('Y',strtotime($this->dateRange[1]));
+        $report->Time->CustomDateRangeEnd->Day      = date('d', strtotime($this->dateRange[1]));
+        $report->Time->CustomDateRangeEnd->Month    = date('m', strtotime($this->dateRange[1]));
+        $report->Time->CustomDateRangeEnd->Year     = date('Y', strtotime($this->dateRange[1]));
 
-        $report->Columns = array (
+        $report->Columns = array(
             CampaignPerformanceReportColumn::TimePeriod,
             CampaignPerformanceReportColumn::AccountId,
             CampaignPerformanceReportColumn::CampaignName,
@@ -240,16 +237,16 @@ class Reports
 
         $report->Time                               = new ReportTime();
         $report->Time->CustomDateRangeStart         = new Date();
-        $report->Time->CustomDateRangeStart->Day    = date('d',strtotime($this->dateRange[0]));
-        $report->Time->CustomDateRangeStart->Month  = date('m',strtotime($this->dateRange[0]));
-        $report->Time->CustomDateRangeStart->Year   = date('Y',strtotime($this->dateRange[0]));
+        $report->Time->CustomDateRangeStart->Day    = date('d', strtotime($this->dateRange[0]));
+        $report->Time->CustomDateRangeStart->Month  = date('m', strtotime($this->dateRange[0]));
+        $report->Time->CustomDateRangeStart->Year   = date('Y', strtotime($this->dateRange[0]));
 
         $report->Time->CustomDateRangeEnd           = new Date();
-        $report->Time->CustomDateRangeEnd->Day      = date('d',strtotime($this->dateRange[1]));
-        $report->Time->CustomDateRangeEnd->Month    = date('m',strtotime($this->dateRange[1]));
-        $report->Time->CustomDateRangeEnd->Year     = date('Y',strtotime($this->dateRange[1]));
+        $report->Time->CustomDateRangeEnd->Day      = date('d', strtotime($this->dateRange[1]));
+        $report->Time->CustomDateRangeEnd->Month    = date('m', strtotime($this->dateRange[1]));
+        $report->Time->CustomDateRangeEnd->Year     = date('Y', strtotime($this->dateRange[1]));
 
-        $report->Columns = array (
+        $report->Columns = array(
             AdGroupPerformanceReportColumn::TimePeriod,
             AdGroupPerformanceReportColumn::AccountId,
             AdGroupPerformanceReportColumn::CampaignId,
@@ -280,8 +277,7 @@ class Reports
     {
         $reportRequestId = null;
 
-        try
-        {
+        try {
             $report                         = new DestinationUrlPerformanceReportRequest();
             $report->ReportName             = 'Destination Url Performance Report';
             $report->Format                 = ReportFormat::Csv;
@@ -293,16 +289,16 @@ class Reports
 
             $report->Time                               = new ReportTime();
             $report->Time->CustomDateRangeStart         = new Date();
-            $report->Time->CustomDateRangeStart->Day    = date('d',strtotime($this->dateRange[0]));
-            $report->Time->CustomDateRangeStart->Month  = date('m',strtotime($this->dateRange[0]));
-            $report->Time->CustomDateRangeStart->Year   = date('Y',strtotime($this->dateRange[0]));
+            $report->Time->CustomDateRangeStart->Day    = date('d', strtotime($this->dateRange[0]));
+            $report->Time->CustomDateRangeStart->Month  = date('m', strtotime($this->dateRange[0]));
+            $report->Time->CustomDateRangeStart->Year   = date('Y', strtotime($this->dateRange[0]));
 
             $report->Time->CustomDateRangeEnd           = new Date();
-            $report->Time->CustomDateRangeEnd->Day      = date('d',strtotime($this->dateRange[1]));
-            $report->Time->CustomDateRangeEnd->Month    = date('m',strtotime($this->dateRange[1]));
-            $report->Time->CustomDateRangeEnd->Year     = date('Y',strtotime($this->dateRange[1]));
+            $report->Time->CustomDateRangeEnd->Day      = date('d', strtotime($this->dateRange[1]));
+            $report->Time->CustomDateRangeEnd->Month    = date('m', strtotime($this->dateRange[1]));
+            $report->Time->CustomDateRangeEnd->Year     = date('Y', strtotime($this->dateRange[1]));
 
-            $report->Columns = array (
+            $report->Columns = array(
                 DestinationUrlPerformanceReportColumn::TimePeriod,
                 DestinationUrlPerformanceReportColumn::AccountName,
                 DestinationUrlPerformanceReportColumn::AccountId,
@@ -323,18 +319,16 @@ class Reports
             if ($reportRequest) {
                 $reportRequestId = $reportRequest->ReportRequestId;
             }
-        }
-        catch (SoapFault $e)
-        {
+        } catch (SoapFault $e) {
             printf("-----\r\nFault Code: %s\r\nFault String: %s\r\nFault Detail: \r\n", $e->faultcode, $e->faultstring);
 
             if (isset($e->detail)) {
                 var_dump($e->detail);
             }
 
-        	// print "-----\r\nLast SOAP request/response:\r\n";
+            // print "-----\r\nLast SOAP request/response:\r\n";
             // print $this->serviceProxy->GetWsdl() . "\r\n";
-        	// print $this->serviceProxy->__getLastRequest()."\r\n";
+            // print $this->serviceProxy->__getLastRequest()."\r\n";
             // print $this->serviceProxy->__getLastResponse()."\r\n";
         }
 
@@ -351,8 +345,7 @@ class Reports
     {
         $reportRequestId = null;
 
-        try
-        {
+        try {
             $report                         = new SearchQueryPerformanceReportRequest();
             $report->ReportName             = 'Search Query Performance Report';
             $report->Format                 = ReportFormat::Csv;
@@ -364,16 +357,16 @@ class Reports
 
             $report->Time                               = new ReportTime();
             $report->Time->CustomDateRangeStart         = new Date();
-            $report->Time->CustomDateRangeStart->Day    = date('d',strtotime($this->dateRange[0]));
-            $report->Time->CustomDateRangeStart->Month  = date('m',strtotime($this->dateRange[0]));
-            $report->Time->CustomDateRangeStart->Year   = date('Y',strtotime($this->dateRange[0]));
+            $report->Time->CustomDateRangeStart->Day    = date('d', strtotime($this->dateRange[0]));
+            $report->Time->CustomDateRangeStart->Month  = date('m', strtotime($this->dateRange[0]));
+            $report->Time->CustomDateRangeStart->Year   = date('Y', strtotime($this->dateRange[0]));
 
             $report->Time->CustomDateRangeEnd           = new Date();
-            $report->Time->CustomDateRangeEnd->Day      = date('d',strtotime($this->dateRange[1]));
-            $report->Time->CustomDateRangeEnd->Month    = date('m',strtotime($this->dateRange[1]));
-            $report->Time->CustomDateRangeEnd->Year     = date('Y',strtotime($this->dateRange[1]));
+            $report->Time->CustomDateRangeEnd->Day      = date('d', strtotime($this->dateRange[1]));
+            $report->Time->CustomDateRangeEnd->Month    = date('m', strtotime($this->dateRange[1]));
+            $report->Time->CustomDateRangeEnd->Year     = date('Y', strtotime($this->dateRange[1]));
 
-            $report->Columns = array (
+            $report->Columns = array(
                 SearchQueryPerformanceReportColumn::Clicks,
                 SearchQueryPerformanceReportColumn::Impressions,
                 SearchQueryPerformanceReportColumn::Spend,
@@ -389,19 +382,16 @@ class Reports
             if ($reportRequest) {
                 $reportRequestId = $reportRequest->ReportRequestId;
             }
-
-        }
-        catch (SoapFault $e)
-        {
+        } catch (SoapFault $e) {
             printf("-----\r\nFault Code: %s\r\nFault String: %s\r\nFault Detail: \r\n", $e->faultcode, $e->faultstring);
 
             if (isset($e->detail)) {
                 var_dump($e->detail);
             }
 
-        	// print "-----\r\nLast SOAP request/response:\r\n";
+            // print "-----\r\nLast SOAP request/response:\r\n";
             // print $this->serviceProxy->GetWsdl() . "\r\n";
-        	// print $this->serviceProxy->__getLastRequest()."\r\n";
+            // print $this->serviceProxy->__getLastRequest()."\r\n";
             // print $this->serviceProxy->__getLastResponse()."\r\n";
         }
 
@@ -418,8 +408,7 @@ class Reports
     {
         $reportRequestId = null;
 
-        try
-        {
+        try {
             $report                         = new AgeGenderAudienceReportRequest();
             $report->ReportName             = 'Age Gender Performance Report';
             $report->Format                 = ReportFormat::Csv;
@@ -431,16 +420,16 @@ class Reports
 
             $report->Time                               = new ReportTime();
             $report->Time->CustomDateRangeStart         = new Date();
-            $report->Time->CustomDateRangeStart->Day    = date('d',strtotime($this->dateRange[0]));
-            $report->Time->CustomDateRangeStart->Month  = date('m',strtotime($this->dateRange[0]));
-            $report->Time->CustomDateRangeStart->Year   = date('Y',strtotime($this->dateRange[0]));
+            $report->Time->CustomDateRangeStart->Day    = date('d', strtotime($this->dateRange[0]));
+            $report->Time->CustomDateRangeStart->Month  = date('m', strtotime($this->dateRange[0]));
+            $report->Time->CustomDateRangeStart->Year   = date('Y', strtotime($this->dateRange[0]));
 
             $report->Time->CustomDateRangeEnd           = new Date();
-            $report->Time->CustomDateRangeEnd->Day      = date('d',strtotime($this->dateRange[1]));
-            $report->Time->CustomDateRangeEnd->Month    = date('m',strtotime($this->dateRange[1]));
-            $report->Time->CustomDateRangeEnd->Year     = date('Y',strtotime($this->dateRange[1]));
+            $report->Time->CustomDateRangeEnd->Day      = date('d', strtotime($this->dateRange[1]));
+            $report->Time->CustomDateRangeEnd->Month    = date('m', strtotime($this->dateRange[1]));
+            $report->Time->CustomDateRangeEnd->Year     = date('Y', strtotime($this->dateRange[1]));
 
-            $report->Columns = array (
+            $report->Columns = array(
                 AgeGenderAudienceReportColumn::AccountName,
                 AgeGenderAudienceReportColumn::AdGroupName,
                 AgeGenderAudienceReportColumn::AgeGroup,
@@ -459,18 +448,16 @@ class Reports
             if ($reportRequest) {
                 $reportRequestId = $reportRequest->ReportRequestId;
             }
-        }
-        catch (SoapFault $e)
-        {
+        } catch (SoapFault $e) {
             printf("-----\r\nFault Code: %s\r\nFault String: %s\r\nFault Detail: \r\n", $e->faultcode, $e->faultstring);
 
             if (isset($e->detail)) {
                 var_dump($e->detail);
             }
 
-        	// print "-----\r\nLast SOAP request/response:\r\n";
+            // print "-----\r\nLast SOAP request/response:\r\n";
             // print $this->serviceProxy->GetWsdl() . "\r\n";
-        	// print $this->serviceProxy->__getLastRequest()."\r\n";
+            // print $this->serviceProxy->__getLastRequest()."\r\n";
             // print $this->serviceProxy->__getLastResponse()."\r\n";
         }
 
@@ -487,8 +474,7 @@ class Reports
     {
         $reportRequestId = null;
 
-        try
-        {
+        try {
             $report                         = new GeographicPerformanceReportRequest();
             $report->ReportName             = 'Most Specific Location Performance Report';
             $report->Format                 = ReportFormat::Csv;
@@ -500,16 +486,16 @@ class Reports
 
             $report->Time                               = new ReportTime();
             $report->Time->CustomDateRangeStart         = new Date();
-            $report->Time->CustomDateRangeStart->Day    = date('d',strtotime($this->dateRange[0]));
-            $report->Time->CustomDateRangeStart->Month  = date('m',strtotime($this->dateRange[0]));
-            $report->Time->CustomDateRangeStart->Year   = date('Y',strtotime($this->dateRange[0]));
+            $report->Time->CustomDateRangeStart->Day    = date('d', strtotime($this->dateRange[0]));
+            $report->Time->CustomDateRangeStart->Month  = date('m', strtotime($this->dateRange[0]));
+            $report->Time->CustomDateRangeStart->Year   = date('Y', strtotime($this->dateRange[0]));
 
             $report->Time->CustomDateRangeEnd           = new Date();
-            $report->Time->CustomDateRangeEnd->Day      = date('d',strtotime($this->dateRange[1]));
-            $report->Time->CustomDateRangeEnd->Month    = date('m',strtotime($this->dateRange[1]));
-            $report->Time->CustomDateRangeEnd->Year     = date('Y',strtotime($this->dateRange[1]));
+            $report->Time->CustomDateRangeEnd->Day      = date('d', strtotime($this->dateRange[1]));
+            $report->Time->CustomDateRangeEnd->Month    = date('m', strtotime($this->dateRange[1]));
+            $report->Time->CustomDateRangeEnd->Year     = date('Y', strtotime($this->dateRange[1]));
 
-            $report->Columns = array (
+            $report->Columns = array(
                 GeographicPerformanceReportColumn::AccountName,
                 GeographicPerformanceReportColumn::LocationType,
                 GeographicPerformanceReportColumn::MostSpecificLocation,
@@ -534,19 +520,16 @@ class Reports
             if ($reportRequest) {
                 $reportRequestId = $reportRequest->ReportRequestId;
             }
-
-        }
-        catch (SoapFault $e)
-        {
+        } catch (SoapFault $e) {
             printf("-----\r\nFault Code: %s\r\nFault String: %s\r\nFault Detail: \r\n", $e->faultcode, $e->faultstring);
 
             if (isset($e->detail)) {
                 var_dump($e->detail);
             }
 
-        	// print "-----\r\nLast SOAP request/response:\r\n";
+            // print "-----\r\nLast SOAP request/response:\r\n";
             // print $this->serviceProxy->GetWsdl() . "\r\n";
-        	// print $this->serviceProxy->__getLastRequest()."\r\n";
+            // print $this->serviceProxy->__getLastRequest()."\r\n";
             // print $this->serviceProxy->__getLastResponse()."\r\n";
         }
 
@@ -642,5 +625,4 @@ class Reports
     {
         return $this->buildMostSpecificLocationReport()->toCollection();
     }
-
 }

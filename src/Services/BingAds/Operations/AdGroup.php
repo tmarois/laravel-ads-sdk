@@ -95,12 +95,11 @@ class AdGroup extends AdGroupOperations
     {
         $status = strtoupper($this->response()->Status ?? null);
 
-        switch($status)
-        {
-            case 'ACTIVE'  : return 'ENABLED'; break;
-            case 'PAUSED'  : return 'PAUSED';  break;
-            case 'DELETED' : return 'DELETED'; break;
-            default :
+        switch ($status) {
+            case 'ACTIVE': return 'ENABLED'; break;
+            case 'PAUSED': return 'PAUSED';  break;
+            case 'DELETED': return 'DELETED'; break;
+            default:
         }
 
         return $status;
@@ -115,7 +114,9 @@ class AdGroup extends AdGroupOperations
     public function setStatus($status)
     {
         $status = ucfirst(strtolower($status));
-        if ($status == 'Enabled') $status = 'Active';
+        if ($status == 'Enabled') {
+            $status = 'Active';
+        }
 
         if (in_array($status, ['Active','Paused'])) {
             $this->request()->Status = $status;
@@ -145,12 +146,11 @@ class AdGroup extends AdGroupOperations
     {
         $type = $this->response()->BiddingScheme->InheritedBidStrategyType ?? 'UNKNOWN';
 
-        switch($type)
-        {
-            case 'EnhancedCpc' : return 'ECPC'; break;
-            case 'ManualCpc'   : return 'CPC'; break;
-            case 'TargetCpa'   : return 'CPA'; break;
-            default :
+        switch ($type) {
+            case 'EnhancedCpc': return 'ECPC'; break;
+            case 'ManualCpc': return 'CPC'; break;
+            case 'TargetCpa': return 'CPA'; break;
+            default:
         }
 
         return $type;
@@ -163,13 +163,11 @@ class AdGroup extends AdGroupOperations
      */
     public function getBid()
     {
-        if ($this->getBidStrategy()=='CPC' || $this->getBidStrategy()=='ECPC')
-        {
+        if ($this->getBidStrategy() == 'CPC' || $this->getBidStrategy() == 'ECPC') {
             return $this->response()->CpcBid->Amount ?? 0;
         }
 
-        if ($this->getBidStrategy()=='CPA')
-        {
+        if ($this->getBidStrategy() == 'CPA') {
             return $this->response()->CpaBid->Amount ?? 0;
         }
 
@@ -187,13 +185,11 @@ class AdGroup extends AdGroupOperations
      */
     public function setBid($amount)
     {
-        if ($this->getBidStrategy()=='CPC' || $this->getBidStrategy()=='ECPC')
-        {
+        if ($this->getBidStrategy() == 'CPC' || $this->getBidStrategy() == 'ECPC') {
             $this->request()->CpcBid = new Bid();
             $this->request()->CpcBid->Amount = $amount;
         }
 
         return $this;
     }
-
 }

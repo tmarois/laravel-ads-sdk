@@ -9,6 +9,7 @@ use Google\AdsApi\AdWords\v201809\cm\Money;
 use Google\AdsApi\AdWords\v201809\cm\BiddingStrategyConfiguration;
 use Google\AdsApi\AdWords\v201809\cm\CpcBid;
 use Google\AdsApi\AdWords\v201809\cm\CpaBid;
+
 // use Google\AdsApi\AdWords\v201809\cm\CpmBid;
 
 class AdGroup extends AdGroupOperations
@@ -93,11 +94,11 @@ class AdGroup extends AdGroupOperations
     {
         $status = strtoupper($this->response()->getStatus());
 
-        switch($status) {
-            case 'ENABLED' : return 'ENABLED'; break;
-            case 'PAUSED'  : return 'PAUSED'; break;
-            case 'REMOVED' : return 'DELETED'; break;
-            default :
+        switch ($status) {
+            case 'ENABLED': return 'ENABLED'; break;
+            case 'PAUSED': return 'PAUSED'; break;
+            case 'REMOVED': return 'DELETED'; break;
+            default:
         }
 
         return $status;
@@ -144,9 +145,8 @@ class AdGroup extends AdGroupOperations
     {
         $type = $this->response()->getBiddingStrategyConfiguration()->getBiddingStrategyType() ?? 'UNKNOWN';
 
-        switch($type)
-        {
-            case 'MANUAL_CPC'  :
+        switch ($type) {
+            case 'MANUAL_CPC':
 
                 $isEnhanced = false;
 
@@ -155,16 +155,19 @@ class AdGroup extends AdGroupOperations
                     $isEnhanced = $this->response()->getBiddingStrategyConfiguration()->getBiddingScheme()->getEnhancedCpcEnabled() ?? false;
                 }
 
-                if ($isEnhanced==true)
-                {
+                if ($isEnhanced == true) {
                     return 'ECPC';
                 }
 
                 return 'CPC';
 
             break;
-            case 'TARGET_CPA'  : return 'CPA'; break;
-            default :
+
+            case 'TARGET_CPA':
+                return 'CPA';
+                break;
+
+            default:
         }
 
         return $type;
@@ -183,22 +186,19 @@ class AdGroup extends AdGroupOperations
 
         $bidAmount = 0;
 
-        foreach($bids as $bid)
-        {
-            if ($bid->getBidsType() == 'CpcBid' && ($this->getBidStrategy() == "CPC" || $this->getBidStrategy() == "ECPC"))
-            {
+        foreach ($bids as $bid) {
+            if ($bid->getBidsType() == 'CpcBid' && ($this->getBidStrategy() == "CPC" || $this->getBidStrategy() == "ECPC")) {
                 $bidAmount = $bid->getbid()->getMicroAmount();
                 break;
             }
 
-            if ($bid->getBidsType() == 'CpaBid' && $this->getBidStrategy() == "CPA")
-            {
+            if ($bid->getBidsType() == 'CpaBid' && $this->getBidStrategy() == "CPA") {
                 $bidAmount = $bid->getbid()->getMicroAmount();
                 break;
             }
         }
 
-        return (($bidAmount) ? round( intval($bidAmount) / 1000000,2) : 0);
+        return (($bidAmount) ? round(intval($bidAmount) / 1000000, 2) : 0);
     }
 
 
@@ -213,9 +213,8 @@ class AdGroup extends AdGroupOperations
      */
     public function setBid($amount)
     {
-        if ($this->getBidStrategy() == 'CPC' || $this->getBidStrategy() == 'ECPC')
-        {
-            $bid   = new CpcBid();
+        if ($this->getBidStrategy() == 'CPC' || $this->getBidStrategy() == 'ECPC') {
+            $bid = new CpcBid();
 
             $money = (new Money())->setMicroAmount($amount*1000000);
             $bid->setBid($money);
@@ -228,5 +227,4 @@ class AdGroup extends AdGroupOperations
 
         return $this;
     }
-
 }

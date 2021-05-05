@@ -2,8 +2,8 @@
 
 namespace LaravelAds;
 
-use LaravelAds\Services\GoogleAds\Service AS GoogleAdsService;
-use LaravelAds\Services\BingAds\Service AS BingAdsService;
+use LaravelAds\Services\GoogleAds\Service as GoogleAdsService;
+use LaravelAds\Services\BingAds\Service as BingAdsService;
 
 class LaravelAds
 {
@@ -12,10 +12,19 @@ class LaravelAds
      *
      * @return static method
      */
-    public static function service($service) {
-        if ($service == 'GoogleAds') return static::googleAds();
-        if ($service == 'BingAds') return static::bingAds();
-        if ($service == 'FacebookAds') return static::facebookAds();
+    public static function service($service)
+    {
+        if ($service == 'GoogleAds') {
+            return static::googleAds();
+        }
+
+        if ($service == 'BingAds') {
+            return static::bingAds();
+        }
+
+        if ($service == 'FacebookAds') {
+            return static::facebookAds();
+        }
     }
 
     /**
@@ -23,7 +32,8 @@ class LaravelAds
      * Google Ads
      *
      */
-    public static function googleAds() {
+    public static function googleAds()
+    {
         return (new GoogleAdsService());
     }
 
@@ -32,7 +42,8 @@ class LaravelAds
      * Bind Ads
      *
      */
-    public static function bingAds() {
+    public static function bingAds()
+    {
         return (new BingAdsService());
     }
 
@@ -41,8 +52,8 @@ class LaravelAds
      * Facebook Ads
      *
      */
-    public static function facebookAds() {
+    public static function facebookAds()
+    {
         return false;
     }
-
 }

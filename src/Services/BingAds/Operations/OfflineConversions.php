@@ -60,7 +60,7 @@ class OfflineConversions
      */
     public function addBulk(array $conversions = [])
     {
-        foreach($conversions as $conversion) {
+        foreach ($conversions as $conversion) {
             $this->add($conversion);
         }
 
@@ -95,12 +95,10 @@ class OfflineConversions
         $errorResponse = [];
         $successResponse = [];
 
-        foreach($this->mutations as $i=>$mutate)
-        {
+        foreach ($this->mutations as $i=>$mutate) {
             $click = $this->offlineConversions[$i] ?? [];
 
-            try
-            {
+            try {
                 $serviceCall = $this->service->call(ServiceClientType::CampaignManagementVersion13);
 
                 $request = new ApplyOfflineConversionsRequest();
@@ -108,8 +106,7 @@ class OfflineConversions
 
                 $result = $serviceCall->GetService()->ApplyOfflineConversions($request);
 
-                if (isset($result->PartialErrors->BatchError))
-                {
+                if (isset($result->PartialErrors->BatchError)) {
                     $errorResponse[$i] = [
                         'name' => $click['name'] ?? '',
                         'time' => $click['time'] ?? '',
@@ -117,22 +114,17 @@ class OfflineConversions
                         'value' => $click['value'] ?? 0,
                         'error' => $result->PartialErrors->BatchError[0]->ErrorCode ?? 'unknown'
                     ];
-                }
-                else
-                {
+                } else {
                     if ($outputValue==true) {
                         $successResponse[$i] = [
                             'click' => $click['click_id'],
                             'value' => $click['value'] ?? 0,
                         ];
-                    }
-                    else {
+                    } else {
                         $successResponse[$i] = $click['click_id'];
                     }
                 }
-            }
-            catch (SoapFault $e)
-            {
+            } catch (SoapFault $e) {
                 // printf("-----\r\nFault Code: %s\r\nFault String: %s\r\nFault Detail: \r\n", $e->faultcode, $e->faultstring);
                 // var_dump($e->detail);
 
@@ -160,9 +152,7 @@ class OfflineConversions
                 // print $serviceCall->GetWsdl() . "\r\n";
                 // print $serviceCall->GetService()->__getLastRequest()."\r\n";
                 // print $serviceCall->GetService()->__getLastResponse()."\r\n";
-            }
-            catch (Exception $e)
-            {
+            } catch (Exception $e) {
                 $errorResponse[$i] = [
                     'name' => $click['name'] ?? '',
                     'time' => $click['time'] ?? '',

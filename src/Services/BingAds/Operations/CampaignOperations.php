@@ -36,8 +36,7 @@ class CampaignOperations
     {
         $serviceCall = $this->service->call(ServiceClientType::CampaignManagementVersion13);
 
-        try
-        {
+        try {
             $campaign = $this->request();
 
             $request = new GetCampaignsByIdsRequest();
@@ -45,8 +44,7 @@ class CampaignOperations
             $request->CampaignIds = [$campaign->Id];
 
             return $serviceCall->GetService()->GetCampaignsByIds($request)->Campaigns->Campaign[0] ?? null;
-        }
-        catch(\Exception $e) {
+        } catch (\Exception $e) {
             print $serviceCall->GetService()->__getLastRequest()."\n";
             print $serviceCall->GetService()->__getLastResponse()."\n";
         }
@@ -64,8 +62,7 @@ class CampaignOperations
     {
         $serviceCall = $this->service->call(ServiceClientType::CampaignManagementVersion13);
 
-        try
-        {
+        try {
             $campaign = $this->request();
 
             $request = new UpdateCampaignsRequest();
@@ -78,9 +75,10 @@ class CampaignOperations
             $serverResponse = $serviceCall->GetService()->UpdateCampaigns($request);
 
             // lets update the current object
-            if ($updateObject) $this->get();
-        }
-        catch(\Exception $e) {
+            if ($updateObject) {
+                $this->get();
+            }
+        } catch (\Exception $e) {
             print $serviceCall->GetService()->__getLastRequest()."\n";
             print $serviceCall->GetService()->__getLastResponse()."\n";
         }

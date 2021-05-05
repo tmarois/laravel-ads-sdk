@@ -67,11 +67,11 @@ class Campaign extends CampaignOperations
     {
         $status = strtoupper($this->response()->getStatus());
 
-        switch($status) {
-            case 'ENABLED' : return 'ENABLED'; break;
-            case 'PAUSED'  : return 'PAUSED'; break;
-            case 'REMOVED' : return 'DELETED'; break;
-            default :
+        switch ($status) {
+            case 'ENABLED': return 'ENABLED'; break;
+            case 'PAUSED': return 'PAUSED'; break;
+            case 'REMOVED': return 'DELETED'; break;
+            default:
         }
 
         return $status;
@@ -104,7 +104,7 @@ class Campaign extends CampaignOperations
     {
         $microAmount = $this->response()->getBudget()->getAmount()->getMicroAmount();
 
-        return (($microAmount) ? round( intval($microAmount) / 1000000,2) : 0);
+        return (($microAmount) ? round(intval($microAmount) / 1000000, 2) : 0);
     }
 
     /**
@@ -139,9 +139,8 @@ class Campaign extends CampaignOperations
     {
         $type = $this->response()->getBiddingStrategyConfiguration()->getBiddingStrategyType() ?? 'UNKNOWN';
 
-        switch($type)
-        {
-            case 'MANUAL_CPC'  :
+        switch ($type) {
+            case 'MANUAL_CPC':
 
                 $isEnhanced = false;
 
@@ -150,16 +149,19 @@ class Campaign extends CampaignOperations
                     $isEnhanced = $this->response()->getBiddingStrategyConfiguration()->getBiddingScheme()->getEnhancedCpcEnabled() ?? false;
                 }
 
-                if ($isEnhanced==true)
-                {
+                if ($isEnhanced == true) {
                     return 'ECPC';
                 }
 
                 return 'CPC';
 
             break;
-            case 'TARGET_CPA'  : return 'CPA'; break;
-            default :
+
+            case 'TARGET_CPA':
+                return 'CPA';
+                break;
+
+            default:
         }
 
         return $type;
@@ -173,8 +175,7 @@ class Campaign extends CampaignOperations
      */
     public function getTargetCpa()
     {
-        if ($this->getBidStrategy() == 'CPA')
-        {
+        if ($this->getBidStrategy() == 'CPA') {
             $strategy =@ $this->response()->getBiddingStrategyConfiguration()->getBiddingScheme() ?? null;
 
             $amount = null;
@@ -186,7 +187,7 @@ class Campaign extends CampaignOperations
                 }
             }
 
-            return (($amount) ? @round( intval($amount) / 1000000,2) : 0);
+            return (($amount) ? @round(intval($amount) / 1000000, 2) : 0);
         }
 
         return 0;
@@ -200,8 +201,7 @@ class Campaign extends CampaignOperations
      */
     public function setTargetCpa($amount = 0)
     {
-        if ($this->getBidStrategy() == 'CPA')
-        {
+        if ($this->getBidStrategy() == 'CPA') {
             $money = new Money();
             $money->setMicroAmount($amount*1000000);
 
@@ -235,5 +235,4 @@ class Campaign extends CampaignOperations
 
         return $this;
     }
-
 }

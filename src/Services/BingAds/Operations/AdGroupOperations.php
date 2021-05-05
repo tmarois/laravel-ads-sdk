@@ -34,8 +34,7 @@ class AdGroupOperations extends Operation
     {
         $serviceCall = $this->service->call(ServiceClientType::CampaignManagementVersion13);
 
-        try
-        {
+        try {
             $adGroup = $this->request();
 
             $request = new GetAdGroupsByIdsRequest();
@@ -44,8 +43,7 @@ class AdGroupOperations extends Operation
             $request->AdGroupIds = [$adGroup->Id];
 
             return $serviceCall->GetService()->GetAdGroupsByIds($request)->AdGroups->AdGroup[0] ?? null;
-        }
-        catch(\Exception $e) {
+        } catch (\Exception $e) {
             print $serviceCall->GetService()->__getLastRequest()."\n";
             print $serviceCall->GetService()->__getLastResponse()."\n";
         }
@@ -61,8 +59,7 @@ class AdGroupOperations extends Operation
     {
         $serviceCall = $this->service->call(ServiceClientType::CampaignManagementVersion13);
 
-        try
-        {
+        try {
             $adGroup = $this->request();
 
             $request = new UpdateAdGroupsRequest();
@@ -75,9 +72,10 @@ class AdGroupOperations extends Operation
             $serverResponse = $serviceCall->GetService()->UpdateAdGroups($request);
 
             // lets update the current object
-            if ($updateObject) $this->get();
-        }
-        catch(\Exception $e) {
+            if ($updateObject) {
+                $this->get();
+            }
+        } catch (\Exception $e) {
             print $serviceCall->GetService()->__getLastRequest()."\n";
             print $serviceCall->GetService()->__getLastResponse()."\n";
         }

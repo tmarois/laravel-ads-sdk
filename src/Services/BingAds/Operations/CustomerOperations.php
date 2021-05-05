@@ -2,7 +2,6 @@
 
 namespace LaravelAds\Services\BingAds\Operations;
 
-
 use LaravelAds\Services\BingAds\Service;
 
 use Microsoft\BingAds\Auth\ServiceClientType;
@@ -33,8 +32,7 @@ class CustomerOperations extends Operation
     {
         $serviceCall = $this->service->call(ServiceClientType::CustomerManagementVersion13);
 
-        try
-        {
+        try {
             $customer = $this->request();
 
             $request = new GetCustomersInfoRequest();
@@ -42,8 +40,7 @@ class CustomerOperations extends Operation
             $request->TopN = 100;
 
             return $serviceCall->GetService()->GetCustomersInfo($request)->CustomersInfo->CustomerInfo[0] ?? null;
-        }
-        catch(\Exception $e) {
+        } catch (\Exception $e) {
             print $serviceCall->GetService()->__getLastRequest()."\n";
             print $serviceCall->GetService()->__getLastResponse()."\n";
         }
