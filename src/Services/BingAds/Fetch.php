@@ -3,16 +3,17 @@
 namespace LaravelAds\Services\BingAds;
 
 use SoapVar;
-use SoapFault;
 use Exception;
-
-use LaravelAds\Services\BingAds\Operations\Campaign;
-use LaravelAds\Services\BingAds\Operations\AdGroup;
-
-use Microsoft\BingAds\V13\CampaignManagement\GetCampaignsByAccountIdRequest;
-use Microsoft\BingAds\V13\CampaignManagement\GetAdGroupsByCampaignIdRequest;
+use SoapFault;
 
 use Microsoft\BingAds\Auth\ServiceClientType;
+use LaravelAds\Services\BingAds\Operations\AdGroup;
+
+use LaravelAds\Services\BingAds\Operations\Campaign;
+use Microsoft\BingAds\V13\CustomerManagement\GetCustomersInfoRequest;
+
+use Microsoft\BingAds\V13\CampaignManagement\GetAdGroupsByCampaignIdRequest;
+use Microsoft\BingAds\V13\CampaignManagement\GetCampaignsByAccountIdRequest;
 
 
 class Fetch
@@ -139,6 +140,39 @@ class Fetch
         return collect($r);
     }
 
+    public function getCustomers($returnArray = true)
+    {
+        $serviceCall = $this->service->call(ServiceClientType::CustomerManagementVersion13);
+
+        $request = new GetCustomersInfoRequest();
+        $request->CustomerNameFilter = '';
+        $request->TopN = 100;
+
+        try {
+            $items = $serviceCall->GetService()->GetCustomersInfo($request);
+
+            foreach($items->CustomersInfo->CustomerInfo as $item)
+                {
+                    $customer = $this->service->customer($item);
+
+                    if ($returnArray)
+                    {
+                        $r[] = [
+                            'id' => $customer->getId(),
+                            'name' => $customer->getName(),
+                        ];
+                    } else {
+                        $r[] = $customer;
+                    }
+                }
+        } catch (\SoapFault $e) {
+            var_dump($e->detail);
+        } catch (\Exception $e) {
+            var_dump($e->detail);
+        }
+
+        return collect($r);
+    }
 }
 
 
