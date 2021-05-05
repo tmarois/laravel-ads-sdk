@@ -3,50 +3,40 @@
 namespace LaravelAds\Services\BingAds;
 
 use SoapVar;
-use SoapFault;
 use Exception;
+use SoapFault;
 use ZipArchive;
 
-use Microsoft\BingAds\Auth\ServiceClient;
-use Microsoft\BingAds\Auth\ServiceClientType;
 
-use Microsoft\BingAds\V13\Reporting\SubmitGenerateReportRequest;
-use Microsoft\BingAds\V13\Reporting\PollGenerateReportRequest;
-use Microsoft\BingAds\V13\Reporting\AccountPerformanceReportRequest;
-use Microsoft\BingAds\V13\Reporting\AudiencePerformanceReportRequest;
-use Microsoft\BingAds\V13\Reporting\KeywordPerformanceReportRequest;
-use Microsoft\BingAds\V13\Reporting\CampaignPerformanceReportRequest;
-use Microsoft\BingAds\V13\Reporting\AdGroupPerformanceReportRequest;
-use Microsoft\BingAds\V13\Reporting\SearchQueryPerformanceReportRequest;
-use Microsoft\BingAds\V13\Reporting\AgeGenderAudienceReportRequest;
-use Microsoft\BingAds\V13\Reporting\GeographicPerformanceReportRequest;
-use Microsoft\BingAds\V13\Reporting\DestinationUrlPerformanceReportRequest;
-use Microsoft\BingAds\V13\Reporting\ReportFormat;
-use Microsoft\BingAds\V13\Reporting\ReportAggregation;
-use Microsoft\BingAds\V13\Reporting\AccountThroughAdGroupReportScope;
-use Microsoft\BingAds\V13\Reporting\DestinationUrlPerformanceReportColumn;
-use Microsoft\BingAds\V13\Reporting\CampaignReportScope;
-use Microsoft\BingAds\V13\Reporting\AdGroupReportScope;
-use Microsoft\BingAds\V13\Reporting\AccountReportScope;
-use Microsoft\BingAds\V13\Reporting\ReportTime;
-use Microsoft\BingAds\V13\Reporting\ReportTimePeriod;
-use Microsoft\BingAds\V13\Reporting\Date;
-use Microsoft\BingAds\V13\Reporting\AccountPerformanceReportFilter;
-use Microsoft\BingAds\V13\Reporting\KeywordPerformanceReportFilter;
-use Microsoft\BingAds\V13\Reporting\CampaignPerformanceReportFilter;
-use Microsoft\BingAds\V13\Reporting\AdGroupPerformanceReportFilter;
-use Microsoft\BingAds\V13\Reporting\DeviceTypeReportFilter;
+use Microsoft\BingAds\Auth\ServiceClientType;
 use Microsoft\BingAds\V13\Reporting\AccountPerformanceReportColumn;
-use Microsoft\BingAds\V13\Reporting\AudiencePerformanceReportColumn;
-use Microsoft\BingAds\V13\Reporting\CampaignPerformanceReportColumn;
+use Microsoft\BingAds\V13\Reporting\AccountPerformanceReportRequest;
+use Microsoft\BingAds\V13\Reporting\AccountReportScope;
+use Microsoft\BingAds\V13\Reporting\AccountThroughAdGroupReportScope;
 use Microsoft\BingAds\V13\Reporting\AdGroupPerformanceReportColumn;
-use Microsoft\BingAds\V13\Reporting\KeywordPerformanceReportColumn;
-use Microsoft\BingAds\V13\Reporting\SearchQueryPerformanceReportColumn;
+use Microsoft\BingAds\V13\Reporting\AdGroupPerformanceReportRequest;
+use Microsoft\BingAds\V13\Reporting\AdGroupReportScope;
 use Microsoft\BingAds\V13\Reporting\AgeGenderAudienceReportColumn;
+use Microsoft\BingAds\V13\Reporting\AgeGenderAudienceReportColumn;
+use Microsoft\BingAds\V13\Reporting\AgeGenderAudienceReportRequest;
+use Microsoft\BingAds\V13\Reporting\CampaignPerformanceReportColumn;
+use Microsoft\BingAds\V13\Reporting\CampaignPerformanceReportRequest;
+use Microsoft\BingAds\V13\Reporting\CampaignReportScope;
+use Microsoft\BingAds\V13\Reporting\Date;
+use Microsoft\BingAds\V13\Reporting\DestinationUrlPerformanceReportColumn;
+use Microsoft\BingAds\V13\Reporting\DestinationUrlPerformanceReportRequest;
 use Microsoft\BingAds\V13\Reporting\GeographicPerformanceReportColumn;
-use Microsoft\BingAds\V13\Reporting\ReportRequestStatusType;
+use Microsoft\BingAds\V13\Reporting\GeographicPerformanceReportColumn;
+use Microsoft\BingAds\V13\Reporting\GeographicPerformanceReportRequest;
 use Microsoft\BingAds\V13\Reporting\KeywordPerformanceReportSort;
+use Microsoft\BingAds\V13\Reporting\ReportAggregation;
+use Microsoft\BingAds\V13\Reporting\ReportFormat;
+use Microsoft\BingAds\V13\Reporting\ReportRequestStatusType;
+use Microsoft\BingAds\V13\Reporting\ReportTime;
+use Microsoft\BingAds\V13\Reporting\SearchQueryPerformanceReportColumn;
+use Microsoft\BingAds\V13\Reporting\SearchQueryPerformanceReportRequest;
 use Microsoft\BingAds\V13\Reporting\SortOrder;
+use Microsoft\BingAds\V13\Reporting\SubmitGenerateReportRequest;
 
 class Reports
 {
@@ -156,15 +146,19 @@ class Reports
         $report->Time->CustomDateRangeEnd->Month    = date('m', strtotime($this->dateRange[1]));
         $report->Time->CustomDateRangeEnd->Year     = date('Y', strtotime($this->dateRange[1]));
 
-        $report->Columns = array(
-            AccountPerformanceReportColumn::TimePeriod,
-            AccountPerformanceReportColumn::AccountId,
-            AccountPerformanceReportColumn::Clicks,
-            AccountPerformanceReportColumn::Impressions,
-            AccountPerformanceReportColumn::Spend,
-            AccountPerformanceReportColumn::Conversions,
-            AccountPerformanceReportColumn::Revenue
-        );
+        if (!empty($this->fields)) {
+            $report->Columns = $this->fields;
+        } else {
+            $report->Columns = [
+                AccountPerformanceReportColumn::TimePeriod,
+                AccountPerformanceReportColumn::AccountId,
+                AccountPerformanceReportColumn::Clicks,
+                AccountPerformanceReportColumn::Impressions,
+                AccountPerformanceReportColumn::Spend,
+                AccountPerformanceReportColumn::Conversions,
+                AccountPerformanceReportColumn::Revenue
+            ];
+        }
 
         $encodedReport   = new SoapVar($report, SOAP_ENC_OBJECT, 'AccountPerformanceReportRequest', $this->serviceProxy->GetNamespace());
         $reportRequestId = $this->submitGenerateReport($encodedReport)->ReportRequestId;
@@ -200,17 +194,21 @@ class Reports
         $report->Time->CustomDateRangeEnd->Month    = date('m', strtotime($this->dateRange[1]));
         $report->Time->CustomDateRangeEnd->Year     = date('Y', strtotime($this->dateRange[1]));
 
-        $report->Columns = array(
-            CampaignPerformanceReportColumn::TimePeriod,
-            CampaignPerformanceReportColumn::AccountId,
-            CampaignPerformanceReportColumn::CampaignName,
-            CampaignPerformanceReportColumn::CampaignId,
-            CampaignPerformanceReportColumn::Clicks,
-            CampaignPerformanceReportColumn::Impressions,
-            CampaignPerformanceReportColumn::Spend,
-            CampaignPerformanceReportColumn::Conversions,
-            CampaignPerformanceReportColumn::Revenue
-        );
+        if (!empty($this->fields)) {
+            $report->Columns = $this->fields;
+        } else {
+            $report->Columns = [
+                CampaignPerformanceReportColumn::TimePeriod,
+                CampaignPerformanceReportColumn::AccountId,
+                CampaignPerformanceReportColumn::CampaignName,
+                CampaignPerformanceReportColumn::CampaignId,
+                CampaignPerformanceReportColumn::Clicks,
+                CampaignPerformanceReportColumn::Impressions,
+                CampaignPerformanceReportColumn::Spend,
+                CampaignPerformanceReportColumn::Conversions,
+                CampaignPerformanceReportColumn::Revenue
+            ];
+        }
 
         $encodedReport   = new SoapVar($report, SOAP_ENC_OBJECT, 'CampaignPerformanceReportRequest', $this->serviceProxy->GetNamespace());
         $reportRequestId = $this->submitGenerateReport($encodedReport)->ReportRequestId;
@@ -246,20 +244,24 @@ class Reports
         $report->Time->CustomDateRangeEnd->Month    = date('m', strtotime($this->dateRange[1]));
         $report->Time->CustomDateRangeEnd->Year     = date('Y', strtotime($this->dateRange[1]));
 
-        $report->Columns = array(
-            AdGroupPerformanceReportColumn::TimePeriod,
-            AdGroupPerformanceReportColumn::AccountId,
-            AdGroupPerformanceReportColumn::CampaignId,
-            AdGroupPerformanceReportColumn::CampaignName,
-            AdGroupPerformanceReportColumn::AdGroupId,
-            AdGroupPerformanceReportColumn::AdGroupName,
-            AdGroupPerformanceReportColumn::Clicks,
-            AdGroupPerformanceReportColumn::Impressions,
-            AdGroupPerformanceReportColumn::Spend,
-            AdGroupPerformanceReportColumn::Conversions,
-            AdGroupPerformanceReportColumn::Revenue,
-            AdGroupPerformanceReportColumn::AveragePosition
-        );
+        if (!empty($this->fields)) {
+            $report->Columns = $this->fields;
+        } else {
+            $report->Columns = [
+                AdGroupPerformanceReportColumn::TimePeriod,
+                AdGroupPerformanceReportColumn::AccountId,
+                AdGroupPerformanceReportColumn::CampaignId,
+                AdGroupPerformanceReportColumn::CampaignName,
+                AdGroupPerformanceReportColumn::AdGroupId,
+                AdGroupPerformanceReportColumn::AdGroupName,
+                AdGroupPerformanceReportColumn::Clicks,
+                AdGroupPerformanceReportColumn::Impressions,
+                AdGroupPerformanceReportColumn::Spend,
+                AdGroupPerformanceReportColumn::Conversions,
+                AdGroupPerformanceReportColumn::Revenue,
+                AdGroupPerformanceReportColumn::AveragePosition
+            ];
+        }
 
         $encodedReport   = new SoapVar($report, SOAP_ENC_OBJECT, 'AdGroupPerformanceReportRequest', $this->serviceProxy->GetNamespace());
         $reportRequestId = $this->submitGenerateReport($encodedReport)->ReportRequestId;
@@ -298,22 +300,27 @@ class Reports
             $report->Time->CustomDateRangeEnd->Month    = date('m', strtotime($this->dateRange[1]));
             $report->Time->CustomDateRangeEnd->Year     = date('Y', strtotime($this->dateRange[1]));
 
-            $report->Columns = array(
-                DestinationUrlPerformanceReportColumn::TimePeriod,
-                DestinationUrlPerformanceReportColumn::AccountName,
-                DestinationUrlPerformanceReportColumn::AccountId,
-                DestinationUrlPerformanceReportColumn::CampaignId,
-                DestinationUrlPerformanceReportColumn::CampaignName,
-                DestinationUrlPerformanceReportColumn::Clicks,
-                DestinationUrlPerformanceReportColumn::Impressions,
-                DestinationUrlPerformanceReportColumn::Spend,
-                DestinationUrlPerformanceReportColumn::Conversions,
-                DestinationUrlPerformanceReportColumn::Revenue,
-                DestinationUrlPerformanceReportColumn::DestinationUrl,
-                DestinationUrlPerformanceReportColumn::FinalUrl
-            );
+            if (!empty($this->fields)) {
+                $report->Columns = $this->fields;
+            } else {
+                $report->Columns = [
+                    DestinationUrlPerformanceReportColumn::TimePeriod,
+                    DestinationUrlPerformanceReportColumn::AccountName,
+                    DestinationUrlPerformanceReportColumn::AccountId,
+                    DestinationUrlPerformanceReportColumn::CampaignId,
+                    DestinationUrlPerformanceReportColumn::CampaignName,
+                    DestinationUrlPerformanceReportColumn::Clicks,
+                    DestinationUrlPerformanceReportColumn::Impressions,
+                    DestinationUrlPerformanceReportColumn::Spend,
+                    DestinationUrlPerformanceReportColumn::Conversions,
+                    DestinationUrlPerformanceReportColumn::Revenue,
+                    DestinationUrlPerformanceReportColumn::DestinationUrl,
+                    DestinationUrlPerformanceReportColumn::FinalUrl
+                ];
+            }
 
             $encodedReport   = new SoapVar($report, SOAP_ENC_OBJECT, 'DestinationUrlPerformanceReportRequest', $this->serviceProxy->GetNamespace());
+
             $reportRequest = $this->submitGenerateReport($encodedReport);
 
             if ($reportRequest) {
@@ -366,14 +373,18 @@ class Reports
             $report->Time->CustomDateRangeEnd->Month    = date('m', strtotime($this->dateRange[1]));
             $report->Time->CustomDateRangeEnd->Year     = date('Y', strtotime($this->dateRange[1]));
 
-            $report->Columns = array(
-                SearchQueryPerformanceReportColumn::Clicks,
-                SearchQueryPerformanceReportColumn::Impressions,
-                SearchQueryPerformanceReportColumn::Spend,
-                SearchQueryPerformanceReportColumn::Conversions,
-                SearchQueryPerformanceReportColumn::Revenue,
-                SearchQueryPerformanceReportColumn::SearchQuery
-            );
+            if (!empty($this->fields)) {
+                $report->Columns = $this->fields;
+            } else {
+                $report->Columns = [
+                    SearchQueryPerformanceReportColumn::Clicks,
+                    SearchQueryPerformanceReportColumn::Impressions,
+                    SearchQueryPerformanceReportColumn::Spend,
+                    SearchQueryPerformanceReportColumn::Conversions,
+                    SearchQueryPerformanceReportColumn::Revenue,
+                    SearchQueryPerformanceReportColumn::SearchQuery
+                ];
+            }
 
             $encodedReport   = new SoapVar($report, SOAP_ENC_OBJECT, 'SearchQueryPerformanceReportRequest', $this->serviceProxy->GetNamespace());
 
@@ -429,17 +440,21 @@ class Reports
             $report->Time->CustomDateRangeEnd->Month    = date('m', strtotime($this->dateRange[1]));
             $report->Time->CustomDateRangeEnd->Year     = date('Y', strtotime($this->dateRange[1]));
 
-            $report->Columns = array(
-                AgeGenderAudienceReportColumn::AccountName,
-                AgeGenderAudienceReportColumn::AdGroupName,
-                AgeGenderAudienceReportColumn::AgeGroup,
-                AgeGenderAudienceReportColumn::Gender,
-                AgeGenderAudienceReportColumn::Clicks,
-                AgeGenderAudienceReportColumn::Impressions,
-                AgeGenderAudienceReportColumn::Spend,
-                AgeGenderAudienceReportColumn::Conversions,
-                AgeGenderAudienceReportColumn::Revenue
-            );
+            if (!empty($this->fields)) {
+                $report->Columns = $this->fields;
+            } else {
+                $report->Columns = [
+                    AgeGenderAudienceReportColumn::AccountName,
+                    AgeGenderAudienceReportColumn::AdGroupName,
+                    AgeGenderAudienceReportColumn::AgeGroup,
+                    AgeGenderAudienceReportColumn::Gender,
+                    AgeGenderAudienceReportColumn::Clicks,
+                    AgeGenderAudienceReportColumn::Impressions,
+                    AgeGenderAudienceReportColumn::Spend,
+                    AgeGenderAudienceReportColumn::Conversions,
+                    AgeGenderAudienceReportColumn::Revenue
+                ];
+            }
 
             $encodedReport   = new SoapVar($report, SOAP_ENC_OBJECT, 'AgeGenderAudienceReportRequest', $this->serviceProxy->GetNamespace());
 
@@ -495,23 +510,27 @@ class Reports
             $report->Time->CustomDateRangeEnd->Month    = date('m', strtotime($this->dateRange[1]));
             $report->Time->CustomDateRangeEnd->Year     = date('Y', strtotime($this->dateRange[1]));
 
-            $report->Columns = array(
-                GeographicPerformanceReportColumn::AccountName,
-                GeographicPerformanceReportColumn::LocationType,
-                GeographicPerformanceReportColumn::MostSpecificLocation,
-                GeographicPerformanceReportColumn::Country,
-                GeographicPerformanceReportColumn::State,
-                GeographicPerformanceReportColumn::MetroArea,
-                GeographicPerformanceReportColumn::City,
-                GeographicPerformanceReportColumn::County,
-                GeographicPerformanceReportColumn::PostalCode,
-                GeographicPerformanceReportColumn::LocationId,
-                GeographicPerformanceReportColumn::Clicks,
-                GeographicPerformanceReportColumn::Impressions,
-                GeographicPerformanceReportColumn::Spend,
-                GeographicPerformanceReportColumn::Conversions,
-                GeographicPerformanceReportColumn::Revenue
-            );
+            if (!empty($this->fields)) {
+                $report->Columns = $this->fields;
+            } else {
+                $report->Columns = [
+                    GeographicPerformanceReportColumn::AccountName,
+                    GeographicPerformanceReportColumn::LocationType,
+                    GeographicPerformanceReportColumn::MostSpecificLocation,
+                    GeographicPerformanceReportColumn::Country,
+                    GeographicPerformanceReportColumn::State,
+                    GeographicPerformanceReportColumn::MetroArea,
+                    GeographicPerformanceReportColumn::City,
+                    GeographicPerformanceReportColumn::County,
+                    GeographicPerformanceReportColumn::PostalCode,
+                    GeographicPerformanceReportColumn::LocationId,
+                    GeographicPerformanceReportColumn::Clicks,
+                    GeographicPerformanceReportColumn::Impressions,
+                    GeographicPerformanceReportColumn::Spend,
+                    GeographicPerformanceReportColumn::Conversions,
+                    GeographicPerformanceReportColumn::Revenue
+                ];
+            }
 
             $encodedReport   = new SoapVar($report, SOAP_ENC_OBJECT, 'GeographicPerformanceReportRequest', $this->serviceProxy->GetNamespace());
 

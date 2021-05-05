@@ -138,7 +138,7 @@ class RefreshTokenCommand extends Command
             ->withDeveloperToken($developerToken);
 
         $this->comment("Please sign in to your Bing Ads account, and open following url:");
-        $this->line($AuthorizationData->Authentication->GetAuthorizationEndpoint());
+        $this->line(str_replace(' ', '%20', $AuthorizationData->Authentication->GetAuthorizationEndpoint()));
 
         $accessToken = $this->ask('Insert the full URL that you were redirected to (after you approve the access):');
 
