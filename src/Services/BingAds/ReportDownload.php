@@ -300,7 +300,7 @@ class ReportDownload
      * toCollection()
      *
      *
-     * @return Illuminate\Support\Collection results
+     * @return \Illuminate\Support\Collection results
      */
     public function toCollection()
     {
