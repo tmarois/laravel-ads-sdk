@@ -124,7 +124,7 @@ class Reports
      *
      *
      */
-    public function buildAccountReport($aggregation = 'Daily')
+    public function buildAccountReport($aggregation = ReportAggregation::Daily)
     {
         $report                         = new AccountPerformanceReportRequest();
         $report->ReportName             = 'Account Performance Report';
@@ -348,7 +348,7 @@ class Reports
      *
      *
      */
-    public function buildSearchTermReport()
+    public function buildSearchTermReport($aggregation = ReportAggregation::Summary)
     {
         $reportRequestId = null;
 
@@ -357,7 +357,7 @@ class Reports
             $report->ReportName             = 'Search Query Performance Report';
             $report->Format                 = ReportFormat::Csv;
             $report->ReturnOnlyCompleteData = false;
-            $report->Aggregation            = ReportAggregation::Summary;
+            $report->Aggregation            = $aggregation;
 
             $report->Scope                  = new AccountThroughAdGroupReportScope();
             $report->Scope->AccountIds      = [$this->service->getClientId()];
@@ -563,7 +563,7 @@ class Reports
      *
      *
      */
-    public function getAccountReport($aggregation = 'Daily')
+    public function getAccountReport($aggregation = ReportAggregation::Daily)
     {
         return $this->buildAccountReport($aggregation)->toCollection();
     }
@@ -592,7 +592,7 @@ class Reports
 
 
     /**
-     * getDestinationUrlReport()
+     * getFinalUrlReport()
      *
      *
      */
@@ -603,13 +603,13 @@ class Reports
 
 
     /**
-     * getDestinationUrlReport()
+     * getSearchTermReport()
      *
      *
      */
-    public function getSearchTermReport()
+    public function getSearchTermReport($aggregation = ReportAggregation::Summary)
     {
-        return $this->buildSearchTermReport()->aggregate('search_term');
+        return $this->buildSearchTermReport($aggregation)->aggregate('search_term');
     }
 
 
