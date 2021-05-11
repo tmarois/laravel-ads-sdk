@@ -2,11 +2,8 @@
 
 namespace LaravelAds\Services\BingAds;
 
-use SoapVar;
-use SoapFault;
 use Exception;
 use ZipArchive;
-
 use Microsoft\BingAds\V13\Reporting\ReportRequestStatusType;
 use Microsoft\BingAds\V13\Reporting\PollGenerateReportRequest;
 
@@ -303,7 +300,7 @@ class ReportDownload
      * toCollection()
      *
      *
-     * @return Collection results
+     * @return \Illuminate\Support\Collection results
      */
     public function toCollection()
     {
