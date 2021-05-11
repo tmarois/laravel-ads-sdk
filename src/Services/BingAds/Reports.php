@@ -33,6 +33,8 @@ use Microsoft\BingAds\V13\Reporting\ReportRequestStatusType;
 use Microsoft\BingAds\V13\Reporting\ReportTime;
 use Microsoft\BingAds\V13\Reporting\SearchQueryPerformanceReportColumn;
 use Microsoft\BingAds\V13\Reporting\SearchQueryPerformanceReportRequest;
+use Microsoft\BingAds\V13\Reporting\KeywordPerformanceReportColumn;
+use Microsoft\BingAds\V13\Reporting\KeywordPerformanceReportRequest;
 use Microsoft\BingAds\V13\Reporting\SortOrder;
 use Microsoft\BingAds\V13\Reporting\SubmitGenerateReportRequest;
 
@@ -122,7 +124,7 @@ class Reports
      *
      *
      */
-    public function buildAccountReport($aggregation = 'Daily')
+    public function buildAccountReport($aggregation = ReportAggregation::Daily)
     {
         $report                         = new AccountPerformanceReportRequest();
         $report->ReportName             = 'Account Performance Report';
@@ -346,7 +348,7 @@ class Reports
      *
      *
      */
-    public function buildSearchTermReport()
+    public function buildSearchTermReport($aggregation = ReportAggregation::Summary)
     {
         $reportRequestId = null;
 
@@ -355,7 +357,7 @@ class Reports
             $report->ReportName             = 'Search Query Performance Report';
             $report->Format                 = ReportFormat::Csv;
             $report->ReturnOnlyCompleteData = false;
-            $report->Aggregation            = ReportAggregation::Summary;
+            $report->Aggregation            = $aggregation;
 
             $report->Scope                  = new AccountThroughAdGroupReportScope();
             $report->Scope->AccountIds      = [$this->service->getClientId()];
@@ -385,6 +387,74 @@ class Reports
             }
 
             $encodedReport   = new SoapVar($report, SOAP_ENC_OBJECT, 'SearchQueryPerformanceReportRequest', $this->serviceProxy->GetNamespace());
+
+            $reportRequest = $this->submitGenerateReport($encodedReport);
+
+            if ($reportRequest) {
+                $reportRequestId = $reportRequest->ReportRequestId;
+            }
+        } catch (SoapFault $e) {
+            printf("-----\r\nFault Code: %s\r\nFault String: %s\r\nFault Detail: \r\n", $e->faultcode, $e->faultstring);
+
+            if (isset($e->detail)) {
+                var_dump($e->detail);
+            }
+
+            // print "-----\r\nLast SOAP request/response:\r\n";
+            // print $this->serviceProxy->GetWsdl() . "\r\n";
+            // print $this->serviceProxy->__getLastRequest()."\r\n";
+            // print $this->serviceProxy->__getLastResponse()."\r\n";
+        }
+
+        return (new ReportDownload($this->serviceProxy, $reportRequestId));
+    }
+
+
+    /**
+     * buildKeywordReport()
+     *
+     *
+     */
+    public function buildKeywordReport($aggregation = ReportAggregation::Daily)
+    {
+        $reportRequestId = null;
+
+        try {
+            $report                         = new KeywordPerformanceReportRequest();
+            $report->ReportName             = 'Keyword Performance Report';
+            $report->Format                 = ReportFormat::Csv;
+            $report->ReturnOnlyCompleteData = false;
+            $report->Aggregation            = $aggregation;
+
+            $report->Scope                  = new AccountThroughAdGroupReportScope();
+            $report->Scope->AccountIds      = [$this->service->getClientId()];
+
+            $report->Time                               = new ReportTime();
+            $report->Time->CustomDateRangeStart         = new Date();
+            $report->Time->CustomDateRangeStart->Day    = date('d', strtotime($this->dateRange[0]));
+            $report->Time->CustomDateRangeStart->Month  = date('m', strtotime($this->dateRange[0]));
+            $report->Time->CustomDateRangeStart->Year   = date('Y', strtotime($this->dateRange[0]));
+
+            $report->Time->CustomDateRangeEnd           = new Date();
+            $report->Time->CustomDateRangeEnd->Day      = date('d', strtotime($this->dateRange[1]));
+            $report->Time->CustomDateRangeEnd->Month    = date('m', strtotime($this->dateRange[1]));
+            $report->Time->CustomDateRangeEnd->Year     = date('Y', strtotime($this->dateRange[1]));
+
+            if (!empty($this->fields)) {
+                $report->Columns = $this->fields;
+            } else {
+                $report->Columns = [
+                    KeywordPerformanceReportColumn::TimePeriod,
+                    KeywordPerformanceReportColumn::Clicks,
+                    KeywordPerformanceReportColumn::Impressions,
+                    KeywordPerformanceReportColumn::Spend,
+                    KeywordPerformanceReportColumn::Conversions,
+                    KeywordPerformanceReportColumn::Revenue,
+                    KeywordPerformanceReportColumn::Keyword
+                ];
+            }
+
+            $encodedReport = new SoapVar($report, SOAP_ENC_OBJECT, 'KeywordPerformanceReportRequest', $this->serviceProxy->GetNamespace());
 
             $reportRequest = $this->submitGenerateReport($encodedReport);
 
@@ -561,7 +631,7 @@ class Reports
      *
      *
      */
-    public function getAccountReport($aggregation = 'Daily')
+    public function getAccountReport($aggregation = ReportAggregation::Daily)
     {
         return $this->buildAccountReport($aggregation)->toCollection();
     }
@@ -590,7 +660,7 @@ class Reports
 
 
     /**
-     * getDestinationUrlReport()
+     * getFinalUrlReport()
      *
      *
      */
@@ -601,13 +671,24 @@ class Reports
 
 
     /**
-     * getDestinationUrlReport()
+     * getSearchTermReport()
      *
      *
      */
-    public function getSearchTermReport()
+    public function getSearchTermReport($aggregation = ReportAggregation::Summary)
     {
-        return $this->buildSearchTermReport()->aggregate('search_term');
+        return $this->buildSearchTermReport($aggregation)->toCollection();
+    }
+
+
+    /**
+     * getKeywordReport()
+     *
+     *
+     */
+    public function getKeywordReport($aggregation = ReportAggregation::Daily)
+    {
+        return $this->buildKeywordReport($aggregation)->toCollection();
     }
 
 
