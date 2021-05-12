@@ -8,7 +8,7 @@ use LaravelAds\Services\BingAds\Service;
 
 use Microsoft\BingAds\V13\CampaignManagement\Campaign as CampaignProxy;
 use Microsoft\BingAds\V13\CampaignManagement\CampaignStatus;
-use LaravelAds\Services\BingAds\Operations\Operation
+use LaravelAds\Services\BingAds\Operations\Operation;
 
 use Microsoft\BingAds\V13\CampaignManagement\GetCampaignsByIdsRequest;
 use Microsoft\BingAds\V13\CampaignManagement\UpdateCampaignsRequest;
