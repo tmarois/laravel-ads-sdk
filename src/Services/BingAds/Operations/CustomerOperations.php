@@ -17,10 +17,8 @@ class CustomerOperations extends Operation
      * __construct()
      *
      */
-    public function __construct(Service $service = null)
-    {
+    public function __construct(Service $service = null) {
         $this->service = $service;
-
         $this->request = new CustomerProxy();
     }
 
@@ -51,34 +49,10 @@ class CustomerOperations extends Operation
     /**
      * save()
      *
+     * TODO: this could probably be removed,
+     *       but just incase someone calls this...
      */
-    public function save($updateObject = true)
-    {
-        /*
-        $serviceCall = $this->service->call(ServiceClientType::CampaignManagementVersion13);
-
-        try
-        {
-            $adGroup = $this->request();
-
-            $request = new UpdateCustomerRequest();
-            $request->AccountId  = $this->service->getClientId();
-            $request->CampaignId = $adGroup->CampaignId;
-            $request->AdGroups = [$adGroup];
-            // $request->UpdateAudienceAdsBidAdjustment = true;
-            // $request->ReturnInheritedBidStrategyTypes = true;
-
-            $serverResponse = $serviceCall->GetService()->UpdateAdGroups($request);
-
-            // lets update the current object
-            if ($updateObject) $this->get();
-        }
-        catch(\Exception $e) {
-            print $serviceCall->GetService()->__getLastRequest()."\n";
-            print $serviceCall->GetService()->__getLastResponse()."\n";
-        }
-        */
-
+    public function save($updateObject = true) {
         return $this;
     }
 }

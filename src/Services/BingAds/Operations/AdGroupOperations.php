@@ -19,10 +19,8 @@ class AdGroupOperations extends Operation
      * __construct()
      *
      */
-    public function __construct(Service $service = null)
-    {
+    public function __construct(Service $service = null) {
         $this->service = $service;
-
         $this->request = new AdGroupProxy();
     }
 

@@ -8,13 +8,11 @@ This is a wrapper for connecting each ad source into your Laravel application. T
 
 **The goal of this package is to provide you with one SDK to manage all.**
 
-*Note: You do not need to use the Laravel Framework, it's not required, using the **manual-configuration** allows this package to be used in any project. Using Laravel helps with the commands for authentication and initial setup.*
-
 ### (1) Installation
 
 Use [Composer](http://getcomposer.org/) to install package.
 
-Run `composer require tmarois/laravel-ads-sdk:^1.2`
+Run `composer require tmarois/laravel-ads-sdk`
 
 ### (2) Laravel Config
 

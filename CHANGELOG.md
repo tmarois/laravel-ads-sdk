@@ -1,17 +1,19 @@
 Change Log
 ==========
 
-## [unreleased]
+## [Unreleased]
 
 ### Added
-* Add ability to specify fields for Bing Ads reports
-* Added a getCustomers() endpoint for Bing Ads
+* Added ability to specify fields for Bing Ads reports
+* Added getCustomers() endpoint for Bing Ads
 
 ### Changed
 * Made the redirect_uri config setting an env variable
 
 ### Fixed
 * Url encoded spaces in OAuth Grant URL
+
+-------------------------------------------------------
 
 ## [1.2.21] - 03-31-2021
 
