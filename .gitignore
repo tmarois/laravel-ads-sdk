@@ -88,3 +88,4 @@ nb-configuration.xml
 
 # Visual Studio Code
 .vscode/
+node_modules
