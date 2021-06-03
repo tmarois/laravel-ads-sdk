@@ -9,6 +9,7 @@ Change Log
 
 ### Changed
 * Made the redirect_uri config setting an env variable
+* Updated the laravel vendor:publish to show laravel-ads-sdk instead of config
 
 ### Fixed
 * Url encoded spaces in OAuth Grant URL

@@ -16,7 +16,7 @@ Run `composer require tmarois/laravel-ads-sdk`
 
 ### (2) Laravel Config
 
-Run `php artisan vendor:publish`, then copy these to your `.env` and update with your credentials.
+Run `php artisan vendor:publish`, If you see options, select the one that says `laravel-ads-sdk`, then copy these to your `.env` and update with your credentials.
 
 *Only if using the Laravel Framework, Otherwise you can use the **manual-configuration** to use in any project.*
 
