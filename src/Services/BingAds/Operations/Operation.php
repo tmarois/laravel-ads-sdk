@@ -26,8 +26,7 @@ abstract class Operation
      * request()
      *
      */
-    public function request()
-    {
+    public function request() {
         return $this->request;
     }
 
@@ -35,8 +34,7 @@ abstract class Operation
      * response()
      *
      */
-    public function response()
-    {
+    public function response() {
         return $this->response;
     }
 
@@ -44,13 +42,10 @@ abstract class Operation
      * set()
      *
      */
-    public function set($entity)
-    {
+    public function set($entity) {
         $this->response = $entity;
-
         // set up our request if we have not done this yet
         $this->request()->Id = $entity->Id;
-
         return $this;
     }
 
@@ -58,10 +53,8 @@ abstract class Operation
      * get()
      *
      */
-    public function get()
-    {
+    public function get() {
         $this->set($this->sendRequest());
-
         return $this;
     }
 }

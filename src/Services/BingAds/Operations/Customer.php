@@ -10,8 +10,7 @@ class Customer extends CustomerOperations
      * getId()
      *
      */
-    public function getId()
-    {
+    public function getId() {
         return $this->response()->Id ?? 0;
     }
 
@@ -21,10 +20,8 @@ class Customer extends CustomerOperations
      * @param int $id
      *
      */
-    public function setId($id)
-    {
+    public function setId($id) {
         $this->request()->Id = $id;
-
         return $this;
     }
 
@@ -34,8 +31,7 @@ class Customer extends CustomerOperations
      * @return string
      *
      */
-    public function getName()
-    {
+    public function getName() {
         return $this->response()->Name ?? '';
     }
 
@@ -45,10 +41,8 @@ class Customer extends CustomerOperations
      * @param string $name
      *
      */
-    public function setName($name)
-    {
+    public function setName($name) {
         $this->request()->Name = $name;
-
         return $this;
     }
 }

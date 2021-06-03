@@ -16,8 +16,7 @@ class AdGroup extends AdGroupOperations
      * getId()
      *
      */
-    public function getId()
-    {
+    public function getId() {
         return $this->response()->Id ?? 0;
     }
 
@@ -27,10 +26,8 @@ class AdGroup extends AdGroupOperations
      * @param int $id
      *
      */
-    public function setId($id)
-    {
+    public function setId($id) {
         $this->request()->Id = $id;
-
         return $this;
     }
 
@@ -40,8 +37,7 @@ class AdGroup extends AdGroupOperations
      * @return string
      *
      */
-    public function getName()
-    {
+    public function getName() {
         return $this->response()->Name ?? '';
     }
 
@@ -51,10 +47,8 @@ class AdGroup extends AdGroupOperations
      * @param string $name
      *
      */
-    public function setName($name)
-    {
+    public function setName($name) {
         $this->request()->Name = $name;
-
         return $this;
     }
 
@@ -64,8 +58,7 @@ class AdGroup extends AdGroupOperations
      * @param int $id
      *
      */
-    public function getCampaignId()
-    {
+    public function getCampaignId() {
         return $this->request()->CampaignId;
     }
 
@@ -75,10 +68,8 @@ class AdGroup extends AdGroupOperations
      * @param int $id
      *
      */
-    public function setCampaignId($id)
-    {
+    public function setCampaignId($id) {
         $this->request()->CampaignId = $id;
-
         return $this;
     }
 
@@ -131,8 +122,7 @@ class AdGroup extends AdGroupOperations
      * @return string
      *
      */
-    public function getType()
-    {
+    public function getType() {
         return '';
     }
 
