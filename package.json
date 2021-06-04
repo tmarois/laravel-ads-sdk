@@ -1,0 +1,13 @@
+{
+    "private": true,
+    "version": "1.2.22",
+    "scripts": {
+        "release": "dotenv release-it"
+    },
+    "devDependencies": {
+        "@release-it/keep-a-changelog": "^2.2.2",
+        "auto-changelog": "^2.2.1",
+        "dotenv-cli": "^4.0.0",
+        "release-it": "^14.2.2"
+    }
+}

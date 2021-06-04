@@ -8,19 +8,17 @@ This is a wrapper for connecting each ad source into your Laravel application. T
 
 **The goal of this package is to provide you with one SDK to manage all.**
 
-*Note: You do not need to use the Laravel Framework, it's not required, using the **manual-configuration** allows this package to be used in any project. Using Laravel helps with the commands for authentication and initial setup.*
-
 ### (1) Installation
 
 Use [Composer](http://getcomposer.org/) to install package.
 
-Run `composer require tmarois/laravel-ads-sdk:^1.2`
+Run `composer require tmarois/laravel-ads-sdk`
 
 ### (2) Laravel Config
 
-Run `php artisan vendor:publish`, then copy these to your `.env` and update with your credentials.
+Run `php artisan vendor:publish`, If you see multiple options, select the one that says `laravel-ads-sdk`
 
-*Only if using the Laravel Framework, Otherwise you can use the **manual-configuration** to use in any project.*
+**Next**, copy this to your `.env` and update with your credentials (if you dont have credentials, continue to the next step).
 
 ```
 ADWORDS_DEVELOPER_TOKEN=""
@@ -36,7 +34,9 @@ BING_REFRESH_TOKEN=""
 
 ### (3) For GoogleAds
 
-*Follow the steps in the command line to generate a refresh token.*
+You will need your developer token, client id and client secret to continue. [Learn More](GoogleAds-Auth.md)
+
+*Follow the steps in the command line to **generate a refresh token**.*
 
 Run `php artisan laravelads:token:generate --service=GoogleAds`
 
@@ -44,7 +44,9 @@ Having Trouble? [Learn More](GoogleAds-Auth.md)
 
 ### (4) For BingAds
 
-*Follow the steps in the command line to generate a refresh token.*
+You will need your developer token, client id and client secret to continue. [Learn More](BingAds-Auth.md)
+
+*Follow the steps in the command line to **generate a refresh token**.*
 
 Run `php artisan laravelads:token:generate --service=BingAds`
 
@@ -102,6 +104,7 @@ This uses the [BingAds-PHP-SDK](https://github.com/BingAds/BingAds-PHP-SDK) for 
 [Need help with authentication or sandbox mode?](BingAds-Auth.md)
 
 #### Management
+* [Fetching - Get Customers](BingAds-SDK.md#fetch-customers)
 * [Fetching - All Campaigns](BingAds-SDK.md#fetch-all-campaigns)
 * [Fetching - All Ad Groups](BingAds-SDK.md#fetch-all-ad-groups)
 * [Management - Campaigns](BingAds-SDK.md#campaigns)
@@ -117,13 +120,14 @@ This uses the [BingAds-PHP-SDK](https://github.com/BingAds/BingAds-PHP-SDK) for 
 * [Search Term Performance](BingAds-SDK.md#search-term-performance-report)
 * [Age Range Performance](BingAds-SDK.md#age-range-performance-report)
 * [Gender Performance](BingAds-SDK.md#gender-performance-report)
+* [Custom Fields](BingAds-SDK.md#custom-fields)
 
 
 # Facebook Ads
 
 This uses the [facebook-php-business-sdk](https://github.com/facebook/facebook-php-business-sdk) for [Facebook Marketing API](https://developers.facebook.com/docs/marketing-apis)
 
-Looking for and accepting contributors to help implement this. 
+Looking for and accepting contributors to help implement this.
 
 # Contributions
 

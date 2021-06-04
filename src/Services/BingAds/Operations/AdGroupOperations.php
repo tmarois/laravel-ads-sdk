@@ -1,87 +1,27 @@
-<?php namespace LaravelAds\Services\BingAds\Operations;
+<?php
 
-use LaravelAds\Services\BingAds\Operations\AdGroup;
+namespace LaravelAds\Services\BingAds\Operations;
+
 use LaravelAds\Services\BingAds\Service;
+use Microsoft\BingAds\Auth\ServiceClient;
 
-use Microsoft\BingAds\V13\CampaignManagement\GetAdGroupsByIdsRequest;
+use Microsoft\BingAds\Auth\ServiceClientType;
+use LaravelAds\Services\BingAds\Operations\AdGroup;
+use LaravelAds\Services\BingAds\Operations\Operation;
+
 use Microsoft\BingAds\V13\CampaignManagement\UpdateAdGroupsRequest;
 use Microsoft\BingAds\V13\CampaignManagement\AdGroup as AdGroupProxy;
+use Microsoft\BingAds\V13\CampaignManagement\GetAdGroupsByIdsRequest;
 
-use Microsoft\BingAds\Auth\ServiceClient;
-use Microsoft\BingAds\Auth\ServiceClientType;
-
-class AdGroupOperations
+class AdGroupOperations extends Operation
 {
-    /**
-     * $service
-     *
-     */
-    protected $service = null;
-
-    /**
-     * $campaignRequest
-     *
-     */
-    protected $request = null;
-
-    /**
-     * $campaignResponse
-     *
-     */
-    protected $response = null;
-
     /**
      * __construct()
      *
      */
-    public function __construct(Service $service = null)
-    {
+    public function __construct(Service $service = null) {
         $this->service = $service;
-
         $this->request = new AdGroupProxy();
-    }
-
-    /**
-     * request()
-     *
-     */
-    public function request()
-    {
-        return $this->request;
-    }
-
-    /**
-     * response()
-     *
-     */
-    public function response()
-    {
-        return $this->response;
-    }
-
-    /**
-     * set()
-     *
-     */
-    public function set($adGroup)
-    {
-        $this->response = $adGroup;
-
-        // set up our request if we have not done this yet
-        $this->request()->Id = $adGroup->Id;
-
-        return $this;
-    }
-
-    /**
-     * get()
-     *
-     */
-    public function get()
-    {
-        $this->set($this->sendRequest());
-
-        return $this;
     }
 
     /**
@@ -92,8 +32,7 @@ class AdGroupOperations
     {
         $serviceCall = $this->service->call(ServiceClientType::CampaignManagementVersion13);
 
-        try
-        {
+        try {
             $adGroup = $this->request();
 
             $request = new GetAdGroupsByIdsRequest();
@@ -102,8 +41,7 @@ class AdGroupOperations
             $request->AdGroupIds = [$adGroup->Id];
 
             return $serviceCall->GetService()->GetAdGroupsByIds($request)->AdGroups->AdGroup[0] ?? null;
-        }
-        catch(\Exception $e) {
+        } catch (\Exception $e) {
             print $serviceCall->GetService()->__getLastRequest()."\n";
             print $serviceCall->GetService()->__getLastResponse()."\n";
         }
@@ -119,8 +57,7 @@ class AdGroupOperations
     {
         $serviceCall = $this->service->call(ServiceClientType::CampaignManagementVersion13);
 
-        try
-        {
+        try {
             $adGroup = $this->request();
 
             $request = new UpdateAdGroupsRequest();
@@ -133,9 +70,10 @@ class AdGroupOperations
             $serverResponse = $serviceCall->GetService()->UpdateAdGroups($request);
 
             // lets update the current object
-            if ($updateObject) $this->get();
-        }
-        catch(\Exception $e) {
+            if ($updateObject) {
+                $this->get();
+            }
+        } catch (\Exception $e) {
             print $serviceCall->GetService()->__getLastRequest()."\n";
             print $serviceCall->GetService()->__getLastResponse()."\n";
         }

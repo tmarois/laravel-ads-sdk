@@ -1,4 +1,6 @@
-<?php namespace LaravelAds\Services\BingAds\Operations;
+<?php
+
+namespace LaravelAds\Services\BingAds\Operations;
 
 use LaravelAds\Services\BingAds\Operations\CampaignOperations;
 
@@ -15,8 +17,7 @@ class Campaign extends CampaignOperations
      * getId()
      *
      */
-    public function getId()
-    {
+    public function getId() {
         return $this->response()->Id ?? 0;
     }
 
@@ -26,10 +27,8 @@ class Campaign extends CampaignOperations
      * @param int $id
      *
      */
-    public function setId($id)
-    {
+    public function setId($id) {
         $this->request()->Id = $id;
-
         return $this;
     }
 
@@ -39,8 +38,7 @@ class Campaign extends CampaignOperations
      * @return string
      *
      */
-    public function getName()
-    {
+    public function getName() {
         return $this->response()->Name ?? '';
     }
 
@@ -50,10 +48,8 @@ class Campaign extends CampaignOperations
      * @param string $name
      *
      */
-    public function setName($name)
-    {
+    public function setName($name) {
         $this->request()->Name = $name;
-
         return $this;
     }
 
@@ -65,15 +61,15 @@ class Campaign extends CampaignOperations
      */
     public function getStatus()
     {
-        $status = strtoupper($this->response()->Status??'UNKNOWN');
+        $status = strtoupper($this->response()->Status ?? 'UNKNOWN');
 
-        switch($status) {
-            case 'ACTIVE'                 : return 'ENABLED'; break;
-            case 'BUDGETPAUSED'           : return 'ENABLED'; break;
-            case 'BUDGETANDMANUALPAUSED'  : return 'PAUSED';  break;
-            case 'PAUSED'                 : return 'PAUSED';  break;
-            case 'REMOVED'                : return 'DELETED'; break;
-            default :
+        switch ($status) {
+            case 'ACTIVE': return 'ENABLED'; break;
+            case 'BUDGETPAUSED': return 'ENABLED'; break;
+            case 'BUDGETANDMANUALPAUSED': return 'PAUSED';  break;
+            case 'PAUSED': return 'PAUSED';  break;
+            case 'REMOVED': return 'DELETED'; break;
+            default:
         }
 
         return $status;
@@ -88,7 +84,9 @@ class Campaign extends CampaignOperations
     public function setStatus($status)
     {
         $status = ucfirst(strtolower($status));
-        if ($status == 'Enabled') $status = 'Active';
+        if ($status == 'Enabled') {
+            $status = 'Active';
+        }
 
         if (in_array($status, ['Active','Paused'])) {
             $this->request()->Status = $status;
@@ -116,12 +114,12 @@ class Campaign extends CampaignOperations
      */
     public function getBudgetDelivery()
     {
-        $type = strtoupper($this->response()->BudgetType??'UNKNOWN');
+        $type = strtoupper($this->response()->BudgetType ?? 'UNKNOWN');
 
-        switch($type) {
-            case 'DAILYBUDGETACCELERATED' : return 'ACCELERATED'; break;
-            case 'DAILYBUDGETSTANDARD'    : return 'STANDARD';  break;
-            default :
+        switch ($type) {
+            case 'DAILYBUDGETACCELERATED': return 'ACCELERATED'; break;
+            case 'DAILYBUDGETSTANDARD': return 'STANDARD';  break;
+            default:
         }
 
         return $type;
@@ -135,7 +133,7 @@ class Campaign extends CampaignOperations
      */
     public function getChannelType()
     {
-        return strtoupper($this->response()->CampaignType??'UNKNOWN');
+        return strtoupper($this->response()->CampaignType ?? 'UNKNOWN');
     }
 
     /**
@@ -148,12 +146,11 @@ class Campaign extends CampaignOperations
     {
         $type = strtoupper($this->response()->BiddingScheme->Type ?? 'UNKNOWN');
 
-        switch($type)
-        {
-            case 'ENHANCEDCPC' : return 'ECPC'; break;
-            case 'MANUALCPC'   : return 'CPC'; break;
-            case 'TARGETCPA'   : return 'CPA'; break;
-            default :
+        switch ($type) {
+            case 'ENHANCEDCPC': return 'ECPC'; break;
+            case 'MANUALCPC': return 'CPC'; break;
+            case 'TARGETCPA': return 'CPA'; break;
+            default:
         }
 
         return $type;
@@ -167,9 +164,8 @@ class Campaign extends CampaignOperations
      */
     public function getTargetCpa()
     {
-        if ($this->getBidStrategy() == 'CPA')
-        {
-            return $this->response()->BiddingScheme->TargetCpa??0;
+        if ($this->getBidStrategy() == 'CPA') {
+            return $this->response()->BiddingScheme->TargetCpa ?? 0;
         }
 
         return 0;
@@ -183,8 +179,7 @@ class Campaign extends CampaignOperations
      */
     public function setTargetCpa($amount = 0)
     {
-        if ($this->getBidStrategy() == 'CPA')
-        {
+        if ($this->getBidStrategy() == 'CPA') {
             $biddingScheme = (new TargetCpaBiddingScheme());
             $biddingScheme->Type = 'TargetCpa';
             $biddingScheme->TargetCpa = $amount;
@@ -196,7 +191,6 @@ class Campaign extends CampaignOperations
                 'TargetCpaBiddingScheme',
                 'https://bingads.microsoft.com/CampaignManagement/v13'
             );
-
         }
 
         return $this;
@@ -208,11 +202,8 @@ class Campaign extends CampaignOperations
      * @param int $amount
      *
      */
-    public function setBudget($amount = 0)
-    {
+    public function setBudget($amount = 0){
         $this->request()->DailyBudget = $amount;
-
         return $this;
     }
-
 }
