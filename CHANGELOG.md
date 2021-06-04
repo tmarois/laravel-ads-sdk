@@ -1,7 +1,7 @@
 Change Log
 ==========
 
-## [Unreleased]
+## [1.2.22] - 2021-06-03
 
 ### Added
 * Added ability to specify fields for Bing Ads reports
