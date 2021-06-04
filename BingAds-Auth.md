@@ -1,5 +1,7 @@
 # BingAds API SDK  (Authentication Help)
 
+*Note: These steps were tested as of June 3rd, 2021, you may need modify these steps to work for your specific project.*
+
 This uses the [BingAds-PHP-SDK](https://github.com/BingAds/BingAds-PHP-SDK) for the [Bing Ads API](https://docs.microsoft.com/en-us/bingads/guides/get-started-php?view=bingads-12)
 
 ## (1) API Access
