@@ -14,7 +14,7 @@ Use [Composer](http://getcomposer.org/) to install package.
 
 Run `composer require tmarois/laravel-ads-sdk`
 
-### (2) Laravel Config (credentials)
+### (2) Laravel Config
 
 Run `php artisan vendor:publish`, If you see multiple options, select the one that says `laravel-ads-sdk`
 
@@ -34,7 +34,9 @@ BING_REFRESH_TOKEN=""
 
 ### (3) For GoogleAds
 
-*Follow the steps in the command line to generate a refresh token.*
+You will need your developer token, client id and client secret to continue. [Learn More](GoogleAds-Auth.md)
+
+*Follow the steps in the command line to **generate a refresh token**.*
 
 Run `php artisan laravelads:token:generate --service=GoogleAds`
 
@@ -42,7 +44,9 @@ Having Trouble? [Learn More](GoogleAds-Auth.md)
 
 ### (4) For BingAds
 
-*Follow the steps in the command line to generate a refresh token.*
+You will need your developer token, client id and client secret to continue. [Learn More](BingAds-Auth.md)
+
+*Follow the steps in the command line to **generate a refresh token**.*
 
 Run `php artisan laravelads:token:generate --service=BingAds`
 
