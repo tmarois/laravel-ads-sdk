@@ -19,6 +19,7 @@ $bingAds = LaravelAds::bingAds()->with('ACCOUNT_ID');
 
 
 #### Management
+* [Fetching - Get Customers](#fetch-customers)
 * [Fetching - All Campaigns](#fetch-all-campaigns)
 * [Fetching - All Ad Groups](#fetch-all-ad-groups)
 * [Management - Campaigns](#campaigns)
@@ -39,6 +40,25 @@ $bingAds = LaravelAds::bingAds()->with('ACCOUNT_ID');
 ## Fetching
 
 If you don't want to learn how to handle the BingAds API request, here are **pre-built methods** to quickly get you going.
+
+### Fetch Customers
+
+Fetching all the customers within the account.
+
+```php
+$customers = $bingAds->fetch()->getCustomers();
+```
+
+*Results: `getCustomers()` (returns a [Laravel Collection](https://laravel.com/docs/collections) object, use `all()` for array)*
+
+```
+[0] => Array
+(
+    [id] => 000000000
+    [name] => Company Name
+)
+...
+```
 
 ### Fetch All Campaigns
 

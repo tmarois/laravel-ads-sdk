@@ -104,6 +104,7 @@ This uses the [BingAds-PHP-SDK](https://github.com/BingAds/BingAds-PHP-SDK) for 
 [Need help with authentication or sandbox mode?](BingAds-Auth.md)
 
 #### Management
+* [Fetching - Get Customers](BingAds-SDK.md#fetch-customers)
 * [Fetching - All Campaigns](BingAds-SDK.md#fetch-all-campaigns)
 * [Fetching - All Ad Groups](BingAds-SDK.md#fetch-all-ad-groups)
 * [Management - Campaigns](BingAds-SDK.md#campaigns)
