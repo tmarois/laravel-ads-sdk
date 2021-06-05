@@ -1,17 +1,20 @@
 Change Log
 ==========
 
-## [unreleased]
+## [1.2.22] - 2021-06-03
 
 ### Added
-* Add ability to specify fields for Bing Ads reports
-* Added a getCustomers() endpoint for Bing Ads
+* Added ability to specify fields for Bing Ads reports
+* Added getCustomers() endpoint for Bing Ads
 
 ### Changed
 * Made the redirect_uri config setting an env variable
+* Updated the laravel vendor:publish to show laravel-ads-sdk instead of config
 
 ### Fixed
 * Url encoded spaces in OAuth Grant URL
+
+-------------------------------------------------------
 
 ## [1.2.21] - 03-31-2021
 

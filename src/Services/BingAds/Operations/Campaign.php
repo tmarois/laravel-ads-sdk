@@ -17,8 +17,7 @@ class Campaign extends CampaignOperations
      * getId()
      *
      */
-    public function getId()
-    {
+    public function getId() {
         return $this->response()->Id ?? 0;
     }
 
@@ -28,10 +27,8 @@ class Campaign extends CampaignOperations
      * @param int $id
      *
      */
-    public function setId($id)
-    {
+    public function setId($id) {
         $this->request()->Id = $id;
-
         return $this;
     }
 
@@ -41,8 +38,7 @@ class Campaign extends CampaignOperations
      * @return string
      *
      */
-    public function getName()
-    {
+    public function getName() {
         return $this->response()->Name ?? '';
     }
 
@@ -52,10 +48,8 @@ class Campaign extends CampaignOperations
      * @param string $name
      *
      */
-    public function setName($name)
-    {
+    public function setName($name) {
         $this->request()->Name = $name;
-
         return $this;
     }
 
@@ -208,10 +202,8 @@ class Campaign extends CampaignOperations
      * @param int $amount
      *
      */
-    public function setBudget($amount = 0)
-    {
+    public function setBudget($amount = 0){
         $this->request()->DailyBudget = $amount;
-
         return $this;
     }
 }
