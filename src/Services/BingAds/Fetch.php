@@ -28,8 +28,7 @@ class Fetch
      *
      *
      */
-    public function __construct($service)
-    {
+    public function __construct($service) {
         $this->service = $service;
     }
 
@@ -75,9 +74,6 @@ class Fetch
         }
 
         return collect($r);
-
-        // print $proxy->GetService()->__getLastRequest()."\n";
-        // print $proxy->GetService()->__getLastResponse()."\n";
     }
 
     /**
