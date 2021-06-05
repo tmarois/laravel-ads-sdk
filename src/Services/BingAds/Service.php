@@ -60,10 +60,8 @@ class Service
      *
      * @return self
      */
-    public function with($clientId)
-    {
+    public function with($clientId) {
         $this->clientId = $clientId;
-
         return $this;
     }
 
@@ -74,10 +72,8 @@ class Service
      *
      * @return self
      */
-    public function withCustomerId($customerId)
-    {
+    public function withCustomerId($customerId) {
         $this->customerId = $customerId;
-
         return $this;
     }
 
@@ -86,8 +82,7 @@ class Service
      *
      * @return string
      */
-    public function getClientId()
-    {
+    public function getClientId() {
         return $this->clientId;
     }
 
@@ -96,8 +91,7 @@ class Service
      *
      * @return string
      */
-    public function getCustomerId()
-    {
+    public function getCustomerId() {
         return $this->customerId;
     }
 
@@ -108,10 +102,8 @@ class Service
      *
      * @return self
      */
-    public function setEnvironment($env)
-    {
+    public function setEnvironment($env) {
         $this->environment = $env;
-
         return $this;
     }
 
@@ -122,8 +114,7 @@ class Service
      *
      * @return string
      */
-    public function getEnvironment()
-    {
+    public function getEnvironment() {
         return $this->environment;
     }
 
@@ -132,8 +123,7 @@ class Service
      *
      *
      */
-    public function fetch()
-    {
+    public function fetch() {
         return (new Fetch($this));
     }
 
@@ -142,11 +132,9 @@ class Service
      *
      *
      */
-    public function call($service)
-    {
+    public function call($service) {
         $serviceClient = (new ServiceClient($service, $this->session(), $this->environment));
         $serviceClient->SetAuthorizationData($this->session());
-
         return $serviceClient;
     }
 
@@ -155,8 +143,7 @@ class Service
      *
      *
      */
-    public function reports($dateFrom, $dateTo)
-    {
+    public function reports($dateFrom, $dateTo) {
         return (new Reports($this))->setDateRange($dateFrom, $dateTo);
     }
 
@@ -165,8 +152,7 @@ class Service
      *
      *
      */
-    public function offlineConversionImport(array $conversions = [])
-    {
+    public function offlineConversionImport(array $conversions = []) {
         return (new OfflineConversions($this))->addBulk($conversions);
     }
 
