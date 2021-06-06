@@ -145,7 +145,7 @@ Coming soon.
 
 We are actively looking for new contributors.
 
-If you want to contribute, join the slack channel and/or submit pull requests.
+If you want to contribute, [Join the Discord](https://discord.gg/g3W49zdWm2) channel and/or submit pull requests.
 
 # License
 
