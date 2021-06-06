@@ -35,7 +35,7 @@ FB_ACCESS_TOKEN=""
 FB_REFRESH_TOKEN=""
 ```
 
-### (3.A) For GoogleAds
+### (3.a) For GoogleAds
 
 You will need your developer token, client id and client secret to continue. [Learn More](GoogleAds-Auth.md)
 
@@ -45,7 +45,7 @@ Run `php artisan laravelads:token:generate --service=GoogleAds`
 
 Having Trouble? [Learn More](GoogleAds-Auth.md)
 
-### (3.B) For BingAds
+### (3.b) For BingAds
 
 You will need your developer token, client id and client secret to continue. [Learn More](BingAds-Auth.md)
 
@@ -55,7 +55,7 @@ Run `php artisan laravelads:token:generate --service=BingAds`
 
 Having Trouble? [Learn More](BingAds-Auth.md)
 
-### (3.C) For FacebookAds
+### (3.c) For FacebookAds
 
 Coming soon
 
