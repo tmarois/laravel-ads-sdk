@@ -2,6 +2,8 @@
 
 namespace LaravelAds\Services\FacebookAds;
 
+use LaravelAds\Services\FacebookAds\Service;
+
 use FacebookAds\Object\AdAccount;
 use FacebookAds\Object\Fields\AdSetFields;
 use FacebookAds\Object\Fields\CampaignFields;
@@ -9,17 +11,16 @@ use FacebookAds\Object\Fields\CampaignFields;
 class Fetch
 {
     /**
-     * $service
-     *
+     * @var LaravelAds\Services\FacebookAds\Service
      */
     protected $service = null;
 
     /**
      * __construct()
      *
-     *
+     * @param LaravelAds\Services\FacebookAds\Service $service
      */
-    public function __construct($service) {
+    public function __construct(Service $service) {
         $this->service = $service;
     }
 
@@ -33,6 +34,7 @@ class Fetch
      * https://github.com/facebook/facebook-php-business-sdk/blob/master/src/FacebookAds/Object/Fields/CampaignFields.php
      * 
      * @param array $fields
+     * @param array $params
      * @return object Collection
      */
     public function getCampaigns($fields = [], $params = [])
@@ -60,6 +62,8 @@ class Fetch
      * getAdSets()
      * This is here to be compatible with google/bing
      *
+     * @param array $fields
+     * @param array $params
      * @return object Collection
      */
     public function getAdSets($fields = [], $params = []) {
@@ -76,6 +80,7 @@ class Fetch
      * https://github.com/facebook/facebook-php-business-sdk/blob/master/src/FacebookAds/Object/Fields/AdSetFields.php
      *
      * @param array $fields
+     * @param array $params
      * @return object Collection
      */
     public function getAdGroups($fields = [], $params = [])

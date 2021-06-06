@@ -2,6 +2,7 @@
 
 namespace LaravelAds\Services\GoogleAds;
 
+use LaravelAds\Services\GoogleAds\Service;
 use LaravelAds\Services\GoogleAds\Operations\AdGroupResponse;
 
 use Google\AdsApi\AdWords\v201809\cm\CampaignService;
@@ -16,18 +17,16 @@ use Google\AdsApi\AdWords\v201809\cm\PredicateOperator;
 class Fetch
 {
     /**
-     * $service
-     *
+     * @var LaravelAds\Services\GoogleAds\Service
      */
     protected $service = null;
 
     /**
      * __construct()
      *
-     *
+     * @param LaravelAds\Services\GoogleAds\Service $service
      */
-    public function __construct($service)
-    {
+    public function __construct(Service $service) {
         $this->service = $service;
     }
 
