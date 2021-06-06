@@ -17,7 +17,6 @@ $bingAds = LaravelAds::bingAds()->with('ACCOUNT_ID');
 |`with(ACCOUNT_ID)`|**(Required)** – This is your "Account Id" (can be found in the url &aid={ YOUR ACCOUNT ID })
 |`withCustomerId(CUSTOMER_ID)`|**(Optional)** – Some requests might require your customer id
 
-
 #### Management
 * [Fetching - Get Customers](#fetch-customers)
 * [Fetching - All Campaigns](#fetch-all-campaigns)
@@ -36,6 +35,8 @@ $bingAds = LaravelAds::bingAds()->with('ACCOUNT_ID');
 * [Age Range Performance](#age-range-performance-report)
 * [Gender Performance](#gender-performance-report)
 * [Custom Fields](#custom-fields)
+
+---------------------------------------------------------
 
 ## Fetching
 
@@ -536,3 +537,4 @@ $bingAds = $bingAds->with('ACCOUNT_ID');
 * [Home](README.md)
 * [GoogleAds - Getting Started](GoogleAds-SDK.md)
 * [BingAds - Getting Started](BingAds-SDK.md)
+* [FacebookAds - Getting Started](FacebookAds-SDK.md)
