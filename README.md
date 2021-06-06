@@ -6,13 +6,13 @@ For **Google Ads**, **Bing Ads** and **Facebook Ads** API.
 
 This is a wrapper for connecting each ad source into your Laravel application. This SDK provides simpler and consistent methods across many ad source integrations than the traditional SDKs; ultimately making it a lot easier to implement in your projects. You shouldn't have to learn how to communicate and understand the responses to every API.
 
-### (1) Installation
+# Installation
 
 Use [Composer](http://getcomposer.org/) to install package.
 
 Run `composer require tmarois/laravel-ads-sdk`
 
-### (2) Laravel Config
+# Config
 
 Run `php artisan vendor:publish`, If you see multiple options, select the one that says `laravel-ads-sdk`
 
@@ -35,7 +35,9 @@ FB_ACCESS_TOKEN=""
 FB_REFRESH_TOKEN=""
 ```
 
-### (3.a) For GoogleAds
+# Authentication
+
+### For GoogleAds
 
 You will need your developer token, client id and client secret to continue. [Learn More](GoogleAds-Auth.md)
 
@@ -45,7 +47,7 @@ Run `php artisan laravelads:token:generate --service=GoogleAds`
 
 Having Trouble? [Learn More](GoogleAds-Auth.md)
 
-### (3.b) For BingAds
+### For BingAds
 
 You will need your developer token, client id and client secret to continue. [Learn More](BingAds-Auth.md)
 
@@ -55,11 +57,11 @@ Run `php artisan laravelads:token:generate --service=BingAds`
 
 Having Trouble? [Learn More](BingAds-Auth.md)
 
-### (3.c) For FacebookAds
+### For FacebookAds
 
 Coming soon
 
-### (4) Usage
+# Usage
 
 Accessing `GoogleAds`, `BingAds` or `FacebookAds` use the following:
 
