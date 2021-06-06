@@ -1,12 +1,10 @@
 # Laravel Ads SDK
 
-[Join Discord](https://discord.gg/g3W49zdWm2) – For support, updates and collaboration.
+[Join the Discord](https://discord.gg/g3W49zdWm2) – For support, updates and collaboration.
 
-For **Google Ads** and **Bing Ads** API.
+For **Google Ads**, **Bing Ads** and **Facebook Ads** API.
 
 This is a wrapper for connecting each ad source into your Laravel application. This SDK provides simpler and consistent methods across many ad source integrations than the traditional SDKs; ultimately making it a lot easier to implement in your projects. You shouldn't have to learn how to communicate and understand the responses to every API.
-
-**The goal of this package is to provide you with one SDK to manage all.**
 
 ### (1) Installation
 
@@ -30,9 +28,14 @@ BING_DEVELOPER_TOKEN=""
 BING_CLIENT_ID=""
 BING_CLIENT_SECRET=""
 BING_REFRESH_TOKEN=""
+
+FB_APP_ID=""
+FB_APP_SECRET=""
+FB_ACCESS_TOKEN=""
+FB_REFRESH_TOKEN=""
 ```
 
-### (3) For GoogleAds
+### (3.A) For GoogleAds
 
 You will need your developer token, client id and client secret to continue. [Learn More](GoogleAds-Auth.md)
 
@@ -42,7 +45,7 @@ Run `php artisan laravelads:token:generate --service=GoogleAds`
 
 Having Trouble? [Learn More](GoogleAds-Auth.md)
 
-### (4) For BingAds
+### (3.B) For BingAds
 
 You will need your developer token, client id and client secret to continue. [Learn More](BingAds-Auth.md)
 
@@ -52,19 +55,26 @@ Run `php artisan laravelads:token:generate --service=BingAds`
 
 Having Trouble? [Learn More](BingAds-Auth.md)
 
-### (5) Usage
+### (3.C) For FacebookAds
 
-Accessing `GoogleAds` or `BingAds` services use the following:
+Coming soon
+
+### (4) Usage
+
+Accessing `GoogleAds`, `BingAds` or `FacebookAds` use the following:
 
 ```php
-// The namespace to the Facade for laravel
+// The namespace to the Facade for laravel Ads SDK
 use LaravelAds;
 
-// calling the Google Ads Service and including the Account ID
+// calling Google Ads and including the Account ID
 $googleAds = LaravelAds::googleAds()->with('ACCOUNT_ID');
 
-// calling the Bing Ads Service and including the Account ID
+// calling Bing Ads and including the Account ID
 $bingAds = LaravelAds::bingAds()->with('ACCOUNT_ID');
+
+// calling Facebook Ads and including the Account ID
+$facebookAds = LaravelAds::facebookAds()->with('ACCOUNT_ID');
 ```
 
 # Google Ads
@@ -127,7 +137,7 @@ This uses the [BingAds-PHP-SDK](https://github.com/BingAds/BingAds-PHP-SDK) for 
 
 This uses the [facebook-php-business-sdk](https://github.com/facebook/facebook-php-business-sdk) for [Facebook Marketing API](https://developers.facebook.com/docs/marketing-apis)
 
-Looking for and accepting contributors to help implement this.
+Coming soon.
 
 # Contributions
 
