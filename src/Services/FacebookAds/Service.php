@@ -3,6 +3,7 @@
 namespace LaravelAds\Services\FacebookAds;
 
 use LaravelAds\Services\FacebookAds\Fetch;
+use LaravelAds\Services\FacebookAds\Reports;
 
 use FacebookAds\Api;
 
@@ -86,7 +87,7 @@ class Service
      *
      */
     public function reports($dateFrom, $dateTo) {
-        // return (new Reports($this))->setDateRange($dateFrom, $dateTo);
+        return (new Reports($this))->setDateRange($dateFrom, $dateTo);
     }
 
     /**
