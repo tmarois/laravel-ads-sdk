@@ -1,6 +1,13 @@
 Change Log
 ==========
 
+## [Unreleased]
+
+### Fixed
+Fixed bing offline conversion response by changing `click` to `click_id` and adding `name` and `time` to match Google
+
+-------------------------------------------------------
+
 ## [1.2.22] - 2021-06-03
 
 ### Added
