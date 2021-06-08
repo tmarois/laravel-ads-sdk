@@ -1,6 +1,6 @@
 {
     "private": true,
-    "version": "1.2.22",
+    "version": "1.2.23",
     "scripts": {
         "release": "dotenv release-it"
     },

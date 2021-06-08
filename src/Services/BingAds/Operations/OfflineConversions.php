@@ -117,7 +117,9 @@ class OfflineConversions
                 } else {
                     if ($outputValue==true) {
                         $successResponse[$i] = [
-                            'click' => $click['click_id'],
+                            'name' => $click['name'],
+                            'time' => $click['time'],
+                            'click_id' => $click['click_id'],
                             'value' => $click['value'] ?? 0,
                         ];
                     } else {
