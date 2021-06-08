@@ -61,7 +61,7 @@ Having Trouble? [Learn More](BingAds-Auth.md)
 
 You will need your app id, app secret and access token. [Learn More](FacebookAds-Auth.md)
 
-**NOTE: It appears for facebook, you do not need a to generate refresh token, once you have your access token, the api should connect.**
+*NOTE: It appears for facebook, you do not need to generate refresh token, once you have your access token, the api should connect.*
 
 # Usage
 
