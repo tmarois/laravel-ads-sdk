@@ -14,9 +14,10 @@ This uses the [facebook-php-business-sdk](https://github.com/facebook/facebook-p
 
 5) Copy and paste the token shown into the env `FB_ACCESS_TOKEN`
 
-### Resources:
+[Back to Readme](README.md#for-facebookads)
+
+
+### External Resources:
 
 - [Quick Start Guide](https://github.com/facebook/facebook-php-business-sdk?fbclid=IwAR30iukDiegrACx9BJnbhJKIU2X3SaayDAr_YkbQzXU6C_96PFd-27mj5kc#quick-start)
 - [Access Tokens](https://developers.facebook.com/docs/facebook-login/access-tokens)
-
-[Back to Readme](README.md)
