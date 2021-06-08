@@ -484,7 +484,7 @@ $response = $conversionImport->upload();
 |---|---|
 |`add( single array )`|Adding a single conversion
 |`addBulk( multi-array )`|Adding an array of single conversions
-|`upload()`|Imports the conversions to Bing
+|`upload()`|Imports the conversions to Bing (pass `true` or `false` as arg to return more detail success array)
 
 **Response:**
 

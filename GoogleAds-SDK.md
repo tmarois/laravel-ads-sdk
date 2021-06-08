@@ -466,7 +466,7 @@ $response = $conversionImport->upload(true);
 |---|---|
 |`add( single array )`|Adding a single conversion
 |`addBulk( multi-array )`|Adding an array of single conversions
-|`upload()`|Imports the conversions to Google
+|`upload()`|Imports the conversions to Google (pass `true` or `false` as arg to return more detail success array)
 
 **Response:**
 
