@@ -59,7 +59,9 @@ Having Trouble? [Learn More](BingAds-Auth.md)
 
 ### For FacebookAds
 
-Coming soon
+You will need your app id, app secret and access token. [Learn More](FacebookAds-Auth.md)
+
+**NOTE: It appears for facebook, you do not need a to generate refresh token, once you have your access token, the api should connect.**
 
 # Usage
 
@@ -139,7 +141,14 @@ This uses the [BingAds-PHP-SDK](https://github.com/BingAds/BingAds-PHP-SDK) for 
 
 This uses the [facebook-php-business-sdk](https://github.com/facebook/facebook-php-business-sdk) for [Facebook Marketing API](https://developers.facebook.com/docs/marketing-apis)
 
-Coming soon.
+#### Management
+* [Fetching - Campaigns](FacebookAds-SDK.md#fetch-campaigns)
+* [Fetching - Ad Groups](FacebookAds-SDK.md#fetch-ad-groups)
+
+#### Reports
+* [Account Performance](FacebookAds-SDK.md#account-reports)
+* [Campaign Performance](FacebookAds-SDK.md#campaign-reports)
+* [Ad Group Performance](FacebookAds-SDK.md#ad-group-reports)
 
 # Contributions
 
