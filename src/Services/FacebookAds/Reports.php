@@ -76,6 +76,45 @@ class Reports
     }
 
     /**
+     * getAccountReport()
+     *
+     * @reference 
+     * https://developers.facebook.com/docs/marketing-api/insights
+     *
+     */
+    public function getAccountReport()
+    {
+        $api = new AdAccount('act_'.$this->service->getAccountId());
+
+        $defaultParams = [
+            'time_range' => [
+                'since' => $this->dateRange[0],
+                'until' => $this->dateRange[1],
+            ]
+        ];
+
+        $params = array_merge($defaultParams, $this->params);
+        $params['level'] = 'account';
+
+        $fields = [
+            'account_id',
+            'impressions',
+            'clicks',
+            'conversions',
+            'conversion_values',
+            'cpc'
+        ];
+
+        if (!empty($this->fields)) {
+            $fields = $this->fields;
+        }
+
+        $insights = $api->getInsights($fields, $params);
+        return collect($insights->getResponse()->getContent()['data'] ?? []);
+    }
+
+
+    /**
      * getCampaignReport()
      *
      * @reference 
@@ -85,7 +124,7 @@ class Reports
      */
     public function getCampaignReport()
     {
-        $campaign = new AdAccount('act_'.$this->service->getAccountId());
+        $api = new AdAccount('act_'.$this->service->getAccountId());
 
         $defaultParams = [
             'time_range' => [
@@ -112,7 +151,7 @@ class Reports
             $fields = $this->fields;
         }
 
-        $insights = $campaign->getInsights($fields, $params);
+        $insights = $api->getInsights($fields, $params);
         return collect($insights->getResponse()->getContent()['data'] ?? []);
     }
 
@@ -133,7 +172,7 @@ class Reports
      */
     public function getAdGroupReport()
     {
-        $campaign = new AdAccount('act_'.$this->service->getAccountId());
+        $api = new AdAccount('act_'.$this->service->getAccountId());
 
         $defaultParams = [
             'time_range' => [
@@ -162,7 +201,7 @@ class Reports
             $fields = $this->fields;
         }
 
-        $insights = $campaign->getInsights($fields, $params);
+        $insights = $api->getInsights($fields, $params);
         return collect($insights->getResponse()->getContent()['data'] ?? []);
     }
 }
