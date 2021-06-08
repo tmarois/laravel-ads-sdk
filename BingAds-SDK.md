@@ -454,6 +454,9 @@ $adGroupBid = $bingAds->adGroup('ADGROUP_ID', 'CAMPAIGN_ID')->getBid();
 You can import offline conversions using this simple method. Uses [OfflineConversion](https://docs.microsoft.com/en-us/advertising/bulk-service/offline-conversion?view=bingads-13)
 
 ```php
+// You need to pass the customer id for this request
+$bingAds->withCustomerId('CUSTOMER_ID');
+
 // Can chain and add() as many as you wish
 $conversionImport = $bingAds->offlineConversionImport()
     ->add([
