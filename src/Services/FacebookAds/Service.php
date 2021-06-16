@@ -91,15 +91,6 @@ class Service
     }
 
     /**
-     * call()
-     *
-     *
-     */
-    public function call($service) {
-        // return (new AdWordsServices())->get($this->session(), $service);
-    }
-
-    /**
      * adGroup()
      * This is here to be compatible with google/bing
      * 
