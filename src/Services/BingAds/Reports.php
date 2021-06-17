@@ -172,13 +172,13 @@ class Reports
      *
      *
      */
-    public function buildCampaignReport()
+    public function buildCampaignReport($aggregation = ReportAggregation::Daily)
     {
         $report                         = new CampaignPerformanceReportRequest();
         $report->ReportName             = 'Campaign Performance Report';
         $report->Format                 = ReportFormat::Csv;
         $report->ReturnOnlyCompleteData = false;
-        $report->Aggregation            = ReportAggregation::Daily;
+        $report->Aggregation            = $aggregation;
 
         $report->Scope                  = new CampaignReportScope();
         $report->Scope->AccountIds      = [$this->service->getClientId()];
