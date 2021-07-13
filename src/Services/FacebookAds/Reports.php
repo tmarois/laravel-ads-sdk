@@ -5,6 +5,7 @@ namespace LaravelAds\Services\FacebookAds;
 use FacebookAds\Object\AdAccount;
 use FacebookAds\Object\AdCampaign;
 use FacebookAds\Object\Values\InsightsPresets;
+use FacebookAds\Object\Fields\AdsInsightsFields;
 
 class Reports
 {
@@ -97,12 +98,13 @@ class Reports
         $params = array_merge($defaultParams, $this->params);
 
         $fields = [
-            'account_id',
-            'impressions',
-            'clicks',
-            'conversions',
-            'conversion_values',
-            'cpc'
+            AdsInsightsFields::ACCOUNT_ID,
+            AdsInsightsFields::ACCOUNT_NAME,
+            AdsInsightsFields::IMPRESSIONS,
+            AdsInsightsFields::CLICKS,
+            AdsInsightsFields::CTR,
+            AdsInsightsFields::CONVERSIONS,
+            AdsInsightsFields::SPEND
         ];
 
         if (!empty($this->fields)) {
@@ -137,14 +139,14 @@ class Reports
         $params = array_merge($defaultParams, $this->params);
 
         $fields = [
-            'account_id',
-            'campaign_id',
-            'campaign_name',
-            'impressions',
-            'clicks',
-            'conversions',
-            'conversion_values',
-            'cpc'
+            AdsInsightsFields::ACCOUNT_ID,
+            AdsInsightsFields::CAMPAIGN_ID,
+            AdsInsightsFields::CAMPAIGN_NAME,
+            AdsInsightsFields::IMPRESSIONS,
+            AdsInsightsFields::CLICKS,
+            AdsInsightsFields::CTR,
+            AdsInsightsFields::CONVERSIONS,
+            AdsInsightsFields::SPEND
         ];
 
         if (!empty($this->fields)) {
@@ -185,16 +187,15 @@ class Reports
         $params = array_merge($defaultParams, $this->params);
 
         $fields = [
-            'account_id',
-            'campaign_id',
-            'campaign_name',
-            'adset_id',
-            'adset_name',
-            'impressions',
-            'clicks',
-            'conversions',
-            'conversion_values',
-            'cpc'
+            AdsInsightsFields::ACCOUNT_ID,
+            AdsInsightsFields::CAMPAIGN_ID,
+            AdsInsightsFields::ADSET_ID,
+            AdsInsightsFields::ADSET_NAME,
+            AdsInsightsFields::IMPRESSIONS,
+            AdsInsightsFields::CLICKS,
+            AdsInsightsFields::CTR,
+            AdsInsightsFields::CONVERSIONS,
+            AdsInsightsFields::SPEND
         ];
 
         if (!empty($this->fields)) {

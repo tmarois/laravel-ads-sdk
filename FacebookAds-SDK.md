@@ -219,6 +219,31 @@ This is the response by default: you can alter the fields by `->setFields(Array)
 ...
 ```
 
+#### Choosing Fields for Insight Reports
+
+You can also choose which fields you wish to return, `setFields(Array $fields)`. Here are the [Allowed Fields](https://github.com/facebook/facebook-php-business-sdk/blob/master/src/FacebookAds/Object/Fields/AdsInsightsFields.php)
+
+```php
+use FacebookAds\Object\Fields\AdsInsightsFields;
+
+// This is the default field list
+// https://github.com/facebook/facebook-php-business-sdk/blob/master/src/FacebookAds/Object/Fields/AdsInsightsFields.php
+$fields = [
+    AdsInsightsFields::ACCOUNT_ID,
+    AdsInsightsFields::CAMPAIGN_ID,
+    AdsInsightsFields::CAMPAIGN_NAME,
+    AdsInsightsFields::IMPRESSIONS,
+    AdsInsightsFields::CLICKS,
+    AdsInsightsFields::CTR,
+    AdsInsightsFields::CONVERSIONS,
+    AdsInsightsFields::SPEND
+];
+
+$report = $facebookAds->reports($dateFrom, $dateTo)
+    ->setFields($fields)->getCampaignReport()
+
+```
+
 ## Jump To:
 * [Home](README.md)
 * [GoogleAds - Getting Started](GoogleAds-SDK.md)
