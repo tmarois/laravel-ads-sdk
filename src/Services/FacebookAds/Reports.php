@@ -87,6 +87,7 @@ class Reports
         $api = new AdAccount('act_'.$this->service->getAccountId());
 
         $defaultParams = [
+            'level' => 'account',
             'time_range' => [
                 'since' => $this->dateRange[0],
                 'until' => $this->dateRange[1],
@@ -94,7 +95,6 @@ class Reports
         ];
 
         $params = array_merge($defaultParams, $this->params);
-        $params['level'] = 'account';
 
         $fields = [
             'account_id',
@@ -127,6 +127,7 @@ class Reports
         $api = new AdAccount('act_'.$this->service->getAccountId());
 
         $defaultParams = [
+            'level' => 'campaign',
             'time_range' => [
                 'since' => $this->dateRange[0],
                 'until' => $this->dateRange[1],
@@ -134,7 +135,6 @@ class Reports
         ];
 
         $params = array_merge($defaultParams, $this->params);
-        $params['level'] = 'account';
 
         $fields = [
             'account_id',
@@ -175,6 +175,7 @@ class Reports
         $api = new AdAccount('act_'.$this->service->getAccountId());
 
         $defaultParams = [
+            'level' => 'adset',
             'time_range' => [
                 'since' => $this->dateRange[0],
                 'until' => $this->dateRange[1],
@@ -182,7 +183,6 @@ class Reports
         ];
 
         $params = array_merge($defaultParams, $this->params);
-        $params['level'] = 'account';
 
         $fields = [
             'account_id',
