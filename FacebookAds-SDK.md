@@ -13,16 +13,16 @@ $facebookAds = LaravelAds::facebookAds()->with('ADS_ACCOUNT_ID');
 ```
 
 #### Management
-* [Fetching - Campaigns](#fetch-campaigns)
-* [Fetching - Ad Groups](#fetch-ad-groups)
+* [Fetching - Campaigns](#white_check_mark-fetch-campaigns)
+* [Fetching - Ad Groups](#white_check_mark-fetch-ad-groups)
 #### Reports
-* [Account Performance](#account-reports)
-* [Campaign Performance](#campaign-reports)
-* [Ad Group Performance](#ad-group-reports)
+* [Account Performance](#white_check_mark-account-reports)
+* [Campaign Performance](#white_check_mark-campaign-reports)
+* [Ad Group Performance](#white_check_mark-ad-group-reports)
 
 ---------------------------------------------------------
 
-## Fetching
+## :rocket: Fetching
 
 If you don't want to learn how to handle the Facebook Ads API request, here are **pre-built methods** to quickly get you going.
 
@@ -130,7 +130,7 @@ $campaigns = $facebookAds->fetch()->getAdSets($fields, $params);
 
 ```
 
-## Reports
+## :rocket: Reports
 
 Here are the **pre-built methods** for retrieving reports.
 
