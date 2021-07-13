@@ -77,13 +77,13 @@ $campaigns = $facebookAds->fetch()->getCampaigns($fields, $params);
 
 ### Fetch Ad Groups
 
-Fetching all ad groups (ad sets) within the account. You can also use `->getAdSets()`, will be the same as example below. 
+Fetching all ad groups (ad sets) within the account. You can also use `->getAdGroups()`, will be the same as example below. 
 
 ```php
-$adgroups  = $facebookAds->fetch()->getAdGroups();
+$adgroups  = $facebookAds->fetch()->getAdSets();
 ```
 
-*Results: `getAdGroups()` (returns a [Laravel Collection](https://laravel.com/docs/collections) object, use `all()` for array)*
+*Results: `getAdSets()` (returns a [Laravel Collection](https://laravel.com/docs/collections) object, use `all()` for array)*
 
 ```
 [0] => Array
@@ -98,6 +98,36 @@ $adgroups  = $facebookAds->fetch()->getAdGroups();
     [bid_strategy] => LOWEST_COST_WITH_BID_CAP
 )
 ...
+```
+
+#### Choosing Fields
+
+You can also choose which fields (columns) you wish to return, `getAdSets(Array $fields)`. Here are the [Allowed Fields](https://github.com/facebook/facebook-php-business-sdk/blob/master/src/FacebookAds/Object/Fields/AdSetFields.php)
+
+```php
+use FacebookAds\Object\Fields\AdSetFields;
+
+// This is the default field list
+// https://github.com/facebook/facebook-php-business-sdk/blob/master/src/FacebookAds/Object/Fields/AdSetFields.php
+$fields = [
+    AdSetFields::ACCOUNT_ID,
+    AdSetFields::CAMPAIGN_ID,
+    AdSetFields::ID,
+    AdSetFields::NAME,
+    AdSetFields::STATUS,
+    AdSetFields::DAILY_BUDGET,
+    AdSetFields::BID_AMOUNT,
+    AdSetFields::BID_STRATEGY
+];
+
+// (OPTIONAL)
+// You can pass in params to filter the response
+// Filter by status: this will get all PAUSED campaigns
+// https://developers.facebook.com/docs/marketing-api/reference/ad-account/adsets/
+$params = ['effective_status'=>['PAUSED']];
+
+$campaigns = $facebookAds->fetch()->getAdSets($fields, $params);
+
 ```
 
 ## Reports
