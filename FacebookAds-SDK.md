@@ -4,7 +4,7 @@
 
 This uses the [facebook-php-business-sdk](https://github.com/facebook/facebook-php-business-sdk) for [Facebook Marketing API](https://developers.facebook.com/docs/marketing-apis).
 
-### Getting Started
+### :rocket: Getting Started
 
 First, you'll need the ads account id, this can be found within your ads manager. You can also locate this in the facebook ads manager url `act=ACCOUNT_ID`.
 
