@@ -5,7 +5,7 @@ Change Log
 
 ### Added
 * New facebook integration [Readme](FacebookAds-SDK.md#facebookads---documentation)
-* New facebook API v11 using [Marketing API](https://developers.facebook.com/docs/marketing-apis) and (facebook-php-business-sdk)[https://github.com/facebook/facebook-php-business-sdk]
+* New facebook API v11 using [Marketing API](https://developers.facebook.com/docs/marketing-apis) and [facebook-php-business-sdk](https://github.com/facebook/facebook-php-business-sdk)
 * Facebook: Fetch Campaigns and AdSets
 * Facebook: Insight reports for Account, Campaign and AdSet performance
 
