@@ -1,7 +1,7 @@
 Change Log
 ==========
 
-## [Unreleased]
+## [1.3.0] - 2021-07-25
 
 ### Added
 * New facebook integration [Readme](FacebookAds-SDK.md#facebookads---documentation)
