@@ -47,8 +47,7 @@ class Service
      *
      * @return self
      */
-    public function with($clientId)
-    {
+    public function with($clientId) {
         $this->clientId = $clientId;
         return $this;
     }
@@ -58,8 +57,7 @@ class Service
      *
      * @return string
      */
-    public function getClientId()
-    {
+    public function getClientId() {
         return $this->clientId;
     }
 
@@ -68,8 +66,7 @@ class Service
      *
      *
      */
-    public function fetch()
-    {
+    public function fetch() {
         return (new Fetch($this));
     }
 
@@ -78,8 +75,7 @@ class Service
      *
      *
      */
-    public function reports($dateFrom, $dateTo)
-    {
+    public function reports($dateFrom, $dateTo) {
         return (new Reports($this))->setDateRange($dateFrom, $dateTo);
     }
 
@@ -88,8 +84,7 @@ class Service
      *
      *
      */
-    public function call($service)
-    {
+    public function call($service) {
         return (new AdWordsServices())->get($this->session(), $service);
     }
 
@@ -98,8 +93,7 @@ class Service
      *
      *
      */
-    public function offlineConversionImport(array $conversions = [])
-    {
+    public function offlineConversionImport(array $conversions = []) {
         return (new OfflineConversions($this))->addBulk($conversions);
     }
 

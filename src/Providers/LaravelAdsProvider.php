@@ -21,6 +21,10 @@ class LaravelAdsProvider extends ServiceProvider
         $this->publishes([
             __DIR__.'/../../config/bing-ads.php' => (function_exists('config_path') ? config_path('bing-ads.php') : 'bing-ads.php')
         ], 'laravel-ads-sdk');
+
+        $this->publishes([
+            __DIR__.'/../../config/facebook-ads.php' => (function_exists('config_path') ? config_path('facebook-ads.php') : 'facebook-ads.php')
+        ], 'laravel-ads-sdk');
     }
 
     /**

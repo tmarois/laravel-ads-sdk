@@ -1,4 +1,4 @@
-# GoogleAds API SDK (Authentication Help)
+# GoogleAds API SDK (Authentication Guide)
 
 This uses the [googleads-php-lib](https://github.com/googleads/googleads-php-lib) SDK for the [Google Ads API](https://developers.google.com/adwords/api/docs/guides/start).
 

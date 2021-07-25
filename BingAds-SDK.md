@@ -17,7 +17,6 @@ $bingAds = LaravelAds::bingAds()->with('ACCOUNT_ID');
 |`with(ACCOUNT_ID)`|**(Required)** – This is your "Account Id" (can be found in the url &aid={ YOUR ACCOUNT ID })
 |`withCustomerId(CUSTOMER_ID)`|**(Optional)** – Some requests might require your customer id
 
-
 #### Management
 * [Fetching - Get Customers](#fetch-customers)
 * [Fetching - All Campaigns](#fetch-all-campaigns)
@@ -36,6 +35,8 @@ $bingAds = LaravelAds::bingAds()->with('ACCOUNT_ID');
 * [Age Range Performance](#age-range-performance-report)
 * [Gender Performance](#gender-performance-report)
 * [Custom Fields](#custom-fields)
+
+---------------------------------------------------------
 
 ## Fetching
 
@@ -453,6 +454,9 @@ $adGroupBid = $bingAds->adGroup('ADGROUP_ID', 'CAMPAIGN_ID')->getBid();
 You can import offline conversions using this simple method. Uses [OfflineConversion](https://docs.microsoft.com/en-us/advertising/bulk-service/offline-conversion?view=bingads-13)
 
 ```php
+// You need to pass the customer id for this request
+$bingAds->withCustomerId('CUSTOMER_ID');
+
 // Can chain and add() as many as you wish
 $conversionImport = $bingAds->offlineConversionImport()
     ->add([
@@ -480,7 +484,7 @@ $response = $conversionImport->upload();
 |---|---|
 |`add( single array )`|Adding a single conversion
 |`addBulk( multi-array )`|Adding an array of single conversions
-|`upload()`|Imports the conversions to Bing
+|`upload()`|Imports the conversions to Bing (pass `true` or `false` as arg to return more detail success array)
 
 **Response:**
 
@@ -536,3 +540,4 @@ $bingAds = $bingAds->with('ACCOUNT_ID');
 * [Home](README.md)
 * [GoogleAds - Getting Started](GoogleAds-SDK.md)
 * [BingAds - Getting Started](BingAds-SDK.md)
+* [FacebookAds - Getting Started](FacebookAds-SDK.md)

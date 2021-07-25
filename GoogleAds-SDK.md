@@ -32,6 +32,8 @@ $googleAds = LaravelAds::googleAds()->with('CLIENT_ID');
 * [Age Range Performance](#age-range-performance-report)
 * [Gender Performance](#gender-performance-report)
 
+---------------------------------------------------------
+
 ## Fetching
 
 If you don't want to learn how to handle the Google Ads API request, here are **pre-built methods** to quickly get you going.
@@ -464,7 +466,7 @@ $response = $conversionImport->upload(true);
 |---|---|
 |`add( single array )`|Adding a single conversion
 |`addBulk( multi-array )`|Adding an array of single conversions
-|`upload()`|Imports the conversions to Google
+|`upload()`|Imports the conversions to Google (pass `true` or `false` as arg to return more detail success array)
 
 **Response:**
 
@@ -550,3 +552,4 @@ $campaignService = $googleAds->call(CampaignService::class);
 * [Home](README.md)
 * [GoogleAds - Getting Started](GoogleAds-SDK.md)
 * [BingAds - Getting Started](BingAds-SDK.md)
+* [FacebookAds - Getting Started](FacebookAds-SDK.md)

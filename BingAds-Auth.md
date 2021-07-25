@@ -1,4 +1,4 @@
-# BingAds API SDK  (Authentication Help)
+# BingAds API SDK  (Authentication Guide)
 
 *Note: These steps were tested as of June 3rd, 2021, you may need modify these steps to work for your specific project.*
 

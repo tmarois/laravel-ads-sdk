@@ -6,30 +6,28 @@ use SoapVar;
 use Exception;
 use SoapFault;
 
-use Microsoft\BingAds\Auth\ServiceClientType;
+use LaravelAds\Services\BingAds\Service;
 use LaravelAds\Services\BingAds\Operations\AdGroup;
-
 use LaravelAds\Services\BingAds\Operations\Campaign;
-use Microsoft\BingAds\V13\CustomerManagement\GetCustomersInfoRequest;
 
+use Microsoft\BingAds\Auth\ServiceClientType;
+use Microsoft\BingAds\V13\CustomerManagement\GetCustomersInfoRequest;
 use Microsoft\BingAds\V13\CampaignManagement\GetAdGroupsByCampaignIdRequest;
 use Microsoft\BingAds\V13\CampaignManagement\GetCampaignsByAccountIdRequest;
 
 class Fetch
 {
     /**
-     * $service
-     *
+     * @var LaravelAds\Services\BingAds\Service
      */
     protected $service = null;
 
     /**
      * __construct()
      *
-     *
+     * @param LaravelAds\Services\BingAds\Service $service
      */
-    public function __construct($service)
-    {
+    public function __construct(Service $service) {
         $this->service = $service;
     }
 
@@ -75,9 +73,6 @@ class Fetch
         }
 
         return collect($r);
-
-        // print $proxy->GetService()->__getLastRequest()."\n";
-        // print $proxy->GetService()->__getLastResponse()."\n";
     }
 
     /**
