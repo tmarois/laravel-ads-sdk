@@ -1,5 +1,7 @@
 # Laravel Ads SDK
 
+<!-- [![Total Downloads](http://poser.pugx.org/tmarois/laravel-ads-sdk/downloads)](https://packagist.org/packages/tmarois/laravel-ads-sdk)  -->
+
 [Join the Discord](https://discord.gg/g3W49zdWm2) – For support, updates and collaboration.
 
 For **Google Ads**, **Bing Ads** and **Facebook Ads** API.
