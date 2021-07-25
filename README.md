@@ -37,7 +37,7 @@ FB_REFRESH_TOKEN=""
 
 # Authentication
 
-### For GoogleAds
+### :point_right: For GoogleAds
 
 You will need your developer token, client id and client secret to continue. [Learn More](GoogleAds-Auth.md)
 
@@ -47,7 +47,7 @@ Run `php artisan laravelads:token:generate --service=GoogleAds`
 
 Having Trouble? [Learn More](GoogleAds-Auth.md)
 
-### For BingAds
+### :point_right: For BingAds
 
 You will need your developer token, client id and client secret to continue. [Learn More](BingAds-Auth.md)
 
@@ -57,13 +57,13 @@ Run `php artisan laravelads:token:generate --service=BingAds`
 
 Having Trouble? [Learn More](BingAds-Auth.md)
 
-### For FacebookAds
+### :point_right: For FacebookAds
 
 You will need your app id, app secret and access token. [Learn More](FacebookAds-Auth.md)
 
 *NOTE: It appears for facebook, you do not need to generate refresh token, once you have your access token, the api should connect as long as you've given yourself the correct access, permissions, scopes to marketing api and ads account.*
 
-# Usage
+# :rocket: Usage
 
 Accessing `GoogleAds`, `BingAds` or `FacebookAds` use the following:
 
