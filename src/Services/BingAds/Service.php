@@ -2,6 +2,8 @@
 
 namespace LaravelAds\Services\BingAds;
 
+use Illuminate\Support\Traits\Macroable;
+
 use LaravelAds\Services\BingAds\Fetch;
 use LaravelAds\Services\BingAds\Reports;
 use Microsoft\BingAds\Auth\ServiceClient;
@@ -23,6 +25,8 @@ use Microsoft\BingAds\V13\CampaignManagement\Campaign as CampaignProxy;
 
 class Service
 {
+    use Macroable;
+
     /**
      * $clientIds
      *

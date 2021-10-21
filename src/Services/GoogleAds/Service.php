@@ -2,6 +2,8 @@
 
 namespace LaravelAds\Services\GoogleAds;
 
+use Illuminate\Support\Traits\Macroable;
+
 use LaravelAds\Services\GoogleAds\Operations\Campaign;
 use LaravelAds\Services\GoogleAds\Operations\AdGroup;
 use LaravelAds\Services\GoogleAds\Operations\OfflineConversions;
@@ -19,6 +21,8 @@ use Google\AdsApi\AdWords\AdWordsSessionBuilder;
 
 class Service
 {
+    use Macroable;
+
     /**
      * $clientIds
      *
