@@ -152,6 +152,50 @@ This uses the [facebook-php-business-sdk](https://github.com/facebook/facebook-p
 * [Campaign Performance](FacebookAds-SDK.md#white_check_mark-campaign-reports)
 * [Ad Group Performance](FacebookAds-SDK.md#white_check_mark-ad-group-reports)
 
+# Customization
+
+We realize that we can't add every endpoint so in order to help improve your developer experience, we have made the Service classes Macroable. Macros are a way to add a new custom method to the classes. This way you are able to utilize the existing auth and all of the other goodies that come with this package.
+
+Typically, you should call this method from the boot method of one of your application's service providers, such as the `App\Providers\AppServiceProvider` service provider:
+
+```php
+public function boot()
+{
+    LaravelAds\Services\BingAds\Service::macro('addUetTags', function($tags){
+        $serviceCall = $this->call(ServiceClientType::CampaignManagementVersion13);
+
+        try {
+            $request = new AddUetTagsRequest();
+            $request->UetTags = $tags;
+
+            $serverResponse = $serviceCall->GetService()->AddUetTags($request);
+
+            return $serverResponse;
+        } catch (\Exception $e) {
+            print $serviceCall->GetService()->__getLastRequest()."\n";
+            print $serviceCall->GetService()->__getLastResponse()."\n";
+        }
+    });
+
+    LaravelAds\Services\GoogleAds\Service::macro('dd', function(){
+        dd($this);
+    });
+}
+```
+
+Then in your controller or job you would call:
+
+```php
+$bingAds = LaravelAds::bingAds()->addUetTags([
+    [
+        'Name' => 'Extensible!',
+        'Description' => 'No PR Needed!',
+    ]
+]);
+
+$bingAds = LaravelAds::googleAds()->dd();
+```
+
 # Contributions
 
 We are actively looking for new contributors.
