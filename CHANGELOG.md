@@ -1,10 +1,15 @@
 Change Log
 ==========
 
-## Pending Changes
+## [Unreleased]
 
 ### Added
 * Added Macroable trait to Service classes for extensibility [Readme](README.md#Customization)
+
+### Changed
+* Updated facebook php sdk to use v12 instead of v11
+
+-------------------------------------------------------
 
 ## [1.3.0] - 2021-07-25
 
