@@ -1,7 +1,7 @@
 Change Log
 ==========
 
-## [Unreleased]
+## [1.4.0] - 2021-10-26
 
 ### Added
 * Added Macroable trait to Service classes for extensibility [Readme](README.md#Customization)
