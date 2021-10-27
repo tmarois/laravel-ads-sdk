@@ -1,6 +1,11 @@
 Change Log
 ==========
 
+## Pending Changes
+
+### Added
+* Added Macroable trait to Service classes for extensibility [Readme](README.md#Customization)
+
 ## [1.3.0] - 2021-07-25
 
 ### Added
@@ -69,7 +74,7 @@ Change Log
 -------------------------------------------------------
 
 ### Changed
-* Google Ads `getTargetCpa()` suppressing any null errors when trying to get the target cpa value. 
+* Google Ads `getTargetCpa()` suppressing any null errors when trying to get the target cpa value.
 
 -------------------------------------------------------
 
@@ -83,14 +88,14 @@ Change Log
 ## [1.2.15] - 12-13-2019
 
 ### Changed
-* Cleaning up more `BingAds` for Soap errors due to undefined variables. (raw output of errors). 
+* Cleaning up more `BingAds` for Soap errors due to undefined variables. (raw output of errors).
 
 -------------------------------------------------------
 
 ## [1.2.14] - 12-12-2019
 
 ### Changed
-* Cleaned up `BingAds` for Soap errors due to request of `__getLastRequest()` undefined errors.  
+* Cleaned up `BingAds` for Soap errors due to request of `__getLastRequest()` undefined errors.
 
 -------------------------------------------------------
 

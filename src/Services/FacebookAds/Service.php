@@ -2,6 +2,7 @@
 
 namespace LaravelAds\Services\FacebookAds;
 
+use Illuminate\Support\Traits\Macroable;
 use LaravelAds\Services\FacebookAds\Fetch;
 use LaravelAds\Services\FacebookAds\Reports;
 
@@ -9,6 +10,8 @@ use FacebookAds\Api;
 
 class Service
 {
+    use Macroable;
+
     /**
      * $accountId
      *
@@ -56,7 +59,7 @@ class Service
     /**
      * getClientId()
      * This is here to be compatible with google/bing
-     * 
+     *
      * @return $accountId
      */
     public function getClientId() {
@@ -93,7 +96,7 @@ class Service
     /**
      * adGroup()
      * This is here to be compatible with google/bing
-     * 
+     *
      * @return AdGroup
      */
     public function adSet($adGroup) {
