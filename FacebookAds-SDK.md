@@ -126,7 +126,7 @@ $fields = [
 // https://developers.facebook.com/docs/marketing-api/reference/ad-account/adsets/
 $params = ['effective_status'=>['PAUSED']];
 
-$campaigns = $facebookAds->fetch()->getAdSets($fields, $params);
+$adgroups = $facebookAds->fetch()->getAdSets($fields, $params);
 
 ```
 
