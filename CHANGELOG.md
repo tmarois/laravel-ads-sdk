@@ -5,6 +5,10 @@ Change Log
 
 ### Changed
 * Bump minimist from 1.2.5 to 1.2.6 #46
+* Updated facebook php sdk to use v13 instead of v12 #49
+
+### Fixed
+* Bing ads random report-id name extension #47
 
 -------------------------------------------------------
 
