@@ -133,9 +133,12 @@ class ReportDownload
 		// if this occurs we will just remove it.
 		$fileNameLength = strpos($name, '_') > 0 ? strpos($name, '_') : strlen($name);
 		$filePath = storage_path('app/') . substr($name, 0, $fileNameLength) . '.csv';
-
-		$data = file($filePath);
-        unlink($filePath);
+		
+		try {
+    		$data = file($filePath);
+		} finally {
+    		unlink($filePath);
+		}
 
         return $data;
     }
