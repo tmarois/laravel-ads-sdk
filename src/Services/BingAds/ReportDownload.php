@@ -129,9 +129,16 @@ class ReportDownload
             unlink($location);
         }
 
-        $data = file(storage_path('app/').$name.'.csv');
-
-        unlink(storage_path('app/').$name.'.csv');
+		// Sometimes the report id has a extension starting with _
+		// if this occurs we will just remove it.
+		$fileNameLength = strpos($name, '_') > 0 ? strpos($name, '_') : strlen($name);
+		$filePath = storage_path('app/') . substr($name, 0, $fileNameLength) . '.csv';
+		
+		try {
+    		$data = file($filePath);
+		} finally {
+    		unlink($filePath);
+		}
 
         return $data;
     }
