@@ -1,7 +1,7 @@
 Change Log
 ==========
 
-## [Unreleased]
+## [1.5.0] - 2022-04-08
 
 ### Changed
 * Bump minimist from 1.2.5 to 1.2.6 #46
