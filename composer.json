@@ -13,7 +13,7 @@
 	"require": {
 		"php": ">=7",
 		"googleads/googleads-php-lib": "^49.0",
-		"microsoft/bingads": "^0.12",
+		"microsoft/bingads": "^13.0.13",
 		"facebook/php-business-sdk": "^13.0"
 	},
 
