@@ -8,6 +8,6 @@
         "@release-it/keep-a-changelog": "^2.2.2",
         "auto-changelog": "^2.2.1",
         "dotenv-cli": "^4.0.0",
-        "release-it": "^14.2.2"
+        "release-it": "^15.6.0"
     }
 }
